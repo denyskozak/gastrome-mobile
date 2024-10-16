@@ -1,0 +1,198 @@
+import { getPercentHeight, getPercentWidth, getTextStyles } from '../../styles/common.styles';
+import { fontEnum } from '../../styles/fonts';
+import { StyleSheet } from 'react-native';
+import { Spaces } from '../../styles/spaces';
+import { Colors } from '../../styles/colors';
+import { BorderRadius } from '../../styles/borderRadiuses';
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  list: {
+  },
+  button: {
+    // flex: 0.1,
+  },
+  // Time
+  timeContainer: {
+    marginTop: Spaces.large,
+    textAlign: 'center',
+    alignItems: 'center',
+    display: 'flex',
+    width: '100%',
+    paddingLeft: Spaces.medium,
+    paddingRight: Spaces.medium,
+  },
+  time: getTextStyles({
+    fontSize: 14,
+  }),
+  //Title
+  titleContainer: {
+    marginTop: Spaces.medium,
+    alignItems: 'center',
+  },
+  title: getTextStyles({
+    fontSize: 24,
+    textAlign: 'center',
+    paddingLeft: Spaces.medium,
+    paddingRight: Spaces.medium,
+    fontFamily: fontEnum.PoppinsBold,
+  }),
+  flag: {
+    alignItems: 'center',
+    marginTop: Spaces.small,
+  },
+
+  image: {
+    height: getPercentHeight(Spaces.xlarge),
+    width: '100%',
+    marginTop: Spaces.large,
+    display: 'flex',
+    justifyContent: 'center',
+     alignItems: "center"
+  },
+
+  imageIcon: {
+    position: 'absolute',
+    alignSelf: 'center',
+    // left: getPercentWidth(50),
+    // bottom: getPercentWidth(50),
+    bottom: '30%',
+  },
+
+  region: getTextStyles({
+    fontSize: 14,
+    marginTop: Spaces.large,
+    fontFamily: fontEnum.PoppinsExtraBold,
+    color: Colors.red,
+  }),
+  viewed: getTextStyles({
+    fontSize: 16,
+    marginTop: Spaces.large,
+    fontFamily: fontEnum.PoppinsSemiBold,
+  }),
+  sub: getTextStyles({
+    fontSize: 20,
+    marginTop: Spaces.large,
+    fontFamily: fontEnum.PoppinsBold,
+  }),
+  description: getTextStyles({
+    fontSize: 16,
+    marginTop: Spaces.medium,
+  }),
+  tip: getTextStyles({
+    fontSize: 16,
+    color: Colors.red,
+    marginTop: Spaces.medium,
+  }),
+  servings: getTextStyles({
+    fontSize: 20,
+    textAlign: 'center',
+    marginTop: Spaces.medium,
+  }),
+  servingsButtons: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    gap: Spaces.small,
+    marginTop: Spaces.small,
+  },
+  ingredientHeader: {
+    alignItems: 'center',
+    marginTop: Spaces.small,
+  },
+  ingredientLabel: getTextStyles({
+    fontSize: 20,
+    textAlign: 'center',
+    marginBottom: Spaces.small,
+    fontFamily: fontEnum.PoppinsBold,
+    color: Colors.red
+  }),
+  ingredientsContainer: {
+    marginLeft: Spaces.small,
+    marginRight: Spaces.small,
+  },
+  actionsContainer: {
+    marginTop: Spaces.medium,
+    flexDirection: 'row',
+  },
+  actions: {
+    flex: 1,
+    justifyContent: 'center',
+    flexDirection: 'row',
+    gap: Spaces.medium,
+  },
+  action: {
+    width: Spaces.xxxlarge,
+  },
+  step: {
+    marginTop: Spaces.medium,
+    marginLeft: Spaces.small,
+    marginRight: Spaces.small,
+  },
+  stepTitle: getTextStyles({
+    fontSize: 20,
+    marginTop: Spaces.small,
+    textAlign: 'center',
+  }),
+  stepName: getTextStyles({
+    fontSize: 20,
+    fontFamily: fontEnum.PoppinsBold,
+  }),
+  underline: {
+    textDecorationLine: 'underline',
+  },
+  stepDescription: getTextStyles({
+    fontSize: 16,
+    marginTop: Spaces.small,
+  }),
+  stepImage: {
+    alignSelf: 'center',
+    marginTop: Spaces.small,
+    width: getPercentWidth(100),
+    height: getPercentHeight(20),
+  },
+  listenIcon: {
+    marginBottom: Spaces.xsmall,
+  },
+  ingredient: getTextStyles({
+    fontSize: 18,
+    justifyContent: 'space-between',
+    marginBottom: Spaces.xsmall,
+  }),
+  ingredients: {
+    marginTop: Spaces.large,
+  },
+  addToCardText: getTextStyles({
+    fontSize: 14,
+    textAlign: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: Spaces.medium,
+    fontFamily: fontEnum.PoppinsSemiBold,
+  }),
+  addToCartButton: {
+    marginTop: Spaces.small,
+    marginRight: 'auto',
+    marginLeft: 'auto'
+  },
+
+  // Voice assistant modal
+  helpModal: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  helpModalText: getTextStyles({
+    marginTop: Spaces.small,
+    fontSize: 18,
+    textAlign: 'center',
+  }),
+  helpModalButton: {
+    marginTop: Spaces.medium,
+  },
+  helpModalStartButtonText: getTextStyles({
+    color: Colors.white,
+  })
+});
+
+export default styles;

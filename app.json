@@ -1,0 +1,79 @@
+{
+  "expo": {
+    "name": "Gastro & Me",
+    "slug": "gastro-and-me",
+    "version": "1.0.23",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "plugins": [
+      [
+        "@react-native-voice/voice",
+        {
+          "microphonePermission": "Allow $(PRODUCT_NAME) to access your microphone for interact with voice Assistant on Cooking Recipe page",
+          "speechRecogntionPermission": "Allow $(PRODUCT_NAME) to securely recognize user speech for interact with voice Assistant on Cooking Recipe page"
+        }
+      ],
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "compileSdkVersion": 31,
+            "targetSdkVersion": 31,
+            "buildToolsVersion": "31.0.0"
+          },
+          "ios": {
+            "deploymentTarget": "13.0"
+          }
+        }
+      ],
+      "expo-localization"
+    ],
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#f8dfdb"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.AzarovStudio.Gastro",
+      "infoPlist": {
+        "NSPhotoLibraryUsageDescription": "Allow $(PRODUCT_NAME) to securely user photos lib",
+        "NSSpeechRecognitionUsageDescription": "Allow $(PRODUCT_NAME) to securely recognize user speech",
+        "NSMicrophoneUsageDescription": "Allow $(PRODUCT_NAME) to access your microphone"
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#FFFFFF"
+      },
+      "package": "com.AzarovStudio.Gastro",
+      "permissions": [
+        "android.permission.RECORD_AUDIO"
+      ]
+    },
+    "web": {
+      "favicon": "./assets/favicon.png",
+      "build": {
+        "babel": {
+          "include": [
+            "react-router-native"
+          ]
+        }
+      }
+    },
+    "description": "",
+    "extra": {
+      "eas": {
+        "projectId": "dfaccf94-7098-4671-aa61-953772aa52b1"
+      }
+    }
+  }
+}
