@@ -1,7 +1,10 @@
 import React, { useState, useContext, createContext  } from 'react';
 import PropsType from 'prop-types';
 
-export const SearchByIngredientsContext = createContext([]);
+export const SearchByIngredientsContext = createContext({
+  list: [],
+  setList: () => {},
+});
 
 // Hook
 export const useSearchByIngredients = () => {

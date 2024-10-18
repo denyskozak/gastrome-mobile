@@ -4,26 +4,32 @@ import { ScrollView, Text, View } from 'react-native';
 import { useTranslator } from '../../../hooks/useTranslator';
 import { Button } from '../../../components/atomic/button/button.component';
 
-import { useSpeechProfile } from '../../../contexts/speechProfile.context';
+import { useSpeechProfile } from '../../../hooks/useSpeechProfile.js';
 import { Animated } from '../../../components/atomic/animated/animated.component';
 import styles from './voiceSettings.styles';
 
-const enabledProfiles = [
-  'Karen', 'Catherine', 'Daniel', 'Arthur', 'Moira', 'Rishi', 'Nicky', 'Aaron', 'Samantha', 'Tessa'
-];
-const isProfileEnabled = profile => enabledProfiles.includes(profile.name)
+const enabledProfiles = {
+    'en': [
+        'Karen', 'Catherine', 'Daniel', 'Arthur', 'Moira', 'Rishi', 'Nicky', 'Aaron', 'Samantha', 'Tessa'
+    ],
+    cs: [
+        'Zuzana'
+    ]
+};
 
 const VoicePageComponent = (props) => {
   const {navigation} = props;
 
   const [
-    t,
+    t,,language
   ] = useTranslator('pages.profile');
 
-  const [speechProfile, setSpeechProfile, speechProfiles] = useSpeechProfile();
+    const isProfileEnabled = profile => enabledProfiles[language].includes(profile.name)
 
+  const [speechProfile, setSpeechProfile, speechProfiles] = useSpeechProfile();
   const profilesList = useMemo(() => speechProfiles.filter(isProfileEnabled), [speechProfiles]);
 
+    console.log('profilesList ', speechProfiles)
   const handleSelectVoice = identifier => {
     Speech.stop()
       .then(() => {
@@ -36,7 +42,7 @@ const VoicePageComponent = (props) => {
               });
             }
           },
-          language: 'en',
+          language,
           rate: 0.8,
           voice: identifier
         })
@@ -51,7 +57,7 @@ const VoicePageComponent = (props) => {
         <View style={styles.content}>
           {profilesList.map(({name, language, identifier}) => <Button type="outlined" style={styles.assistantButton}
                                                                       selected={speechProfile === identifier}
-                                                                      key={`${name} (${language})`}
+                                                                      key={`${name}-${language}`}
                                                                       title={name}
                                                                       onPress={() => handleSelectVoice(identifier)}/>)}
         </View>

@@ -47,7 +47,7 @@ export const translates = {
       clear: 'Chcete vyprázdnit celý košík?',
     },
     welcome: {
-      tryIt: 'Prozkoumejte!',
+      tryIt: 'Recepty!',
       title: 'Začněte svou cestu ke zlepšení vaření přímo z domova.',
       subTitle: 'Vyzkoušejte AI hlasového asistenta na stránce receptu',
       generator: 'Přejeďte a získejte náhodný recept',
@@ -151,7 +151,7 @@ export const translates = {
     cooking: {
       singleVideo: '\n (Jedno video pro všechny kroky)',
       step: '- Krok {index} z {count} -',
-      startVoice: 'Vařte s hlasovým asistentem',
+      startVoice: 'Vařte s asistentem',
       assistantCommandsTitle: 'Použijte příkazy "další", "zpět", "opakovat" a "časovač" pro interakci s hlasovým asistentem',
       start: 'Začít',
       madeBy: 'Video Instagram @{name}',

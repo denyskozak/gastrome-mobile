@@ -3,7 +3,10 @@ import PropsType from 'prop-types';
 import AsyncStorage from '@react-native-community/async-storage';
 import { FAVORITES_RECIPE_ID_KEY } from '../constants/asyncStoreKeys';
 
-export const FavoritesContext = createContext(false);
+export const FavoritesContext = createContext({
+  favorites: [],
+  setFavorites: () => {},
+});
 
 // Hook
 export const useFavorites = () => {

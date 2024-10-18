@@ -13,7 +13,6 @@ import { Input } from '../../components/atomic/input/input.component';
 import { VoiceButton } from '../recipe/components/voice.button/voice.button.component';
 
 import { getIngredientsMock } from '../../mock/ingredients';
-import { voiceLanguage } from '../../constants/voice';
 
 import { Spaces } from '../../styles/spaces';
 import { PermissionModal } from '../../components/templates/permission-modal/permission-modal.component';
@@ -28,7 +27,6 @@ import styles from './grocery.styles';
 import { HelpButton } from '../../components/molecular/help-button/help-button';
 import { recipesPageRoute } from '../../navigation/navigation.routes';
 import { recipesRoute } from '../recipes/navigation/recipes.routes';
-import { useAnimatedStyle } from 'react-native-reanimated';
 import {useSubscriptions} from "../../contexts/subscriptions.context";
 
 const intoVideo = require('./grocery-instruction-video.mp4');
@@ -38,7 +36,7 @@ const GroceryPageComponent = (props) => {
     navigation,
   } = props;
 
-  const [t] = useTranslator('pages.grocery');
+  const [t,, language] = useTranslator('pages.grocery');
   const [isSubscriber] = useSubscriptions();
 
   // Voice select
@@ -61,10 +59,10 @@ const GroceryPageComponent = (props) => {
 
   const setAddedIngredient = useCallback((name) => setVoiceTooltipText(t('addedIngredient', {name})), [])
   const ingredients = useMemo(() =>
-      getIngredientsMock()
+      getIngredientsMock(!isSubscriber, language)
         .sort(sortIngredients)
         .map(({title}) => title.toLocaleLowerCase()),
-    []
+    [!isSubscriber, language]
   );
 
   const ingredientNamesSet = useMemo(() => (
@@ -72,7 +70,7 @@ const GroceryPageComponent = (props) => {
       set.add(String(name).toLowerCase());
       return set
     }, new Set())
-  ), []);
+  ), [ingredients]);
 
   // For render
   const items = useMemo(() =>
@@ -184,7 +182,7 @@ const GroceryPageComponent = (props) => {
       const isVoiceRecognizationAvailable = await Voice.isAvailable();
 
       if (status === 'granted' && isVoiceRecognizationAvailable === 1) {
-        await Voice.start(voiceLanguage);
+        await Voice.start(language);
         setListening(!isListening);
       } else {
         setPermissionModalVisible(true);
@@ -307,7 +305,7 @@ const GroceryPageComponent = (props) => {
           async () => {
             const {status} = await Audio.requestPermissionsAsync();
             if (status === 'granted') {
-              await Voice.start(voiceLanguage);
+              await Voice.start(language);
               setListening(!isListening);
             }
 

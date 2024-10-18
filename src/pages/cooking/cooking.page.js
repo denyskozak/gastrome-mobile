@@ -14,9 +14,8 @@ import { Animation } from '../../components/atomic/animation/animation.component
 import { Button } from '../../components/atomic/button/button.component';
 import { PermissionModal } from '../../components/templates/permission-modal/permission-modal.component';
 import { VolumeModal } from '../../components/templates/volume-modal/volume-modal.component';
-import { voiceLanguage } from '../../constants/voice';
 import { getVoiceOneWord } from '../../utilities/getVoiceOneWord';
-import { useSpeechProfile } from '../../contexts/speechProfile.context';
+import { useSpeechProfile } from '../../hooks/useSpeechProfile.js';
 import { useAWS } from '../../hooks/useAWS';
 import { delayForPromise } from '../../utilities/promiseDelay';
 import { useActivateSoundIOS } from '../../hooks/useActiveSoundIOS';

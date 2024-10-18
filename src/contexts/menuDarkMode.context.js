@@ -21,7 +21,7 @@ const MenuDarkModeComponent = (props) => {
     children,
   } = props;
 
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(true);
 
   const value = {
     darkMode,

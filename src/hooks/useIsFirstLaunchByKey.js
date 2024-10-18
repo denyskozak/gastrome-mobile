@@ -12,7 +12,7 @@ export const useIsFirstLaunchByKey = (asyncStoreKey) => {
         const FirstLaunchState = await isFirstLaunch(asyncStoreKey);
         await delayForPromise(500);
         if (FirstLaunchState && asyncStoreKey) {
-          AsyncStorage.setItem(asyncStoreKey, 'true');
+          await AsyncStorage.setItem(asyncStoreKey, 'true');
           setIsFirst(true);
         }
       })()

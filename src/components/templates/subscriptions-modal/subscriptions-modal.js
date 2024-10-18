@@ -74,16 +74,6 @@ const SubscriptionsModalComponent = (props) => {
       {!isLoading && (<View style={styles.buttons}>
         {!isError && !isSuccess && (
           <>
-            {/*<Button*/}
-            {/*  type="outlined"*/}
-            {/*  size="xl"*/}
-            {/*  style={styles.button}*/}
-            {/*  onPress={() => {*/}
-            {/*    onChangeVisible(false);*/}
-            {/*  }}*/}
-            {/*>*/}
-            {/*  {t('free')}*/}
-            {/*</Button>*/}
             {options.map((item) => (
               <Button
                 key={item.product.identifier}

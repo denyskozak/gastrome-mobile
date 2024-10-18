@@ -3,13 +3,16 @@ import PropsType from 'prop-types';
 import AsyncStorage from '@react-native-community/async-storage';
 import {defaultLanguage} from "../translator/translates";
 
-
-export const SettingsContext = createContext({
+const defaultValue = {
   measure: 'g',
   language: defaultLanguage,
-});
+  isFirstRunEver: false,
+  speechProfile: null,
+  speechProfiles: [],
+};
 
-console.log('defaultLanguage: ', defaultLanguage);
+export const SettingsContext = createContext({...defaultValue});
+
 const SETTINGS_ASYNC_STORE_KEY = 'SETTINGS_ASYNC_STORE_KEY2323r2';
 
 // Hook
@@ -42,10 +45,7 @@ const SettingsComponent = (props) => {
     children,
   } = props;
 
-  const [settings, setSettings] = useState({
-    measure: 'g',
-    language: defaultLanguage,
-  });
+  const [settings, setSettings] = useState({...defaultValue});
 
   useEffect(() => {
     try {
