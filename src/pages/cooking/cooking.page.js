@@ -280,14 +280,8 @@ export const CookingPage = (props) => {
       index={index}
       showHelpArrow={index === 0}
       videoURL={item.videoURL}
-      additionalText={recipe.isSingleVideo ? t('singleVideo') : ''}
       activeIndex={activeIndex}
-      backLabel={t('back')}
-      author={
-        steps.length - 1 === index && recipe.instagram
-          ? t('madeBy', {name: recipe.instagram})
-          : null
-      }
+
       stepTitle={item.stepTitle}
       readCharIndex={index === targetStep ? readCharIndex : 0}
       description={item.description}
@@ -298,6 +292,14 @@ export const CookingPage = (props) => {
       isListening={isListening  && !timerVoiceActivated}
       onBackClick={() => navigation.goBack()}
       withVoiceAssistant={withVoiceAssistant}
+
+      additionalText={recipe.isSingleVideo ? t('singleVideo') : ''}
+      author={
+        steps.length - 1 === index && recipe.instagram
+            ? t('madeBy', {name: recipe.instagram})
+            : null
+      }
+      backLabel={t('back')}
       loadingText={t('loading')}
     />
   );

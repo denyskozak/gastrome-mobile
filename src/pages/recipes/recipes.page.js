@@ -31,8 +31,8 @@ const filters = [
     'dinner': '🥘',
   },
   {
-    'italy': '',
-    'ukraine': '',
+    'italy': '🇮🇹',
+    'ukraine': '🇺🇦',
   },
   {
     // 'Christmas': '🎄',

@@ -47,6 +47,12 @@ const SettingsPageComponent = (props) => {
                 <Button
                     type="outlined"
                     style={styles.settingButton}
+                    title={t('subscriptions')}
+                    onPress={() => navigation.navigate(subscriptionsSettingsRoute)}
+                />
+                <Button
+                    type="outlined"
+                    style={styles.settingButton}
                     title={t('chooseAssistantButton')}
                     onPress={() => navigation.navigate(voiceSettingsRoute)}
                 />
@@ -71,8 +77,8 @@ const SettingsPageComponent = (props) => {
                 <Button
                     type="outlined"
                     style={styles.settingButton}
-                    title={t('subscriptions')}
-                    onPress={() => navigation.navigate(subscriptionsSettingsRoute)}
+                    title={t('contact')}
+                    onPress={() => Linking.openURL(contactURL)}
                 />
                 <Button
                     type="outlined"
@@ -92,12 +98,6 @@ const SettingsPageComponent = (props) => {
                 {/*  title={t('faq')}*/}
                 {/*  onPress={() => navigation.navigate(faqRoute)}*/}
                 {/*/>*/}
-                <Button
-                    type="outlined"
-                    style={styles.settingButton}
-                    title={t('contact')}
-                    onPress={() => Linking.openURL(contactURL)}
-                />
             </View>
 
             <Text style={styles.footer}>{t('footer')}</Text>

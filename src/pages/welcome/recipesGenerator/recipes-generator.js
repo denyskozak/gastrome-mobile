@@ -26,7 +26,7 @@ const RecipesGeneratorComponent = (props) => {
 
   useEffect(() => {
     setRandomRecipe(getTreeRandomRecipe())
-  }, [setRandomRecipe]);
+  }, [setRandomRecipe, recipes]);
 
   const ingredientsList = useMemo(() =>
       (randomRecipe ? randomRecipe.ingredients : [])

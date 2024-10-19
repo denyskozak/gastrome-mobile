@@ -93,7 +93,7 @@ export const recipes = [
     "prep_time": 10,
     "cook_time": 60,
     "time": 70,
-    "priority": 1,
+    "priority": 0,
     "instagram": "nastya_shemelina9",
     "filters": [
       "Ukraine",

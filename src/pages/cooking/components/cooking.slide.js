@@ -118,7 +118,7 @@ export const CookingSlideComponent = (props) => {
                     <Text style={styles.step}>
                         {stepTitle}
                     </Text>
-                    {!isTextHidden && (
+                    {!isTextHidden && description && (
                         <Text style={styles.text}>
                             {readCharIndex === 0
                                 ? description
@@ -129,7 +129,7 @@ export const CookingSlideComponent = (props) => {
                                 </>}
                         </Text>
                     )}
-                    {!isTextHidden && (
+                    {!isTextHidden && additionalText && (
                         <Text style={styles.text}>
                             {additionalText}
                         </Text>
