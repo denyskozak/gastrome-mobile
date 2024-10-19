@@ -2,6 +2,7 @@ import { StyleSheet } from 'react-native';
 import { containerMarginTop, getTextStyles } from '../../styles/common.styles';
 import { Spaces } from '../../styles/spaces';
 import { Colors } from '../../styles/colors';
+import {BorderRadius as FontSizes} from "../../styles/borderRadiuses";
 
 const styles = StyleSheet.create({
   container: {
@@ -28,6 +29,9 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: Spaces.medium
   },
+  footerText: getTextStyles({
+    fontSize: FontSizes.medium,
+  }),
   languages: {
     flexDirection: 'row',
     gap: Spaces.medium

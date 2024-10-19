@@ -9,6 +9,7 @@ const defaultValue = {
   isFirstRunEver: false,
   speechProfile: '',
   speechProfiles: [],
+  isDevMode: false,
 };
 
 export const SettingsContext = createContext({...defaultValue});

@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import * as Linking from 'expo-linking';
 
-import {ScrollView, Text, View} from 'react-native';
+import {Pressable, ScrollView, Text, View} from 'react-native';
 import {useTranslator} from '../../hooks/useTranslator';
 import {Button} from '../../components/atomic/button/button.component';
 
@@ -29,6 +29,12 @@ const SettingsPageComponent = (props) => {
     const [settings, setSetting] = useSettings();
     const {measure} = settings;
     const [isMeasureModalOpen, setIsMeasureModalOpen] = useState(false);
+    const [clicksForDevMode, setClicksForDevMode] = useState(0);
+
+    const handleClickForDevMode = () => {
+        if (clicksForDevMode === 4) setSetting('isDevMode', !settings['isDevMode']);
+        setClicksForDevMode(clicksForDevMode === 4 ? 0 : clicksForDevMode + 1);
+    }
 
     const renderLanguageButton = ([title, language]) => (
         <Button key={language} title={title} type="outlined" selected={language === currentLanguage} onPress={() => setLanguage(language)}/>
@@ -100,7 +106,9 @@ const SettingsPageComponent = (props) => {
                 {/*/>*/}
             </View>
 
-            <Text style={styles.footer}>{t('footer')}</Text>
+            <Pressable  style={styles.footer} onPress={handleClickForDevMode}>
+                <Text style={styles.footerText}>{settings['isDevMode'] ? 'WELCOME IN DEV MOVE <3' : t('footer')}</Text>
+            </Pressable>
 
             <MeasureModal
                 isVisible={isMeasureModalOpen}

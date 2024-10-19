@@ -26,6 +26,7 @@ import { Spaces } from '../../styles/spaces';
 
 import styles from './cooking.page.styles';
 import {useRecipes} from "../../hooks/useRecipes";
+import {useSettings} from "../../contexts/settings.context";
 
 const alarmSong = require('./alarm.mp3');
 const soundObject = new Audio.Sound();
@@ -45,7 +46,7 @@ export const CookingPage = (props) => {
   const [t,,language] = useTranslator('pages.cooking');
   const [tCommon] = useTranslator('common');
   const [recipes] = useRecipes();
-
+  const [settings] = useSettings();
   const [targetStep, setTargetStep] = useState(null);
   const [helpModalVisible, setHelpModalVisible] = useState(false);
   const [permissionModalVisible, setPermissionModalVisible] = useState(false);
@@ -58,6 +59,7 @@ export const CookingPage = (props) => {
   const [readCharIndex, setReadCharIndex] = useState(0);
   const [voiceTooltipText, setVoiceTooltipText] = useState('');
   const voiceAnimationRef = useRef(null);
+  const [lastCommandDevMode, setLastCommandDevMove] = useState('');
 
   const parseDuration = useCallback((value) => {
     const translates = {
@@ -174,7 +176,9 @@ export const CookingPage = (props) => {
         }
 
         const command = getVoiceOneWord(value[0]);
-
+        if (settings['isDevMode']) {
+          setLastCommandDevMove(command);
+        }
         const targetStepDuration = (targetStep === null ? steps[0].duration : steps[targetStep].duration) || 0;
 
         if (command === t('next')) {
@@ -212,7 +216,7 @@ export const CookingPage = (props) => {
           isAvailableAsync().then(() => requestReview());
         }
       };
-    }, [targetStep, t])
+    }, [targetStep, t, settings['isDevMode']])
   );
 
   useEffect(() => {
@@ -284,7 +288,7 @@ export const CookingPage = (props) => {
 
       stepTitle={item.stepTitle}
       readCharIndex={index === targetStep ? readCharIndex : 0}
-      description={item.description}
+      description={!settings['isDevMode'] ? item.description : `${item.description}\n Last Command - ${lastCommandDevMode}`}
       duration={item.duration ? parseDuration(item.duration) : ''}
       isTimerActive={isTimerActive}
       onStartTimePress={() => setIsTimeActive(true)}
