@@ -126,7 +126,7 @@ export const translates = {
             close: 'Close',
             apply: 'Apply',
             subscriptions: 'Prepared plans for your:',
-            buySubscription: 'Subscribe for Extra Recipes',
+            buySubscription: 'Join GastroMe Community',
             extraRecipesText: 'You have 7 free monthly recipes,\n do you wish more?',
             time: '{time} min',
         },
@@ -152,7 +152,7 @@ export const translates = {
         },
         cooking: {
             singleVideo: '\n (Single video for all steps)',
-            step: '- Step {index} from {count} -',
+            step: '- Step {index} of {count} -',
             startVoice: 'Cook with Voice assistant',
             assistantCommandsTitle: 'Use commands "next", "back", "repeat" and "timer" for interact with Voice Assistant',
             start: 'Start',
@@ -174,6 +174,20 @@ export const translates = {
         }
     },
     components: {
+        filters: {
+            'breakfast': 'Breakfast',
+            'lunch': 'Lunch',
+            'dinner': 'Dinner',
+
+            'italy': 'Italy',
+            'ukraine': 'Ukraine',
+
+            'pasta': 'Pasta',
+            'dessert': 'Dessert',
+            'snack': 'Snack',
+            'coffee': 'Coffee',
+            'salad': 'Salad',
+        },
         autocomplete: {
             applyText: 'Apply',
             removeAll: 'Reset!',
@@ -183,10 +197,10 @@ export const translates = {
         },
         subscriptionsModal: {
             free: 'Keep free',
-            benefits: 'Exclusive Benefits Await You:',
+            benefits: 'Exclusive Benefits GastroMe Community:',
             benefitsOne: 'Unlock 30+ video recipes 🌟',
-            benefitsTwo: 'Support project with no ads 🙏',
-            benefitsThree: 'Regular fresh recipes  📅',
+            benefitsTwo: 'Special environment and asking 🙏',
+            benefitsThree: 'Private Streams  📅',
             error: 'Sorry, subscription purchase error, try again or contact to us on settings page',
             restore: 'Restore',
             success: 'Thank you for subscribing! Your support fuels our app\'s growth 🚀',

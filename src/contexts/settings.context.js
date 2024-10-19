@@ -7,7 +7,7 @@ const defaultValue = {
   measure: 'g',
   language: defaultLanguage,
   isFirstRunEver: false,
-  speechProfile: null,
+  speechProfile: '',
   speechProfiles: [],
 };
 
@@ -36,7 +36,13 @@ export const useSettings = () => {
     AsyncStorage.setItem(SETTINGS_ASYNC_STORE_KEY, JSON.stringify(newSettings));
   }, [settings, setSettings])
 
-  return [settings, changeSetting];
+  const changeSettings = useCallback((nextSettings) => {
+    const newSettings = {...settings, ...nextSettings};
+    setSettings(newSettings);
+    AsyncStorage.setItem(SETTINGS_ASYNC_STORE_KEY, JSON.stringify(newSettings));
+  }, [settings, setSettings])
+
+  return [settings, changeSetting, changeSettings];
 };
 
 // Component

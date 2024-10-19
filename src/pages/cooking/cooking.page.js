@@ -55,6 +55,7 @@ export const CookingPage = (props) => {
   const [isTimerActive, setIsTimeActive] = useState(false);
   const [activeIndex, setActiveIndex] = React.useState(0);
   const [timerVoiceActivated, setTimerVoiceActivated] = React.useState(false); // regarding from where timer was called
+  const [readCharIndex, setReadCharIndex] = useState(0);
   const [voiceTooltipText, setVoiceTooltipText] = useState('');
   const voiceAnimationRef = useRef(null);
 
@@ -70,7 +71,7 @@ export const CookingPage = (props) => {
     return secondsToMinutesWithTranslations(value, translates);
   }, [t]);
 
-  const recipe = useMemo(() => recipes.find(item => item.id === id), [id]);
+  const recipe = useMemo(() => recipes.find(item => item.id === id), [id, recipes]);
   const steps = useMemo(() =>
       recipe.steps
         .map((item, index) => ({
@@ -90,9 +91,14 @@ export const CookingPage = (props) => {
   }) => {
     voiceAnimationRef.current?.play?.();
     Speech.speak(text, {
-      language, rate: 0.8, voice: speechProfile, onDone: () => {
+      language, rate: 0.8, voice: speechProfile,
+      onDone: () => {
         voiceAnimationRef.current?.pause?.();
-        onDone()
+        onDone();
+        setReadCharIndex(0);
+      },
+      onBoundary: ({ charIndex }) => {
+        setReadCharIndex(Number(charIndex))
       }
     })
   };
@@ -266,9 +272,11 @@ export const CookingPage = (props) => {
     }
   };
 
+  const withVoiceAssistant = steps.length > 1;
+
   const renderItem = ({index, item, activeIndex}) => (
     <CookingSlide
-      key={index}
+      key={item.stepTitle}
       index={index}
       showHelpArrow={index === 0}
       videoURL={item.videoURL}
@@ -281,6 +289,7 @@ export const CookingPage = (props) => {
           : null
       }
       stepTitle={item.stepTitle}
+      readCharIndex={index === targetStep ? readCharIndex : 0}
       description={item.description}
       duration={item.duration ? parseDuration(item.duration) : ''}
       isTimerActive={isTimerActive}
@@ -288,6 +297,7 @@ export const CookingPage = (props) => {
       hideButtons={isListening || timerVoiceActivated}
       isListening={isListening  && !timerVoiceActivated}
       onBackClick={() => navigation.goBack()}
+      withVoiceAssistant={withVoiceAssistant}
       loadingText={t('loading')}
     />
   );
@@ -302,7 +312,7 @@ export const CookingPage = (props) => {
         onChangeActiveIndex={setActiveIndex}
       />
       {/*Voice assistant*/}
-      {!timerVoiceActivated && (
+      {!timerVoiceActivated && withVoiceAssistant && (
         <VoiceButton
           voiceTooltipText={voiceTooltipText}
           animationRef={voiceAnimationRef}

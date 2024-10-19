@@ -68,7 +68,6 @@
     "@babel/core": "^7.12.9"
   },
   "private": true,
-  "type": "module",
   "name": "gastro-and-me",
   "version": "1.0.0"
 }

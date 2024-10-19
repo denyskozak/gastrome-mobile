@@ -64,11 +64,11 @@ const SubscriptionsModalComponent = (props) => {
       onChangeVisible(value);
       setIsError(false)
     }}>
-      {/*<Text style={styles.title}>{t('benefits')}</Text>*/}
+      <Text style={styles.title}>{t('benefits')}</Text>
       <View style={styles.benefits}>
-        {/*<Text style={styles.benefitsText}>{t('benefitsOne')}</Text>*/}
+        <Text style={styles.benefitsText}>{t('benefitsOne')}</Text>
         <Text style={styles.benefitsText}>{t('benefitsTwo')}</Text>
-        {/*<Text style={styles.benefitsText}>{t('benefitsThree')}</Text>*/}
+        <Text style={styles.benefitsText}>{t('benefitsThree')}</Text>
       </View>
       {isLoading && (<AnimatedLogo size="medium" isInfinity/>)}
       {!isLoading && (<View style={styles.buttons}>

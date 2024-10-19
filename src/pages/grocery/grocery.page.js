@@ -74,12 +74,12 @@ const GroceryPageComponent = (props) => {
 
   // For render
   const items = useMemo(() =>
-      getIngredientsMock()
+      getIngredientsMock(!isSubscriber, language)
         .map((item) => {
           item.selected = selected.has(item.title);
           return {...item};
         }).sort(sortIngredients),
-    [selected]);
+    [selected, !isSubscriber, language]);
 
   const searchedItems = useMemo(() => searchedIndexes.map(index => items[index]), [searchedIndexes, items])
 

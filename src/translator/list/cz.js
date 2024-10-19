@@ -124,7 +124,7 @@ export const translates = {
       close: 'Zavřít',
       apply: 'Použít',
       subscriptions: 'Připravené plány pro vás:',
-      buySubscription: 'Předplatit více receptů',
+      buySubscription: 'Připoj se ke komunitě GastroMe',
       extraRecipesText: 'Máte 7 měsíčních receptů zdarma,\n chcete více?',
       time: '{time} min',
     },
@@ -171,6 +171,20 @@ export const translates = {
     }
   },
   components: {
+    filters: {
+      'breakfast': 'Snídaně',
+      'lunch': 'Oběd',
+      'dinner': 'Večeře',
+
+      'italy': 'Itálie',
+      'ukraine': 'Ukrajina',
+
+      'pasta': 'Těstoviny',
+      'dessert': 'Dezert',
+      'snack': 'Svačina',
+      'coffee': 'Káva',
+      'salad': 'Salát',
+    },
     autocomplete: {
       applyText: 'Použít',
       removeAll: 'Obnovit!',
@@ -180,10 +194,10 @@ export const translates = {
     },
     subscriptionsModal: {
       free: 'Udržet zdarma',
-      benefits: 'Exkluzivní výhody na vás čekají:',
+      benefits: 'Exkluzivní výhody GastroMe Community:',
       benefitsOne: 'Odemkněte 30+ video receptů 🌟',
-      benefitsTwo: 'Podpořte projekt bez reklam 🙏',
-      benefitsThree: 'Pravidelně čerstvé recepty 📅',
+      benefitsTwo: 'Speciální prostředí a dotazování 🙏',
+      benefitsThree: 'Soukromé streamy 📅',
       error: 'Omlouváme se, chyba při nákupu předplatného, zkuste to znovu nebo nás kontaktujte na stránce nastavení',
       restore: 'Obnovit',
       success: 'Děkujeme za předplatné! Vaše podpora podporuje růst naší aplikace 🚀',

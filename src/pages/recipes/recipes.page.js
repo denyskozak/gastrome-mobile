@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect, useRef, useCallback } from 'react';
+import React, {useState, useMemo, useEffect, useRef, useCallback, Fragment} from 'react';
 import { VirtualizedList, Text, View, Pressable } from 'react-native';
 import SwipeablePanel from 'react-native-sheets-bottom';
 import Icon from '@expo/vector-icons/Ionicons';
@@ -26,23 +26,23 @@ import {useSubscriptions} from "../../contexts/subscriptions.context";
 
 const filters = [
   {
-    'Breakfast': '🍳',
-    'Lunch': '🍽️',
-    'Dinner': '🥘',
+    'breakfast': '🍳',
+    'lunch': '🍽️',
+    'dinner': '🥘',
   },
   {
-    'Italy': '',
-    'Ukraine': '',
+    'italy': '',
+    'ukraine': '',
   },
   {
     // 'Christmas': '🎄',
-    'Pasta': '🍝',
-    'Dessert': '🍨',
-    'Snack': '🥨',
-    'Coffee': '☕',
-    'Salad': '🥗',
+    'pasta': '🍝',
+    'dessert': '🍨',
+    'snack': '🥨',
+    'coffee': '☕',
+    'salad': '🥗',
   }
-]
+];
 
 const filtersFlatObject = filters.reduce((store, item) => ({...store, ...item}));
 let isFirstRun = true;
@@ -52,6 +52,7 @@ const RecipesPageComponent = (props) => {
   } = props;
 
   const [t,,currentLanguage] = useTranslator('pages.recipes');
+  const [tFilter] = useTranslator('components.filters');
   const [favorites] = useFavorites();
   const [isSubscriber] = useSubscriptions();
 
@@ -209,10 +210,10 @@ const RecipesPageComponent = (props) => {
       size="l"
       type="outlined"
       key={`filter-${filter}`}
-      onPress={() => setFilter(filter)}
-      selected={filterNames.includes(filter)}
+      onPress={() => setFilter(tFilter(filter))}
+      selected={filterNames.includes(tFilter(filter))}
     >
-      {filter}
+      {tFilter(filter)}
       {renderFilterIcon(filter)}
     </Button>
   );
@@ -237,8 +238,6 @@ const RecipesPageComponent = (props) => {
     [t('favorites'), 'bookmark-outline', () => setFilter('Favorites')]
   ];
 
-  const getItemCount = () => recipes.length;
-
   return (
     <View style={styles.container}>
       {/*Actions and search*/}
@@ -257,7 +256,7 @@ const RecipesPageComponent = (props) => {
         <View style={styles.actionContainer}>
 
           {actions.map(([text, iconName, onPress]) => (
-            <>
+            <Fragment key={text}>
               <Pressable onPress={onPress}>
                 <Text style={styles.actionText}>{text}</Text>
               </Pressable>
@@ -269,7 +268,7 @@ const RecipesPageComponent = (props) => {
               >
                 <Icon name={iconName} size={24} color={Colors.black}/>
               </Button>
-            </>
+            </Fragment>
           ))}
 
         </View>
@@ -315,10 +314,10 @@ const RecipesPageComponent = (props) => {
             </View>)
             : null
         }
+        keyExtractor={item => item.id}
         renderItem={({item, index}) => {
           const element = (
             <RecipeItem
-              key={item.id}
               enableHint={isFirstRun && index < 3}
               onPress={id => {
                 navigation.navigate(recipeRoute, {id});
