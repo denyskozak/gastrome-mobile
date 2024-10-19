@@ -10,6 +10,7 @@ import { useTranslator } from '../../../../hooks/useTranslator';
 import { Tooltip } from '../../../../components/atomic/tooltip/tooltip.component';
 import { Button } from '../../../../components/atomic/button/button.component';
 import { Colors } from '../../../../styles/colors';
+import {AttentionAnimation} from "../../../../components/molecular/attansion-animation/attansion-animation.component";
 
 const VoiceButtonComponent = (props) => {
   const {isListening, onButtonPress, startText, hideButtonWhenSpeaking, animationRef, voiceTooltipText} = props;
@@ -40,7 +41,9 @@ const VoiceButtonComponent = (props) => {
             onPress={onButtonPress}
           >
             <>
-              <Icon name="mic-outline" size={24} color={Colors.second}/>
+              <AttentionAnimation>
+                <Icon name="mic-outline" size={24} color={Colors.second}/>
+              </AttentionAnimation>
               {'  '}
               {!isListening ? startText : t('listenActive')}
             </>

@@ -47,7 +47,7 @@ export const translates = {
       clear: 'Chcete vymazat celý košík?',
     },
     welcome: {
-      tryIt: 'Prozkoumat!',
+      tryIt: 'Seznam!',
       title: 'Začněte svou cestu ke zlepšení vaření přímo z domova.',
       subTitle: 'Vyzkoušejte asistenta vaření s hlasovým ovládáním na stránce receptu',
       generator: 'Posuňte a získáte náhodný recept',
@@ -124,8 +124,8 @@ export const translates = {
       close: 'Zavřít',
       apply: 'Použít',
       subscriptions: 'Připravené plány pro vás:',
-      buySubscription: 'Připojte se ke komunitě GastroMe',
-      extraRecipesText: 'Máte 7 volných měsíčních receptů,\n přejete si více?',
+      buySubscription: 'Připojte se ke komunitě!',
+      extraRecipesText: 'Máte 8 volných měsíčních receptů,\n přejete si více?',
       time: '{time} min',
     },
     recipe: {
@@ -151,7 +151,7 @@ export const translates = {
     cooking: {
       singleVideo: '\n (Jedno video pro všechny kroky)',
       step: '- Krok {index} z {count} -',
-      startVoice: 'Vařte s hlasovým asistentem',
+      startVoice: 'Vařte s asistentem',
       assistantCommandsTitle: 'Použijte příkazy "další", "zpět", "opakovat" a "časovač" pro interakci s hlasovým asistentem',
       start: 'Začít',
       madeBy: 'Video Instagram @{name}',
@@ -195,9 +195,9 @@ export const translates = {
     subscriptionsModal: {
       free: 'Zůstat zdarma',
       benefits: 'Exkluzivní výhody komunity GastroMe:',
-      benefitsOne: 'Odemkněte 30+ video receptů 🌟',
-      benefitsTwo: 'Speciální prostředí a dotazy 🙏',
-      benefitsThree: 'Soukromé streamy 📅',
+      benefitsOne: 'Odemkněte 30+ receptů 📚',
+      benefitsTwo: 'Speciální prostředí 🥰',
+      benefitsThree: 'Soukromé streamy 🧝 (soon)',
       error: 'Omlouváme se, došlo k chybě při nákupu předplatného, zkuste to znovu nebo nás kontaktujte na stránce nastavení',
       restore: 'Obnovit',
       success: 'Děkujeme za předplatné! Vaše podpora pohání růst naší aplikace 🚀',
@@ -217,7 +217,7 @@ export const translates = {
     },
     recipesGenerator: {
       title: 'Náhodný recept zde:',
-      extraRecipesText: 'K dispozici máte 7 receptů, pro více klikněte na text',
+      extraRecipesText: 'K dispozici máte 8 receptů, pro více klikněte na text',
       generate: 'Získat nový',
       time: '{time} min',
     },

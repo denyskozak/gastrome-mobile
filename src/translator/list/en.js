@@ -127,7 +127,7 @@ export const translates = {
             apply: 'Apply',
             subscriptions: 'Prepared plans for your:',
             buySubscription: 'Join GastroMe Community',
-            extraRecipesText: 'You have 7 free monthly recipes,\n do you wish more?',
+            extraRecipesText: 'You have 8 free monthly recipes,\n do you wish more?',
             time: '{time} min',
         },
         recipe: {
@@ -198,9 +198,9 @@ export const translates = {
         subscriptionsModal: {
             free: 'Keep free',
             benefits: 'Exclusive Benefits GastroMe Community:',
-            benefitsOne: 'Unlock 30+ video recipes 🌟',
-            benefitsTwo: 'Special environment and asking 🙏',
-            benefitsThree: 'Private Streams 📅',
+            benefitsOne: 'Unlock 30+ recipes 📚',
+            benefitsTwo: 'Special environment 🥰',
+            benefitsThree: 'Private Streams 🧝',
             error: 'Sorry, subscription purchase error, try again or contact to us on settings page',
             restore: 'Restore',
             success: 'Thank you for subscribing! Your support fuels our app\'s growth 🚀',
@@ -220,7 +220,7 @@ export const translates = {
         },
         recipesGenerator: {
             title: 'Random Recipe There:',
-            extraRecipesText: 'There are 7 recipes available to you, for more click on text',
+            extraRecipesText: 'There are 8 recipes available to you, for more click on text',
             generate: 'Get new',
             time: '{time} min',
         },

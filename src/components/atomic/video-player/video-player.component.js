@@ -33,7 +33,7 @@ const VideoPlayerComponent = (props) => {
     <View style={styles.container}>
       {isLoading &&
         <Animated delay={500} duration={2000} outName="" style={styles.loading}>
-          <AnimatedLogo delay={500}/>
+          <AnimatedLogo delay={500} isInfinity/>
           {loadingText && <Text style={styles.loadingText}>{loadingText}</Text>}
         </Animated>
       }

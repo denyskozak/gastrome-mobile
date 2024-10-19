@@ -170,7 +170,7 @@ const GroceryPageComponent = (props) => {
 
   useEffect(() => {
     setSelected(new Set());
-  }, [isSubscriber]);
+  }, [isSubscriber, language]);
 
   const runListening = async () => {
     if (isListening) {

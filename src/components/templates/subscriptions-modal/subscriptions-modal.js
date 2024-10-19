@@ -61,6 +61,7 @@ const SubscriptionsModalComponent = (props) => {
 
   return (
     <Modal isVisible={isOpen} onChangeVisible={(value) => {
+        if (isLoading) return;
       onChangeVisible(value);
       setIsError(false)
     }}>
