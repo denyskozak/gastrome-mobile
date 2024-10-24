@@ -7,7 +7,6 @@ import React from "react";
 const AuthorPreviewComponent = (props) => {
     const { imageSource, name } = props;
 
-    console.log('imageSource ', imageSource)
     return (
       <View>
           <Text style={styles.name}>{name}</Text>

@@ -6,13 +6,14 @@ import {
   voiceSettingsRoute,
   subscriptionsSettingsRoute,
   faqRoute,
-  storageRoute
+  storageRoute, devModeRoute
 } from './profile.routes';
 import { ProfilePage } from '../profile.page';
 import { VoicePage } from '../voiceSettings/voiceSettings.page';
 import { SubscriptionsPage } from '../subscriptions/subscriptions.page';
 import { FaqPage } from '../faq/faq.page';
 import { StoragePage } from '../storage/storage.page';
+import {DevMode} from "../dev-mode/dev-mode";
 
 export const getStack = (t) => ([
   [mainSettingsRoute, ProfilePage, { title: t('profile')}],
@@ -20,6 +21,7 @@ export const getStack = (t) => ([
   [storageRoute, StoragePage, { title: t('storage') }],
   [subscriptionsSettingsRoute, SubscriptionsPage, { title: t('subscriptions') }],
   [faqRoute, FaqPage, { title: t('faq') }],
+  [devModeRoute, DevMode, { title: 'Dev Mode' }],
 ]);
 
 const ProfileNavigationComponent = (props) => {

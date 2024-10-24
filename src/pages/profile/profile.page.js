@@ -6,7 +6,7 @@ import {useTranslator} from '../../hooks/useTranslator';
 import {Button} from '../../components/atomic/button/button.component';
 
 import {Spaces} from '../../styles/spaces';
-import {subscriptionsSettingsRoute, voiceSettingsRoute} from './navigation/profile.routes';
+import {devModeRoute, subscriptionsSettingsRoute, voiceSettingsRoute} from './navigation/profile.routes';
 
 import styles from './profile.styles';
 import {MeasureModal} from '../../components/templates/measure-modal/measure-modal.component';
@@ -37,7 +37,8 @@ const SettingsPageComponent = (props) => {
     }
 
     const renderLanguageButton = ([title, language]) => (
-        <Button key={language} title={title} type="outlined" selected={language === currentLanguage} onPress={() => setLanguage(language)}/>
+        <Button key={language} title={title} type="outlined" selected={language === currentLanguage}
+                onPress={() => setLanguage(language)}/>
     );
 
     return (
@@ -86,27 +87,38 @@ const SettingsPageComponent = (props) => {
                     title={t('contact')}
                     onPress={() => Linking.openURL(contactURL)}
                 />
-                <Button
-                    type="outlined"
-                    style={styles.settingButton}
-                    title={t('terms')}
-                    onPress={() => Linking.openURL(termsURL)}
-                />
-                <Button
-                    type="outlined"
-                    style={styles.settingButton}
-                    title={t('privacy')}
-                    onPress={() => Linking.openURL(privacyURL)}
-                />
+                {!settings['isDevMode'] && (
+                    <>
+                        <Button
+                            type="outlined"
+                            style={styles.settingButton}
+                            title={t('terms')}
+                            onPress={() => Linking.openURL(termsURL)}
+                        />
+                        <Button
+                            type="outlined"
+                            style={styles.settingButton}
+                            title={t('privacy')}
+                            onPress={() => Linking.openURL(privacyURL)}
+                        />
+                    </>
+                )}
+
                 {/*<Button*/}
                 {/*  type="outlined"*/}
                 {/*  style={styles.settingButton}*/}
                 {/*  title={t('faq')}*/}
                 {/*  onPress={() => navigation.navigate(faqRoute)}*/}
                 {/*/>*/}
+                {settings['isDevMode'] && <Button
+                    type="outlined"
+                    style={styles.settingButton}
+                    title="Dev Page"
+                    onPress={() => navigation.navigate(devModeRoute)}
+                />}
             </View>
 
-            <Pressable  style={styles.footer} onPress={handleClickForDevMode}>
+            <Pressable style={styles.footer} onPress={handleClickForDevMode}>
                 <Text style={styles.footerText}>{settings['isDevMode'] ? 'WELCOME IN DEV MOVE <3' : t('footer')}</Text>
             </Pressable>
 

@@ -43,7 +43,7 @@ export const getStack = (t) => ([
     authorsRoute,
     AuthorsPage,
     {
-      title: t('author'),
+      title: t('authors'),
       headerShown: true,
     },
   ],

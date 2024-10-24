@@ -1,3 +1,10 @@
-import { App } from './src/App';
+import {App} from './src/App';
+import {AppContextWrapper} from "./src/AppContextWrapper";
 
-export default App;
+const MainApp = () => (
+    <AppContextWrapper>
+        <App/>
+    </AppContextWrapper>
+);
+
+export default MainApp;

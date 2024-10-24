@@ -84,7 +84,7 @@ export const CookingSlideComponent = (props) => {
                     uri={videoURL}
                     loadingText={loadingText}
                     resizeMode="cover"
-                    progressLineBottomPosition={isListening || !withVoiceAssistant ? 0 : Spaces.xxlarge + Spaces.small}
+                    progressLineBottomPosition={isListening || !withVoiceAssistant || isTimerActive ? 0 : Spaces.xxlarge + Spaces.small}
                     onLoaded={() => {
                         if (showHelpArrow) setShowArrow(true)
                     }}

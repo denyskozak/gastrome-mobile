@@ -318,7 +318,7 @@ const RecipesPageComponent = (props) => {
         renderItem={({item, index}) => {
           const element = (
             <RecipeItem
-              enableHint={isFirstRun && index < 3}
+              enableHint={isFirstRun && index < 2}
               onPress={id => {
                 navigation.navigate(recipeRoute, {id});
               }}
@@ -329,7 +329,7 @@ const RecipesPageComponent = (props) => {
           );
 
           return (
-            index > 1 ? element : (<Animated>{element}</Animated>));
+            index > 2 ? element : (<Animated>{element}</Animated>));
         }}
       />
 

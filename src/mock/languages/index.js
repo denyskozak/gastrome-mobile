@@ -28,7 +28,6 @@ const translates = {
     },
 };
 
-console.log(333, translates)
 const getRecipesByLanguage = (language = 'en') => {
     if (!(language in translates)) return [];
     return prepareItems(translates[language].recipes)

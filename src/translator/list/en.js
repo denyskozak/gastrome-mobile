@@ -151,10 +151,10 @@ export const translates = {
             chooseMeasure: 'Measure ⚖️',
         },
         cooking: {
-            singleVideo: '\n (Single video for all steps)',
+            singleVideo: '(Single video for all steps)',
             step: '- Step {index} of {count} -',
             startVoice: 'Cook with Voice assistant',
-            assistantCommandsTitle: 'Use commands "next", "back", "repeat" and "timer" for interact with Voice Assistant',
+            assistantCommandsTitle: 'Use commands "next", "back", "repeat" for interact with Voice Assistant',
             start: 'Start',
             madeBy: 'Video Instagram @{name}',
             loading: 'Downloading video...',
@@ -164,13 +164,13 @@ export const translates = {
             nextCommand: 'Wait your command',
             durationCommand: 'For set timer for {duration}, say timer.',
             voiceCommands: 'Commands: next, back, repeat or timer',
-            listenText: 'Listening step description ...',
+            listenText: 'Listening step',
             "next": "next",
             "repeat": "repeat",
             "timer": "timer",
             "done": "done",
             back: 'Back',
-
+            backCommand: 'back',
         }
     },
     components: {

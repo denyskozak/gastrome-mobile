@@ -20,6 +20,7 @@ const mapActiveSubscription = (data) => {
 
 export const usePaymentSubscriptions = () => {
   const [currentOffering, setCurrentOffering] = useState(null);
+  const [isLoaded, setLoaded] = useState(false);
   const [currentActive, setCurrentActive] = useState({
     name: '',
     expirationDate: '',
@@ -43,6 +44,7 @@ export const usePaymentSubscriptions = () => {
         setCurrentSubscription(info);
       }
       setCurrentOffering(offerings.current);
+      setLoaded(true);
     };
 
     setup()
@@ -60,6 +62,7 @@ export const usePaymentSubscriptions = () => {
     isActive,
     currentActive,
     currentOffering,
-    setCurrentSubscription
+    setCurrentSubscription,
+    isLoaded
   ];
 };

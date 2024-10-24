@@ -25,17 +25,3 @@ export const isIPhoneLowerX =  () => {
   
   return false;
 }
-
-export const isIPhoneUpper14 = () => {
-  const { modelName } = Device;
-  if (getDevice() === 'iPhone' && typeof modelName === 'string') {
-    const uppers = [
-      'iPhone 14 Pro',
-      'iPhone 15',
-    ];
-
-    return uppers.some(model => modelName.includes(model));
-  }
-
-  return false;
-};

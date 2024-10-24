@@ -2,7 +2,7 @@ import React, { useContext, createContext } from 'react';
 import PropsType from 'prop-types';
 import { usePaymentSubscriptions } from '../hooks/usePaymentSubscriptions';
 
-export const SubscriptionsContext = createContext([]);
+export const SubscriptionsContext = createContext(null);
 
 // Hook
 export const useSubscriptions = () => {
@@ -16,14 +16,16 @@ export const useSubscriptions = () => {
     isSubscriber,
     currentSubscription,
     subscriptions,
-    setCurrentSubscription
+    setCurrentSubscription,
+    isLoaded
   } = context;
 
   return [
     isSubscriber,
     currentSubscription,
     subscriptions,
-    setCurrentSubscription
+    setCurrentSubscription,
+    isLoaded
   ];
 };
 
@@ -33,13 +35,14 @@ const SubscriptionsComponent = (props) => {
     children,
   } = props;
 
-  const [isSubscriber, currentSubscription, subscriptions, setCurrentSubscription] = usePaymentSubscriptions();
+  const [isSubscriber, currentSubscription, subscriptions, setCurrentSubscription, isLoaded] = usePaymentSubscriptions();
 
   const value = {
     isSubscriber,
     currentSubscription,
     subscriptions,
-    setCurrentSubscription
+    setCurrentSubscription,
+    isLoaded
   };
 
   return (

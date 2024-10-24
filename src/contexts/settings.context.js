@@ -10,11 +10,12 @@ const defaultValue = {
   speechProfile: '',
   speechProfiles: [],
   isDevMode: false,
+  errors: []
 };
 
 export const SettingsContext = createContext({...defaultValue});
 
-const SETTINGS_ASYNC_STORE_KEY = 'SETTINGS_ASYNC_STORE_KEY2323r2';
+const SETTINGS_ASYNC_STORE_KEY = 'SETTINGS_ASYNC_STORE_KEY31';
 
 // Hook
 export const useSettings = () => {
@@ -31,7 +32,7 @@ export const useSettings = () => {
    * @param {string} key - One of setting
    * @param {string|number} value - Value of key setting
    */
-  const changeSetting = useCallback((key, value) => {
+  const setSetting = useCallback((key, value) => {
     const newSettings = {...settings, [key]: value};
     setSettings(newSettings);
     AsyncStorage.setItem(SETTINGS_ASYNC_STORE_KEY, JSON.stringify(newSettings));
@@ -43,7 +44,7 @@ export const useSettings = () => {
     AsyncStorage.setItem(SETTINGS_ASYNC_STORE_KEY, JSON.stringify(newSettings));
   }, [settings, setSettings])
 
-  return [settings, changeSetting, changeSettings];
+  return [settings, setSetting, changeSettings];
 };
 
 // Component
