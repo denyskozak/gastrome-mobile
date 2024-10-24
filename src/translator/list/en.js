@@ -163,7 +163,7 @@ export const translates = {
             timerEnd: 'Your timer is end',
             nextCommand: 'Wait your command',
             durationCommand: 'For set timer for {duration}, say timer.',
-            voiceCommands: 'Commands: next, back, repeat or timer',
+            voiceCommands: 'Commands: next, back, repeat',
             listenText: 'Listening step',
             "next": "next",
             "repeat": "repeat",

@@ -161,7 +161,7 @@ export const translates = {
       timerEnd: 'Váš časovač skončil',
       nextCommand: 'Čekám na váš příkaz',
       durationCommand: 'Pro nastavení časovače na {duration}, řekněte časovač.',
-      voiceCommands: 'Příkazy: další, zadní, opakovat nebo časovač',
+      voiceCommands: 'Příkazy: další, zadní, opakovat',
       listenText: 'Poslouchejte krok ...',
       "next": "další",
       "repeat": "opakovat",

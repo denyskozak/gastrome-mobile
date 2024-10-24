@@ -23,10 +23,9 @@ export const App = () => {
   // const [isOnBoarding, setIsOnBoarding] = useIsOnBoarding();
   const [isVisibleCustomSplashScreen, setVisibleCustomSplashScreen] = useState(true);
   const [isFirstRunEver, setIsFirstRunEver] = useState(false);
-  const [,,,,isSubscriptionLoaded] = useSubscriptions();
 
   useEffect(() => {
-    if (fontsLoaded && isSubscriptionLoaded) {
+    if (fontsLoaded) {
       try {
         (async () => {
           const isFirstLaunchEverFlag = await isFirstLaunch(IS_FIRST_LAUNCH_EVER_STORE_KEY);
@@ -44,7 +43,7 @@ export const App = () => {
       }
 
     }
-  }, [fontsLoaded, isSubscriptionLoaded]);
+  }, [fontsLoaded]);
 
   return (
     <View style={{ flex: 1 }}>
@@ -52,7 +51,7 @@ export const App = () => {
       {/*TODO Remove onboarding */}
       {/*{fontsLoaded && !isVisibleCustomSplashScreen && isOnBoarding ? <OnBoard onEnd={() => setIsOnBoarding(false)}/> : null}*/}
       {fontsLoaded && !isVisibleCustomSplashScreen
-          ? (<Layout><Navigation isFirstRunEver={isFirstRunEver} /></Layout> )
+          ? (<AppContextWrapper><Layout><Navigation isFirstRunEver={isFirstRunEver} /></Layout></AppContextWrapper>)
           : null}
     </View>
   );
