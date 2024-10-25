@@ -14,6 +14,7 @@ import { SubscriptionsPage } from '../subscriptions/subscriptions.page';
 import { FaqPage } from '../faq/faq.page';
 import { StoragePage } from '../storage/storage.page';
 import {DevMode} from "../dev-mode/dev-mode";
+import {SafeAreaView} from "react-native";
 
 export const getStack = (t) => ([
   [mainSettingsRoute, ProfilePage, { title: t('profile')}],
@@ -31,10 +32,13 @@ const ProfileNavigationComponent = (props) => {
   const tabs = getStack(t);
 
   return (
-      <StackNavigator
-        tabs={tabs}
-        initialRouteName={mainSettingsRoute}
-      />
+      <SafeAreaView style={{ flex: 1 }}>
+        <StackNavigator
+            tabs={tabs}
+            initialRouteName={mainSettingsRoute}
+        />
+      </SafeAreaView>
+
   );
 };
 

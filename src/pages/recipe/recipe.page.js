@@ -267,7 +267,7 @@ const RecipePageComponent = (props) => {
             onScroll={handleScroll}
             data={steps}
             // @TODO replace on id when API is ready */
-            keyExtractor={(item) => String(item.description).slice(0, 5)}
+            keyExtractor={(item, index) => `${String(item.description).slice(0, 5)}-${index}`}
             renderItem={({item, index}) => {
                 const {title, description, image} = item;
 

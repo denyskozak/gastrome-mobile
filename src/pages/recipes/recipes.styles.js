@@ -3,6 +3,7 @@ import { containerMarginTop, getPercentWidth, getTextStyles } from '../../styles
 import { Spaces } from '../../styles/spaces';
 import { Colors } from '../../styles/colors';
 import { BorderRadius } from '../../styles/borderRadiuses';
+import {getDevice} from "../../utilities/getCurrentDevice";
 
 const styles = StyleSheet.create({
   container: {
@@ -120,6 +121,8 @@ const styles = StyleSheet.create({
   //list
   list: {
     gap: Spaces.xlarge,
+    alignItems: 'center',
+    width: getDevice() === 'iPhone' ? '100%' : getPercentWidth(99),
   },
   subscriptions: {
     paddingBottom: Spaces.xlarge,

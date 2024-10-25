@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View } from 'react-native';
+import {SafeAreaView, View} from 'react-native';
 import { useFonts } from 'expo-font'
 import * as SplashScreen from 'expo-splash-screen';
 
@@ -14,6 +14,7 @@ import {IS_FIRST_LAUNCH_EVER_STORE_KEY} from "./constants/asyncStoreKeys";
 import AsyncStorage from "@react-native-community/async-storage";
 import {Navigation} from "./navigation/navigation.js";
 import {useSubscriptions} from "./contexts/subscriptions.context";
+import {Colors} from "./styles/colors";
 
 SplashScreen.preventAutoHideAsync().then().catch(() => console.log('error-splash-prevent-auto-hide'));
 
@@ -46,13 +47,13 @@ export const App = () => {
   }, [fontsLoaded]);
 
   return (
-    <View style={{ flex: 1 }}>
-      {!fontsLoaded || isVisibleCustomSplashScreen ? <CustomSplashScreen /> : null}
-      {/*TODO Remove onboarding */}
-      {/*{fontsLoaded && !isVisibleCustomSplashScreen && isOnBoarding ? <OnBoard onEnd={() => setIsOnBoarding(false)}/> : null}*/}
-      {fontsLoaded && !isVisibleCustomSplashScreen
-          ? (<AppContextWrapper><Layout><Navigation isFirstRunEver={isFirstRunEver} /></Layout></AppContextWrapper>)
-          : null}
+    <View style={{ flex: 1, backgroundColor: Colors.backgroundColorLowOpacity }}>
+        {!fontsLoaded || isVisibleCustomSplashScreen ? <CustomSplashScreen /> : null}
+        {/*TODO Remove onboarding */}
+        {/*{fontsLoaded && !isVisibleCustomSplashScreen && isOnBoarding ? <OnBoard onEnd={() => setIsOnBoarding(false)}/> : null}*/}
+        {fontsLoaded && !isVisibleCustomSplashScreen
+            ? (<AppContextWrapper><Layout><Navigation isFirstRunEver={isFirstRunEver} /></Layout></AppContextWrapper>)
+            : null}
     </View>
   );
 };

@@ -16,6 +16,7 @@ import { CookingPage } from '../../cooking/cooking.page';
 import { VoicePage } from '../../profile/voiceSettings/voiceSettings.page';
 import { AuthorPage } from '../../author/author.page';
 import {AuthorsPage} from "../../authors/authors.page";
+import {SafeAreaView} from "react-native";
 
 export const getStack = (t) => ([
   [recipesRoute, RecipesPage, { title: t('recipes')}],
@@ -56,10 +57,13 @@ const RecipesNavigationComponent = (props) => {
   const tabs = getStack(t);
 
   return (
-      <StackNavigator
-        tabs={tabs}
-        initialRouteName={recipesRoute}
-      />
+      <SafeAreaView style={{ flex: 1 }}>
+        <StackNavigator
+            tabs={tabs}
+            initialRouteName={recipesRoute}
+        />
+      </SafeAreaView>
+
   );
 };
 

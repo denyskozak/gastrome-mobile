@@ -284,7 +284,9 @@ const RecipesPageComponent = (props) => {
         : null}
       {/*Items list*/}
       <VirtualizedList
+          // initialNumToRender={getDevice() === 'iPad' ? 4 : 2}
         showsVerticalScrollIndicator={false}
+        showsHorizontalScrollIndicator={false}
         ref={flatListRef}
         contentContainerStyle={styles.list}
         data={data}
@@ -315,22 +317,17 @@ const RecipesPageComponent = (props) => {
             : null
         }
         keyExtractor={item => item.id}
-        renderItem={({item, index}) => {
-          const element = (
+        renderItem={({item, index}) => (
             <RecipeItem
-              enableHint={isFirstRun && index < 2}
-              onPress={id => {
-                navigation.navigate(recipeRoute, {id});
-              }}
-              isFavorited={favorites.includes(item.id)}
-              selectedIngredients={listSearchByIngredients}
-              {...item}
+                enableHint={isFirstRun && index < 2}
+                onPress={id => {
+                  navigation.navigate(recipeRoute, {id});
+                }}
+                isFavorited={favorites.includes(item.id)}
+                selectedIngredients={listSearchByIngredients}
+                {...item}
             />
-          );
-
-          return (
-            index > 2 ? element : (<Animated>{element}</Animated>));
-        }}
+        )}
       />
 
       <SubscriptionsModal

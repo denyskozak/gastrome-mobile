@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, SafeAreaView } from 'react-native';
 import { FlatGrid } from 'react-native-super-grid';
 import _ from 'lodash';
 import Icon from '@expo/vector-icons/Ionicons';
@@ -148,7 +148,7 @@ const CartPageComponent = (props) => {
     </View>
   );
 
-  return (<View style={styles.container}>
+  return (<SafeAreaView style={styles.container}>
     <View style={styles.content}>
       {/*Add ingredient*/}
       <View style={styles.addFormContainer}>
@@ -264,7 +264,7 @@ const CartPageComponent = (props) => {
       }}
       onClose={() => setRefreshConfirmModalOpen(false)}
     />
-  </View>);
+  </SafeAreaView>);
 };
 
 export const CartPage = CartPageComponent;

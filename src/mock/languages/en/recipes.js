@@ -1,4 +1,4 @@
-import { getAuthor } from '../../author';
+import {getAuthor} from "../author";
 
 export const recipes = [
   {
@@ -13,7 +13,7 @@ export const recipes = [
     "cook_time": 15,
     "time": 30,
     "priority": 0,
-    "author": getAuthor(45),
+    "author": getAuthor(1),
     "filters": [
       "Breakfast",
     ],
@@ -1042,7 +1042,7 @@ export const recipes = [
     "title": "Baked Mini Pumpkin with Cheese",
     "description": "A delicious dish of baked mini pumpkin filled with creamy Mont d’Or or Camembert cheese mixture.",
     "servings": 2,
-
+    author: getAuthor(2),
     "level": "Intermediate",
     "region": "",
     "prep_time": 10,

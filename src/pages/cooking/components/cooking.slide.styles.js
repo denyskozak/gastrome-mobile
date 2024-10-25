@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     },
     textContainer: {
         position: 'absolute',
-        top: getDevice() === 'iPad' ? Spaces.xxlarge + Spaces.xlarge : Spaces.xxlarge,
+        top: getDevice() === 'iPad' ? Spaces.xxlarge : Spaces.large,
         width: getDevice() === 'iPad' ? '80%' : '90%',
         borderWidth: 1,
         borderRadius: BorderRadius.small,

@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {FlatList, Pressable, View} from 'react-native';
+import {FlatList, Pressable, SafeAreaView, View} from 'react-native';
 import {useTranslator} from '../../hooks/useTranslator';
 import * as Linking from "expo-linking";
 import Icon from "@expo/vector-icons/Ionicons";
@@ -32,7 +32,7 @@ const AuthorsPageComponent = (props) => {
     const [t] = useTranslator('pages.authors');
 
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             <Text style={styles.title}>{t('title')}</Text>
             <FlatList
                 showsVerticalScrollIndicator={false}
@@ -60,7 +60,7 @@ const AuthorsPageComponent = (props) => {
                     </Pressable>
                 )}
             />
-        </View>
+        </SafeAreaView>
     );
 };
 

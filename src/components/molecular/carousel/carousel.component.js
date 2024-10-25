@@ -13,13 +13,14 @@ import { ArrowDirection } from '../../atomic/carousel-arrow/carousel-arrow.compo
 import { getPercentHeight, getPercentWidth } from '../../../styles/common.styles';
 import { Colors } from '../../../styles/colors';
 import PropTypes from 'prop-types';
+import {Spaces} from "../../../styles/spaces";
 
 const CarouselComponent = React.forwardRef((props, ref) => {
   const { items, renderItem, activeIndex, onChangeActiveIndex } = props;
   const tabBarHeight = useBottomTabBarHeight();
 
   const PAGE_WIDTH =  getPercentWidth(100);
-  const PAGE_HEIGHT = getPercentHeight(100) - tabBarHeight;
+  const PAGE_HEIGHT = getPercentHeight(100) - tabBarHeight - Spaces.mxxlarge;
   const directionAnim = useSharedValue(
     ArrowDirection.IS_HORIZONTAL
   );

@@ -1,4 +1,4 @@
-import { getAuthor } from '../../author';
+import {getAuthor} from "../author";
 
 export const recipes = [
   {
@@ -13,7 +13,7 @@ export const recipes = [
     "cook_time": 15,
     "time": 30,
     "priority": 0,
-    "author": getAuthor(45),
+    "author": getAuthor(1),
     "filters": [
       "Snídaně",
     ],
@@ -1007,6 +1007,7 @@ export const recipes = [
     "servings": 2,
     "level": "Středně pokročilý",
     "region": "",
+    author: getAuthor(2),
     "prep_time": 10,
     "cook_time": 20,
     "filters": [

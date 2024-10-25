@@ -21,7 +21,7 @@ import { RecipesGenerator } from './recipesGenerator/recipes-generator';
 import { recipeRoute } from './navigation/welcome.routes';
 import { downloadAsync } from '../../utilities/downloadAsync';
 import { sortRecipes } from '../recipes/recipes.sortings';
-import { isIPhoneLowerX } from '../../utilities/getCurrentDevice';
+import {getDevice, isIPhoneLowerX} from '../../utilities/getCurrentDevice';
 import { AttentionAnimation } from '../../components/molecular/attansion-animation/attansion-animation.component';
 import {useRecipes} from "../../hooks/useRecipes";
 
@@ -55,7 +55,7 @@ const WelcomePageComponent = (props) => {
     });
 
     // Manipulate welcome video for lower than X iphone's
-    setIsVideoCover(isIPhoneLowerX());
+    setIsVideoCover(isIPhoneLowerX() || getDevice() === 'iPad');
   }, [recipes]);
 
   const basicFadeInDelay = 1500;

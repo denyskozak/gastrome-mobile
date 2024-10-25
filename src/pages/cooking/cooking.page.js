@@ -93,11 +93,12 @@ export const CookingPage = (props) => {
 
     const say = (text, onDone = () => {
     }) => {
-        voiceAnimationRef.current?.play?.();
+        voiceAnimationRef?.current?.pause?.();
+        voiceAnimationRef?.current?.play?.();
         Speech.speak(text, {
             language, rate: 0.8, voice: speechProfile,
             onDone: () => {
-                voiceAnimationRef.current?.pause?.();
+                voiceAnimationRef?.current?.pause?.();
                 onDone();
                 setReadCharIndex(0);
             },
@@ -172,11 +173,10 @@ export const CookingPage = (props) => {
                 try {
                     if (!isVoiceAnimationInProcess) {
                         isVoiceAnimationInProcess = true;
-                        voiceAnimationRef.current?.play();
-                        setTimeout(() => {
-                            voiceAnimationRef.current?.pause?.();
-                            isVoiceAnimationInProcess = false;
-                        }, 1000);
+                        voiceAnimationRef?.current?.play();
+                        await delayForPromise(500);
+                        voiceAnimationRef?.current?.pause?.();
+                        isVoiceAnimationInProcess = false;
                     }
 
                     const command = getVoiceOneWord(value[0]);

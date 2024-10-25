@@ -4,6 +4,19 @@ import { StyleSheet } from 'react-native';
 import { Spaces } from '../../styles/spaces';
 import { Colors } from '../../styles/colors';
 import { BorderRadius } from '../../styles/borderRadiuses';
+import {getDevice} from "../../utilities/getCurrentDevice";
+
+const IPadImage = {
+  height: 250,
+  width: 320,
+  alignSelf: 'center',
+  borderRadius: BorderRadius.small
+};
+
+const IPhoneImage = {
+  height: getPercentHeight(Spaces.xlarge),
+  width: '100%',
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -45,12 +58,11 @@ const styles = StyleSheet.create({
   },
 
   image: {
-    height: getPercentHeight(Spaces.xlarge),
-    width: '100%',
     marginTop: Spaces.large,
     display: 'flex',
     justifyContent: 'center',
-     alignItems: "center"
+     alignItems: "center",
+    ...(getDevice() === 'iPad' ? IPadImage : IPhoneImage)
   },
 
   imageIcon: {
