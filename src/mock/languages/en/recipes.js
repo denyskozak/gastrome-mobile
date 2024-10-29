@@ -1239,7 +1239,6 @@ export const recipes = [
     "id": 22,
     "title": "Corn with Lemon Sauce",
     "description": "Experience a burst of flavors with this marvellous corn recipe. Paired with a tantalizing lemon sauce, it's a great way to enjoy a simple yet vibrant dish. The smoked and spicy paprika coupled with the richness of butter gives the corn a delightful taste, while the lemon sauce provides a refreshing tang.",
-    "tip": "Butter is recommended for a richer flavor, but olive oil can be a healthy substitute. Pair it with grated parmesan for a delightful cheesy touch.",
 
     "level": "Easy",
     "region": "",

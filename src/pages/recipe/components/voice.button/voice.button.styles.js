@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     bottom: Spaces.xlarge,
     alignSelf: 'center',
     // width: '40%',
-    zIndex: 2,
+    zIndex: 1000,
   },
   animationBackground: {
     padding: Spaces.small,

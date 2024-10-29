@@ -1201,7 +1201,6 @@ export const recipes = [
     "id": 22,
     "title": "Kukuřice s citronovou omáčkou",
     "description": "Zažijte výbuch chutí s tímto úžasným receptem na kukuřici. Spárován s lákavou citronovou omáčkou je to skvělý způsob, jak si vychutnat jednoduché, ale živé jídlo. Uzená a pálivá paprika spolu s bohatostí másla dodává kukuřici lahodnou chuť, zatímco citronová omáčka poskytuje osvěžující kyselost",
-    "tip": "Máslo je doporučeno pro bohatší chuť, ale olivový olej může být zdravější náhradou. Spárujte s nastrouhaným parmazánem pro lahodný sýrový nádech",
     "level": "Snadné",
     "region": "",
     "servings": 3,
