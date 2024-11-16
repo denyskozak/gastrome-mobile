@@ -7,13 +7,14 @@ import { Modal } from '../../atomic/modal/modal.component';
 import styles from './volume-modal.styles';
 import { useTranslator } from '../../../hooks/useTranslator';
 import PropTypes from 'prop-types';
+import {Colors} from "../../../styles/colors";
 
 const VolumeModalComponent = ({ isVisible, onChangeVisible, onTryAgainPress, onPress }) => {
   const [t] = useTranslator('components.volumeModal');
 
   return (
     <Modal isVisible={isVisible} onChangeVisible={onChangeVisible}>
-      <Icon name="volume-high-outline" size={Spaces.xxlarge}/>
+      <Icon name="volume-high-outline" size={Spaces.xxlarge} color={Colors.white}/>
       {/*TODO replace translation*/}
       <Text style={styles.helpModalTitle}>
         {t('text')}
@@ -27,6 +28,7 @@ const VolumeModalComponent = ({ isVisible, onChangeVisible, onTryAgainPress, onP
       <Button
         type="outlined"
         style={styles.helpModalButton}
+        textStyle={styles.helpModalButtonText}
         onPress={() => {
           onChangeVisible(false);
         }}

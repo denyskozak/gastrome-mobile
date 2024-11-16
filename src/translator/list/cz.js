@@ -95,7 +95,8 @@ export const translates = {
       cancel: 'Zrušit',
       inActiveSubscriberTitle: 'Vaše podpora pro nás znamená svět 🫡',
       storage: 'Úložiště',
-      feedback: 'Ohodnoťte aplikaci 🤩'
+      feedback: 'Ohodnoťte aplikaci 🤩',
+      join: 'Připojit se ke komunitě',
     },
     storage: {
       usedSize: 'Použitá velikost - {size} Mb',
@@ -152,7 +153,7 @@ export const translates = {
       singleVideo: '(Jedno video pro všechny kroky)',
       step: '- Krok {index} z {count} -',
       startVoice: 'Vařte s asistentem',
-      assistantCommandsTitle: 'Použijte příkazy "další", "zadní", "opakovat" pro interakci s hlasovým asistentem',
+      assistantCommandsTitle: 'Použijte příkazy "další", "zpět", "opakovat" pro interakci s hlasovým asistentem',
       start: 'Začít',
       madeBy: 'Video Instagram @{name}',
       loading: 'Stahování videa...',
@@ -161,14 +162,14 @@ export const translates = {
       timerEnd: 'Váš časovač skončil',
       nextCommand: 'Čekám na váš příkaz',
       durationCommand: 'Pro nastavení časovače na {duration}, řekněte časovač.',
-      voiceCommands: 'Příkazy: další, zadní, opakovat',
+      voiceCommands: 'Příkazy: další, zpět, opakovat',
       listenText: 'Poslouchejte krok ...',
       "next": "další",
       "repeat": "opakovat",
       "timer": "časovač",
       "done": "hotovo",
-      back: 'Zadní',
-      backCommand: 'zadní',
+      back: 'Zpět',
+      backCommand: 'zpět',
     }
   },
   components: {

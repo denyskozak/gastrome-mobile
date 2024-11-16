@@ -12,14 +12,12 @@ import { ProfilePage } from '../profile.page';
 import { VoicePage } from '../voiceSettings/voiceSettings.page';
 import { SubscriptionsPage } from '../subscriptions/subscriptions.page';
 import { FaqPage } from '../faq/faq.page';
-import { StoragePage } from '../storage/storage.page';
 import {DevMode} from "../dev-mode/dev-mode";
 import {SafeAreaView} from "react-native";
 
 export const getStack = (t) => ([
   [mainSettingsRoute, ProfilePage, { title: t('profile')}],
   [voiceSettingsRoute, VoicePage, { title: t('voice') }],
-  [storageRoute, StoragePage, { title: t('storage') }],
   [subscriptionsSettingsRoute, SubscriptionsPage, { title: t('subscriptions') }],
   [faqRoute, FaqPage, { title: t('faq') }],
   [devModeRoute, DevMode, { title: 'Dev Mode' }],

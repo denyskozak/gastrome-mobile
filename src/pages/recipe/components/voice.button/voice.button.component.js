@@ -1,5 +1,5 @@
 import React from 'react';
-import { Pressable, View } from 'react-native';
+import { Pressable, View, Text } from 'react-native';
 import PropTypes from 'prop-types';
 import Icon from '@expo/vector-icons/Ionicons';
 
@@ -35,19 +35,20 @@ const VoiceButtonComponent = (props) => {
 
       {(!hideButtonWhenSpeaking || !isListening) && (
         <Animated name="FadeIn" outName="FadeOut">
+          <AttentionAnimation intensive={2}>
           <Button
             animate
             type="wide"
             onPress={onButtonPress}
+            style={styles.button}
           >
-            <>
-              <AttentionAnimation>
+            <Text style={styles.buttonText}>
                 <Icon name="mic-outline" size={24} color={Colors.second}/>
-              </AttentionAnimation>
               {'  '}
               {!isListening ? startText : t('listenActive')}
-            </>
+            </Text>
           </Button>
+          </AttentionAnimation>
         </Animated>
       )}
     </>

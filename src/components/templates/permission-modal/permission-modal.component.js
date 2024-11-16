@@ -6,13 +6,14 @@ import { Modal } from '../../atomic/modal/modal.component';
 
 import styles from './permission-modal.styles';
 import { useTranslator } from '../../../hooks/useTranslator';
+import {Colors} from "../../../styles/colors";
 
 const PermissionModalComponent = ({ isVisible, onChangeVisible, onPress }) => {
   const [t] = useTranslator('components.voicePermission');
 
   return (
     <Modal isVisible={isVisible} onChangeVisible={onChangeVisible}>
-      <Icon name="mic-off-outline" size={Spaces.xxlarge}/>
+      <Icon name="mic-off-outline" size={Spaces.xxlarge} color={Colors.white}/>
       {/*TODO replace translation*/}
       <Text style={styles.helpModalTitle}>
         {t('text')}
@@ -26,6 +27,8 @@ const PermissionModalComponent = ({ isVisible, onChangeVisible, onPress }) => {
       <Button
         type="outlined"
         style={styles.helpModalButton}
+        textStyle={styles.helpModalButtonText}
+
         onPress={onPress}
         title={t('close')}
       />

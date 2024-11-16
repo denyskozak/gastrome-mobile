@@ -25,6 +25,7 @@ const styles = StyleSheet.create({
   list: {
   },
   button: {
+    backgroundColor: Colors.black,
     // flex: 0.1,
   },
   // Time

@@ -1,10 +1,9 @@
-import React, {useMemo} from 'react';
+import React from 'react';
 import * as Speech from 'expo-speech';
 import {ScrollView, Text, View} from 'react-native';
 import {useTranslator} from '../../../hooks/useTranslator';
 import {Button} from '../../../components/atomic/button/button.component';
 
-import {useSpeechProfile} from '../../../hooks/useSpeechProfile.js';
 import {Animated} from '../../../components/atomic/animated/animated.component';
 import styles from './voiceSettings.styles';
 import {useSettings} from "../../../contexts/settings.context.js";
@@ -15,8 +14,8 @@ const VoicePageComponent = (props) => {
     const [
         t, , language
     ] = useTranslator('pages.profile');
-
     const [settings, setSetting] = useSettings();
+
 
     const handleSelectVoice = identifier => {
         Speech.stop()

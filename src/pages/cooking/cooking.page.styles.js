@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
     marginTop: Spaces.small,
     fontSize: 18,
     textAlign: 'center',
+    color: Colors.white
   }),
   helpModalButton: {
     marginTop: Spaces.medium,

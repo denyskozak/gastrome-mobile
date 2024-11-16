@@ -1,14 +1,17 @@
 import { StyleSheet } from 'react-native';
 import { Colors } from '../../../styles/colors';
 import { Spaces } from '../../../styles/spaces';
+import {BorderRadius} from "../../../styles/borderRadiuses";
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: Colors.backgroundColor,
+    backgroundColor: Colors.black,
     padding: Spaces.large,
     justifyContent: 'center',
-    borderRadius: 4,
-    borderColor: 'rgba(0, 0, 0, 0.1)',
+    borderRadius: BorderRadius.medium,
+    borderWidth: 1,
+
+    borderColor: Colors.white,
     marginTop: Spaces.small,
     marginBottom: Spaces.small,
     alignItems: 'center',

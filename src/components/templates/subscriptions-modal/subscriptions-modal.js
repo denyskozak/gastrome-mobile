@@ -81,6 +81,7 @@ const SubscriptionsModalComponent = (props) => {
                 type="outlined"
                 size="xl"
                 style={styles.button}
+                textStyle={styles.buttonText}
                 onPress={() => {
                   handleOptionClick(item)
                 }}
@@ -92,6 +93,7 @@ const SubscriptionsModalComponent = (props) => {
               type="outlined"
               size="xl"
               style={styles.button}
+              textStyle={styles.buttonText}
               onPress={handleRestoreClick}
             >
               {t('restore')}

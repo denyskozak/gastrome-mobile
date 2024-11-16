@@ -23,9 +23,7 @@ const styles = StyleSheet.create({
   },
   // Voice assistant
   button: {
-    width: '100%',
-    height: Spaces.xxlarge + Spaces.small,
-    borderRadius: 0,
+    backgroundColor: Colors.black,
   },
   buttonText: getTextStyles({
     fontSize: 24,

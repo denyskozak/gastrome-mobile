@@ -97,7 +97,8 @@ export const translates = {
             inActiveSubscriberTitle: 'Your support means the world to us 🫡',
             // faq: 'About us',
             storage: 'Storage',
-            feedback: 'Rate app 🤩'
+            feedback: 'Rate app 🤩',
+            join: 'Join Community',
         },
         storage: {
             usedSize: 'Used size - {size} Mb',

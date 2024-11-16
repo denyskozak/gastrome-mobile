@@ -14,6 +14,7 @@ import {useSettings} from '../../contexts/settings.context';
 import {Animation} from '../../components/atomic/animation/animation.component';
 import {isAvailableAsync, requestReview} from 'expo-store-review';
 import {contactURL, privacyURL, termsURL} from "../../constants/links";
+import {SubscriptionButton} from "../../components/templates/subscription-button/subscription-button";
 
 const languagesList = [
     ['Czech', 'cs'],
@@ -51,12 +52,6 @@ const SettingsPageComponent = (props) => {
 
             </View>
             <View style={styles.settingButtons}>
-                <Button
-                    type="outlined"
-                    style={styles.settingButton}
-                    title={t('subscriptions')}
-                    onPress={() => navigation.navigate(subscriptionsSettingsRoute)}
-                />
                 <Button
                     type="outlined"
                     style={styles.settingButton}
@@ -119,6 +114,7 @@ const SettingsPageComponent = (props) => {
             </View>
 
             <Pressable style={styles.footer} onPress={handleClickForDevMode}>
+                <SubscriptionButton text={t('join')} onPress={() => navigation.navigate(subscriptionsSettingsRoute)} />
                 <Text style={styles.footerText}>{settings['isDevMode'] ? 'WELCOME IN DEV MOVE <3' : t('footer')}</Text>
             </Pressable>
 

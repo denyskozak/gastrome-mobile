@@ -7,10 +7,13 @@ import { fontEnum } from '../../../styles/fonts';
 const styles = StyleSheet.create({
   title: getTextStyles({
     textAlign: 'center',
+    color: Colors.white,
   }),
   benefitsText: getTextStyles({
     fontSize: 20,
     textAlign: 'center',
+    color: Colors.white,
+
   }),
   benefits: {
     marginTop: Spaces.medium,
@@ -22,19 +25,24 @@ const styles = StyleSheet.create({
   },
   button: {
     marginTop: Spaces.small,
+    borderColor: Colors.white,
   },
+  buttonText: getTextStyles({
+    color: Colors.white,
+  }),
   closeButton: {
     marginTop: Spaces.medium,
   },
   error: getTextStyles({
     marginTop: Spaces.medium,
     fontSize: 20,
-    color: Colors.red,
+    color: Colors.white,
   }),
   success: getTextStyles({
     marginTop: Spaces.medium,
     fontSize: 20,
-    fontFamily: fontEnum.PoppinsSemiBold
+    fontFamily: fontEnum.PoppinsSemiBold,
+    color: Colors.white,
   })
 });
 

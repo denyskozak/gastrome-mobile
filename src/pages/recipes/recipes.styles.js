@@ -46,6 +46,9 @@ const styles = StyleSheet.create({
     marginTop: Spaces.medium,
     color: Colors.primary
   }),
+  firstSubscriptionButton: {
+    paddingTop: Spaces.large,
+  },
   actionText: getTextStyles({
     fontSize: 14,
     marginLeft: Spaces.small,
@@ -131,9 +134,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 16,
     marginBottom: Spaces.small,
-  }),
-  subscriptionsButton: getTextStyles({
-    color: Colors.white
   }),
   // Voice assistant button
   assistant: {

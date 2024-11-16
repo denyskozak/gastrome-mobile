@@ -290,15 +290,18 @@ const RecipePageComponent = (props) => {
 
         {/* Voice assistant or video link */}
         {visibleCookingLink && (
-            <Animated style={styles.button}>
+            <Animated >
+                <AttentionAnimation intensive={2}>
                 <Button
                     type="wide"
                     onPress={() => navigation.push(cookingRoute, {id})}
+                    style={styles.button}
                 >
                     <Icon name="play-outline" size={24} color={Colors.white}/>
                     {' '}
                     {t('watchVideo')}
                 </Button>
+                  </AttentionAnimation>
             </Animated>
         )}
 

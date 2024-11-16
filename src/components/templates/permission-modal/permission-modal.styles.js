@@ -8,12 +8,15 @@ const styles = StyleSheet.create({
     marginTop: Spaces.large,
     fontSize: 18,
     textAlign: 'center',
+    color: Colors.white,
   }),
   helpModalButtonText: getTextStyles({
     fontSize: 20,
+    color: Colors.white,
   }),
   helpModalButton: {
     marginTop: Spaces.medium,
+    borderColor: Colors.white,
   },
 });
 

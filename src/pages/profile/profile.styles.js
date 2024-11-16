@@ -27,10 +27,12 @@ const styles = StyleSheet.create({
   }),
   footer: {
     position: 'absolute',
-    bottom: Spaces.medium
+    bottom: Spaces.medium,
+    gap: Spaces.small,
   },
   footerText: getTextStyles({
     fontSize: FontSizes.medium,
+    textAlign: 'center',
   }),
   languages: {
     flexDirection: 'row',
