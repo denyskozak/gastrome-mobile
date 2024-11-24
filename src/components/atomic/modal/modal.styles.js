@@ -4,8 +4,8 @@ import { Spaces } from '../../../styles/spaces';
 import {BorderRadius} from "../../../styles/borderRadiuses";
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: Colors.black,
+  getContainer: (isBlack) => ({
+    backgroundColor: isBlack ? Colors.black : Colors.backgroundColor,
     padding: Spaces.large,
     justifyContent: 'center',
     borderRadius: BorderRadius.medium,
@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     marginTop: Spaces.small,
     marginBottom: Spaces.small,
     alignItems: 'center',
-  }
+  }),
 });
 
 export default styles;

@@ -1,7 +1,7 @@
 import { addSpaceWithCondition } from '../../utilities/renders';
 
 // American weight system to Europe
-const roundQuantity = value => value.toFixed(0)
+const roundQuantity = value => Math.round(value).toFixed(2)
 const changeQuantityToUSA = (quantity, unit) => {
   switch (unit) {
     case 'g':

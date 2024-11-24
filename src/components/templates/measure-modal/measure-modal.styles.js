@@ -8,15 +8,10 @@ const styles = StyleSheet.create({
     marginTop: Spaces.large,
     fontSize: 18,
     textAlign: 'center',
-    color: Colors.white,
   }),
   button: {
     marginTop: Spaces.medium,
-    borderColor: Colors.white,
   },
-  buttonText: getTextStyles({
-    color: Colors.white,
-  }),
 });
 
 export default styles;

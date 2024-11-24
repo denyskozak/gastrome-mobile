@@ -4,7 +4,7 @@ import {
   Easing, FadeOut,
 } from 'react-native-reanimated';
 import { AnimatedLogo } from '../../atomic/logo/animated-logo.component';
-import { Text } from 'react-native';
+import {Text, View} from 'react-native';
 
 const SplashScreenComponent = () => {
   const exiting = FadeOut
@@ -12,10 +12,9 @@ const SplashScreenComponent = () => {
     .easing(Easing.ease);
 
   return (
-    <Animated.NativeView style={styles.container} exiting={exiting}>
-        <AnimatedLogo style={styles.logo} duration={750} size="medium" />
-        <Text style={styles.by}> by Gastro & Me Team</Text>
-    </Animated.NativeView>
+    <View style={styles.container} exiting={exiting}>
+        <AnimatedLogo delay={500} duration={750} size="medium" />
+    </View>
   );
 };
 

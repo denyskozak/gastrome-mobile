@@ -3,10 +3,12 @@ import { getTextStyles } from '../../../styles/common.styles';
 import { Spaces } from '../../../styles/spaces';
 import { BorderRadius } from '../../../styles/borderRadiuses';
 import {getDevice} from "../../../utilities/getCurrentDevice";
+import {Colors} from "../../../styles/colors";
 
 const styles = StyleSheet.create({
   title: getTextStyles({
-    textAlign: 'center'
+    textAlign: 'center',
+    color: Colors.white,
   }),
   video: {
     marginTop: Spaces.medium,
@@ -16,6 +18,7 @@ const styles = StyleSheet.create({
   },
   button: {
     marginTop: Spaces.medium,
+    borderColor: Colors.white,
   }
 });
 

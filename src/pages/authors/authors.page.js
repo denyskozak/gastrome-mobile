@@ -33,7 +33,6 @@ const AuthorsPageComponent = (props) => {
 
     return (
         <SafeAreaView style={styles.container}>
-            <Text style={styles.title}>{t('title')}</Text>
             <FlatList
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={styles.list}
@@ -56,7 +55,7 @@ const AuthorsPageComponent = (props) => {
                 )}
                 renderItem={({item, index}) => (
                     <Pressable onPress={() => navigation.navigate(authorRoute, { id: item.id })}>
-                        <AuthorPreview name={`#${index + 1} ${item.name}`} imageSource={item.image} />
+                        <AuthorPreview name={item.name} imageSource={item.image} />
                     </Pressable>
                 )}
             />

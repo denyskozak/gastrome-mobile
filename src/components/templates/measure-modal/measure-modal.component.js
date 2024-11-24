@@ -16,7 +16,7 @@ const MeasureModalComponent = ({ isVisible, currentMeasure, onChangeVisible, onP
   ];
 
   return (
-    <Modal isVisible={isVisible} onChangeVisible={onChangeVisible}>
+    <Modal isBlack={false} isVisible={isVisible} onChangeVisible={onChangeVisible}>
       <Text style={styles.title}>
         {t('title')}
       </Text>
@@ -25,7 +25,6 @@ const MeasureModalComponent = ({ isVisible, currentMeasure, onChangeVisible, onP
           key={measure}
           type="outlined"
           style={styles.button}
-          textStyle={styles.buttonText}
           selected={measure === currentMeasure}
           onPress={() => {onPress(measure)}}
         >
@@ -35,7 +34,6 @@ const MeasureModalComponent = ({ isVisible, currentMeasure, onChangeVisible, onP
       <Button
         type="outlined"
         style={styles.button}
-        textStyle={styles.buttonText}
         onPress={() => {onChangeVisible(false)}}
         title={t('close')}
       />

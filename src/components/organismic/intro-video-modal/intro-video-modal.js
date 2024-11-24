@@ -33,7 +33,7 @@ const IntroVideoModalComponent = (props) => {
           onChangeVisible(false);
         }}
       >
-        <Icon name="checkmark-outline" size={24} color={Colors.black}/>
+        <Icon name="checkmark-outline" size={24} color={Colors.white}/>
       </Button>
     </Modal>
   );

@@ -15,6 +15,7 @@ import {Button} from '../../../components/atomic/button/button.component';
 import {TimerButton} from '../../../components/templates/timer-button/timer-button';
 import {Animation} from '../../../components/atomic/animation/animation.component';
 import _ from 'lodash';
+import {StoryProgressBar} from "../../../components/atomic/story-bar/story-bar";
 
 export const CookingSlideComponent = (props) => {
     const {
@@ -36,6 +37,7 @@ export const CookingSlideComponent = (props) => {
         readCharIndex,
         isListening,
         withVoiceAssistant,
+        stepsCount,
     } = props;
 
     const [showArrow, setShowArrow] = useState(false);
@@ -108,6 +110,7 @@ export const CookingSlideComponent = (props) => {
                 {isPause && !isTimerActive && pauseButton}
 
                 <Animated style={StyleSheet.flatten([styles.textContainer, readCharIndex !== 0 ? styles.textContainerActive : null])}>
+                    <StoryProgressBar steps={stepsCount} activeIndex={index} />
                     <Pressable style={styles.textBackIcon} onPress={onBackClick}>
                         <Icon name='chevron-back-outline' color={Colors.black} size={Spaces.large}/>
                     </Pressable>
@@ -170,6 +173,7 @@ CookingSlideComponent.propTypes = {
     isTimerActive: PropTypes.bool,
     readCharIndex: PropTypes.number,
     withVoiceAssistant: PropTypes.bool,
+    stepsCount: PropTypes.number.isRequired,
 }
 CookingSlideComponent.defaultProps = {
     hideButtons: false,

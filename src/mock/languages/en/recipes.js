@@ -2,6 +2,79 @@ import {getAuthor} from "../author";
 
 export const recipes = [
   {
+    "id": 47,
+    "title": "Tomato Sauced Pasta",
+    "description": " ",
+    "level": "Easy",
+    "servings": 2,
+    "hasVideoSteps": true,
+    free: true,
+    "prep_time": 10,
+    "cook_time": 5,
+    "time": 15,
+    "priority": 0,
+    "author": getAuthor(3),
+    "filters": [
+      "Dinner",
+    ],
+    "steps": [
+      {
+        "description": "Cut the cherry tomatoes in half, sprinkle with salt, pepper and add a few cloves of garlic.",
+        "ingredientsIds": [],
+      },
+      {
+        "description": "Add feta slices, drizzle with olive oil, stir and bake at 200 C / 392 F for 30 minutes",
+        "ingredientsIds": [],
+      },
+      {
+        "description": "Remove the sauce and mix it (with a fork, if you have a blender). Bring to a boil and cook the pasta - time per pack minus 2 minutes",
+        "ingredientsIds": [],
+      },
+    ],
+    "ingredients": [
+      {
+        "id": 1,
+        "title": "Kefir",
+        "quantity": 250,
+        "unit": "ml"
+      },
+      {
+        "id": 2,
+        "title": "Oatmeal",
+        "quantity": 50,
+        "unit": "g"
+      },
+      {
+        "id": 3,
+        "title": "Chia seeds",
+        "quantity": 10,
+        "unit": "g"
+      },
+      {
+        "id": 4,
+        "title": "Flax seeds",
+        "quantity": 10,
+        "unit": "g"
+      },
+      {
+        "id": 5,
+        "title": "Nuts",
+      },
+      {
+        "id": 6,
+        "title": "Sunflower seeds",
+        "quantity": 10,
+        "unit": "g"
+      },
+      {
+        "id": 7,
+        "title": "Protein",
+        "quantity": 25,
+        "unit": "g"
+      },
+    ],
+  },
+  {
     "id": 46,
     "title": "Kefir with oatmeal",
     "description": "Good for the morning, oatmeal does not need to be brewed, just put it in kefir, it will absorb the moisture from it",
@@ -175,7 +248,7 @@ export const recipes = [
         "ingredientsIds": [],
       },
       {
-        "description": "Add the dried fruit and mix. Put it into a baking tin covered with parchment and greased with oil and put it in the oven for 1 hour at 180 degrees. After cooking, it will seem soft, but after it hardens and refrigerates, it will be just right. Cool and cover with icing ",
+        "description": "Add the dried fruit and mix. Put it into a baking tin covered with parchment and greased with oil and put it in the oven for 1 hour at 180 C/ 356 F degrees. After cooking, it will seem soft, but after it hardens and refrigerates, it will be just right. Cool and cover with icing ",
         "ingredientsIds": [],
         duration: 3600
       },
@@ -309,7 +382,7 @@ export const recipes = [
         "ingredientsIds": [],
       },
       {
-        "description": "Grease the mould with oil. Transfer the mixture into it. Bake in a preheated oven at 180 degrees Celsius for 40 minutes. Check the readiness with a toothpick, if the muffin is moist inside, then extend the cooking time.",
+        "description": "Grease the mould with oil. Transfer the mixture into it. Bake in a preheated oven at 180 C / 356 F degrees Celsius for 40 minutes. Check the readiness with a toothpick, if the muffin is moist inside, then extend the cooking time.",
         "ingredientsIds": [],
         duration: 2400
       },
@@ -927,7 +1000,7 @@ export const recipes = [
       {"description": "Trim the tenderloin of fat and films. Rub the tenderloin with salt, pepper and granulated garlic."},
       {"description": "Heat the oil in a frying pan and fry the tenderloin until it is browned on all sides. Fry over high heat. "},
       {"description": "Coat the fried meat on all sides with mustard and roll it in nut crumbs."},
-      {"description": "Bake in the oven for 15 minutes (180 degrees).", duration: 900},
+      {"description": "Bake in the oven for 15 minutes (180 C / 356 F degrees).", duration: 900},
     ]
   },
   // {
@@ -992,7 +1065,7 @@ export const recipes = [
       {"description": "Sift the flour into a bowl, add the spices and baking powder. Stir the mixture and sift into a larger bowl. Then add the sugar and mix again."},
       {"description": "Beat the egg into the dry mixture and add the softened butter. Work these ingredients by hand into a compact dough, which you place in a microtene bag and leave in the fridge for at least 2 hours (but preferably until the next day)."},
       {
-        "description": "Now proceed to make the biscuits. Take small pieces of chilled dough and roll them into balls. Place on two baking trays lined with baking paper. Put the oven preheated to 180 °C and bake for 12 minutes.",
+        "description": "Now proceed to make the biscuits. Take small pieces of chilled dough and roll them into balls. Place on two baking trays lined with baking paper. Put the oven preheated to 180 °C / 356 F and bake for 12 minutes.",
         duration: 720
       },
     ]
@@ -1170,11 +1243,11 @@ export const recipes = [
     ],
     "steps": [
       {
-        "description": "Empty the pumpkin then add salt, and a little olive oil, and bake for 35 minutes, 180 degrees ",
+        "description": "Empty the pumpkin then add salt, and a little olive oil, and bake for 35 minutes, 180 C / 356 F ",
         duration: 2100
       },
       {
-        "description": " Add the cheese, garlic, wine to backed pumpkin and put in the oven for 10 minutes 180 degrees",
+        "description": " Add the cheese, garlic, wine to backed pumpkin and put in the oven for 10 minutes 180 degrees / 356 F",
         duration: 600
       },
       {
@@ -1202,7 +1275,7 @@ export const recipes = [
     "priority": 2,
     "steps": [
       {
-        "description": "If you prepare pumpkin puree yourself, take the pumpkin, peel, cut into small cubes. Place in a mold, drizzle with olive oil and bake for 30-35 mins at 200°. Use a fork or immersion blender to puree the mixture.",
+        "description": "If you prepare pumpkin puree yourself, take the pumpkin, peel, cut into small cubes. Place in a mold, drizzle with olive oil and bake for 30-35 mins at 200° C / 392 F. Use a fork or immersion blender to puree the mixture.",
         "ingredientsIds": [2]
       },
       {

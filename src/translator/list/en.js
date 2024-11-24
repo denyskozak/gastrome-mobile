@@ -27,7 +27,6 @@ export const translates = {
         authors: {
             emptyList: 'No authors found on platform :(',
             becomeChef: "Become new Chef",
-
         },
         author: {
             emptyList: 'Author has no recipes :(',
@@ -199,9 +198,9 @@ export const translates = {
         subscriptionsModal: {
             free: 'Keep free',
             benefits: 'Exclusive Benefits GastroMe Community:',
-            benefitsOne: 'Unlock 30+ recipes 📚',
-            benefitsTwo: 'Special environment 🥰',
-            benefitsThree: 'Private Streams 🧝',
+            benefitsOne: 'Unlock ALL recipes 📚',
+            benefitsTwo: 'Community chat 🥰',
+            benefitsThree: 'Cooking Streams 🧝',
             error: 'Sorry, subscription purchase error, try again or contact to us on settings page',
             restore: 'Restore',
             success: 'Thank you for subscribing! Your support fuels our app\'s growth 🚀',

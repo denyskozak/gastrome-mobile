@@ -70,14 +70,14 @@ const styles = StyleSheet.create({
         position: 'absolute',
         padding: Spaces.small,
         left: 0,
-        top: 0,
+        top: Spaces.large,
     },
     textHideIcon: {
         zIndex: 2,
         position: 'absolute',
         padding: Spaces.small,
         right: 0,
-        top: 0,
+        top: Spaces.large,
     },
     authorContainer: {
         borderRadius: BorderRadius.small,

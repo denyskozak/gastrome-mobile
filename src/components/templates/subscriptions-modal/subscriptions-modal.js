@@ -71,7 +71,7 @@ const SubscriptionsModalComponent = (props) => {
         <Text style={styles.benefitsText}>{t('benefitsTwo')}</Text>
         <Text style={styles.benefitsText}>{t('benefitsThree')}</Text>
       </View>
-      {isLoading && (<AnimatedLogo size="medium" isInfinity/>)}
+      {isLoading && (<AnimatedLogo size="medium" color="white" isInfinity/>)}
       {!isLoading && (<View style={styles.buttons}>
         {!isError && !isSuccess && (
           <>
@@ -110,12 +110,13 @@ const SubscriptionsModalComponent = (props) => {
           type="outlined"
           size="m"
           style={styles.closeButton}
+          styleText={styles.closeButtonText}
           onPress={() => {
             onChangeVisible(false);
             setIsError(false)
           }}
         >
-          <Icon name="checkmark-outline" size={Spaces.large} color={Colors.black}/>
+          <Icon name="close-outline" size={Spaces.large} color={Colors.white}/>
         </Button>
       </View>)}
     </Modal>

@@ -17,15 +17,11 @@ import {recipeRoute, recipesGroceryRoute} from './navigation/recipes.routes';
 import {useFavorites} from '../../contexts/favorites.context';
 import {getDevice} from '../../utilities/getCurrentDevice';
 import {SubscriptionsModal} from '../../components/templates/subscriptions-modal/subscriptions-modal';
-import {Animated} from '../../components/atomic/animated/animated.component';
 
 import styles from './recipes.styles';
-import {Spaces} from '../../styles/spaces';
 import {useRecipes} from "../../hooks/useRecipes";
 import {useSubscriptions} from "../../contexts/subscriptions.context";
-import {AttentionAnimation} from "../../components/molecular/attansion-animation/attansion-animation.component";
 import {SubscriptionButton} from "../../components/templates/subscription-button/subscription-button";
-import {subscriptionsSettingsRoute} from "../profile/navigation/profile.routes";
 
 const filters = [
     {
@@ -84,6 +80,7 @@ const RecipesPageComponent = (props) => {
     const [isFilterOpened, setFilterOpened] = useState(false);
     const [isSubscriptionsOpened, setSubscriptionsOpened] = useState(false);
     const flatListRef = useRef(null);
+    const [visibleItems, setVisibleItems] = useState(new Set());
 
     // Search
     const findRecipeIndexesByTitle = useCallback((value, list) => {
@@ -241,6 +238,11 @@ const RecipesPageComponent = (props) => {
         [t('favorites'), 'bookmark-outline', () => setFilter('Favorites')]
     ];
 
+    // onViewableItemsChanged callback
+    const onViewableItemsChanged = useRef(({ viewableItems }) => {
+        setVisibleItems(new Set(viewableItems.map((item) => item.key)));
+    }).current;
+
     return (
         <View style={styles.container}>
             {/*Actions and search*/}
@@ -291,6 +293,7 @@ const RecipesPageComponent = (props) => {
                 showsVerticalScrollIndicator={false}
                 showsHorizontalScrollIndicator={false}
                 ref={flatListRef}
+                onViewableItemsChanged={onViewableItemsChanged}
                 contentContainerStyle={styles.list}
                 data={data}
                 gap={10}
@@ -313,9 +316,10 @@ const RecipesPageComponent = (props) => {
                         : null
                 }
                 keyExtractor={item => item.id}
-                renderItem={({item, index}) => (
+                renderItem={({item}) => (
                     <RecipeItem
-                        enableHint={isFirstRun && index < 2}
+                        enableHint
+                        animate={visibleItems.has(item.id)}
                         onPress={id => {
                             navigation.navigate(recipeRoute, {id});
                         }}

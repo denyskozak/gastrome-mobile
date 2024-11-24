@@ -13,7 +13,9 @@ const translations = {
     cs
 };
 
-const deviceLanguage = getLocales()[0].languageCode;
-const defaultLanguage = Object.values(languages).includes(deviceLanguage) ? deviceLanguage : 'en';
+// Choose device default language
+// const deviceLanguage = getLocales()[0].languageCode;
+// const defaultLanguage = Object.values(languages).includes(deviceLanguage) ? deviceLanguage : 'en';
+const defaultLanguage = 'en';
 
 export {translations, defaultLanguage}

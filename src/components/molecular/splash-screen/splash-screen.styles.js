@@ -14,10 +14,6 @@ const styles = StyleSheet.create({
     top: 0,
     zIndex: 1,
   },
-  logo: {
-    position: 'absolute',
-    top: '20%',
-  },
   by: {
     position: 'absolute',
     bottom: '10%',

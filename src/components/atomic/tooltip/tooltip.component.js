@@ -32,7 +32,7 @@ const TooltipComponent = (props) => {
               style={styles.popover}
               visible={isVisible}
               position={calculatedPlacement}
-              backgroundColor={Colors.primary}
+              backgroundColor={Colors.black}
             >
               <Text style={styles.text}>{text}</Text>
             </Popover>

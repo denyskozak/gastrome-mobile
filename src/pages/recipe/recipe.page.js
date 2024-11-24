@@ -26,6 +26,7 @@ import {useAWS} from '../../hooks/useAWS';
 import styles from './recipe.styles';
 import {useRecipes} from "../../hooks/useRecipes";
 import {AuthorPreview} from "../../components/molecular/author-preview/author-preview";
+import {ZoomInOut} from "../../components/molecular/zoom-in-out-animation/zoom-in-out-animation";
 
 const RecipePageComponent = (props) => {
     const {
@@ -141,7 +142,9 @@ const RecipePageComponent = (props) => {
 
                 <Pressable onPress={() => navigation.push(cookingRoute, {id})}>
                     <Animated delay={250} duration={750}>
-                        <Image source={image} style={styles.image}/>
+                        <ZoomInOut enabled width={styles.image.width} height={styles.image.height}>
+                            <Image source={image} style={styles.image}/>
+                        </ZoomInOut>
                         {isPreloadVideo && (
                             <Animated style={styles.imageIcon} outName="FadeOut" duration={800}>
                                 <AttentionAnimation delay={200} duration={1200} start={0.5} end={1} property="opacity">
@@ -283,6 +286,7 @@ const RecipePageComponent = (props) => {
                         {title ? `. ${title}` : ''}
                     </Text>
                     {description && <Text style={styles.stepDescription}>{description}</Text>}
+
                     {image && <Image style={styles.stepImage} source={{uri: image}}/>}
                 </View>);
             }}
@@ -290,18 +294,18 @@ const RecipePageComponent = (props) => {
 
         {/* Voice assistant or video link */}
         {visibleCookingLink && (
-            <Animated >
+            <Animated>
                 <AttentionAnimation intensive={3} delay={1500}>
-                <Button
-                    type="wide"
-                    onPress={() => navigation.push(cookingRoute, {id})}
-                    style={styles.button}
-                >
-                    <Icon name="play-outline" size={24} color={Colors.white}/>
-                    {' '}
-                    {t('watchVideo')}
-                </Button>
-                  </AttentionAnimation>
+                    <Button
+                        type="wide"
+                        onPress={() => navigation.push(cookingRoute, {id})}
+                        style={styles.button}
+                    >
+                        <Icon name="play-outline" size={24} color={Colors.white}/>
+                        {' '}
+                        {t('watchVideo')}
+                    </Button>
+                </AttentionAnimation>
             </Animated>
         )}
 

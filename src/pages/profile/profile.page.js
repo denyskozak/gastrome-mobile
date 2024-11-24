@@ -49,10 +49,11 @@ const SettingsPageComponent = (props) => {
 
             <SubscriptionButton text={t('join')} onPress={() => navigation.navigate(subscriptionsSettingsRoute)} />
 
-            <View style={styles.languages}>
-                {languagesList.map(renderLanguageButton)}
+            {/*Lang switcher*/}
+            {/*<View style={styles.languages}>*/}
+            {/*    {languagesList.map(renderLanguageButton)}*/}
+            {/*</View>*/}
 
-            </View>
             <View style={styles.settingButtons}>
                 <Button
                     type="outlined"

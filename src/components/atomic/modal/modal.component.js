@@ -10,6 +10,7 @@ const ModalComponent = (props) => {
     onChangeVisible,
     children,
     animationTiming = 1000,
+    isBlack = true,
   } = props;
 
   return (
@@ -21,7 +22,7 @@ const ModalComponent = (props) => {
       animationOutTiming={animationTiming}
       onBackdropPress={() => onChangeVisible instanceof Function && onChangeVisible(false)}
     >
-      <View style={styles.container}>
+      <View style={styles.getContainer(isBlack)}>
         {children}
       </View>
     </NativeModal>

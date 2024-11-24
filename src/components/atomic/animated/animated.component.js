@@ -22,6 +22,7 @@ import AnimatedLib, {
   BounceOutLeft,
   SlideInLeft,
   SlideOutLeft,
+  PinwheelIn,
   Easing,
 } from 'react-native-reanimated';
 import PropTypes from 'prop-types';
@@ -41,7 +42,8 @@ const animations = {
   BounceInUp,
   FlipInEasyY,
   LightSpeedInRight,
-  LightSpeedInLeft
+  LightSpeedInLeft,
+  PinwheelIn,
 };
 
 const animationsOut = {

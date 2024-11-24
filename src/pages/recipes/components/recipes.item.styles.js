@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 0,
     right: 0,
-    opacity: 0.9
+    opacity: 0.8
   },
   like: {
     marginBottom: Spaces.small,

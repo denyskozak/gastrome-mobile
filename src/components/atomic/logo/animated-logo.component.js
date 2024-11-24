@@ -12,63 +12,84 @@ import {
 } from 'react-native-reanimated';
 
 const AnimatedLogoComponent = (props) => {
-    const {style, delay, duration, size, isInfinity} = props;
+    const {delay, duration, size,color} = props;
 
-    const rotation = useSharedValue(0);
+    const scale = useSharedValue(1); // Scale starts at 1 (original size)
+    const opacity = useSharedValue(1); // Opacity starts fully visible
 
     const animatedStyles = useAnimatedStyle(() => {
         return {
             transform: [
                 {
-                    rotateZ: `${rotation.value}deg`,
+                    scale: scale.value, // Apply scale transformation
                 },
             ],
+            opacity: opacity.value, // Adjust opacity
         };
-    }, [rotation.value]);
+    }, [scale.value, opacity.value]);
 
     useEffect(() => {
-        rotation.value = withDelay(
+        // Modern pulse animation with slight overshoot and opacity change
+        scale.value = withDelay(
             delay,
-            withRepeat(
-                withTiming(360, {
-                    duration,
-                    easing: Easing.linear,
-                }),
-                isInfinity ? -1 : 1,
-                false
-            )
+            withTiming(1.15, {
+                duration: duration / 2,
+                easing: Easing.bezier(0.42, 0, 0.58, 1), // Smooth cubic-bezier easing
+            }, () => {
+                // Add a small overshoot effect before returning to original size
+                scale.value = withTiming(1.05, {
+                    duration: duration / 4,
+                    easing: Easing.bezier(0.42, 0, 0.58, 1),
+                }, () => {
+                    // Finally, settle back to the original size
+                    scale.value = withTiming(1, {
+                        duration: duration / 4,
+                        easing: Easing.out(Easing.quad), // Slow easing out
+                    });
+                });
+            })
         );
 
-        return () => cancelAnimation(rotation);
+        // Simultaneous opacity pulse
+        opacity.value = withDelay(
+            delay,
+            withTiming(0.9, {
+                duration: duration / 2,
+                easing: Easing.inOut(Easing.ease), // Smooth fade in and out
+            }, () => {
+                opacity.value = withTiming(1, {
+                    duration: duration / 2,
+                    easing: Easing.inOut(Easing.ease),
+                });
+            })
+        );
+
+        return () => {
+            cancelAnimation(scale);
+            cancelAnimation(opacity);
+        };
     }, []);
 
-    const entering = FadeIn
-        .delay(500)
-        .duration(500)
-        .easing(Easing.ease);
 
     return (
-        <Animated.NativeView style={[style, animatedStyles]} entering={entering}>
-            <Logo size={size}/>
-        </Animated.NativeView>
+        <Animated name="PinwheelIn" style={animatedStyles} >
+            <Logo color={color} size={size}/>
+        </Animated>
     );
 };
 
 AnimatedLogoComponent.propTypes = {
-    style: PropTypes.object,
-    isInfinity: PropTypes.bool,
     delay: PropTypes.number,
+    color: PropTypes.oneOf(['white', 'black']),
     duration: PropTypes.number,
     size: PropTypes.oneOf(LogoSizes),
-
 }
 
 AnimatedLogoComponent.defaultProps = {
-    style: {},
-    isInfinity: false,
     delay: 1500,
     duration: 1500,
     size: 'small',
+    color: 'black'
 }
 
 export const AnimatedLogo = AnimatedLogoComponent;

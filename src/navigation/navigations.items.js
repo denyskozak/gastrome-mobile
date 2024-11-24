@@ -16,6 +16,7 @@ import { Spaces } from '../styles/spaces';
 import { WelcomeNavigation } from '../pages/welcome/navigation/welcome.navigation';
 import {AuthorsPage} from "../pages/authors/authors.page";
 import {authorsRoute} from "../pages/recipes/navigation/recipes.routes";
+import {AuthorsNavigation} from "../pages/authors/navigation/recipes.navigation";
 
 const createRenderIcon = (name, size = 32, darkMode = false, delay = 2150) => () => (
   <Animated style={{ width: size, }} name="FadeInDown" delay={delay}><Icon name={name} size={size} color={darkMode ? Colors.black : Colors.second}/></Animated>
@@ -40,10 +41,10 @@ export const getNavigationTabs = (t, isDarkModeMenu) => {
     ],
     [
       authorsRoute,
-      AuthorsPage,
+      AuthorsNavigation,
       {
         title: t('authors'),
-        headerShown: true,
+        headerShown: false,
         tabBarIcon: renderIcon('people-outline', 1250),
       },
     ],

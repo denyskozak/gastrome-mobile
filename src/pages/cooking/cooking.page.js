@@ -28,6 +28,7 @@ import styles from './cooking.page.styles';
 import {useRecipes} from "../../hooks/useRecipes";
 import {useSettings} from "../../contexts/settings.context";
 import {useLogger} from "../../hooks/useLogger";
+import {StoryProgressBar} from "../../components/atomic/story-bar/story-bar";
 
 const alarmSong = require('./alarm.mp3');
 const soundObject = new Audio.Sound();
@@ -290,6 +291,7 @@ export const CookingPage = (props) => {
         <CookingSlide
             key={item.stepTitle}
             index={index}
+            stepsCount={steps.length}
             showHelpArrow={index === 0}
             videoURL={item.videoURL}
             activeIndex={activeIndex}

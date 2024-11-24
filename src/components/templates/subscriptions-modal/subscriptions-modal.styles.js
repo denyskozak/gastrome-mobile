@@ -32,7 +32,11 @@ const styles = StyleSheet.create({
   }),
   closeButton: {
     marginTop: Spaces.medium,
+    borderColor: Colors.white,
   },
+  closeButtonText: getTextStyles({
+    color: Colors.white,
+  }),
   error: getTextStyles({
     marginTop: Spaces.medium,
     fontSize: 20,
