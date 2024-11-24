@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import {SafeAreaView, View} from 'react-native';
+import {View} from 'react-native';
 import { useFonts } from 'expo-font'
 import * as SplashScreen from 'expo-splash-screen';
+import AsyncStorage from "@react-native-community/async-storage";
 
 import { fonts } from './styles/fonts';
 
@@ -11,9 +12,7 @@ import { delayForPromise } from './utilities/promiseDelay';
 import {Layout} from "./Layout.js";
 import {isFirstLaunch} from "./utilities/isFirstLaunch";
 import {IS_FIRST_LAUNCH_EVER_STORE_KEY} from "./constants/asyncStoreKeys";
-import AsyncStorage from "@react-native-community/async-storage";
 import {Navigation} from "./navigation/navigation.js";
-import {useSubscriptions} from "./contexts/subscriptions.context";
 import {Colors} from "./styles/colors";
 
 SplashScreen.preventAutoHideAsync().then().catch(() => console.log('error-splash-prevent-auto-hide'));

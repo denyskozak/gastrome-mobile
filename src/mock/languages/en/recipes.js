@@ -2,6 +2,75 @@ import {getAuthor} from "../author";
 
 export const recipes = [
   {
+    "id": 46,
+    "title": "Kefir with oatmeal",
+    "description": "Good for the morning, oatmeal does not need to be brewed, just put it in kefir, it will absorb the moisture from it",
+    "level": "Easy",
+    "servings": 2,
+    "hasVideoSteps": true,
+    free: true,
+    "prep_time": 10,
+    "cook_time": 5,
+    "time": 15,
+    "priority": 0,
+    "author": getAuthor(2),
+    "filters": [
+      "Breakfast",
+    ],
+    "steps": [
+      {
+        "description": "Pour in kefir, sprinkle oatmeal, chia and flax seeds on top, add nuts to taste and sunflower seeds",
+        "ingredientsIds": [],
+      },
+      {
+        "description": "Add protein if desired, stir and leave for 10 minutes",
+        "ingredientsIds": [],
+      },
+    ],
+    "ingredients": [
+      {
+        "id": 1,
+        "title": "Kefir",
+        "quantity": 250,
+        "unit": "ml"
+      },
+      {
+        "id": 2,
+        "title": "Oatmeal",
+        "quantity": 50,
+        "unit": "g"
+      },
+      {
+        "id": 3,
+        "title": "Chia seeds",
+        "quantity": 10,
+        "unit": "g"
+      },
+      {
+        "id": 4,
+        "title": "Flax seeds",
+        "quantity": 10,
+        "unit": "g"
+      },
+      {
+        "id": 5,
+        "title": "Nuts",
+      },
+      {
+        "id": 6,
+        "title": "Sunflower seeds",
+        "quantity": 10,
+        "unit": "g"
+      },
+      {
+        "id": 7,
+        "title": "Protein",
+        "quantity": 25,
+        "unit": "g"
+      },
+    ],
+  },
+  {
     "id": 45,
     "title": "Eggs Pizza",
     "description": "Indulge in the perfect breakfast dream with our Eggs Pizza recipe. Creamy, fluffy, and bursting with rich flavors, these eggs are cooked to perfection with a hint of butter and a touch of seasoning",

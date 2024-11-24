@@ -6,7 +6,7 @@ import { BorderRadius } from '../../../../styles/borderRadiuses';
 const styles = StyleSheet.create({
   line: {
     height: Spaces.xsmall + Spaces.xxsmall,
-    backgroundColor: Colors.red,
+    backgroundColor: Colors.white,
     borderTopRightRadius: BorderRadius.small,
     borderBottomRightRadius: BorderRadius.small,
     borderRightWidth: Spaces.xsmall + Spaces.xxsmall,

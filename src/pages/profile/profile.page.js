@@ -47,6 +47,8 @@ const SettingsPageComponent = (props) => {
             {/*<Icon name="person-circle-outline" size={Spaces.xxxlarge} color={Colors.primary}/>*/}
             <Animation name="cooking" width={Spaces.xxxlarge * 3} height={Spaces.xxxlarge * 3}/>
 
+            <SubscriptionButton text={t('join')} onPress={() => navigation.navigate(subscriptionsSettingsRoute)} />
+
             <View style={styles.languages}>
                 {languagesList.map(renderLanguageButton)}
 
@@ -114,7 +116,6 @@ const SettingsPageComponent = (props) => {
             </View>
 
             <Pressable style={styles.footer} onPress={handleClickForDevMode}>
-                <SubscriptionButton text={t('join')} onPress={() => navigation.navigate(subscriptionsSettingsRoute)} />
                 <Text style={styles.footerText}>{settings['isDevMode'] ? 'WELCOME IN DEV MOVE <3' : t('footer')}</Text>
             </Pressable>
 

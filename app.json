@@ -7,6 +7,7 @@
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
     "plugins": [
+      "@react-native-firebase/app",
       [
         "@react-native-voice/voice",
         {
@@ -23,6 +24,7 @@
             "buildToolsVersion": "31.0.0"
           },
           "ios": {
+            "useFrameworks": "static",
             "deploymentTarget": "13.0"
           }
         }
@@ -42,6 +44,7 @@
     ],
     "ios": {
       "supportsTablet": true,
+      "googleServicesFile": "./GoogleService-Info.plist",
       "bundleIdentifier": "com.AzarovStudio.Gastro",
       "infoPlist": {
         "NSPhotoLibraryUsageDescription": "Allow $(PRODUCT_NAME) to securely user photos lib",
@@ -50,6 +53,7 @@
       }
     },
     "android": {
+      "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"

@@ -9,7 +9,7 @@ import React from "react";
 export const SubscriptionButton = (props) => {
     const { onPress, text = '' } = props;
     return (
-        <AttentionAnimation>
+        <AttentionAnimation intensive={3} delay={1500}>
             <Button style={styles.subscriptionsButton} onPress={() => {
                 onPress?.()
             }}>

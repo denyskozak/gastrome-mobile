@@ -36,7 +36,8 @@ const styles = StyleSheet.create({
   }),
   languages: {
     flexDirection: 'row',
-    gap: Spaces.medium
+    gap: Spaces.medium,
+    marginTop: Spaces.medium
   }
 });
 

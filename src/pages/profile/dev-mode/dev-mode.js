@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Button, Text, View} from 'react-native';
+import {Button, ScrollView, Text, View} from 'react-native';
 import * as Speech from "expo-speech";
 
 import {useSettings} from "../../../contexts/settings.context";
@@ -16,7 +16,7 @@ export const DevMode = () => {
     }, []);
 
     return (
-        <View>
+        <ScrollView>
             <Text>
                 errors: {settings['errors'].join(', ')}
             </Text>
@@ -24,6 +24,6 @@ export const DevMode = () => {
                 voices: {profiles.map(profile => `${profile.identifier}${profile.name}---`)}
             </Text>
             <Button title={'Rest'} onPress={() => resetLogger()} />
-        </View>
+        </ScrollView>
     );
 };
