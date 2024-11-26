@@ -12,9 +12,9 @@ const SplashScreenComponent = () => {
     .easing(Easing.ease);
 
   return (
-    <View style={styles.container} exiting={exiting}>
+    <Animated.NativeView style={styles.container} exiting={exiting}>
         <AnimatedLogo delay={500} duration={750} size="medium" />
-    </View>
+    </Animated.NativeView>
   );
 };
 

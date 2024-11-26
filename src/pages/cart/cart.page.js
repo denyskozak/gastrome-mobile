@@ -15,7 +15,6 @@ import { Input } from '../../components/atomic/input/input.component';
 import { useCommonModal } from '../../contexts/commonModal/commonModal.context';
 import { mapRenderCartQuantity } from '../recipe/recipe.renders';
 import { sortByTitle } from '../recipes/recipes.sortings';
-import { getTitle } from '../recipes/recipes.utilities';
 import {
   addSpaceBefore,
   addSpaceWithCondition,
@@ -237,11 +236,7 @@ const CartPageComponent = (props) => {
           type="outlined"
           style={styles.actionButton}
           onPress={() => {
-            const deletedItems = items
-              .filter((item, index) => selected.includes(index));
-            const deletedItemTitles = deletedItems.map(getTitle);
-            const filteredCart = cart.filter(item => !deletedItemTitles.includes(item.title));
-            setCart(filteredCart);
+            setCart(cart.filter((item, index) => !selected.includes(index)));
             setSelected([]);
           }}
         >

@@ -16,10 +16,11 @@ import {isAvailableAsync, requestReview} from 'expo-store-review';
 import {contactURL, privacyURL, termsURL} from "../../constants/links";
 import {SubscriptionButton} from "../../components/templates/subscription-button/subscription-button";
 
-const languagesList = [
-    ['Czech', 'cs'],
-    ['English', 'en']
-];
+// const languagesList = [
+//     ['Czech', 'cs'],
+//     ['English', 'en']
+// ];
+
 const SettingsPageComponent = (props) => {
     const {navigation} = props;
     const [
@@ -37,10 +38,10 @@ const SettingsPageComponent = (props) => {
         setClicksForDevMode(clicksForDevMode === 4 ? 0 : clicksForDevMode + 1);
     }
 
-    const renderLanguageButton = ([title, language]) => (
-        <Button key={language} title={title} type="outlined" selected={language === currentLanguage}
-                onPress={() => setLanguage(language)}/>
-    );
+    // const renderLanguageButton = ([title, language]) => (
+    //     <Button key={language} title={title} type="outlined" selected={language === currentLanguage}
+    //             onPress={() => setLanguage(language)}/>
+    // );
 
     return (
         <ScrollView contentContainerStyle={styles.container}>

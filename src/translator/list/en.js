@@ -30,7 +30,7 @@ export const translates = {
         },
         author: {
             emptyList: 'Author has no recipes :(',
-            recipes: 'Recipes:',
+            recipes: 'Recipes (scroll down):',
             title: "Our lovely stars",
         },
         cart: {
@@ -127,7 +127,7 @@ export const translates = {
             apply: 'Apply',
             subscriptions: 'Prepared plans for your:',
             buySubscription: 'Join GastroMe Community',
-            extraRecipesText: 'You have 8 free monthly recipes,\n do you wish more?',
+            extraRecipesText: 'You have 10 free monthly recipes,\n do you wish more?',
             time: '{time} min',
         },
         recipe: {
@@ -220,7 +220,7 @@ export const translates = {
         },
         recipesGenerator: {
             title: 'Random Recipe There:',
-            extraRecipesText: 'There are 8 recipes available to you, for more click on text',
+            extraRecipesText: 'There are 10 recipes available to you, for more click on text',
             generate: 'Get new',
             time: '{time} min',
         },

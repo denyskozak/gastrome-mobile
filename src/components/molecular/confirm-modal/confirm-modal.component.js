@@ -32,6 +32,7 @@ const ConfirmModalComponent = (props) => {
         <Button
           type="outlined"
           style={styles.button}
+          textStyle={styles.buttonText}
           onPress={() => {
             onClose();
           }}
@@ -41,6 +42,7 @@ const ConfirmModalComponent = (props) => {
           type="outlined"
           disabled={isConfirmDisabled}
           style={styles.button}
+          textStyle={styles.buttonText}
           onPress={() => {
             onConfirm();
             onClose();

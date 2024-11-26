@@ -4,14 +4,14 @@ export const recipes = [
   {
     "id": 47,
     "title": "Tomato Sauced Pasta",
-    "description": " ",
+    "description": "Classic juicy pasta from our leading Czech colleague",
     "level": "Easy",
     "servings": 2,
     "hasVideoSteps": true,
     free: true,
     "prep_time": 10,
-    "cook_time": 5,
-    "time": 15,
+    "cook_time": 30,
+    "time": 40,
     "priority": 0,
     "author": getAuthor(3),
     "filters": [
@@ -27,7 +27,7 @@ export const recipes = [
         "ingredientsIds": [],
       },
       {
-        "description": "Remove the sauce and mix it (with a fork, if you have a blender). Bring to a boil and cook the pasta - time per pack minus 2 minutes",
+        "description": "Remove the sauce and mix it (use blender or fork). Bring to a boil and cook the pasta - time per pack minus 2 minutes",
         "ingredientsIds": [],
       },
     ],

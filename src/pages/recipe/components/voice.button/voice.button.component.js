@@ -35,7 +35,7 @@ const VoiceButtonComponent = (props) => {
 
       {(!hideButtonWhenSpeaking || !isListening) && (
         <Animated name="FadeIn" outName="FadeOut">
-          <AttentionAnimation intensive={3} delay={2000}>
+          <AttentionAnimation delay={2000}>
           <Button
             animate
             type="wide"

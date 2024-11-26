@@ -2,7 +2,7 @@
   "expo": {
     "name": "Gastro & Me",
     "slug": "gastro-and-me",
-    "version": "1.1.10",
+    "version": "1.1.14",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
@@ -19,8 +19,8 @@
         "expo-build-properties",
         {
           "android": {
-            "compileSdkVersion": 31,
-            "targetSdkVersion": 31,
+            "compileSdkVersion": 34,
+            "targetSdkVersion": 34,
             "buildToolsVersion": "31.0.0"
           },
           "ios": {

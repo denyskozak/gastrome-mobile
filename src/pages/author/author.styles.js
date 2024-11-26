@@ -9,6 +9,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     gap: Spaces.medium,
+    justifyContent: "center",
+    alignItems: 'center',
   },
   description: getTextStyles({
     marginTop: Spaces.medium,
@@ -21,7 +23,7 @@ const styles = StyleSheet.create({
   recipes: getTextStyles({
     marginTop: Spaces.medium,
     alignItems: 'center',
-    fontSize: 16,
+    fontSize: 18,
     textAlign: 'center',
     paddingLeft: Spaces.medium,
     paddingRight: Spaces.medium,

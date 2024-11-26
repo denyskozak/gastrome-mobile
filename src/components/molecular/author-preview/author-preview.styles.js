@@ -6,14 +6,14 @@ import {BorderRadius} from "../../../styles/borderRadiuses";
 
 const styles = StyleSheet.create({
   image: {
-    height: Spaces.xxxlarge * 2,
-    width: Spaces.xxxlarge * 2,
+    height: Spaces.xxxlarge * 1.5,
+    width: Spaces.xxxlarge * 1.5,
     marginTop: Spaces.large,
     alignSelf: 'center',
     borderRadius: BorderRadius.large
   },
   name: getTextStyles({
-    marginTop: Spaces.medium,
+    marginTop: Spaces.small,
     alignItems: 'center',
     fontSize: 24,
     textAlign: 'center',

@@ -15,6 +15,7 @@ import {contactURL} from "../../constants/links";
 import {authorRoute} from "../recipes/navigation/recipes.routes";
 
 import styles from './authors.styles';
+import {AttentionAnimation} from "../../components/molecular/attansion-animation/attansion-animation.component";
 
 let isFirstRun = true;
 
@@ -41,21 +42,25 @@ const AuthorsPageComponent = (props) => {
                 numColumns={getDevice() === 'iPad' ? 2 : 1}
                 ListEmptyComponent={<Text style={styles.emptyList}>{t('emptyList')}</Text>}
                 ListFooterComponent={(
-                    <Button onPress={() => {
-                        Linking.openURL(contactURL)
-                    }}>
-                        <Text style={styles.subscriptionsButton}>
-                            <Icon name="heart" size={24} color={Colors.red}/>
-                            {' '}
-                            {t('becomeChef')}
-                            {' '}
-                            <Icon name="heart" size={24} color={Colors.red}/>
-                        </Text>
-                    </Button>
+                    <AttentionAnimation delay={2000}>
+
+                        <Button style={styles.subscriptionsButton} onPress={() => {
+                            Linking.openURL(contactURL)
+                        }}>
+                            <Text style={styles.subscriptionsButtonText}>
+                                <Icon name="heart" size={24} color={Colors.red}/>
+                                {' '}
+                                {t('becomeChef')}
+                                {' '}
+                                <Icon name="heart" size={24} color={Colors.red}/>
+                            </Text>
+                        </Button>
+                    </AttentionAnimation>
+
                 )}
                 renderItem={({item, index}) => (
-                    <Pressable onPress={() => navigation.navigate(authorRoute, { id: item.id })}>
-                        <AuthorPreview name={item.name} imageSource={item.image} />
+                    <Pressable onPress={() => navigation.navigate(authorRoute, {id: item.id})}>
+                        <AuthorPreview name={item.name} imageSource={item.image}/>
                     </Pressable>
                 )}
             />

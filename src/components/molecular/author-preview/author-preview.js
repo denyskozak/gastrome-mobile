@@ -11,10 +11,10 @@ const AuthorPreviewComponent = (props) => {
 
     return (
         <View>
-            <Text style={styles.name}>{name}</Text>
             <Animated name="PinwheelIn">
                 <Image source={imageSource} style={styles.image}/>
             </Animated>
+            <Text style={styles.name}>{name}</Text>
         </View>
     );
 }

@@ -143,7 +143,7 @@ export const CookingSlideComponent = (props) => {
                         <Text style={styles.author}>{author}</Text>
                     </View>
                 )}
-                {showArrow && (
+                {showArrow && stepsCount > 1 && (
                     <Animated style={styles.helpArrow} delay={500}>
                         <Animation name="swipeLeft" height={Spaces.xxxlarge * 2.5} width={Spaces.xxxlarge * 2.5}/>
                     </Animated>

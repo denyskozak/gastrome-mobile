@@ -188,11 +188,7 @@ const RecipePageComponent = (props) => {
                             </Button>
                         </View>
                     </View>
-                    {author && (
-                        <Pressable onPress={() => navigation.navigate(authorRoute, {id: author.id})}>
-                            <AuthorPreview name={author.name} imageSource={author.image}/>
-                        </Pressable>
-                    )}
+
                     {region && <Text style={styles.region}>{t('region')}: {region}</Text>}
                     {subTitle && <Text style={styles.sub}>{subTitle}</Text>}
                     {description && <Text style={styles.description}>{description}</Text>}
@@ -267,6 +263,11 @@ const RecipePageComponent = (props) => {
 
                 </View>
             </>}
+            ListFooterComponent={author ? (
+                <Pressable onPress={() => navigation.navigate(authorRoute, {id: author.id})}>
+                    <AuthorPreview name={author.name} imageSource={author.image}/>
+                </Pressable>
+            ) : null}
             onScroll={handleScroll}
             data={steps}
             // @TODO replace on id when API is ready */
@@ -291,11 +292,10 @@ const RecipePageComponent = (props) => {
                 </View>);
             }}
         />
-
         {/* Voice assistant or video link */}
         {visibleCookingLink && (
             <Animated>
-                <AttentionAnimation intensive={3} delay={1500}>
+                <AttentionAnimation delay={1500}>
                     <Button
                         type="wide"
                         onPress={() => navigation.push(cookingRoute, {id})}

@@ -116,7 +116,7 @@ const WelcomePageComponent = (props) => {
           </Animated>
           <View style={styles.letGoButtonContainer}>
             <Animated delay={animationDelays.exploreButton} duration={800} name="BounceIn">
-              <AttentionAnimation delay={animationDelays.exploreButtonResizing} intensive={3}>
+              <AttentionAnimation delay={animationDelays.exploreButtonResizing}>
                 <Button
                   type="outlined"
                   style={styles.letGoButton}

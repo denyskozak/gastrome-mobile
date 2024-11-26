@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {FlatList, View} from 'react-native';
+import {FlatList, Pressable, View} from 'react-native';
 import {Text} from 'react-native';
 import {useAuthor} from "../../hooks/useAuthor";
 import {getDevice} from "../../utilities/getCurrentDevice";
@@ -10,6 +10,10 @@ import {AuthorPreview} from "../../components/molecular/author-preview/author-pr
 import {useTranslator} from '../../hooks/useTranslator';
 
 import styles from './author.styles';
+import {Spaces} from "../../styles/spaces";
+import Icon from "@expo/vector-icons/Ionicons";
+import * as Linking from "expo-linking";
+import {contactURL} from "../../constants/links";
 
 let isFirstRun = true;
 
@@ -31,6 +35,7 @@ const AuthorPageComponent = (props) => {
     return (
         <View style={styles.container}>
             <AuthorPreview name={name} imageSource={image} />
+            {author.instagram && <Pressable onPress={() =>  Linking.openURL(author.instagram)}><Icon name="logo-instagram" size={Spaces.xlarge} /></Pressable>}
             <Text style={styles.description}>{description}</Text>
             <Text style={styles.recipes}>{t('recipes')}</Text>
             <FlatList
@@ -45,6 +50,7 @@ const AuthorPageComponent = (props) => {
                         <RecipeItem
                             key={item.id}
                             enableHint={isFirstRun && index < 3}
+                            hideImage
                             onPress={id => {
                                 navigation.navigate(recipeRoute, {id});
                             }}

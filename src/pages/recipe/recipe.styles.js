@@ -15,7 +15,7 @@ const IPadImage = {
 
 const IPhoneImage = {
   height: getPercentHeight(Spaces.xlarge),
-  width: '100%',
+  width: getPercentWidth(100),
 };
 
 const styles = StyleSheet.create({

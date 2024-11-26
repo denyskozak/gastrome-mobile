@@ -7,7 +7,7 @@ export const authors = [
     id: 3,
     name: 'Dunčko Tomáš',
     instagram: 'https://www.instagram.com/culinary_art_food/',
-    description: 'One of Top Czech Restaurants Chef',
+    description: 'Czech chef, Visioner',
     image: Author3
   },
   {
@@ -19,7 +19,7 @@ export const authors = [
   {
     id: 1,
     name: 'Stanislav Drobny',
-    description: 'Cooking Instructor in Gastro & Me',
+    description: 'Cooking Instructor Gastro & Me',
     image: Author1
   },
 ]

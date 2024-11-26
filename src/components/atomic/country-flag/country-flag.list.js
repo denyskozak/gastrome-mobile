@@ -4,5 +4,6 @@ export const CountryFlagMap = {
   'Europe': 'EU',
   'USA': 'US',
   'Ukraine': 'UA',
+  'Czech': 'CS',
 };
 export const CountryList = Object.keys(CountryFlagMap);

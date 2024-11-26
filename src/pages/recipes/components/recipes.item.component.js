@@ -15,6 +15,7 @@ import {Animated} from '../../../components/atomic/animated/animated.component';
 
 import styles from './recipes.item.styles';
 import {ZoomInOut} from "../../../components/molecular/zoom-in-out-animation/zoom-in-out-animation";
+import {AttentionAnimation} from "../../../components/molecular/attansion-animation/attansion-animation.component";
 
 const RecipeItemComponent = (props) => {
     const {
@@ -30,6 +31,7 @@ const RecipeItemComponent = (props) => {
         filters,
         isFavorited,
         animate,
+        hideImage,
         enableHint = false,
     } = props;
     const [t] = useTranslator('pages.recipes');
@@ -58,7 +60,7 @@ const RecipeItemComponent = (props) => {
     const renderThreeDots = items => items.length > 4 ? '...' : '';
 
     return (<Pressable style={styles.container} onPress={() => onPress(id)}>
-        {image && (
+        {image && !hideImage && (
             <TouchableHighlight style={styles.imageTouchable} activeOpacity={0.9} onPress={() => onPress(id)}>
                 <View>
                     <ZoomInOut enabled={animate} width={styles.image.width} height={styles.image.height}>
@@ -69,12 +71,16 @@ const RecipeItemComponent = (props) => {
                     </ZoomInOut>
 
                     {/*<AttentionAnimation duration={1200} start={0.5} end={1} property="opacity">*/}
-                    {enableHint && <Animated duration={800} delay={1000} outName="FadeOut" style={styles.imageIcon}>
-                        <Animation name="click" autoPlay={false} height={Spaces.xxxlarge * 1.2}
-                                   width={Spaces.xxxlarge * 1.2}/>
-                        {/*<Icon name={'play-circle-outline'} color={Colors[iconColor]}*/}
-                        {/*      size={Spaces.xxlarge + Spaces.small}/>*/}
-                    </Animated>}
+                    {enableHint && (
+                        <View style={styles.imageIcon}>
+                            <AttentionAnimation duration={1000} delay={2000} enabled={animate} start={1} end={0} property="opacity">
+                                <Animation name="click" autoPlay={false} height={Spaces.xxxlarge * 1.4}
+                                           width={Spaces.xxxlarge * 1.4}/>
+                                {/*<Icon name={'play-circle-outline'} color={Colors[iconColor]}*/}
+                                {/*      size={Spaces.xxlarge + Spaces.small}/>*/}
+                            </AttentionAnimation>
+                        </View>
+                    )}
                     {/*</AttentionAnimation>*/}
                 </View>
             </TouchableHighlight>
@@ -130,7 +136,8 @@ RecipeItemComponent.propTypes = {
     selectedIngredients: PropTypes.arrayOf(PropTypes.string),
     isFavorited: PropTypes.bool,
     enableHint: PropTypes.bool,
-    animate: PropTypes.bool
+    animate: PropTypes.bool,
+    hideImage: PropTypes.bool
 };
 
 RecipeItemComponent.defaultProps = {
@@ -139,6 +146,7 @@ RecipeItemComponent.defaultProps = {
     isFavorited: false,
     enableHint: false,
     animate: false,
+    hideImage: false,
 };
 
 export const RecipeItem = React.memo(RecipeItemComponent);
