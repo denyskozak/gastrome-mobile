@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {FlatList, Pressable, View} from 'react-native';
+import {FlatList, Pressable, SafeAreaView, View} from 'react-native';
 import {Text} from 'react-native';
 import {useAuthor} from "../../hooks/useAuthor";
 import {getDevice} from "../../utilities/getCurrentDevice";
@@ -33,7 +33,7 @@ const AuthorPageComponent = (props) => {
     const [t] = useTranslator('pages.author');
 
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             <AuthorPreview name={name} imageSource={image} />
             {author.instagram && <Pressable onPress={() =>  Linking.openURL(author.instagram)}><Icon name="logo-instagram" size={Spaces.xlarge} /></Pressable>}
             <Text style={styles.description}>{description}</Text>
@@ -62,7 +62,7 @@ const AuthorPageComponent = (props) => {
                         index > 1 ? element : (<Animated>{element}</Animated>));
                 }}
             />
-        </View>
+        </SafeAreaView>
     );
 };
 

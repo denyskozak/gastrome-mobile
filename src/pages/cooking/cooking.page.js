@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
-import {Pressable, Text, View} from 'react-native';
+import {Pressable, SafeAreaView, Text, View} from 'react-native';
 import {Audio} from 'expo-av';
 import * as Speech from 'expo-speech';
 import Voice from '@react-native-voice/voice';
@@ -319,7 +319,7 @@ export const CookingPage = (props) => {
     );
 
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             <Carousel
                 ref={carouselRef}
                 items={steps}
@@ -434,6 +434,6 @@ export const CookingPage = (props) => {
                     }
                 }}
             />
-        </View>
+        </SafeAreaView>
     )
 };

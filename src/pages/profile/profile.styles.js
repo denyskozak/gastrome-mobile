@@ -7,6 +7,9 @@ import {BorderRadius as FontSizes} from "../../styles/borderRadiuses";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  content: {
+    flex: 1,
     marginTop: containerMarginTop,
     alignItems: "center",
   },

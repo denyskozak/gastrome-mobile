@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useEffect, useCallback, useRef } from 'react';
-import { Text, View } from 'react-native';
+import {SafeAreaView, Text, View} from 'react-native';
 import { FlatGrid } from 'react-native-super-grid';
 import Voice from '@react-native-voice/voice';
 import { Audio } from 'expo-av';
@@ -216,7 +216,7 @@ const GroceryPageComponent = (props) => {
   }
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       {/* Voice assistance */}
       <VoiceButton
         hideButtonWhenSpeaking={false}
@@ -313,7 +313,7 @@ const GroceryPageComponent = (props) => {
           }
         }
       />
-    </View>
+    </SafeAreaView>
   );
 };
 

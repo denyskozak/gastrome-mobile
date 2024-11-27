@@ -1,5 +1,5 @@
 import React, {useState, useMemo, useEffect, useRef, useCallback, Fragment} from 'react';
-import {VirtualizedList, Text, View, Pressable} from 'react-native';
+import {VirtualizedList, Text, View, Pressable, SafeAreaView} from 'react-native';
 import SwipeablePanel from 'react-native-sheets-bottom';
 import Icon from '@expo/vector-icons/Ionicons';
 
@@ -244,7 +244,7 @@ const RecipesPageComponent = (props) => {
     }).current;
 
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             {/*Actions and search*/}
             <View style={styles.actionButtonsContainer}>
                 {/* Hidden search by name, return in future */}
@@ -366,7 +366,7 @@ const RecipesPageComponent = (props) => {
                     </Button>
                 </View>
             </SwipeablePanel>
-        </View>
+        </SafeAreaView>
     );
 };
 

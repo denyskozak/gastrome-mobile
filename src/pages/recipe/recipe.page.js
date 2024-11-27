@@ -1,5 +1,5 @@
 import React, {useEffect, useMemo, useRef, useState} from 'react';
-import {FlatList, Pressable, Image, Text, View} from 'react-native';
+import {FlatList, Pressable, Image, Text, View, SafeAreaView} from 'react-native';
 import Icon from '@expo/vector-icons/Ionicons';
 import _ from 'lodash';
 
@@ -126,7 +126,7 @@ const RecipePageComponent = (props) => {
         debounceChangeCookingLinkState(y);
     };
 
-    return (<View style={styles.container}>
+    return (<SafeAreaView style={styles.container}>
         <FlatList
             ref={flatListRef}
             showsVerticalScrollIndicator={false}
@@ -324,7 +324,7 @@ const RecipePageComponent = (props) => {
             }}
             onChangeVisible={setIsMeasureModalOpen}
         />
-    </View>);
+    </SafeAreaView>);
 };
 
 export const RecipePage = RecipePageComponent;

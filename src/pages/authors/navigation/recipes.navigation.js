@@ -6,7 +6,7 @@ import { RecipePage } from '../../recipe/recipe.page';
 import { CookingPage } from '../../cooking/cooking.page';
 import { AuthorPage } from '../../author/author.page';
 import {AuthorsPage} from "../authors.page";
-import {SafeAreaView} from "react-native";
+import {SafeAreaView, View} from "react-native";
 import {authorRoute, authorsRoute, cookingRoute, recipeRoute} from "../../recipes/navigation/recipes.routes";
 
 export const getStack = (t) => ([
@@ -37,12 +37,12 @@ const AuthorsNavigationComponent = (props) => {
   const tabs = getStack(t);
 
   return (
-      <SafeAreaView style={{ flex: 1 }}>
+      <View style={{ flex: 1 }}>
         <StackNavigator
             tabs={tabs}
             initialRouteName={authorsRoute}
         />
-      </SafeAreaView>
+      </View>
 
   );
 };

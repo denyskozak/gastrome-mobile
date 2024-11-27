@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import * as Linking from 'expo-linking';
 
-import {Pressable, ScrollView, Text, View} from 'react-native';
+import {Pressable, SafeAreaView, ScrollView, Text, View} from 'react-native';
 import {useTranslator} from '../../hooks/useTranslator';
 import {Button} from '../../components/atomic/button/button.component';
 
@@ -47,91 +47,98 @@ const SettingsPageComponent = (props) => {
 
     return (
         <ScrollView contentContainerStyle={styles.container}>
-            {/*<Icon name="person-circle-outline" size={Spaces.xxxlarge} color={Colors.primary}/>*/}
-            <Animation name="cooking" width={Spaces.xxxlarge * 3} height={Spaces.xxxlarge * 3}/>
+            <SafeAreaView style={styles.content}>
 
-            <SubscriptionButton text={isSubscriber ? t('community'): t('join')} onPress={() => navigation.navigate(subscriptionsSettingsRoute)} />
+                {/*<Icon name="person-circle-outline" size={Spaces.xxxlarge} color={Colors.primary}/>*/}
+                <Animation name="cooking" width={Spaces.xxxlarge * 3} height={Spaces.xxxlarge * 3}/>
 
-            {/*Lang switcher*/}
-            {/*<View style={styles.languages}>*/}
-            {/*    {languagesList.map(renderLanguageButton)}*/}
-            {/*</View>*/}
+                <SubscriptionButton text={isSubscriber ? t('community') : t('join')}
+                                    onPress={() => navigation.navigate(subscriptionsSettingsRoute)}/>
 
-            <View style={styles.settingButtons}>
-                <Button
-                    type="outlined"
-                    style={styles.settingButton}
-                    title={t('chooseAssistantButton')}
-                    onPress={() => navigation.navigate(voiceSettingsRoute)}
+                {/*Lang switcher*/}
+                {/*<View style={styles.languages}>*/}
+                {/*    {languagesList.map(renderLanguageButton)}*/}
+                {/*</View>*/}
+
+                <View style={styles.settingButtons}>
+                    <Button
+                        type="outlined"
+                        style={styles.settingButton}
+                        title={t('chooseAssistantButton')}
+                        onPress={() => navigation.navigate(voiceSettingsRoute)}
+                    />
+                    {/*<Button*/}
+                    {/*  type="outlined"*/}
+                    {/*  style={styles.settingButton}*/}
+                    {/*  title={t('measure')}*/}
+                    {/*  onPress={() => setIsMeasureModalOpen(true)}*/}
+                    {/*/>*/}
+                    {/*<Button*/}
+                    {/*  type="outlined"*/}
+                    {/*  style={styles.settingButton}*/}
+                    {/*  title={t('storage')}*/}
+                    {/*  onPress={() => navigation.navigate(storageRoute)}*/}
+                    {/*/>*/}
+                    <Button
+                        type="outlined"
+                        style={styles.settingButton}
+                        title={t('feedback')}
+                        onPress={() => isAvailableAsync().then(() => requestReview())}
+                    />
+                    <Button
+                        type="outlined"
+                        style={styles.settingButton}
+                        title={t('contact')}
+                        onPress={() => Linking.openURL(contactURL)}
+                    />
+                    {!settings['isDevMode'] && (
+                        <>
+                            <Button
+                                type="outlined"
+                                style={styles.settingButton}
+                                title={t('terms')}
+                                onPress={() => Linking.openURL(termsURL)}
+                            />
+                            <Button
+                                type="outlined"
+                                style={styles.settingButton}
+                                title={t('privacy')}
+                                onPress={() => Linking.openURL(privacyURL)}
+                            />
+                        </>
+                    )}
+
+                    {/*<Button*/}
+                    {/*  type="outlined"*/}
+                    {/*  style={styles.settingButton}*/}
+                    {/*  title={t('faq')}*/}
+                    {/*  onPress={() => navigation.navigate(faqRoute)}*/}
+                    {/*/>*/}
+                    {settings['isDevMode'] && <Button
+                        type="outlined"
+                        style={styles.settingButton}
+                        title="Dev Page"
+                        onPress={() => navigation.navigate(devModeRoute)}
+                    />}
+                </View>
+                <Pressable style={styles.footer} onPress={handleClickForDevMode}>
+                    <Text
+                        style={styles.footerText}>{settings['isDevMode'] ? 'WELCOME IN DEV MOVE <3' : t('footer')}</Text>
+                </Pressable>
+
+                <MeasureModal
+                    isVisible={isMeasureModalOpen}
+                    currentMeasure={measure}
+                    onPress={measure => {
+                        setSetting('measure', measure);
+                        setIsMeasureModalOpen(false);
+                    }}
+                    onChangeVisible={setIsMeasureModalOpen}
                 />
-                {/*<Button*/}
-                {/*  type="outlined"*/}
-                {/*  style={styles.settingButton}*/}
-                {/*  title={t('measure')}*/}
-                {/*  onPress={() => setIsMeasureModalOpen(true)}*/}
-                {/*/>*/}
-                {/*<Button*/}
-                {/*  type="outlined"*/}
-                {/*  style={styles.settingButton}*/}
-                {/*  title={t('storage')}*/}
-                {/*  onPress={() => navigation.navigate(storageRoute)}*/}
-                {/*/>*/}
-                <Button
-                    type="outlined"
-                    style={styles.settingButton}
-                    title={t('feedback')}
-                    onPress={() => isAvailableAsync().then(() => requestReview())}
-                />
-                <Button
-                    type="outlined"
-                    style={styles.settingButton}
-                    title={t('contact')}
-                    onPress={() => Linking.openURL(contactURL)}
-                />
-                {!settings['isDevMode'] && (
-                    <>
-                        <Button
-                            type="outlined"
-                            style={styles.settingButton}
-                            title={t('terms')}
-                            onPress={() => Linking.openURL(termsURL)}
-                        />
-                        <Button
-                            type="outlined"
-                            style={styles.settingButton}
-                            title={t('privacy')}
-                            onPress={() => Linking.openURL(privacyURL)}
-                        />
-                    </>
-                )}
 
-                {/*<Button*/}
-                {/*  type="outlined"*/}
-                {/*  style={styles.settingButton}*/}
-                {/*  title={t('faq')}*/}
-                {/*  onPress={() => navigation.navigate(faqRoute)}*/}
-                {/*/>*/}
-                {settings['isDevMode'] && <Button
-                    type="outlined"
-                    style={styles.settingButton}
-                    title="Dev Page"
-                    onPress={() => navigation.navigate(devModeRoute)}
-                />}
-            </View>
+            </SafeAreaView>
 
-            <Pressable style={styles.footer} onPress={handleClickForDevMode}>
-                <Text style={styles.footerText}>{settings['isDevMode'] ? 'WELCOME IN DEV MOVE <3' : t('footer')}</Text>
-            </Pressable>
 
-            <MeasureModal
-                isVisible={isMeasureModalOpen}
-                currentMeasure={measure}
-                onPress={measure => {
-                    setSetting('measure', measure);
-                    setIsMeasureModalOpen(false);
-                }}
-                onChangeVisible={setIsMeasureModalOpen}
-            />
         </ScrollView>
     );
 };
