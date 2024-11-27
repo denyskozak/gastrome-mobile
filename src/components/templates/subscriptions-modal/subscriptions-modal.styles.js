@@ -30,6 +30,10 @@ const styles = StyleSheet.create({
   buttonText: getTextStyles({
     color: Colors.white,
   }),
+  logoWrapper: {
+    marginTop: Spaces.medium,
+    marginBottom: Spaces.medium,
+  },
   closeButton: {
     marginTop: Spaces.medium,
     borderColor: Colors.white,

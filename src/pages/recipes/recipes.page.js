@@ -297,6 +297,7 @@ const RecipesPageComponent = (props) => {
                 contentContainerStyle={styles.list}
                 data={data}
                 gap={10}
+                initialNumToRender={3}
                 getItemCount={items => items.length}
                 getItem={(items, index) => data[index]}
                 numColumns={getDevice() === 'iPad' ? 2 : 1}

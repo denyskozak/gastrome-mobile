@@ -71,7 +71,7 @@ const SubscriptionsModalComponent = (props) => {
         <Text style={styles.benefitsText}>{t('benefitsTwo')}</Text>
         <Text style={styles.benefitsText}>{t('benefitsThree')}</Text>
       </View>
-      {isLoading && (<AnimatedLogo size="medium" color="white" isInfinity/>)}
+      {isLoading && (<View style={styles.logoWrapper}><AnimatedLogo size="medium" color="white" isInfinity/></View>)}
       {!isLoading && (<View style={styles.buttons}>
         {!isError && !isSuccess && (
           <>

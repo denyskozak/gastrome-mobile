@@ -2,6 +2,7 @@ import React from 'react';
 import Icon from '@expo/vector-icons/Ionicons';
 
 import {
+  authorsPageRoute,
   cartPageRoute,
   profilePageRoute, recipesPageRoute,
   welcomePageRoute
@@ -14,7 +15,6 @@ import { ProfileNavigation } from '../pages/profile/navigation/profile.navigatio
 import { RecipesNavigation } from '../pages/recipes/navigation/recipes.navigation';
 import { Spaces } from '../styles/spaces';
 import { WelcomeNavigation } from '../pages/welcome/navigation/welcome.navigation';
-import {authorsRoute} from "../pages/recipes/navigation/recipes.routes";
 import {AuthorsNavigation} from "../pages/authors/navigation/recipes.navigation";
 import {AttentionAnimation} from "../components/molecular/attansion-animation/attansion-animation.component";
 
@@ -43,7 +43,7 @@ export const getNavigationTabs = (t, isDarkModeMenu) => {
       },
     ],
     [
-      authorsRoute,
+      authorsPageRoute,
       AuthorsNavigation,
       {
         title: t('authors'),

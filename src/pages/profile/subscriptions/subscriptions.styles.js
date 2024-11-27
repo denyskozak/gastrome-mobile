@@ -13,6 +13,10 @@ const styles = StyleSheet.create({
   subscriptionText: getTextStyles({
     textAlign: 'center'
   }),
+  communityText: getTextStyles({
+    textAlign: 'center',
+    fontSize: 22
+  }),
   howToCancelButton: {
     width: Spaces.xxxlarge  * 4,
   },

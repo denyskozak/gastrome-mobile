@@ -15,6 +15,7 @@ import {Animation} from '../../components/atomic/animation/animation.component';
 import {isAvailableAsync, requestReview} from 'expo-store-review';
 import {contactURL, privacyURL, termsURL} from "../../constants/links";
 import {SubscriptionButton} from "../../components/templates/subscription-button/subscription-button";
+import {useSubscriptions} from "../../contexts/subscriptions.context";
 
 // const languagesList = [
 //     ['Czech', 'cs'],
@@ -32,6 +33,7 @@ const SettingsPageComponent = (props) => {
     const {measure} = settings;
     const [isMeasureModalOpen, setIsMeasureModalOpen] = useState(false);
     const [clicksForDevMode, setClicksForDevMode] = useState(0);
+    const [isSubscriber] = useSubscriptions();
 
     const handleClickForDevMode = () => {
         if (clicksForDevMode === 4) setSetting('isDevMode', !settings['isDevMode']);
@@ -48,7 +50,7 @@ const SettingsPageComponent = (props) => {
             {/*<Icon name="person-circle-outline" size={Spaces.xxxlarge} color={Colors.primary}/>*/}
             <Animation name="cooking" width={Spaces.xxxlarge * 3} height={Spaces.xxxlarge * 3}/>
 
-            <SubscriptionButton text={t('join')} onPress={() => navigation.navigate(subscriptionsSettingsRoute)} />
+            <SubscriptionButton text={isSubscriber ? t('community'): t('join')} onPress={() => navigation.navigate(subscriptionsSettingsRoute)} />
 
             {/*Lang switcher*/}
             {/*<View style={styles.languages}>*/}

@@ -21,6 +21,7 @@ const SubscriptionsPageComponent = () => {
   return (
     <View>
       <View style={styles.subscriptions}>
+          {isSubscriber && <Text style={styles.communityText}>{t('communityText')}</Text>}
         <Text style={styles.subscriptionText}>{t(isSubscriber ? 'subscriptionsTitle' : 'inActiveSubscriberTitle')}</Text>
         {isSubscriber && (
           <View>

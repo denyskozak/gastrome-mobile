@@ -38,7 +38,7 @@ const SubscriptionsComponent = (props) => {
   const [isSubscriber, currentSubscription, subscriptions, setCurrentSubscription, isLoaded] = usePaymentSubscriptions();
 
   const value = {
-    isSubscriber: false,
+    isSubscriber,
     currentSubscription,
     subscriptions,
     setCurrentSubscription,

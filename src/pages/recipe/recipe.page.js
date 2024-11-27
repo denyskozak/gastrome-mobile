@@ -1,4 +1,4 @@
-import React, {useEffect, useMemo, useState} from 'react';
+import React, {useEffect, useMemo, useRef, useState} from 'react';
 import {FlatList, Pressable, Image, Text, View} from 'react-native';
 import Icon from '@expo/vector-icons/Ionicons';
 import _ from 'lodash';
@@ -68,12 +68,17 @@ const RecipePageComponent = (props) => {
     const stepRefs = {};
     const {measure} = settings;
     const [isPreloadVideo, setIsPreloadVideo] = useState(false);
+    const flatListRef = useRef(null);
 
     useEffect(() => {
         downloadAsync(getCookingStepURL(id, 1))
             .then(() => setIsPreloadVideo(true))
             .catch(() => console.log('Error first step video preload: '));
     }, []);
+
+    useEffect(() => {
+        flatListRef.current?.scrollToOffset({ offset: 0, animated: true });
+    }, [id]);
 
     const recipeCountry = useMemo(() => {
         return filters.find(item => CountryList.includes(item));
@@ -123,6 +128,7 @@ const RecipePageComponent = (props) => {
 
     return (<View style={styles.container}>
         <FlatList
+            ref={flatListRef}
             showsVerticalScrollIndicator={false}
             ListHeaderComponent={<>
                 {/* Image section */}
