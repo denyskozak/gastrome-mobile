@@ -147,7 +147,7 @@ const RecipePageComponent = (props) => {
                 </View>
 
                 <Pressable onPress={() => navigation.push(cookingRoute, {id})}>
-                    <Animated delay={250} duration={750}>
+                    <Animated delay={250} duration={750} style={styles.imageContainer}>
                         <ZoomInOut enabled width={styles.image.width} height={styles.image.height}>
                             <Image source={image} style={styles.image}/>
                         </ZoomInOut>

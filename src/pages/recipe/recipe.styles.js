@@ -14,8 +14,8 @@ const IPadImage = {
 };
 
 const IPhoneImage = {
-  height: getPercentHeight(Spaces.xlarge),
-  width: getPercentWidth(100),
+  height: 250,
+  width: 320,
 };
 
 const styles = StyleSheet.create({
@@ -58,6 +58,9 @@ const styles = StyleSheet.create({
     marginTop: Spaces.small,
   },
 
+  imageContainer: {
+    alignItems: "center",
+  },
   image: {
     marginTop: Spaces.large,
     display: 'flex',
