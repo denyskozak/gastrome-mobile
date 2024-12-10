@@ -34,44 +34,41 @@ export const recipes = [
     "ingredients": [
       {
         "id": 1,
-        "title": "Kefir",
-        "quantity": 250,
-        "unit": "ml"
+        "title": "Spaghetti",
+        "quantity": 75,
+        "unit": "g",
+        "description": "dried spaghetti, but fresh is also possible"
       },
       {
         "id": 2,
-        "title": "Oatmeal",
+        "title": "Cherry tomatoes",
         "quantity": 50,
         "unit": "g"
       },
       {
         "id": 3,
-        "title": "Chia seeds",
-        "quantity": 10,
+        "title": "Feta",
+        "quantity": 35,
         "unit": "g"
       },
       {
         "id": 4,
-        "title": "Flax seeds",
-        "quantity": 10,
+        "title": "Pepper",
+        "quantity": 2,
         "unit": "g"
       },
       {
         "id": 5,
-        "title": "Nuts",
+        "title": "Olive oil",
+        "quantity": 1,
+        "unit": "tbsp"
       },
       {
         "id": 6,
-        "title": "Sunflower seeds",
-        "quantity": 10,
+        "title": "Herbs",
+        "quantity": 2,
         "unit": "g"
-      },
-      {
-        "id": 7,
-        "title": "Protein",
-        "quantity": 25,
-        "unit": "g"
-      },
+      }
     ],
   },
   {
@@ -1217,7 +1214,8 @@ export const recipes = [
       {
         "title": "White wine",
         "quantity": 1,
-        "unit": "tbsp"
+        "unit": "tbsp",
+        "description": 'optional',
       },
       {
         "title": "Bread",
