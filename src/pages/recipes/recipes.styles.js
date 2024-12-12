@@ -47,7 +47,8 @@ const styles = StyleSheet.create({
     color: Colors.primary
   }),
   firstSubscriptionButton: {
-    paddingTop: Spaces.large,
+    paddingTop: Spaces.xlarge,
+    // width: 320,
   },
   actionText: getTextStyles({
     fontSize: 14,

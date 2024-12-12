@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
   }),
   sub: getTextStyles({
     fontSize: 20,
-    marginTop: Spaces.large,
+    marginTop: Spaces.small,
     fontFamily: fontEnum.PoppinsBold,
   }),
   description: getTextStyles({
@@ -100,12 +100,12 @@ const styles = StyleSheet.create({
   tip: getTextStyles({
     fontSize: 16,
     color: Colors.red,
-    marginTop: Spaces.medium,
+    marginTop: Spaces.small,
   }),
   servings: getTextStyles({
     fontSize: 20,
     textAlign: 'center',
-    marginTop: Spaces.medium,
+    marginTop: Spaces.small,
   }),
   servingsButtons: {
     flexDirection: 'row',
@@ -177,14 +177,14 @@ const styles = StyleSheet.create({
     marginBottom: Spaces.xsmall,
   }),
   ingredients: {
-    marginTop: Spaces.large,
+    marginTop: Spaces.small,
   },
   addToCardText: getTextStyles({
     fontSize: 14,
     textAlign: 'center',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: Spaces.medium,
+    marginTop: Spaces.small,
     fontFamily: fontEnum.PoppinsSemiBold,
   }),
   addToCartButton: {

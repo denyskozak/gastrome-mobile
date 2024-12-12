@@ -249,6 +249,9 @@ const RecipePageComponent = (props) => {
                                     </View>
                                 </View>
                             )}
+                            {author && author.image && <Pressable onPress={() => navigation.navigate(authorRoute, {id: author.id})}>
+                                <AuthorPreview name={author.name} imageSource={author.image}/>
+                            </Pressable>}
                             {/*TODO Its dubplicate of "Add to cart" function, Return if needed*/}
                             {/*{!existsInCart && (<Text style={styles.addToCardText}>*/}
                             {/*  {t('addToCart')}*/}
@@ -269,11 +272,6 @@ const RecipePageComponent = (props) => {
 
                 </View>
             </>}
-            ListFooterComponent={author ? (
-                <Pressable onPress={() => navigation.navigate(authorRoute, {id: author.id})}>
-                    <AuthorPreview name={author.name} imageSource={author.image}/>
-                </Pressable>
-            ) : null}
             onScroll={handleScroll}
             data={steps}
             // @TODO replace on id when API is ready */

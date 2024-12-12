@@ -51,7 +51,7 @@ export const CookingSlideComponent = (props) => {
     }, [showArrow]);
 
     useEffect(() => {
-            setPause(isTimerActive);
+        setPause(isTimerActive);
     }, [isTimerActive]);
 
     const pauseButton = (
@@ -86,31 +86,41 @@ export const CookingSlideComponent = (props) => {
                     uri={videoURL}
                     loadingText={loadingText}
                     resizeMode="cover"
-                    progressLineBottomPosition={isListening || !withVoiceAssistant || isTimerActive ? 0 : Spaces.xxlarge + Spaces.small}
+                    progressLineBottomPosition={0}
+                    // TODO return if will be need
+                    // progressLineBottomPosition={isListening || !withVoiceAssistant || isTimerActive ? 0 : 0}
                     onLoaded={() => {
                         if (showHelpArrow) setShowArrow(true)
                     }}
                 />
 
                 {!hideButtons && (
-                    <Animated duration={1000} name="SlideInLeft" outName="SlideOutLeft"
-                              style={styles.backButtonContainer}>
-                        <Button size="l" style={styles.backButton} type="outlined" onPress={onBackClick}>
-                            <Text style={styles.backButtonText}>
-                                <Icon name='chevron-back-outline' color={Colors.black} size={Spaces.large}/>
-                                {backLabel}
-                            </Text>
-                        </Button>
-                        {duration && !isTimerActive ?
-                            <TimerButton onPress={onStartTimePress} duration={duration}/> : null}
+                    <>
+                        <Animated duration={1000} name="SlideInLeft" outName="SlideOutLeft"
+                                  style={styles.backButtonLeftContainer}>
+                            <Button size="m" style={styles.backButton} type="outlined" onPress={onBackClick}>
+                                <Text style={styles.backButtonText}>
+                                    {backLabel}
+                                </Text>
+                            </Button>
+                            {/*TODO return timer*/}
+                            {/*{duration && !isTimerActive ?*/}
+                            {/*    <TimerButton onPress={onStartTimePress} duration={duration}/> : null}*/}
 
-                    </Animated>
+                        </Animated>
+
+                        {duration && !isTimerActive ?
+                            <Animated duration={1000} name="SlideInLeft" outName="SlideOutLeft"
+                                      style={styles.backButtonRightContainer}><TimerButton onPress={onStartTimePress}/>
+                            </Animated> : null}
+                    </>
                 )}
 
                 {isPause && !isTimerActive && pauseButton}
 
-                <Animated style={StyleSheet.flatten([styles.textContainer, readCharIndex !== 0 ? styles.textContainerActive : null])}>
-                    <StoryProgressBar steps={stepsCount} activeIndex={index} />
+                <Animated
+                    style={StyleSheet.flatten([styles.textContainer, readCharIndex !== 0 ? styles.textContainerActive : null])}>
+                    <StoryProgressBar steps={stepsCount} activeIndex={index}/>
                     <Pressable style={styles.textBackIcon} onPress={onBackClick}>
                         <Icon name='chevron-back-outline' color={Colors.black} size={Spaces.large}/>
                     </Pressable>

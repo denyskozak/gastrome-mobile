@@ -27,6 +27,7 @@ const styles = StyleSheet.create({
         marginLeft: Spaces.medium,
         marginRight : Spaces.medium,
         backgroundColor: Colors.black,
+        marginBottom: Spaces.medium,
     },
     subscriptionsButtonText: getTextStyles({
         color: Colors.white,

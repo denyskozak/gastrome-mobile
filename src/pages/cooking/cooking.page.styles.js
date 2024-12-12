@@ -11,10 +11,9 @@ const styles = StyleSheet.create({
   },
   timer: {
     position: 'absolute',
-    bottom: Spaces.xxxlarge * 2,
+    bottom: '50%',
     alignSelf: 'center',
     zIndex: 2,
-
   },
   helpModal: {
     alignItems: 'center',

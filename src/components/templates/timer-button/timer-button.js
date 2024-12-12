@@ -8,22 +8,22 @@ import styles from './timer-button.styles';
 import { secondsToMinutesWithTranslations } from '../../../utilities/timeParsers';
 
 const TimerButtonComponent = (props) => {
-  const { onPress, duration } = props;
+  const { onPress } = props;
   const [t] = useTranslator('components.timerButton');
 
   return (
     <Button
       type="outlined"
+      size="m"
       style={styles.button}
       textStyle={styles.buttonText}
-      title={t('buttonText', {duration} )}
+      title={t('buttonText')}
       onPress={onPress}
     />
   );
 }
 
 TimerButtonComponent.propTypes = {
-  duration: PropTypes.string.isRequired,
   onPress: PropTypes.func.isRequired
 };
 

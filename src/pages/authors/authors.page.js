@@ -43,7 +43,6 @@ const AuthorsPageComponent = (props) => {
                 ListEmptyComponent={<Text style={styles.emptyList}>{t('emptyList')}</Text>}
                 ListFooterComponent={(
                     <AttentionAnimation delay={2000}>
-
                         <Button style={styles.subscriptionsButton} onPress={() => {
                             Linking.openURL(contactURL)
                         }}>

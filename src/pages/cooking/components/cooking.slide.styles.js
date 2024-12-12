@@ -24,17 +24,25 @@ const styles = StyleSheet.create({
         zIndex: 3
     },
     video: {width: '100%', height: '100%'},
-    backButtonContainer: {
+    backButtonLeftContainer: {
         position: 'absolute',
         zIndex: 2,
         left: getDevice() === 'iPad' ? '10%' : '5%',
-        bottom: Spaces.xxxlarge,
+        bottom: Spaces.xxlarge,
+        flexDirection: 'row',
+        gap: Spaces.small,
+    },
+    backButtonRightContainer: {
+        position: 'absolute',
+        zIndex: 2,
+        right: getDevice() === 'iPad' ? '10%' : '5%',
+        bottom: Spaces.xxlarge,
         flexDirection: 'row',
         gap: Spaces.small,
     },
     backPause: {
         position: 'absolute',
-        bottom: '20%',
+        bottom: '50%',
     },
     backButton: {
         backgroundColor: Colors.backgroundColorLowOpacity,

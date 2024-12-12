@@ -20,10 +20,10 @@ const styles = StyleSheet.create({
     transition: 'background-color 0.3s ease', // Smooth transition
   },
   activeSegment: {
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.black,
   },
   inactiveSegment: {
-    backgroundColor: Colors.black,
+    backgroundColor: Colors.primary,
   },
 });
 

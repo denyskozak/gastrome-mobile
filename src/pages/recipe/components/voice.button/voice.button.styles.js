@@ -21,13 +21,21 @@ const styles = StyleSheet.create({
     borderColor: Colors.primary,
     borderWidth: 2,
   },
+
+  animationOffBackground: {
+    // padding: Spaces.xxsmall,
+    backgroundColor: Colors.second,
+    borderRadius: 100,
+    borderColor: Colors.primary,
+    borderWidth: 2,
+  },
   // Voice assistant
   button: {
-    backgroundColor: Colors.black,
+    backgroundColor: Colors.primary,
   },
   buttonText: getTextStyles({
     fontSize: 24,
-    color: Colors.white,
+    color: Colors.black,
     justifyContent: 'center',
   }),
 });

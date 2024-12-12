@@ -16,6 +16,7 @@ import {isAvailableAsync, requestReview} from 'expo-store-review';
 import {contactURL, privacyURL, termsURL} from "../../constants/links";
 import {SubscriptionButton} from "../../components/templates/subscription-button/subscription-button";
 import {useSubscriptions} from "../../contexts/subscriptions.context";
+import {AnimatedLogo} from "../../components/atomic/logo/animated-logo.component";
 
 // const languagesList = [
 //     ['Czech', 'cs'],
@@ -50,10 +51,9 @@ const SettingsPageComponent = (props) => {
             <SafeAreaView style={styles.content}>
 
                 {/*<Icon name="person-circle-outline" size={Spaces.xxxlarge} color={Colors.primary}/>*/}
-                <Animation name="cooking" width={Spaces.xxxlarge * 3} height={Spaces.xxxlarge * 3}/>
+                {/*<Animation name="cooking" width={Spaces.xxxlarge * 3} height={Spaces.xxxlarge * 3}/>*/}
+                <AnimatedLogo delay={300} isInfinity/>
 
-                <SubscriptionButton text={isSubscriber ? t('community') : t('join')}
-                                    onPress={() => navigation.navigate(subscriptionsSettingsRoute)}/>
 
                 {/*Lang switcher*/}
                 {/*<View style={styles.languages}>*/}
@@ -61,6 +61,8 @@ const SettingsPageComponent = (props) => {
                 {/*</View>*/}
 
                 <View style={styles.settingButtons}>
+                    <SubscriptionButton text={isSubscriber ? t('community') : t('join')}
+                                        onPress={() => navigation.navigate(subscriptionsSettingsRoute)}/>
                     <Button
                         type="outlined"
                         style={styles.settingButton}

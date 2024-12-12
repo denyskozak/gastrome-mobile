@@ -12,6 +12,9 @@ import microJSON from './list/micro-voice.json';
 import prepareCookingJSON from './list/prepare-cooking.json';
 import swipeLeftJSON from './list/swipe-left.json';
 import clickJSON from './list/click.json';
+import voiceOnJSON from './list/voice-on.json';
+import voiceOffJSON from './list/voice-off.json';
+import cookOnFireJSON from './list/cooking-on-fire.json';
 
 const looties = {
   cooking: cookingJSON,
@@ -23,6 +26,9 @@ const looties = {
   prepareCooking: prepareCookingJSON,
   swipeLeft: swipeLeftJSON,
   click: clickJSON,
+  voiceOff: voiceOffJSON,
+  voiceOn: voiceOnJSON,
+  cookOnFire: cookOnFireJSON,
 }
 
 const AnimationComponent = React.forwardRef((props, ref) => {

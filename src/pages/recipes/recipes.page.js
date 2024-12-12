@@ -304,7 +304,14 @@ const RecipesPageComponent = (props) => {
                 ListEmptyComponent={<Text style={styles.emptyList}>{t('emptyList')}</Text>}
                 ListHeaderComponent={<View>
                     {renderSelectedIngredients()}
-                    {!isSubscriber ? <View style={styles.firstSubscriptionButton}><SubscriptionButton onPress={() =>setSubscriptionsOpened(true)} text={t('buySubscription')} /></View> : null}
+                    {!isSubscriber
+                        ? <View style={styles.firstSubscriptionButton}>
+                            <Text style={styles.subscriptionsInto}>
+                                {t('extraRecipesText')}
+                            </Text>
+                            <SubscriptionButton onPress={() =>setSubscriptionsOpened(true)} text={t('buySubscription')} />
+                    </View>
+                        : null}
                 </View>}
                 ListFooterComponent={
                     () => !isSubscriber

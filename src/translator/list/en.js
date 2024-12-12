@@ -155,7 +155,7 @@ export const translates = {
         cooking: {
             singleVideo: '(Single video for all steps)',
             step: '- Step {index} of {count} -',
-            startVoice: 'Cook with Voice assistant',
+            startVoice: 'Run Assistant',
             assistantCommandsTitle: 'Use commands "next", "back", "repeat" for interact with Voice Assistant',
             start: 'Start',
             madeBy: 'Video Instagram @{name}',
@@ -214,6 +214,7 @@ export const translates = {
         },
         voiceButton: {
             listenActive: 'Listening...',
+            tip: "Voice Assistant Here"
         },
         volumeModal: {
             text: 'Oops! Looks like your volume is low. Increase it to access this feature.',
@@ -234,7 +235,7 @@ export const translates = {
             tbsp: 'Table Spoon',
         },
         timerButton: {
-            buttonText: 'Timer: {duration}'
+            buttonText: 'Timer'
         },
     }
 };

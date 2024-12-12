@@ -33,6 +33,8 @@ import {StoryProgressBar} from "../../components/atomic/story-bar/story-bar";
 const alarmSong = require('./alarm.mp3');
 const soundObject = new Audio.Sound();
 
+let isFirstAssistantRun = true;
+
 export const CookingPage = (props) => {
     const {
         navigation,
@@ -55,7 +57,6 @@ export const CookingPage = (props) => {
     const [permissionModalVisible, setPermissionModalVisible] = useState(false);
     const [isListening, setListening] = useState(false);
     const [isVolumeModalVisible, setVolumeModalVisible] = useState(false);
-    const [isFirstAssistantRun, setFirstAssistantRun] = useState(true);
     const [isTimerActive, setIsTimeActive] = useState(false);
     const [activeIndex, setActiveIndex] = React.useState(0);
     const [timerVoiceActivated, setTimerVoiceActivated] = React.useState(false); // regarding from where timer was called
@@ -264,7 +265,7 @@ export const CookingPage = (props) => {
 
         if (isFirstAssistantRun) {
             setHelpModalVisible(true);
-            setFirstAssistantRun(false);
+            isFirstAssistantRun = false;
         } else {
             await delayForPromise(1000);
             await startVoiceUsage();
@@ -320,13 +321,6 @@ export const CookingPage = (props) => {
 
     return (
         <SafeAreaView style={styles.container}>
-            <Carousel
-                ref={carouselRef}
-                items={steps}
-                renderItem={renderItem}
-                activeIndex={activeIndex}
-                onChangeActiveIndex={setActiveIndex}
-            />
             {/*Voice assistant*/}
             {!timerVoiceActivated && withVoiceAssistant && (
                 <VoiceButton
@@ -337,6 +331,14 @@ export const CookingPage = (props) => {
                     onButtonPress={handleStartCookingPress}
                 />
             )}
+            <Carousel
+                ref={carouselRef}
+                items={steps}
+                renderItem={renderItem}
+                activeIndex={activeIndex}
+                onChangeActiveIndex={setActiveIndex}
+            />
+
             {/*Timer*/}
             {
                 isTimerActive && activeStepDuration

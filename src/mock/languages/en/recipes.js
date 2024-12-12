@@ -25,10 +25,13 @@ export const recipes = [
       {
         "description": "Add feta slices, drizzle with olive oil, stir and bake at 200 C / 392 F for 30 minutes",
         "ingredientsIds": [],
+        duration: 1800
+
       },
       {
         "description": "Remove the sauce and mix it (use blender or fork). Bring to a boil and cook the pasta - time per pack minus 2 minutes",
         "ingredientsIds": [],
+        duration: 120
       },
     ],
     "ingredients": [
