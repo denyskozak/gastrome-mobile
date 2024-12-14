@@ -14,6 +14,10 @@ export const recipes = [
     "time": 40,
     "priority": 0,
     "author": getAuthor(3),
+    "proteins": 9,
+    "fats": 12,
+    "carbohydrates": 62,
+    "calories": 360,
     "filters": [
       "Dinner",
     ],
@@ -90,6 +94,10 @@ export const recipes = [
     "filters": [
       "Breakfast",
     ],
+    "proteins": 14,
+    "fats": 12,
+    "carbohydrates": 32,
+    "calories": 280,
     "steps": [
       {
         "description": "Pour in kefir, sprinkle oatmeal, chia and flax seeds on top, add nuts to taste and sunflower seeds",
@@ -156,6 +164,10 @@ export const recipes = [
     "time": 30,
     "priority": 0,
     "author": getAuthor(1),
+    "proteins": 18,
+    "fats": 22,
+    "carbohydrates": 8,
+    "calories": 310,
     "filters": [
       "Breakfast",
     ],
@@ -237,6 +249,10 @@ export const recipes = [
     "time": 70,
     "priority": 0,
     "instagram": "nastya_shemelina9",
+    "proteins": 48,
+    "fats": 55,
+    "carbohydrates": 60,
+    "calories": 780,
     "filters": [
       "Ukraine",
       "Breakfast",
@@ -310,6 +326,10 @@ export const recipes = [
     "cook_time": 15,
     "time": 30,
     "priority": 3,
+    "proteins": 18,
+    "fats": 38,
+    "carbohydrates": 45,
+    "calories": 540,
     "filters": [
       "Dessert",
       "Snack",
@@ -370,7 +390,10 @@ export const recipes = [
     "prep_time": 40,
     "cook_time": 20,
     "time": 60,
-
+    "proteins": 16,
+    "fats": 28,
+    "carbohydrates": 70,
+    "calories": 560,
     "priority": 3,
     "filters": [
       "Breakfast",
@@ -457,7 +480,10 @@ export const recipes = [
     "prep_time": 0,
     "cook_time": 30,
     "time": 30,
-
+    "proteins": 10,
+    "fats": 20,
+    "carbohydrates": 25,
+    "calories": 320,
     "priority": 3,
     "filters": [
       "Snack",
@@ -549,7 +575,10 @@ export const recipes = [
     "prep_time": 15,
     "cook_time": 15,
     "time": 30,
-
+    "proteins": 6,
+    "fats": 5,
+    "carbohydrates": 20,
+    "calories": 150,
     "instagram": "enjoy__taste",
     "priority": 2,
     "filters": [
@@ -642,6 +671,10 @@ export const recipes = [
     "time": 45,
     "instagram": "inmykitchen_pl",
     "priority": 3,
+    "proteins": 45,
+    "fats": 22,
+    "carbohydrates": 10,
+    "calories": 390,
     "filters": [
       "Lunch",
       "Dinner",
@@ -726,7 +759,10 @@ export const recipes = [
     "cook_time": 15,
     "time": 15,
     "iconColor": "white",
-
+    "proteins": 12,
+    "fats": 18,
+    "carbohydrates": 8,
+    "calories": 220,
     "instagram": "liliyummy",
     "priority": 3,
     "filters": [
@@ -792,7 +828,10 @@ export const recipes = [
     "cook_time": 30,
     "time": 40,
     "iconColor": 'white',
-
+    "proteins": 25,
+    "fats": 8,
+    "carbohydrates": 18,
+    "calories": 250,
     "instagram": "pardaev__",
     "priority": 3,
     "filters": [
@@ -908,7 +947,10 @@ export const recipes = [
     "level": "Easy",
     "servings": 2,
     "iconColor": 'white',
-
+    "proteins": 6,
+    "fats": 28,
+    "carbohydrates": 45,
+    "calories": 420,
     "hasVideoSteps": true,
     "prep_time": 15,
     "cook_time": 15,
@@ -981,6 +1023,10 @@ export const recipes = [
     "priority": 3,
     "hasVideoSteps": true,
     "instagram": "katarina_movchan",
+    "proteins": 52,
+    "fats": 34,
+    "carbohydrates": 6,
+    "calories": 520,
     "filters": [
       "Ukraine",
       "Pork",
@@ -1050,6 +1096,10 @@ export const recipes = [
       'Christmas',
       "Dessert"
     ],
+    "proteins": 6,
+    "fats": 16,
+    "carbohydrates": 50,
+    "calories": 360,
     "priority": 2,
     "hasVideoSteps": true,
     "free": false,
@@ -1077,7 +1127,10 @@ export const recipes = [
     "description": "Parboiling the potatoes helps to ensure they will be fully cooked and tender after baking. Using raw potatoes would increase the cooking time substantially, possibly resulting in overly browned cheese before the potatoes are tender.",
     "servings": 4,
     "iconColor": 'white',
-
+    "proteins": 20,
+    "fats": 40,
+    "carbohydrates": 80,
+    "calories": 680,
     "level": "Easy",
     "region": "",
     "prep_time": 0,
@@ -1119,7 +1172,10 @@ export const recipes = [
     "title": "Cheesy Potato Cakes",
     "description": "Delicious potato cakes filled with melted mozzarella cheese, served crispy on the outside and soft on the inside.",
     "servings": 3,
-
+    "proteins": 12,
+    "fats": 18,
+    "carbohydrates": 40,
+    "calories": 380,
     "level": "Easy",
     "region": "",
     "prep_time": 0,
@@ -1189,6 +1245,10 @@ export const recipes = [
     "region": "",
     "prep_time": 10,
     "cook_time": 20,
+    "proteins": 25,
+    "fats": 40,
+    "carbohydrates": 20,
+    "calories": 480,
     "filters": [
       'Dinner'
     ],
@@ -1264,6 +1324,10 @@ export const recipes = [
     "hasVideoSteps": true,
     "iconColor": 'white',
     "servings": 4,
+    "proteins": 22,
+    "fats": 38,
+    "carbohydrates": 48,
+    "calories": 540,
     "filters": [
       'Risotto',
       'Lunch',
@@ -1382,7 +1446,10 @@ export const recipes = [
     "id": 22,
     "title": "Corn with Lemon Sauce",
     "description": "Experience a burst of flavors with this marvellous corn recipe. Paired with a tantalizing lemon sauce, it's a great way to enjoy a simple yet vibrant dish. The smoked and spicy paprika coupled with the richness of butter gives the corn a delightful taste, while the lemon sauce provides a refreshing tang.",
-
+    "proteins": 6,
+    "fats": 25,
+    "carbohydrates": 28,
+    "calories": 320,
     "level": "Easy",
     "region": "",
     "servings": 3,
@@ -1500,7 +1567,10 @@ export const recipes = [
     "title": "Spaghetti Carbonara",
     "description": "This iconic Roman cuisine dish, Spaghetti Carbonara, stands tall among the most famous pasta recipes worldwide, cherished for its simplicity and the high-quality ingredients it champions. Adhering to the authentic Italian recipe, it relies on just five key ingredients, bringing forth a meal that’s both simple to prepare and delightful to savor. Be guided by this recipe to avoid common pitfalls and achieve the perfect carbonara that strikes a delicate balance — avoiding eggs that are too scrambled or too raw.\n\n DO NOT USE garlic, parsley, onion, cream, milk, parmigiano, pancetta, or bacon in this recipe",
     "tip": "Adherence to the quality and authenticity of the ingredients is key to this recipe's success. Also, mastering the egg consistency is crucial: it should neither resemble scrambled eggs nor be raw and cold.",
-
+    "proteins": 35,
+    "fats": 30,
+    "carbohydrates": 75,
+    "calories": 650,
     "hasVideoSteps": true,
     "free": true,
     "level": "Intermediate",
@@ -1859,7 +1929,10 @@ export const recipes = [
     "title": "Pasta Orzo with Tomatoes",
     "description": "A quick and flavorful pasta dish that's cooked in just one pan. With the combined goodness of cherry tomatoes, cream, and cheeses, this dish is sure to delight your taste buds.",
     "tip": "Keep an eye on the cooking time for the orzo pasta as it may vary based on the brand.",
-
+    "proteins": 18,
+    "fats": 25,
+    "carbohydrates": 10,
+    "calories": 320,
     "hasVideoSteps": true,
     "priority": 2,
     "level": "Easy",
@@ -1960,7 +2033,10 @@ export const recipes = [
     "title": "Insalata Caprese",
     "region": "Italy, Campania",
     "description": "A timeless classic, Caprese Salad is a quintessential summertime dish in Italy. Legend has it that this quintessential summer dish was born during the 1950s in the southern region of Campania on the Isle of Capri, hence the name caprese. Light to taste and easy to assemble, the key to making this salad is using the highest quality ingredients you can find, especially the tomatoes which should be at their peak of ripeness!",
-
+    "proteins": 18,
+    "fats": 22,
+    "carbohydrates": 10,
+    "calories": 280,
     "servings": 6,
     "prep_time": 10,
     "cook_time": 5,
@@ -2039,7 +2115,10 @@ export const recipes = [
     "id": 7,
     "title": "Tomato Tartare",
     "description": "An innovative combination of finely chopped canned tomatoes and feta cheese, this tomato tartare makes a beautiful and delicious first course or appetizer. As the star ingredient, the quality of the canned tomatoes really matters.",
-
+    "proteins": 12,
+    "fats": 18,
+    "carbohydrates": 10,
+    "calories": 250,
     "level": "Easy",
     "region": "Italy",
     "servings": 4,
@@ -2153,7 +2232,10 @@ export const recipes = [
     "description": "A classic Italian pasta dish with a rich tomato sauce, enhanced with butter, Parmesan, and aromatic basil.",
     "tip": "For the best flavor, use high-quality olive oil and freshly grated Parmesan. Adjust the quantity of pasta water to get your desired sauce consistency.",
     "iconColor": 'white',
-
+    "proteins": 22,
+    "fats": 20,
+    "carbohydrates": 75,
+    "calories": 540,
     "level": "Medium",
     "region": "Italy",
     "servings": 2,
@@ -2271,7 +2353,10 @@ export const recipes = [
     "id": 8,
     "title": "Spaghetti al Pomodoro",
     "description": "The most famous Italian recipe, lo spaghetto al pomodoro is made with just a few simple ingredients, tastes delicious, and is easy to make.",
-
+    "proteins": 18,
+    "fats": 12,
+    "carbohydrates": 90,
+    "calories": 520,
     "level": "Easy",
     "region": "Italy",
     "servings": 4,
@@ -2359,7 +2444,10 @@ export const recipes = [
     "region": "Italy, Lazio",
     "tip": "Cacio e pepe means \"cheese and pepper\" in several central Italian dialects.",
     "description": "Rich cheese, bronze-extruded pasta, and freshly-ground pepper — the ultimate comfort food, spaghetti cacio e pepe is a simple Roman dish that depends on the quality of just a few ingredients",
-
+    "proteins": 20,
+    "fats": 15,
+    "carbohydrates": 80,
+    "calories": 520,
     "level": "Easy",
     "servings": 6,
     "prep_time": 0,
@@ -2430,7 +2518,10 @@ export const recipes = [
     "title": "Brodo di Parmigiano Reggiano (Parmesan Broth)",
     "description": "Make your Parmigiano Reggiano last longer with our simple parmesan broth. Use this rich recipe for stuffed pasta in brodo, or deepen your next soup with this base!",
     "region": "Italy",
-
+    "proteins": 20,
+    "fats": 10,
+    "carbohydrates": 15,
+    "calories": 220,
     "level": "Easy",
     "servings": null,
     "prep_time": 120,
@@ -2511,7 +2602,10 @@ export const recipes = [
     "id": 9,
     "title": "Bicerin: Classic Coffee from Turin",
     "description": "Meaning “small round glass” in Piemontese dialect, bicerin is a traditional hot drink native to Torino. Served in its namesake glass, the rich beverage is made of three distinct layers: espresso, hot chocolate, and whipped milk or cream.",
-
+    "proteins": 6,
+    "fats": 22,
+    "carbohydrates": 20,
+    "calories": 300,
     "level": "Medium",
     "region": "Italy",
     "hasVideoSteps": true,
@@ -2679,7 +2773,10 @@ export const recipes = [
       " Do not allow the chocolate to thicken too much before removing it from heat.\n" +
       " If chocolate clumps start to form, remove the mixture from heat and whisk vigorously until it is smooth again.\n" +
       " For those who wish, the chocolate can be flavored with vanilla, cinnamon, or caramel.",
-
+    "proteins": 20,
+    "fats": 50,
+    "carbohydrates": 40,
+    "calories": 600,
     "level": "Easy",
     "region": "Italy",
     "servings": 2,
@@ -2764,7 +2861,10 @@ export const recipes = [
     "title": "Lemon Cream Dessert",
     "description": "A light summer dessert that strikes a balance between the sourness of lemon and the sweetness of cream. This unique treat is reminiscent of a cross between yogurt and melted ice cream.",
     "tip": "This dessert provides an unusual presentation, using the lemon peel as a mould for the creamy filling.",
-
+    "proteins": 4,
+    "fats": 70,
+    "carbohydrates": 90,
+    "calories": 890,
     "level": "Easy",
     "region": "",
     "servings": 6,
@@ -2838,7 +2938,10 @@ export const recipes = [
     "title": "Cheesecakes with Raspberry Filling",
     "description": "Delicious cheesecakes filled Twith a sweet raspberry filling, perfect for a delightful breakfast or a dessert treat.",
     "tip": "Be careful not to overblend the cheesecake mixture to ensure the right consistency. Use a neutral oil for frying to keep the original taste of the cheesecakes.",
-
+    "proteins": 10,
+    "fats": 70,
+    "carbohydrates": 90,
+    "calories": 890,
     "level": "Medium",
     "region": null,
     "free": true,

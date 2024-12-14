@@ -93,6 +93,21 @@ const styles = StyleSheet.create({
     marginTop: Spaces.small,
     fontFamily: fontEnum.PoppinsBold,
   }),
+  calories: getTextStyles({
+    fontSize: 18,
+    alignSelf: 'center',
+    fontFamily: fontEnum.PoppinsMedium,
+    marginTop: Spaces.medium
+  }),
+  PFCText: getTextStyles({
+    fontSize: 18,
+    fontFamily: fontEnum.PoppinsMedium,
+  }),
+  PFC: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: Spaces.small
+  },
   description: getTextStyles({
     fontSize: 16,
     marginTop: Spaces.medium,
@@ -140,6 +155,10 @@ const styles = StyleSheet.create({
   },
   action: {
     width: Spaces.xxxlarge,
+  },
+  measureButton: {
+    marginTop: Spaces.medium,
+    alignSelf: 'center',
   },
   step: {
     marginTop: Spaces.medium,

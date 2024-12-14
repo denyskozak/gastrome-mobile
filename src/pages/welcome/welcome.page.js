@@ -37,7 +37,6 @@ const WelcomePageComponent = (props) => {
   const {navigation} = props;
 
   const [t] = useTranslator('pages.welcome');
-  const [recipes] = useRecipes();
 
   const [, setModalVisible] = useState(false);
   const [isVideoCover, setIsVideoCover] = useState(false);
@@ -45,18 +44,9 @@ const WelcomePageComponent = (props) => {
   const containerScrollViewRef = useRef(null);
 
   useEffect(() => {
-    const recipes = sortRecipes(recipes);
-
-    // Preload 2 first images for recipes page
-    recipes.slice(0, 2).map(item => {
-      downloadAsync(item.image || '').catch(() => {
-        console.log('Error downloading first two recipe images');
-      })
-    });
-
     // Manipulate welcome video for lower than X iphone's
     setIsVideoCover(isIPhoneLowerX() || getDevice() === 'iPad');
-  }, [recipes]);
+  }, []);
 
   const basicFadeInDelay = 1500;
   const stepAnimationDelay = 250;

@@ -217,21 +217,6 @@ const GroceryPageComponent = (props) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* Voice assistance */}
-      <VoiceButton
-        hideButtonWhenSpeaking={false}
-        isListening={isListening}
-        animationRef={voiceAnimationRef}
-        voiceTooltipText={voiceTooltipText}
-        startText={t('startVoice')}
-        onButtonPress={() => {
-          (async () => {
-            setSearchText('');
-            await runListening();
-            setVoiceTooltipText(t('tellUs'));
-          })();
-        }}
-      />
       <View style={styles.content}>
         {/* Search */}
         <Input
@@ -289,6 +274,21 @@ const GroceryPageComponent = (props) => {
         )}
       </View>
 
+      {/* Voice assistance */}
+      <VoiceButton
+          hideButtonWhenSpeaking={true}
+          isListening={isListening}
+          animationRef={voiceAnimationRef}
+          voiceTooltipText={voiceTooltipText}
+          startText={t('startVoice')}
+          onButtonPress={() => {
+            (async () => {
+              setSearchText('');
+              await runListening();
+              setVoiceTooltipText(t('tellUs'));
+            })();
+          }}
+      />
       {/* OnBoarding modal */}
       <IntroVideoModal isOpen={isOnBoardModalVisible} onChangeVisible={setIsOnBoardModalVisible} title={t('howItWorks')}
                        source={intoVideo}/>

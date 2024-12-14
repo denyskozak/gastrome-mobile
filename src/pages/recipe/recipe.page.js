@@ -9,7 +9,7 @@ import {Button} from '../../components/atomic/button/button.component';
 import {Spaces} from '../../styles/spaces';
 import {useMenuCart} from '../../contexts/cart.context';
 import {useCommonModal} from '../../contexts/commonModal/commonModal.context';
-import {renderIngredient} from './recipe.renders';
+import {renderIngredient, renderQuantity} from './recipe.renders';
 import {CountryList} from '../../components/atomic/country-flag/country-flag.list';
 import {CountryFlag} from '../../components/atomic/country-flag/country-flag.component';
 import {authorRoute, cookingRoute} from '../recipes/navigation/recipes.routes';
@@ -51,7 +51,11 @@ const RecipePageComponent = (props) => {
         level,
         servings,
         iconColor = 'black',
-        author
+        author,
+        proteins,
+        fats,
+        carbohydrates,
+        calories
     } = recipe;
 
     const {getCookingStepURL} = useAWS();
@@ -126,6 +130,10 @@ const RecipePageComponent = (props) => {
         debounceChangeCookingLinkState(y);
     };
 
+    const multiplyByServings = (value = 0) => {
+        return value * (servingsCount / servings);
+    };
+
     return (<SafeAreaView style={styles.container}>
         <FlatList
             ref={flatListRef}
@@ -194,13 +202,61 @@ const RecipePageComponent = (props) => {
                             </Button>
                         </View>
                     </View>
-
+                    {/* Meassures button*/}
+                    <Button
+                        style={styles.measureButton}
+                        type="outlined"
+                        size="l"
+                        onPress={() => {
+                            setIsMeasureModalOpen(true);
+                        }}
+                    >
+                        {t('chooseMeasure')}
+                    </Button>
                     {region && <Text style={styles.region}>{t('region')}: {region}</Text>}
                     {subTitle && <Text style={styles.sub}>{subTitle}</Text>}
+                    {calories && <Text style={styles.calories}>{t('calories')}: {multiplyByServings(calories) }</Text>}
+                    <View style={styles.PFC}>
+                        {proteins && <Text style={styles.PFCText}>{t('proteins')}: {renderQuantity(multiplyByServings(proteins), 'g' , '', measure)}</Text>}
+                        {carbohydrates && <Text style={styles.PFCText}>{t('carbs')}:  {renderQuantity(multiplyByServings(carbohydrates), 'g' , '', measure)}</Text>}
+                        {fats && <Text style={styles.PFCText}>{t('fats')}:  {renderQuantity(multiplyByServings(fats), 'g' , '', measure)}</Text>}
+                    </View>
+
                     {description && <Text style={styles.description}>{description}</Text>}
                     {tip && <Text style={styles.tip}>{tip}</Text>}
+                    {/*Servning manager*/}
+                    {servingsCount && (
+                        <View>
+                            <Text style={styles.servings}>
+                                {t('servings', {count: servingsCount})}
+                            </Text>
+                            <View style={styles.servingsButtons}>
+                                <Button
+                                    type="outlined"
+                                    size="m"
+                                    onPress={() => {
+                                        if (servingsCount > servings) {
+                                            setServingsCount(servingsCount / 2);
+                                        }
+                                    }}
+                                >
+                                    <Icon name="remove-circle-outline" color={Colors.black} size={20}/>
+                                </Button>
 
-                    {/*Ingredients:*/}
+                                <Button
+                                    type="outlined"
+                                    onPress={() => {
+                                        if (servingsCount < 50) {
+                                            setServingsCount(servingsCount * 2);
+                                        }
+                                    }}
+                                    size="m"
+                                >
+                                    <Icon name="add-circle-outline" color={Colors.black} size={20}/>
+                                </Button>
+                            </View>
+                        </View>
+                    )}
 
                     <FlatList
                         style={styles.ingredients}
@@ -208,47 +264,6 @@ const RecipePageComponent = (props) => {
                         keyExtractor={({id, title}) => id + title}
                         ListHeaderComponent={<Text style={styles.ingredientLabel}>{t('ingredients')}:</Text>}
                         ListFooterComponent={<View style={styles.ingredientHeader}>
-                            <Button
-                                type="outlined"
-                                size="l"
-                                onPress={() => {
-                                    setIsMeasureModalOpen(true);
-                                }}
-                            >
-                                {t('chooseMeasure')}
-                            </Button>
-                            {servingsCount && (
-                                <View>
-                                    <Text style={styles.servings}>
-                                        {t('servings', {count: servingsCount})}
-                                    </Text>
-                                    <View style={styles.servingsButtons}>
-                                        <Button
-                                            type="outlined"
-                                            size="m"
-                                            onPress={() => {
-                                                if (servingsCount > servings) {
-                                                    setServingsCount(servingsCount / 2);
-                                                }
-                                            }}
-                                        >
-                                            <Icon name="remove-circle-outline" color={Colors.black} size={20}/>
-                                        </Button>
-
-                                        <Button
-                                            type="outlined"
-                                            onPress={() => {
-                                                if (servingsCount < 50) {
-                                                    setServingsCount(servingsCount * 2);
-                                                }
-                                            }}
-                                            size="m"
-                                        >
-                                            <Icon name="add-circle-outline" color={Colors.black} size={20}/>
-                                        </Button>
-                                    </View>
-                                </View>
-                            )}
                             {author && author.image && <Pressable onPress={() => navigation.navigate(authorRoute, {id: author.id})}>
                                 <AuthorPreview name={author.name} imageSource={author.image}/>
                             </Pressable>}

@@ -55,7 +55,7 @@ const RecipesPageComponent = (props) => {
     const [favorites] = useFavorites();
     const [isSubscriber] = useSubscriptions();
 
-    const [recipes] = useRecipes();
+    const [recipes] = useRecipes(true);
 
     // Add like to filers of item
     const preMappingFavorites = useCallback((items) => {
@@ -68,8 +68,7 @@ const RecipesPageComponent = (props) => {
         });
     }, [favorites]);
 
-    const defaultDataList = useMemo(() => sortRecipes(preMappingFavorites(recipes), 'asc'), [preMappingFavorites, recipes]);
-
+    const defaultDataList = useMemo(() => sortRecipes(preMappingFavorites(recipes), isSubscriber ? 'asc' : 'free'), [preMappingFavorites, recipes, isSubscriber]);
     // List
     const [listData, setListData] = useState(defaultDataList);
     const [searchedItems, setSearchedItems] = useState([]);
@@ -329,8 +328,13 @@ const RecipesPageComponent = (props) => {
                         enableHint
                         animate={visibleItems.has(item.id)}
                         onPress={id => {
-                            navigation.navigate(recipeRoute, {id});
+                            if (item.free || isSubscriber) {
+                                navigation.navigate(recipeRoute, {id});
+                            } else {
+                                setSubscriptionsOpened(true);
+                            }
                         }}
+                        isSubscriber={isSubscriber}
                         isFavorited={favorites.includes(item.id)}
                         selectedIngredients={listSearchByIngredients}
                         {...item}

@@ -1,7 +1,7 @@
 import { addSpaceWithCondition } from '../../utilities/renders';
 
 // American weight system to Europe
-const roundQuantity = value => Math.round(value).toFixed(2)
+const roundQuantity = value => Math.round(value).toFixed(2).replace('.00', '')
 const changeQuantityToUSA = (quantity, unit) => {
   switch (unit) {
     case 'g':
@@ -42,7 +42,7 @@ const renderIngredientQuantity = (quantity, unit, measureSystem = 'g') => (
 
 export const mapRenderCartQuantity = ({ quantity, unit, comment }, measureSystem = 'g') => renderQuantity(quantity, unit, comment, measureSystem);
 
-export const renderQuantity = (quantity, unit, comment, measureSystem = 'g') => {
+export const renderQuantity = (quantity, unit, comment = '', measureSystem = 'g') => {
   if (quantity) {
     const [parsedQuantity, parsedUnit] = measureConvertors[measureSystem](quantity, unit);
     return quantity ? `${parsedQuantity}${renderValue(parsedUnit)}${renderValue(comment)}` : '';

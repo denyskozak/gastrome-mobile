@@ -24,14 +24,17 @@ const RecipeItemComponent = (props) => {
         image,
         title,
         level,
+        free,
         subTitle,
         onPress,
         ingredients,
         selectedIngredients,
         filters,
         isFavorited,
+        isSubscriber,
         animate,
         hideImage,
+        iconColor = 'black',
         enableHint = false,
     } = props;
     const [t] = useTranslator('pages.recipes');
@@ -71,7 +74,7 @@ const RecipeItemComponent = (props) => {
                     </ZoomInOut>
 
                     {/*<AttentionAnimation duration={1200} start={0.5} end={1} property="opacity">*/}
-                    {enableHint && (
+                    {enableHint && (free || isSubscriber) && (
                         <View style={styles.imageIcon}>
                             <AttentionAnimation duration={1000} delay={2000} enabled={animate} start={1} end={0} property="opacity">
                                 <Animation name="click" autoPlay={false} height={Spaces.xxxlarge * 1.4}
@@ -79,6 +82,13 @@ const RecipeItemComponent = (props) => {
                                 {/*<Icon name={'play-circle-outline'} color={Colors[iconColor]}*/}
                                 {/*      size={Spaces.xxlarge + Spaces.small}/>*/}
                             </AttentionAnimation>
+                        </View>
+                    )}
+                    {!free && !isSubscriber && (
+                        <View style={styles.imageBlockIcon}>
+                                <Icon name="lock-closed" size={Spaces.xxxlarge} color={iconColor} />
+                                {/*<Icon name={'play-circle-outline'} color={Colors[iconColor]}*/}
+                                {/*      size={Spaces.xxlarge + Spaces.small}/>*/}
                         </View>
                     )}
                     {/*</AttentionAnimation>*/}
@@ -135,6 +145,7 @@ RecipeItemComponent.propTypes = {
     filters: PropTypes.arrayOf(PropTypes.string),
     selectedIngredients: PropTypes.arrayOf(PropTypes.string),
     isFavorited: PropTypes.bool,
+    isSubscriber: PropTypes.bool,
     enableHint: PropTypes.bool,
     animate: PropTypes.bool,
     hideImage: PropTypes.bool
@@ -144,6 +155,7 @@ RecipeItemComponent.defaultProps = {
     filters: [],
     selectedIngredients: [],
     isFavorited: false,
+    isSubscriber: false,
     enableHint: false,
     animate: false,
     hideImage: false,

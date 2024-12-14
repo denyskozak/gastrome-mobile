@@ -150,7 +150,11 @@ export const translates = {
             ingredients: 'Ingredients',
             addToCart: 'Press to add all ingredients to shopping list ',
             viewed: 'Viewed',
-            chooseMeasure: 'Measure ⚖️',
+            proteins: 'Proteins',
+            carbs: 'Carbs',
+            fats: 'Fats',
+            calories: 'Calories',
+            chooseMeasure: 'Measures ⚖️',
         },
         cooking: {
             singleVideo: '(Single video for all steps)',
@@ -230,8 +234,8 @@ export const translates = {
         measuresModal: {
             title: 'Choose your country weight type',
             close: 'Close',
-            oz: 'Imperial',
-            g: 'Metric',
+            oz: 'Oz',
+            g: 'Grams',
             tbsp: 'Table Spoon',
         },
         timerButton: {

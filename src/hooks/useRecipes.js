@@ -3,10 +3,10 @@ import {getRecipes} from "../mock/languages";
 import {useTranslator} from "./useTranslator";
 import {useMemo} from "react";
 
-export const useRecipes = () => {
+export const useRecipes = (areAllFree = false) => {
     const [isSubscriber] = useSubscriptions();
     const [,,language] = useTranslator();
-    const recipes = useMemo(() => getRecipes(!isSubscriber, language), [isSubscriber, language]);
+    const recipes = useMemo(() => getRecipes(areAllFree ? false : !isSubscriber, language), [isSubscriber, language]);
 
     return [recipes];
 }
