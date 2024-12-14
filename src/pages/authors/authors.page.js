@@ -16,6 +16,7 @@ import {authorRoute} from "../recipes/navigation/recipes.routes";
 
 import styles from './authors.styles';
 import {AttentionAnimation} from "../../components/molecular/attansion-animation/attansion-animation.component";
+import * as Haptics from "expo-haptics";
 
 let isFirstRun = true;
 
@@ -58,7 +59,10 @@ const AuthorsPageComponent = (props) => {
 
                 )}
                 renderItem={({item, index}) => (
-                    <Pressable onPress={() => navigation.navigate(authorRoute, {id: item.id})}>
+                    <Pressable onPress={() => {
+                        Haptics.selectionAsync();
+                        navigation.navigate(authorRoute, {id: item.id});
+                    }}>
                         <AuthorPreview name={item.name} imageSource={item.image}/>
                     </Pressable>
                 )}

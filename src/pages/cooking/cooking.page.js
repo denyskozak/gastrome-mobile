@@ -29,6 +29,7 @@ import {useRecipes} from "../../hooks/useRecipes";
 import {useSettings} from "../../contexts/settings.context";
 import {useLogger} from "../../hooks/useLogger";
 import {StoryProgressBar} from "../../components/atomic/story-bar/story-bar";
+import * as Haptics from "expo-haptics";
 
 const alarmSong = require('./alarm.mp3');
 const soundObject = new Audio.Sound();
@@ -112,6 +113,7 @@ export const CookingPage = (props) => {
 
     const startListen = () => {
         (async () => {
+            Haptics.impactAsync('medium');
             setVoiceTooltipText(t('voiceCommands'));
             await Voice.start(language);
         })();

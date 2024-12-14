@@ -22,6 +22,7 @@ import styles from './recipes.styles';
 import {useRecipes} from "../../hooks/useRecipes";
 import {useSubscriptions} from "../../contexts/subscriptions.context";
 import {SubscriptionButton} from "../../components/templates/subscription-button/subscription-button";
+import * as Haptics from "expo-haptics";
 
 const filters = [
     {
@@ -318,7 +319,10 @@ const RecipesPageComponent = (props) => {
                             <Text style={styles.subscriptionsInto}>
                                 {t('extraRecipesText')}
                             </Text>
-                            <SubscriptionButton onPress={() => setSubscriptionsOpened(true)} text={t('buySubscription')} />
+                            <SubscriptionButton onPress={() => {
+                                Haptics.impactAsync('light');
+                                setSubscriptionsOpened(true);
+                            }} text={t('buySubscription')} />
                         </View>)
                         : null
                 }
@@ -333,6 +337,7 @@ const RecipesPageComponent = (props) => {
                             } else {
                                 setSubscriptionsOpened(true);
                             }
+                            Haptics.selectionAsync();
                         }}
                         isSubscriber={isSubscriber}
                         isFavorited={favorites.includes(item.id)}
@@ -350,33 +355,33 @@ const RecipesPageComponent = (props) => {
             />
 
             {/*Filters*/}
-            {/*<SwipeablePanel*/}
-            {/*    fullWidth*/}
-            {/*    onlyLarge*/}
-            {/*    closeOnTouchOutside*/}
-            {/*    barStyle={styles.filtersBar}*/}
-            {/*    isActive={isFilterOpened}*/}
-            {/*    style={styles.filters}*/}
-            {/*    onClose={() => setFilterOpened(false)}*/}
-            {/*>*/}
-            {/*    <Text style={styles.filtersTitle}>{t('filtersTitle')}</Text>*/}
-            {/*    <View style={styles.filtersContainer}>*/}
-            {/*        {filters.map(list => (*/}
-            {/*            <View key={`filters-group-${Object.keys(list)}`} style={styles.filtersSection}>*/}
-            {/*                {Object.keys(list).map(renderFilter)}*/}
-            {/*            </View>*/}
-            {/*        ))}*/}
-            {/*    </View>*/}
-            {/*    <View style={styles.filtersClose}>*/}
-            {/*        <Button*/}
-            {/*            size="l"*/}
-            {/*            // type="outlined"*/}
-            {/*            onPress={() => setFilterOpened(false)}*/}
-            {/*        >*/}
-            {/*            {t(filterNames.length ? 'apply' : 'close')}*/}
-            {/*        </Button>*/}
-            {/*    </View>*/}
-            {/*</SwipeablePanel>*/}
+            <SwipeablePanel
+                fullWidth
+                onlyLarge
+                closeOnTouchOutside
+                barStyle={styles.filtersBar}
+                isActive={isFilterOpened}
+                style={styles.filters}
+                onClose={() => setFilterOpened(false)}
+            >
+                <Text style={styles.filtersTitle}>{t('filtersTitle')}</Text>
+                <View style={styles.filtersContainer}>
+                    {filters.map(list => (
+                        <View key={`filters-group-${Object.keys(list)}`} style={styles.filtersSection}>
+                            {Object.keys(list).map(renderFilter)}
+                        </View>
+                    ))}
+                </View>
+                <View style={styles.filtersClose}>
+                    <Button
+                        size="l"
+                        // type="outlined"
+                        onPress={() => setFilterOpened(false)}
+                    >
+                        {t(filterNames.length ? 'apply' : 'close')}
+                    </Button>
+                </View>
+            </SwipeablePanel>
         </SafeAreaView>
     );
 };

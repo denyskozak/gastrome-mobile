@@ -14,6 +14,7 @@ import Icon from '@expo/vector-icons/Ionicons';
 import { Colors } from '../../../styles/colors';
 import { Spaces } from '../../../styles/spaces';
 import {useRecipes} from "../../../hooks/useRecipes";
+import * as Haptics from "expo-haptics";
 
 const RecipesGeneratorComponent = (props) => {
   const {onRecipePress} = props;
@@ -36,6 +37,10 @@ const RecipesGeneratorComponent = (props) => {
     [randomRecipe]
   );
   const renderThreeDots = items => items.length > 4 ? '...' : '';
+  const handlePress = () => {
+    Haptics.impactAsync('light');
+    onRecipePress(randomRecipe.id);
+  };
 
   return (
     <View style={styles.container}>
@@ -46,9 +51,9 @@ const RecipesGeneratorComponent = (props) => {
         {randomRecipe && (
           <Animated>
             {randomRecipe && (
-              <Pressable style={styles.recipe} onPress={() => onRecipePress(randomRecipe.id)}>
+              <Pressable style={styles.recipe} onPress={handlePress}>
                 {randomRecipe.image && (
-                  <TouchableHighlight activeOpacity={0.8} onPress={() => onRecipePress(randomRecipe.id)}>
+                  <TouchableHighlight activeOpacity={0.8} onPress={handlePress}>
                     <View>
                       <Image
                         rounded
@@ -95,6 +100,7 @@ const RecipesGeneratorComponent = (props) => {
             onPress={() => {
               delayForPromise(300)
                 .then(() => {
+                  Haptics.impactAsync('light');
                   setRandomRecipe(getTreeRandomRecipe());
                 })
             }}

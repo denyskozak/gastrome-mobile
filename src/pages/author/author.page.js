@@ -14,6 +14,7 @@ import {Spaces} from "../../styles/spaces";
 import Icon from "@expo/vector-icons/Ionicons";
 import * as Linking from "expo-linking";
 import {contactURL} from "../../constants/links";
+import * as Haptics from "expo-haptics";
 
 let isFirstRun = true;
 
@@ -52,6 +53,7 @@ const AuthorPageComponent = (props) => {
                             enableHint={isFirstRun && index < 3}
                             hideImage
                             onPress={id => {
+                                Haptics.selectionAsync();
                                 navigation.navigate(recipeRoute, {id});
                             }}
                             {...item}

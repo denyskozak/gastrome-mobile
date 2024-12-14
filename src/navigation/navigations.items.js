@@ -21,7 +21,9 @@ import {AttentionAnimation} from "../components/molecular/attansion-animation/at
 const createRenderIcon = (name, size = 32, darkMode = false, delay = 2150, attention = false) => () => {
 
   const element = <Animated style={{ width: size, }} name="FadeInDown" delay={delay}><Icon name={name} size={size} color={darkMode ? Colors.black : Colors.second}/></Animated>;
-  return attention === false ? element : <AttentionAnimation property="translateY"  start={0} end={-5} delay={2000}>{element}</AttentionAnimation>
+  return attention === false
+      ? element
+      : <AttentionAnimation property="translateY" start={0} end={-5} delay={2000}>{element}</AttentionAnimation>
 };
 
 export const getNavigationTabs = (t, isDarkModeMenu) => {

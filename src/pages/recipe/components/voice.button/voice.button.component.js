@@ -15,6 +15,7 @@ import microJSON from "../../../../components/atomic/animation/list/micro-voice.
 import {Spaces} from "../../../../styles/spaces";
 import {FirstLaunchTooltip} from "../../../../components/molecular/first-launch-tooltip/first-launch-tooltip.component";
 import {VOICE_ASSISTANT_TIP} from "../../../../constants/asyncStoreKeys";
+import * as Haptics from "expo-haptics";
 
 const VoiceButtonComponent = (props) => {
   const {isListening, onButtonPress, startText, hideButtonWhenSpeaking, animationRef, voiceTooltipText} = props;
@@ -41,7 +42,10 @@ const VoiceButtonComponent = (props) => {
           <View
               style={styles.activeCooking}
           >
-            <Pressable onPress={onButtonPress}>
+            <Pressable onPress={() => {
+              Haptics.impactAsync('light');
+              onButtonPress?.();
+            }}>
               <Animated name="SlideInDown" outName="SlideOutDown">
                 <FirstLaunchTooltip asyncStoreKey={VOICE_ASSISTANT_TIP} delay={500} text={t('tip')} placement="top">
                   <View style={styles.animationOffBackground}>

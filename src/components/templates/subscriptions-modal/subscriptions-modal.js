@@ -13,6 +13,7 @@ import { AnimatedLogo } from '../../atomic/logo/animated-logo.component';
 import Purchases from 'react-native-purchases';
 import { useSubscriptions } from '../../../contexts/subscriptions.context';
 import { Spaces } from '../../../styles/spaces';
+import * as Haptics from "expo-haptics";
 
 const SubscriptionsModalComponent = (props) => {
   const {isOpen, onChangeVisible} = props;
@@ -83,6 +84,7 @@ const SubscriptionsModalComponent = (props) => {
                 style={styles.button}
                 textStyle={styles.buttonText}
                 onPress={() => {
+                  Haptics.impactAsync('light');
                   handleOptionClick(item)
                 }}
               >

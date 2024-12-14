@@ -27,6 +27,7 @@ import styles from './recipe.styles';
 import {useRecipes} from "../../hooks/useRecipes";
 import {AuthorPreview} from "../../components/molecular/author-preview/author-preview";
 import {ZoomInOut} from "../../components/molecular/zoom-in-out-animation/zoom-in-out-animation";
+import * as Haptics from "expo-haptics";
 
 const RecipePageComponent = (props) => {
     const {
@@ -97,6 +98,7 @@ const RecipePageComponent = (props) => {
     });
 
     const handleAddToCart = () => {
+        Haptics.selectionAsync();
         if (!existsInCart) {
             addCartItems(recipe.ingredients.map(prepareIngredient));
             setExistsInCart(true);
@@ -113,6 +115,7 @@ const RecipePageComponent = (props) => {
 
     const handleShare = async () => {
         try {
+            Haptics.selectionAsync();
             const ingredientsList = ingredients.map(item => renderIngredient(item, measure)).join(', \n');
             await handleSocialShare(
                 `I like to share ${title} recipe, ingredients: \n\n${ingredientsList}`);
@@ -122,6 +125,7 @@ const RecipePageComponent = (props) => {
     };
 
     const handleLikePress = () => {
+        Haptics.selectionAsync();
         setLike(id);
     };
 
@@ -157,7 +161,10 @@ const RecipePageComponent = (props) => {
                     {recipeCountry && <View style={styles.flag}><CountryFlag name={recipeCountry}/></View>}
                 </View>
 
-                <Pressable onPress={() => navigation.push(cookingRoute, {id})}>
+                <Pressable onPress={() => {
+                    Haptics.selectionAsync();
+                    navigation.push(cookingRoute, {id});
+                }}>
                     <Animated delay={250} duration={750} style={styles.imageContainer}>
                         <ZoomInOut enabled width={styles.image.width} height={styles.image.height}>
                             <Image source={image} style={styles.image}/>
@@ -212,6 +219,7 @@ const RecipePageComponent = (props) => {
                         size="l"
                         onPress={() => {
                             setIsMeasureModalOpen(true);
+                            Haptics.selectionAsync();
                         }}
                     >
                         {t('chooseMeasure')}
@@ -240,6 +248,7 @@ const RecipePageComponent = (props) => {
                                     onPress={() => {
                                         if (servingsCount > servings) {
                                             setServingsCount(servingsCount / 2);
+                                            Haptics.selectionAsync();
                                         }
                                     }}
                                 >
@@ -251,6 +260,7 @@ const RecipePageComponent = (props) => {
                                     onPress={() => {
                                         if (servingsCount < 50) {
                                             setServingsCount(servingsCount * 2);
+                                            Haptics.selectionAsync();
                                         }
                                     }}
                                     size="m"
@@ -267,7 +277,10 @@ const RecipePageComponent = (props) => {
                         keyExtractor={({id, title}) => id + title}
                         ListHeaderComponent={<Text style={styles.ingredientLabel}>{t('ingredients')}:</Text>}
                         ListFooterComponent={<View style={styles.ingredientHeader}>
-                            {author && author.image && <Pressable onPress={() => navigation.navigate(authorRoute, {id: author.id})}>
+                            {author && author.image && <Pressable onPress={() => {
+                                Haptics.selectionAsync();
+                                navigation.navigate(authorRoute, {id: author.id});
+                            }}>
                                 <AuthorPreview name={author.name} imageSource={author.image}/>
                             </Pressable>}
                             {/*TODO Its dubplicate of "Add to cart" function, Return if needed*/}
@@ -320,7 +333,10 @@ const RecipePageComponent = (props) => {
                 <AttentionAnimation delay={1500}>
                     <Button
                         type="wide"
-                        onPress={() => navigation.push(cookingRoute, {id})}
+                        onPress={() => {
+                            Haptics.selectionAsync();
+                            navigation.push(cookingRoute, {id});
+                        }}
                         style={styles.button}
                     >
                         <Icon name="play-outline" size={24} color={Colors.white}/>

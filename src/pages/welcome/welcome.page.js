@@ -24,6 +24,7 @@ import { sortRecipes } from '../recipes/recipes.sortings';
 import {getDevice, isIPhoneLowerX} from '../../utilities/getCurrentDevice';
 import { AttentionAnimation } from '../../components/molecular/attansion-animation/attansion-animation.component';
 import {useRecipes} from "../../hooks/useRecipes";
+import * as Haptics from "expo-haptics";
 
 const videoSources = [
   require('./assets/1.mp4'),
@@ -112,6 +113,7 @@ const WelcomePageComponent = (props) => {
                   style={styles.letGoButton}
                   textStyle={styles.letGoButtonText}
                   onPress={() => {
+                    Haptics.impactAsync('light');
                     navigation.navigate(recipesPageRoute)
                   }}
                   title={t('tryIt')}

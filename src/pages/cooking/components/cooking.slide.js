@@ -16,6 +16,7 @@ import {TimerButton} from '../../../components/templates/timer-button/timer-butt
 import {Animation} from '../../../components/atomic/animation/animation.component';
 import _ from 'lodash';
 import {StoryProgressBar} from "../../../components/atomic/story-bar/story-bar";
+import * as Haptics from "expo-haptics";
 
 export const CookingSlideComponent = (props) => {
     const {
@@ -98,7 +99,10 @@ export const CookingSlideComponent = (props) => {
                     <>
                         <Animated duration={1000} name="SlideInLeft" outName="SlideOutLeft"
                                   style={styles.backButtonLeftContainer}>
-                            <Button size="m" style={styles.backButton} type="outlined" onPress={onBackClick}>
+                            <Button size="m" style={styles.backButton} type="outlined" onPress={() => {
+                                Haptics.selectionAsync();
+                                onBackClick?.();
+                            }}>
                                 <Text style={styles.backButtonText}>
                                     {backLabel}
                                 </Text>
@@ -121,7 +125,10 @@ export const CookingSlideComponent = (props) => {
                 <Animated
                     style={StyleSheet.flatten([styles.textContainer, readCharIndex !== 0 ? styles.textContainerActive : null])}>
                     <StoryProgressBar steps={stepsCount} activeIndex={index}/>
-                    <Pressable style={styles.textBackIcon} onPress={onBackClick}>
+                    <Pressable style={styles.textBackIcon} onPress={() => {
+                        Haptics.selectionAsync();
+                        onBackClick?.();
+                    }}>
                         <Icon name='chevron-back-outline' color={Colors.black} size={Spaces.large}/>
                     </Pressable>
                     <Pressable style={styles.textHideIcon} onPress={() => setIsTextHidden(!isTextHidden)}>
