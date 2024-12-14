@@ -1,11 +1,11 @@
 import { addSpaceWithCondition } from '../../utilities/renders';
 
 // American weight system to Europe
-const roundQuantity = value => Math.round(value).toFixed(2).replace('.00', '')
+const roundQuantity = value => Number(value).toFixed(1)
 const changeQuantityToUSA = (quantity, unit) => {
   switch (unit) {
     case 'g':
-      return [roundQuantity(quantity * 0.035274 ), 'oz']; // Convert to pounds
+      return [roundQuantity(quantity * 0.035274 ), 'oz']; // Convert to ounces
     case 'ml':
       return [roundQuantity(quantity * 0.033814 ), 'oz']; // Convert to ounces
     default:

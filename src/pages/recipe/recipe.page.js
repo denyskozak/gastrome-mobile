@@ -134,6 +134,9 @@ const RecipePageComponent = (props) => {
         return value * (servingsCount / servings);
     };
 
+    const renderPFC = (value) => (
+        renderQuantity(multiplyByServings(value), 'g' , '', ['g', 'oz'].includes(measure) ? measure : 'g')
+    )
     return (<SafeAreaView style={styles.container}>
         <FlatList
             ref={flatListRef}
@@ -202,7 +205,7 @@ const RecipePageComponent = (props) => {
                             </Button>
                         </View>
                     </View>
-                    {/* Meassures button*/}
+                    {/* Measures button */}
                     <Button
                         style={styles.measureButton}
                         type="outlined"
@@ -215,11 +218,11 @@ const RecipePageComponent = (props) => {
                     </Button>
                     {region && <Text style={styles.region}>{t('region')}: {region}</Text>}
                     {subTitle && <Text style={styles.sub}>{subTitle}</Text>}
-                    {calories && <Text style={styles.calories}>{t('calories')}: {multiplyByServings(calories) }</Text>}
+                    {calories && <Text style={styles.calories}>{t('calories')}: {multiplyByServings(calories)}</Text>}
                     <View style={styles.PFC}>
-                        {proteins && <Text style={styles.PFCText}>{t('proteins')}: {renderQuantity(multiplyByServings(proteins), 'g' , '', measure)}</Text>}
-                        {carbohydrates && <Text style={styles.PFCText}>{t('carbs')}:  {renderQuantity(multiplyByServings(carbohydrates), 'g' , '', measure)}</Text>}
-                        {fats && <Text style={styles.PFCText}>{t('fats')}:  {renderQuantity(multiplyByServings(fats), 'g' , '', measure)}</Text>}
+                        {proteins && <Text style={styles.PFCText}>{t('proteins')}: {renderPFC(proteins)}</Text>}
+                        {carbohydrates && <Text style={styles.PFCText}>{t('carbs')}:  {renderPFC(carbohydrates)}</Text>}
+                        {fats && <Text style={styles.PFCText}>{t('fats')}:  {renderPFC(fats)}</Text>}
                     </View>
 
                     {description && <Text style={styles.description}>{description}</Text>}

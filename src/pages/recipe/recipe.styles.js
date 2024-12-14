@@ -89,24 +89,24 @@ const styles = StyleSheet.create({
     fontFamily: fontEnum.PoppinsSemiBold,
   }),
   sub: getTextStyles({
-    fontSize: 20,
+    fontSize: 18,
     marginTop: Spaces.small,
     fontFamily: fontEnum.PoppinsBold,
   }),
   calories: getTextStyles({
-    fontSize: 18,
+    fontSize: 16,
     alignSelf: 'center',
     fontFamily: fontEnum.PoppinsMedium,
     marginTop: Spaces.medium
   }),
   PFCText: getTextStyles({
-    fontSize: 18,
+    fontSize: 16,
     fontFamily: fontEnum.PoppinsMedium,
   }),
   PFC: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: Spaces.small
+    marginTop: Spaces.medium
   },
   description: getTextStyles({
     fontSize: 16,
