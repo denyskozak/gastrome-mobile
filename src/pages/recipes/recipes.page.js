@@ -306,9 +306,6 @@ const RecipesPageComponent = (props) => {
                     {renderSelectedIngredients()}
                     {!isSubscriber
                         ? <View style={styles.firstSubscriptionButton}>
-                            <Text style={styles.subscriptionsInto}>
-                                {t('extraRecipesText')}
-                            </Text>
                             <SubscriptionButton onPress={() =>setSubscriptionsOpened(true)} text={t('buySubscription')} />
                     </View>
                         : null}

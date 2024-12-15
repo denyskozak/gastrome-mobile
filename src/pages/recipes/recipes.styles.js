@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     color: Colors.primary
   }),
   firstSubscriptionButton: {
-    paddingTop: Spaces.xlarge,
+    paddingTop: Spaces.large,
     // width: 320,
   },
   actionText: getTextStyles({
@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
     width: getDevice() === 'iPhone' ? '100%' : getPercentWidth(99),
   },
   subscriptions: {
-    paddingBottom: Spaces.xlarge,
+    paddingBottom: Spaces.large,
   },
   subscriptionsInto: getTextStyles({
     textAlign: 'center',

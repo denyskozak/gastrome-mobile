@@ -30,6 +30,7 @@ import { useSettings } from '../../contexts/settings.context';
 import { handleSocialShare } from '../../utilities/socialShare';
 import { recipesPageRoute } from '../../navigation/navigation.routes';
 import { recipesRoute } from '../recipes/navigation/recipes.routes';
+import * as Haptics from "expo-haptics";
 
 const intoVideo = require('./cart-instruction-video.mp4');
 
@@ -93,6 +94,7 @@ const CartPageComponent = (props) => {
 
   const handleShare = async () => {
     try {
+      Haptics.impactAsync('light');
       const itemsList = items.map(renderShareIngredients).join(', \n');
       await handleSocialShare(
         `I've prepared list of products for next shopping: \n\n${itemsList}.`,
@@ -107,6 +109,7 @@ const CartPageComponent = (props) => {
   };
 
   const addItemToList = () => {
+    Haptics.impactAsync('light');
     const foundDuplicate = items.find(item => item.title === addIngredientValue);
     if (!foundDuplicate) {
       addCartItems([{title: addIngredientValue}]);
@@ -184,6 +187,7 @@ const CartPageComponent = (props) => {
               size="xl"
               type="outlined"
               onPress={() => {
+                Haptics.impactAsync('light');
                 navigation.navigate(recipesPageRoute, {screen: recipesRoute})
               }}
               title={t('notFoundButton')}
@@ -199,6 +203,7 @@ const CartPageComponent = (props) => {
           animate
           type="fulled"
           onPress={() => {
+            Haptics.impactAsync('medium');
             setCart([]);
             setSelected([]);
             isAvailableAsync().then(() => requestReview());
@@ -227,6 +232,7 @@ const CartPageComponent = (props) => {
           type="outlined"
           style={styles.actionButton}
           onPress={() => {
+            Haptics.impactAsync('light');
             setRefreshConfirmModalOpen(true);
           }}
         >
@@ -236,6 +242,7 @@ const CartPageComponent = (props) => {
           type="outlined"
           style={styles.actionButton}
           onPress={() => {
+            Haptics.impactAsync('light');
             setCart(cart.filter((item, index) => !selected.includes(index)));
             setSelected([]);
           }}
