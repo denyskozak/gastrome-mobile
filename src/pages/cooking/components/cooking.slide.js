@@ -17,6 +17,7 @@ import {Animation} from '../../../components/atomic/animation/animation.componen
 import _ from 'lodash';
 import {StoryProgressBar} from "../../../components/atomic/story-bar/story-bar";
 import * as Haptics from "expo-haptics";
+import {getDevice} from "../../../utilities/getCurrentDevice";
 
 export const CookingSlideComponent = (props) => {
     const {
@@ -87,9 +88,8 @@ export const CookingSlideComponent = (props) => {
                     uri={videoURL}
                     loadingText={loadingText}
                     resizeMode="cover"
-                    progressLineBottomPosition={0}
-                    // TODO return if will be need
-                    // progressLineBottomPosition={isListening || !withVoiceAssistant || isTimerActive ? 0 : 0}
+                    // progressLineBottomPosition={0}
+                    progressLineBottomPosition={ getDevice() === 'iPad' ? Spaces.medium : 0}
                     onLoaded={() => {
                         if (showHelpArrow) setShowArrow(true)
                     }}

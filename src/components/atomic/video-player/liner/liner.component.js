@@ -13,6 +13,7 @@ import { Animated } from '../../animated/animated.component';
 import PropTypes from 'prop-types';
 import { Dimensions } from 'react-native';
 import { getPercentWidth } from '../../../../styles/common.styles';
+import {getDevice} from "../../../../utilities/getCurrentDevice";
 
 const LinerComponent = (props) => {
   const {style, positionMillis, durationMillis} = props;
@@ -21,7 +22,7 @@ const LinerComponent = (props) => {
 
   useEffect(() => {
     if (positionMillis !== undefined && durationMillis !== undefined) {
-      progress.value = withTiming((positionMillis / durationMillis) * getPercentWidth(100), {
+      progress.value = withTiming((positionMillis / durationMillis) * getPercentWidth( getDevice() === 'iPad' ? 80 : 100), {
         duration: 700,
         easing: Easing.linear,
       });

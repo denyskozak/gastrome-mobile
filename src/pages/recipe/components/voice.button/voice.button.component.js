@@ -18,14 +18,14 @@ import {VOICE_ASSISTANT_TIP} from "../../../../constants/asyncStoreKeys";
 import * as Haptics from "expo-haptics";
 
 const VoiceButtonComponent = (props) => {
-  const {isListening, onButtonPress, startText, hideButtonWhenSpeaking, animationRef, voiceTooltipText} = props;
+  const {isListening, onButtonPress, isUpper, startText, hideButtonWhenSpeaking, animationRef, voiceTooltipText} = props;
   const [t] = useTranslator('components.voiceButton');
 
   return (
     <>
       {isListening && (
         <View
-          style={styles.activeCooking}
+          style={styles.getActiveCooking(isUpper)}
         >
           <Pressable onPress={onButtonPress}>
             <Animated name="SlideInDown" outName="SlideOutDown">
@@ -40,7 +40,7 @@ const VoiceButtonComponent = (props) => {
 
       {(!hideButtonWhenSpeaking || !isListening) && (
           <View
-              style={styles.activeCooking}
+              style={styles.getActiveCooking(isUpper)}
           >
             <Pressable onPress={() => {
               Haptics.impactAsync('light');
@@ -68,11 +68,13 @@ VoiceButtonComponent.propTypes = {
   /** @return {import('lottie-react-native').AnimatedLottieView} The converted level **/
   animationRef: PropTypes.object,
   voiceTooltipText: PropTypes.string,
+  isUpper: PropTypes.bool,
 };
 
 VoiceButtonComponent.defaultProps = {
   onButtonPress: () => {
   },
+  isUpper: false,
   hideButtonWhenSpeaking: true,
   isListening: false,
   voiceTooltipText: '',

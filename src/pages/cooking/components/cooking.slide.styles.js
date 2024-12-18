@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
         left: 0,
         zIndex: 3
     },
-    video: {width: '100%', height: '100%'},
+    video: {width: '100%', height: '100%', borderRadius:  getDevice() === 'iPad' ? BorderRadius.medium : 0},
     backButtonLeftContainer: {
         position: 'absolute',
         zIndex: 2,

@@ -3,17 +3,18 @@ import { getPercentHeight, getPercentWidth, getTextStyles } from '../../../../st
 import { fontEnum } from '../../../../styles/fonts';
 import { Spaces } from '../../../../styles/spaces';
 import { Colors } from '../../../../styles/colors';
+import {getDevice} from "../../../../utilities/getCurrentDevice";
 
 const styles = StyleSheet.create({
-  activeCooking: {
+  getActiveCooking: (isUpper = false) => ({
     alignItems: 'center',
     justifyContent: 'center',
     position: 'absolute',
-    bottom: Spaces.xlarge,
+    bottom: getDevice() === 'iPad' ? Spaces.xxxlarge + Spaces.medium  : isUpper ? Spaces.mxxlarge : Spaces.xlarge,
     alignSelf: 'center',
     // width: '40%',
     zIndex: 1000,
-  },
+  }),
   animationBackground: {
     padding: Spaces.small,
     backgroundColor: Colors.second,

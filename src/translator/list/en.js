@@ -203,7 +203,7 @@ export const translates = {
         },
         subscriptionsModal: {
             free: 'Keep free',
-            benefits: 'Exclusive Benefits GastroMe Community:',
+            benefits: 'One coffee for price you is huge support for us:',
             benefitsOne: 'Unlock ALL recipes 📚',
             benefitsTwo: 'Community chat 🥰',
             benefitsThree: 'Cooking Streams 🧝',

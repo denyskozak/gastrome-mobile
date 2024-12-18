@@ -278,6 +278,7 @@ const GroceryPageComponent = (props) => {
       <VoiceButton
           hideButtonWhenSpeaking={true}
           isListening={isListening}
+          isUpper
           animationRef={voiceAnimationRef}
           voiceTooltipText={voiceTooltipText}
           startText={t('startVoice')}
