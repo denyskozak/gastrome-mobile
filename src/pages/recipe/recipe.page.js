@@ -2,6 +2,7 @@ import React, {useEffect, useMemo, useRef, useState} from 'react';
 import {FlatList, Pressable, Image, Text, View, SafeAreaView} from 'react-native';
 import Icon from '@expo/vector-icons/Ionicons';
 import _ from 'lodash';
+import * as Haptics from "expo-haptics";
 
 import {Animated} from '../../components/atomic/animated/animated.component';
 import {useTranslator} from '../../hooks/useTranslator';
@@ -27,7 +28,7 @@ import styles from './recipe.styles';
 import {useRecipes} from "../../hooks/useRecipes";
 import {AuthorPreview} from "../../components/molecular/author-preview/author-preview";
 import {ZoomInOut} from "../../components/molecular/zoom-in-out-animation/zoom-in-out-animation";
-import * as Haptics from "expo-haptics";
+import {logEvent} from "../../utilities/google-analitics";
 
 const RecipePageComponent = (props) => {
     const {
@@ -76,6 +77,7 @@ const RecipePageComponent = (props) => {
     const flatListRef = useRef(null);
 
     useEffect(() => {
+        logEvent('recipe_page', {title, id});
         downloadAsync(getCookingStepURL(id, 1))
             .then(() => setIsPreloadVideo(true))
             .catch(() => console.log('Error first step video preload: '));

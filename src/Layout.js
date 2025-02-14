@@ -22,7 +22,7 @@ const LayoutComponent = ({children}) => {
                 const possibleProfile = typeof possibleIndex === 'number' ? profiles[possibleIndex]['identifier'] : '';
                 setSettings({speechProfile: possibleProfile, speechProfiles: profiles})
             } catch (e) {
-                console.log('Error speech profile loading');
+                console.log('Error speech profile loading', e);
             }
         })()
     }, [language]);

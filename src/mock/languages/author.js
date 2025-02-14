@@ -1,9 +1,9 @@
 import { authors as enAuthors} from './en/authors';
-import { authors as csAuthors} from './cs/authors';
+import { authors as ruAuthors} from './ru/authors';
 
 const translates = {
     en: enAuthors,
-    cs: csAuthors,
+    ru: ruAuthors,
 };
 
 // Authors

@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     position: 'absolute',
-    bottom: getDevice() === 'iPad' ? Spaces.xxxlarge + Spaces.medium  : isUpper ? Spaces.mxxlarge : Spaces.xlarge,
+    bottom: getDevice() === 'iPad' ? Spaces.xxxlarge + Spaces.medium  : isUpper ? Spaces.xxxlarge : Spaces.xlarge,
     alignSelf: 'center',
     // width: '40%',
     zIndex: 1000,

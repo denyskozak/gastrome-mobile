@@ -43,11 +43,11 @@ const styles = StyleSheet.create({
   },
   emptyList: getTextStyles({
     fontSize: 16,
-    marginTop: Spaces.medium,
     color: Colors.primary
   }),
   firstSubscriptionButton: {
-    paddingTop: Spaces.large,
+    marginTop: Spaces.medium,
+    marginBottom: Spaces.medium,
     // width: 320,
   },
   actionText: getTextStyles({
@@ -124,18 +124,17 @@ const styles = StyleSheet.create({
 
   //list
   list: {
-    gap: Spaces.xlarge,
+    // gap: Spaces.xlarge,
     alignItems: 'center',
     width: getDevice() === 'iPhone' ? '100%' : getPercentWidth(99),
   },
+  separator: {
+    height: Spaces.xlarge
+  },
   subscriptions: {
+    marginTop: Spaces.medium,
     paddingBottom: Spaces.large,
   },
-  subscriptionsInto: getTextStyles({
-    textAlign: 'center',
-    fontSize: 16,
-    marginBottom: Spaces.small,
-  }),
   // Voice assistant button
   assistant: {
     height: Spaces.xxlarge + Spaces.small,

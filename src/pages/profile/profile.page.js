@@ -18,10 +18,10 @@ import {SubscriptionButton} from "../../components/templates/subscription-button
 import {useSubscriptions} from "../../contexts/subscriptions.context";
 import {AnimatedLogo} from "../../components/atomic/logo/animated-logo.component";
 
-// const languagesList = [
-//     ['Czech', 'cs'],
-//     ['English', 'en']
-// ];
+const languagesList = [
+    ['Ru', 'ru'],
+    ['En', 'en']
+];
 
 const SettingsPageComponent = (props) => {
     const {navigation} = props;
@@ -41,10 +41,10 @@ const SettingsPageComponent = (props) => {
         setClicksForDevMode(clicksForDevMode === 4 ? 0 : clicksForDevMode + 1);
     }
 
-    // const renderLanguageButton = ([title, language]) => (
-    //     <Button key={language} title={title} type="outlined" selected={language === currentLanguage}
-    //             onPress={() => setLanguage(language)}/>
-    // );
+    const renderLanguageButton = ([title, language]) => (
+        <Button key={language} title={title} type="outlined" selected={language === currentLanguage}
+                onPress={() => setLanguage(language)}/>
+    );
 
     return (
         <ScrollView contentContainerStyle={styles.container}>
@@ -56,9 +56,9 @@ const SettingsPageComponent = (props) => {
 
 
                 {/*Lang switcher*/}
-                {/*<View style={styles.languages}>*/}
-                {/*    {languagesList.map(renderLanguageButton)}*/}
-                {/*</View>*/}
+                <View style={styles.languages}>
+                    {languagesList.map(renderLanguageButton)}
+                </View>
 
                 <View style={styles.settingButtons}>
                     <SubscriptionButton text={isSubscriber ? t('community') : t('join')}

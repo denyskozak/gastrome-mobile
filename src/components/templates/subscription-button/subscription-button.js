@@ -7,20 +7,19 @@ import {Colors} from "../../../styles/colors";
 import React from "react";
 
 export const SubscriptionButton = (props) => {
-    const { onPress, text = '' } = props;
+    const {onPress, text = ''} = props;
     return (
-        <AttentionAnimation end={1.08} delay={1500}>
-            <Button style={styles.subscriptionsButton} onPress={() => {
-                onPress?.()
-            }}>
-                <Text style={styles.subscriptionsButtonText}>
-                    <Icon name="heart" size={24} color={Colors.white}/>
-                    {' '}
-                    {text}
-                    {' '}
-                    <Icon name="heart" size={24} color={Colors.white}/>
-                </Text>
-            </Button>
-        </AttentionAnimation>
+        <Button style={styles.subscriptionsButton} onPress={() => {
+            onPress?.()
+        }}>
+            <Text style={styles.subscriptionsButtonText}>
+                <Icon name="heart" size={24} color={Colors.white}/>
+                {' '}
+                {text}
+                {' '}
+                <Icon name="heart" size={24} color={Colors.white}/>
+            </Text>
+        </Button>
+
     )
 }

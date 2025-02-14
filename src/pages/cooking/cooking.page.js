@@ -30,6 +30,7 @@ import {useSettings} from "../../contexts/settings.context";
 import {useLogger} from "../../hooks/useLogger";
 import {StoryProgressBar} from "../../components/atomic/story-bar/story-bar";
 import * as Haptics from "expo-haptics";
+import {logEvent} from "../../utilities/google-analitics";
 
 const alarmSong = require('./alarm.mp3');
 const soundObject = new Audio.Sound();
@@ -49,6 +50,7 @@ export const CookingPage = (props) => {
     const {getCookingStepURL} = useAWS();
 
     const [t, , language] = useTranslator('pages.cooking');
+    console.log('language: ', language)
     const [tCommon] = useTranslator('common');
     const [recipes] = useRecipes();
     const [settings, setSetting] = useSettings();
@@ -93,6 +95,10 @@ export const CookingPage = (props) => {
                     })
                 ),
         [recipe.steps]);
+
+    useEffect(() => {
+        logEvent('cooking_page', { id, title: recipe.title})
+    }, [recipe]);
 
     const say = (text, onDone = () => {
     }) => {

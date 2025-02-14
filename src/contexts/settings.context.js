@@ -4,7 +4,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import {defaultLanguage} from "../translator/translates";
 
 const defaultValue = {
-  measure: 'g',
+  measure: 'oz',
   language: defaultLanguage,
   isFirstRunEver: false,
   speechProfile: '',

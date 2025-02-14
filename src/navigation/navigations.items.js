@@ -44,15 +44,15 @@ export const getNavigationTabs = (t, isDarkModeMenu) => {
         tabBarIcon: renderIcon('home-outline', 1000),
       },
     ],
-    [
-      authorsPageRoute,
-      AuthorsNavigation,
-      {
-        title: t('authors'),
-        headerShown: false,
-        tabBarIcon: renderIcon('people-outline', 1250),
-      },
-    ],
+    // [
+    //   authorsPageRoute,
+    //   AuthorsNavigation,
+    //   {
+    //     title: t('authors'),
+    //     headerShown: false,
+    //     tabBarIcon: renderIcon('people-outline', 1250),
+    //   },
+    // ],
     [
       recipesPageRoute,
       RecipesNavigation,

@@ -129,7 +129,6 @@ export const translates = {
             apply: 'Apply',
             subscriptions: 'Prepared plans for your:',
             buySubscription: 'Join GastroMe Community',
-            extraRecipesText: 'You have 10 free monthly recipes,\n do you wish more?',
             time: '{time} min',
         },
         recipe: {
@@ -204,8 +203,8 @@ export const translates = {
         subscriptionsModal: {
             free: 'Keep free',
             benefits: 'One coffee for price you is huge support for us:',
-            benefitsOne: 'Unlock ALL recipes 📚',
-            benefitsTwo: 'Community chat 🥰',
+            benefitsOne: 'Support Us 🥰',
+            benefitsTwo: 'Community chat 📚',
             benefitsThree: 'Cooking Streams 🧝',
             error: 'Sorry, subscription purchase error, try again or contact to us on settings page',
             restore: 'Restore',
@@ -227,7 +226,6 @@ export const translates = {
         },
         recipesGenerator: {
             title: 'Random Recipe There:',
-            extraRecipesText: 'There are 10 recipes available to you, for more click on text',
             generate: 'Get new',
             time: '{time} min',
         },

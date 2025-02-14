@@ -1,9 +1,8 @@
-import React, {useEffect, useMemo, useState} from 'react';
+import React, {useMemo} from 'react';
 import PropTypes from 'prop-types';
 import Icon from '@expo/vector-icons/Ionicons';
 import {Pressable, Text, View, TouchableHighlight, Image} from 'react-native';
 
-import {Button} from '../../../components/atomic/button/button.component';
 import {useTranslator} from '../../../hooks/useTranslator';
 import {CountryList} from '../../../components/atomic/country-flag/country-flag.list';
 import {CountryFlag} from '../../../components/atomic/country-flag/country-flag.component';
@@ -11,11 +10,8 @@ import {Animation} from '../../../components/atomic/animation/animation.componen
 import {Colors} from '../../../styles/colors';
 import {Spaces} from '../../../styles/spaces';
 import {cutText} from '../../../utilities/cutText';
-import {Animated} from '../../../components/atomic/animated/animated.component';
 
 import styles from './recipes.item.styles';
-import {ZoomInOut} from "../../../components/molecular/zoom-in-out-animation/zoom-in-out-animation";
-import {AttentionAnimation} from "../../../components/molecular/attansion-animation/attansion-animation.component";
 
 const RecipeItemComponent = (props) => {
     const {
@@ -24,19 +20,16 @@ const RecipeItemComponent = (props) => {
         image,
         title,
         level,
-        free,
         subTitle,
         onPress,
         ingredients,
         selectedIngredients,
         filters,
         isFavorited,
-        isSubscriber,
-        animate,
         hideImage,
-        iconColor = 'black',
         enableHint = false,
     } = props;
+
     const [t] = useTranslator('pages.recipes');
 
     const recipeCountry = useMemo(() => {
@@ -66,31 +59,30 @@ const RecipeItemComponent = (props) => {
         {image && !hideImage && (
             <TouchableHighlight style={styles.imageTouchable} activeOpacity={0.9} onPress={() => onPress(id)}>
                 <View>
-                    <ZoomInOut enabled={animate} width={styles.image.width} height={styles.image.height}>
+                    <View width={styles.image.width} height={styles.image.height}>
                         <Image
                             source={image}
                             style={styles.image}
                         />
-                    </ZoomInOut>
+                    </View>
 
                     {/*<AttentionAnimation duration={1200} start={0.5} end={1} property="opacity">*/}
-                    {enableHint && (free || isSubscriber) && (
+                    {enableHint && (
                         <View style={styles.imageIcon}>
-                            <AttentionAnimation duration={1000} delay={2000} enabled={animate} start={1} end={0} property="opacity">
                                 <Animation name="click" autoPlay={false} height={Spaces.xxxlarge * 1.4}
                                            width={Spaces.xxxlarge * 1.4}/>
                                 {/*<Icon name={'play-circle-outline'} color={Colors[iconColor]}*/}
                                 {/*      size={Spaces.xxlarge + Spaces.small}/>*/}
-                            </AttentionAnimation>
                         </View>
                     )}
-                    {!free && !isSubscriber && (
-                        <View style={styles.imageBlockIcon}>
-                                <Icon name="lock-closed" size={Spaces.xxxlarge} color={iconColor} />
-                                {/*<Icon name={'play-circle-outline'} color={Colors[iconColor]}*/}
-                                {/*      size={Spaces.xxlarge + Spaces.small}/>*/}
-                        </View>
-                    )}
+                    {/*Locked for unsubscribed user, removed since all recipes free*/}
+                    {/*{!free && !isSubscriber && (*/}
+                    {/*    <View style={styles.imageBlockIcon}>*/}
+                    {/*            <Icon name="lock-closed" size={Spaces.xxxlarge} color={iconColor} />*/}
+                    {/*            /!*<Icon name={'play-circle-outline'} color={Colors[iconColor]}*!/*/}
+                    {/*            /!*      size={Spaces.xxlarge + Spaces.small}/>*!/*/}
+                    {/*    </View>*/}
+                    {/*)}*/}
                     {/*</AttentionAnimation>*/}
                 </View>
             </TouchableHighlight>
@@ -121,22 +113,22 @@ const RecipeItemComponent = (props) => {
             <Text style={styles.title}>
                 {cutText(50, title)}
             </Text>
-            {subTitle && <Text style={styles.subTitle}>{cutText(150, subTitle)}</Text>}
-            <Text style={styles.ingredients}>
-                {/*Render selected ingredients by user*/}
-                {selectedIngredientsList.length > 0
-                    ? (<Text
-                        style={styles.selectedIngredients}>{t('selectedIngredients')} {selectedIngredientsList.join(', ')}{renderThreeDots(selectedIngredientsList)}</Text>)
-                    : <>{ingredientsList}{renderThreeDots(ingredientsList)}</>
-                }
-            </Text>
-            <Button
-                style={styles.selectButton}
-                textStyle={styles.selectButtonText}
-                type="outlined"
-                title={t('get')}
-                onPress={() => onPress(id)}
-            />
+            {/*{subTitle && <Text style={styles.subTitle}>{cutText(150, subTitle)}</Text>}*/}
+            {/*<Text style={styles.ingredients}>*/}
+            {/*    /!*Render selected ingredients by user*!/*/}
+            {/*    {selectedIngredientsList.length > 0*/}
+            {/*        ? (<Text*/}
+            {/*            style={styles.selectedIngredients}>{t('selectedIngredients')} {selectedIngredientsList.join(', ')}{renderThreeDots(selectedIngredientsList)}</Text>)*/}
+            {/*        : <>{ingredientsList}{renderThreeDots(ingredientsList)}</>*/}
+            {/*    }*/}
+            {/*</Text>*/}
+            {/*<Button*/}
+            {/*    style={styles.selectButton}*/}
+            {/*    textStyle={styles.selectButtonText}*/}
+            {/*    type="outlined"*/}
+            {/*    title={t('get')}*/}
+            {/*    onPress={() => onPress(id)}*/}
+            {/*/>*/}
         </View>
     </Pressable>);
 };
@@ -147,7 +139,6 @@ RecipeItemComponent.propTypes = {
     isFavorited: PropTypes.bool,
     isSubscriber: PropTypes.bool,
     enableHint: PropTypes.bool,
-    animate: PropTypes.bool,
     hideImage: PropTypes.bool
 };
 
@@ -157,7 +148,6 @@ RecipeItemComponent.defaultProps = {
     isFavorited: false,
     isSubscriber: false,
     enableHint: false,
-    animate: false,
     hideImage: false,
 };
 

@@ -1,7 +1,8 @@
 import React, {useState, useMemo, useEffect, useRef, useCallback, Fragment} from 'react';
-import {VirtualizedList, Text, View, Pressable, SafeAreaView} from 'react-native';
+import {Text, View, Pressable, SafeAreaView} from 'react-native';
 import SwipeablePanel from 'react-native-sheets-bottom';
 import Icon from '@expo/vector-icons/Ionicons';
+import { FlashList } from "@shopify/flash-list";
 
 import {RecipeItem} from './components/recipes.item.component';
 import {useTranslator} from '../../hooks/useTranslator';
@@ -80,7 +81,6 @@ const RecipesPageComponent = (props) => {
     const [isFilterOpened, setFilterOpened] = useState(false);
     const [isSubscriptionsOpened, setSubscriptionsOpened] = useState(false);
     const flatListRef = useRef(null);
-    const [visibleItems, setVisibleItems] = useState(new Set());
 
     // Search
     const findRecipeIndexesByTitle = useCallback((value, list) => {
@@ -238,11 +238,6 @@ const RecipesPageComponent = (props) => {
         [t('favorites'), 'bookmark-outline', () => setFilter('Favorites')]
     ];
 
-    // onViewableItemsChanged callback
-    const onViewableItemsChanged = useRef(({ viewableItems }) => {
-        setVisibleItems(new Set(viewableItems.map((item) => item.key)));
-    }).current;
-
     return (
         <SafeAreaView style={styles.container}>
             {/*Actions and search*/}
@@ -288,16 +283,22 @@ const RecipesPageComponent = (props) => {
                 </View>
                 : null}
             {/*Items list*/}
-            <VirtualizedList
+            <FlashList
                 // initialNumToRender={getDevice() === 'iPad' ? 4 : 2}
-                showsVerticalScrollIndicator={false}
+                showsVerticalScrollIndicator={true}
+                indicatorStyle="black"
+                scrollIndicatorInsets={{
+                    top: 20,
+                    left: 20,
+                    bottom: 0,
+                    right: 0,
+                }}
                 showsHorizontalScrollIndicator={false}
                 ref={flatListRef}
-                onViewableItemsChanged={onViewableItemsChanged}
                 contentContainerStyle={styles.list}
                 data={data}
                 gap={10}
-                initialNumToRender={3}
+                estimatedItemSize={data.length}
                 getItemCount={items => items.length}
                 getItem={(items, index) => data[index]}
                 numColumns={getDevice() === 'iPad' ? 2 : 1}
@@ -310,12 +311,10 @@ const RecipesPageComponent = (props) => {
                     </View>
                         : null}
                 </View>}
+                ItemSeparatorComponent={() => <View style={styles.separator} />}
                 ListFooterComponent={
                     () => !isSubscriber
                         ? (<View style={styles.subscriptions}>
-                            <Text style={styles.subscriptionsInto}>
-                                {t('extraRecipesText')}
-                            </Text>
                             <SubscriptionButton onPress={() => {
                                 Haptics.impactAsync('light');
                                 setSubscriptionsOpened(true);
@@ -324,24 +323,21 @@ const RecipesPageComponent = (props) => {
                         : null
                 }
                 keyExtractor={item => item.id}
-                renderItem={({item}) => (
-                    <RecipeItem
-                        enableHint
-                        animate={visibleItems.has(item.id)}
-                        onPress={id => {
-                            if (item.free || isSubscriber) {
+                renderItem={({item}) => {
+
+                    return (
+                        <RecipeItem
+                            enableHint
+                            onPress={id => {
                                 navigation.navigate(recipeRoute, {id});
-                            } else {
-                                setSubscriptionsOpened(true);
-                            }
-                            Haptics.selectionAsync();
-                        }}
-                        isSubscriber={isSubscriber}
-                        isFavorited={favorites.includes(item.id)}
-                        selectedIngredients={listSearchByIngredients}
-                        {...item}
-                    />
-                )}
+                                Haptics.selectionAsync();
+                            }}
+                            isFavorited={favorites.includes(item.id)}
+                            selectedIngredients={listSearchByIngredients}
+                            {...item}
+                        />
+                    )
+                }}
             />
 
             <SubscriptionsModal

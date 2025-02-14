@@ -280,7 +280,10 @@ const GroceryPageComponent = (props) => {
           isListening={isListening}
           isUpper
           animationRef={voiceAnimationRef}
+          a
           voiceTooltipText={voiceTooltipText}
+          lootieName="voice"
+          autoPlay={false}
           startText={t('startVoice')}
           onButtonPress={() => {
             (async () => {

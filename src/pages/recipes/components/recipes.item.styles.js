@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
   },
   content: {
     backgroundColor: Colors.backgroundColor,
-    marginTop: Spaces.medium,
+    marginTop: Spaces.small,
     alignItems: 'center',
   },
   imageContainer: {
@@ -33,7 +33,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 0,
     right: 0,
-    opacity: 0.8
   },
   imageBlockIcon: {
     position: 'absolute',

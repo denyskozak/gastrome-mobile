@@ -1,8 +1,16 @@
 import Author1 from '../../authorImages/1.jpeg';
 import Author2 from '../../authorImages/2.jpg';
 import Author3 from '../../authorImages/3.jpg';
+import Julia from '../../authorImages/4.jpg';
 
 export const authors = [
+  {
+    id: 4,
+    name: 'Julia Kot',
+    // instagram: 'https://www.instagram.com/culinary_art_food/',
+    description: 'Love cooking with you!',
+    image: Julia
+  },
   {
     id: 3,
     name: 'Dunčko Tomáš',

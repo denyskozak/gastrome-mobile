@@ -18,7 +18,7 @@ import {VOICE_ASSISTANT_TIP} from "../../../../constants/asyncStoreKeys";
 import * as Haptics from "expo-haptics";
 
 const VoiceButtonComponent = (props) => {
-  const {isListening, onButtonPress, isUpper, startText, hideButtonWhenSpeaking, animationRef, voiceTooltipText} = props;
+  const {isListening, onButtonPress, isUpper, lootieName, autoPlay, startText, hideButtonWhenSpeaking, animationRef, voiceTooltipText} = props;
   const [t] = useTranslator('components.voiceButton');
 
   return (
@@ -49,7 +49,7 @@ const VoiceButtonComponent = (props) => {
               <Animated name="SlideInDown" outName="SlideOutDown">
                 <FirstLaunchTooltip asyncStoreKey={VOICE_ASSISTANT_TIP} delay={500} text={t('tip')} placement="top">
                   <View style={styles.animationOffBackground}>
-                    <Animation ref={animationRef} name="cookOnFire" width={Spaces.xxxlarge * 1.5} height={Spaces.xxxlarge * 1.5}/>
+                    <Animation autoPlay={autoPlay} ref={animationRef} name={lootieName} width={Spaces.xxxlarge * 1.5} height={Spaces.xxxlarge * 1.5}/>
                   </View>
                 </FirstLaunchTooltip>
               </Animated>
@@ -69,6 +69,8 @@ VoiceButtonComponent.propTypes = {
   animationRef: PropTypes.object,
   voiceTooltipText: PropTypes.string,
   isUpper: PropTypes.bool,
+  autoPlay: PropTypes.bool,
+  lootieName: PropTypes.oneOf(['cookOnFire', 'voice']),
 };
 
 VoiceButtonComponent.defaultProps = {
@@ -76,8 +78,10 @@ VoiceButtonComponent.defaultProps = {
   },
   isUpper: false,
   hideButtonWhenSpeaking: true,
+  autoPlay: true,
   isListening: false,
   voiceTooltipText: '',
+  lootieName: 'cookOnFire',
 };
 
 export const VoiceButton = VoiceButtonComponent;
