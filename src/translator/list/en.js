@@ -31,6 +31,7 @@ export const translates = {
         "oz": "oz",
         "ml": "ml",
         "tbsp": "tbsp",
+        "tsp": "tsp",
         "slices": "slices",
     },
     pages: {

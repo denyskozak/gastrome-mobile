@@ -50,7 +50,6 @@ export const CookingPage = (props) => {
     const {getCookingStepURL} = useAWS();
 
     const [t, , language] = useTranslator('pages.cooking');
-    console.log('language: ', language)
     const [tCommon] = useTranslator('common');
     const [recipes] = useRecipes();
     const [settings, setSetting] = useSettings();
@@ -230,7 +229,6 @@ export const CookingPage = (props) => {
                         isAvailableAsync().then(() => requestReview());
                     }
                 } catch (e) {
-                    console.log('e.message ', e.message)
                     logError(e.message)
                 }
             };

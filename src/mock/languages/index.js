@@ -1,5 +1,6 @@
 import {recipes as enRecipes} from './en/recipes';
 import {recipes as ruRecipes} from './ru/recipes';
+import {recipes as ukRecipes} from './uk/recipes';
 import {recipeImageById} from "../recipeImages";
 
 const getRandomViewCount = () => Math.round(Math.random() * 1000);
@@ -26,6 +27,7 @@ const mergeBaseOnOriginLanguage = (recipe, index) => ({
 const translates = {
     en: enRecipes,
     ru: ruRecipes.map(mergeBaseOnOriginLanguage),
+    uk: ukRecipes.map(mergeBaseOnOriginLanguage),
 };
 
 const getRecipesByLanguage = (language = 'en') => {

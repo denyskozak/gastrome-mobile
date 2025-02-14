@@ -31,6 +31,7 @@ export const translates = {
         "pcs": "шт",
         "ml": "мл",
         "tbsp": "cт. ложка",
+        "tsp": "чай. ложка",
         "slices": "кусочков",
         "cloves": "гродь",
     },

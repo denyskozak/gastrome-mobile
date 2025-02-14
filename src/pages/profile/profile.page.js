@@ -19,8 +19,9 @@ import {useSubscriptions} from "../../contexts/subscriptions.context";
 import {AnimatedLogo} from "../../components/atomic/logo/animated-logo.component";
 
 const languagesList = [
-    ['Ru', 'ru'],
-    ['En', 'en']
+    ['UA', 'uk'],
+    ['RU', 'ru'],
+    ['EN', 'en'],
 ];
 
 const SettingsPageComponent = (props) => {

@@ -6,12 +6,16 @@ const enabledProfiles = {
     ],
     ru: [
         'Milena'
+    ],
+    uk: [
+        'Lesya'
     ]
 };
 
 export const preferableProfileByLanguages = {
     en: 'Samantha',
-    ru: 'Milena'
+    ru: 'Milena',
+    uk: 'Lesya',
 }
 
 export const isProfileEnabled = (profile, language) => enabledProfiles[language].includes(profile.name);
