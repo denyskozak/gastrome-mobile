@@ -1,6 +1,5 @@
 import {recipes as enRecipes} from './en/recipes';
 import {recipes as ruRecipes} from './ru/recipes';
-import deepmerge from 'deepmerge';
 import {recipeImageById} from "../recipeImages";
 
 const getRandomViewCount = () => Math.round(Math.random() * 1000);
@@ -21,7 +20,7 @@ const mergeBaseOnOriginLanguage = (recipe, index) => ({
     ...enRecipes[index],
     ...recipe,
     steps: enRecipes[index].steps.map((step, indexStep) => ({...step, ...recipe.steps[indexStep]})),
-    ingredients: enRecipes[index].ingredients.map((ingredient, indexIngredient) => ({...ingredient, ...recipe.ingredients[indexIngredient]})),
+    ingredients: enRecipes[index].ingredients.map((ingredient, indexIngredient) => ({...ingredient, description: '', ...recipe.ingredients[indexIngredient]})),
 })
 
 const translates = {

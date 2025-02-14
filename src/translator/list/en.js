@@ -22,6 +22,16 @@ export const translates = {
         minutes: 'minutes',
         second: 'second',
         seconds: 'seconds',
+        "Easy": "Easy",
+        "Medium": "Medium",
+        "Hard": "Hard",
+        "g": "g",
+        "packs": "packs",
+        "pcs": "pcs",
+        "oz": "oz",
+        "ml": "ml",
+        "tbsp": "tbsp",
+        "slices": "slices",
     },
     pages: {
         authors: {

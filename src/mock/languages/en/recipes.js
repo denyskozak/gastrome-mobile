@@ -1166,14 +1166,14 @@ export const recipes = [
                 "title": "Soy sause",
                 "description": null,
                 "quantity": 2,
-                "unit": "tbs"
+                "unit": "tbsp"
             },
             {
                 "id": 9,
                 "title": "Vinegar",
                 "description": "70%",
                 "quantity": 1,
-                "unit": "tbs"
+                "unit": "tbsp"
             },
             {
                 "id": 10,

@@ -4,7 +4,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import {defaultLanguage} from "../translator/translates";
 
 const defaultValue = {
-  measure: 'oz',
+  measure: 'g',
   language: defaultLanguage,
   isFirstRunEver: false,
   speechProfile: '',
@@ -15,7 +15,7 @@ const defaultValue = {
 
 export const SettingsContext = createContext({...defaultValue});
 
-const SETTINGS_ASYNC_STORE_KEY = 'SETTINGS_ASYNC_STORE_KEY31';
+const SETTINGS_ASYNC_STORE_KEY = 'SETTINGS_ASYNC_STORE_KEY313';
 
 // Hook
 export const useSettings = () => {

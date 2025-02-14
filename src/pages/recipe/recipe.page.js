@@ -36,7 +36,7 @@ const RecipePageComponent = (props) => {
     } = props;
 
     const [t] = useTranslator('pages.recipe');
-
+    const [tCommon] = useTranslator('common');
     const [recipes] = useRecipes();
     const recipe = useMemo(() => recipes.find(item => item.id === id), [id, recipes]);
     const {
@@ -118,7 +118,7 @@ const RecipePageComponent = (props) => {
     const handleShare = async () => {
         try {
             Haptics.selectionAsync();
-            const ingredientsList = ingredients.map(item => renderIngredient(item, measure)).join(', \n');
+            const ingredientsList = ingredients.map(item => renderIngredient(item, measure, tCommon)).join(', \n');
             await handleSocialShare(
                 `I like to share ${title} recipe, ingredients: \n\n${ingredientsList}`);
         } catch (error) {
@@ -141,7 +141,7 @@ const RecipePageComponent = (props) => {
     };
 
     const renderPFC = (value) => (
-        renderQuantity(multiplyByServings(value), 'g' , '', ['g', 'oz'].includes(measure) ? measure : 'g')
+        renderQuantity(multiplyByServings(value), 'g' , tCommon, '', ['g', 'oz'].includes(measure) ? measure : 'g')
     )
     return (<SafeAreaView style={styles.container}>
         <FlatList
@@ -155,7 +155,7 @@ const RecipePageComponent = (props) => {
                         {'  '}
                         {t('time', {time})}
                         {' - '}
-                        {level}
+                        {tCommon(level)}
                     </Text>
                 </View>
                 <View style={styles.titleContainer}>
@@ -299,10 +299,9 @@ const RecipePageComponent = (props) => {
                             {/*</Button>*/}
                         </View>}
                         renderItem={({item}) => (<Text style={styles.ingredient}>
-                            {`- ${renderIngredient(item, measure)}`}
+                            {`- ${renderIngredient(item, measure, tCommon)}`}
                         </Text>)}
                     />
-
                 </View>
             </>}
             onScroll={handleScroll}

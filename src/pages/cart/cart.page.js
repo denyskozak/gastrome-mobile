@@ -40,6 +40,7 @@ const CartPageComponent = (props) => {
   } = props;
 
   const [t] = useTranslator('pages.cart');
+  const [tCommon] = useTranslator('common');
 
   const [cart, addCartItems, setCart] = useMenuCart();
   const [selected, setSelected] = useState([]);
@@ -104,7 +105,7 @@ const CartPageComponent = (props) => {
     }
   };
   const renderShareIngredients = (item) => {
-    const quantities = item.quantities.map((item) => mapRenderCartQuantity(item, measure)).join(', ');
+    const quantities = item.quantities.map((item) => mapRenderCartQuantity(item, measure, tCommon)).join(', ');
     return `${item.title}${addSpaceWithCondition(quantities, item.quantities.length > 0)}${addSpaceBefore(item.comment)}`;
   };
 
@@ -142,7 +143,7 @@ const CartPageComponent = (props) => {
         {' '}
         {/*Quantities*/}
         {item.quantities.length > 0 && (<Text style={styles.subText}>
-          ({item.quantities.map((item) => mapRenderCartQuantity(item, measure)).join(', ')})
+          ({item.quantities.map((item) => mapRenderCartQuantity(item, measure, tCommon)).join(', ')})
         </Text>)}
         {/*Comment*/}
         {item.comment && <Text style={styles.subText}>{item.comment}</Text>}

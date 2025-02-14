@@ -31,6 +31,7 @@ const RecipeItemComponent = (props) => {
     } = props;
 
     const [t] = useTranslator('pages.recipes');
+    const [tCommon] = useTranslator('common');
 
     const recipeCountry = useMemo(() => {
         return filters.find(item => CountryList.includes(item));
@@ -107,7 +108,7 @@ const RecipeItemComponent = (props) => {
                     {'  '}
                     {t('time', {time})}
                     {' - '}
-                    {level}
+                    {tCommon(level)}
                 </Text>
             </View>
             <Text style={styles.title}>
