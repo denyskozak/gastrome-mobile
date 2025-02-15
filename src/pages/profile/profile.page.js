@@ -11,7 +11,6 @@ import {devModeRoute, subscriptionsSettingsRoute, voiceSettingsRoute} from './na
 import styles from './profile.styles';
 import {MeasureModal} from '../../components/templates/measure-modal/measure-modal.component';
 import {useSettings} from '../../contexts/settings.context';
-import {Animation} from '../../components/atomic/animation/animation.component';
 import {isAvailableAsync, requestReview} from 'expo-store-review';
 import {contactURL, privacyURL, termsURL} from "../../constants/links";
 import {SubscriptionButton} from "../../components/templates/subscription-button/subscription-button";
@@ -32,6 +31,7 @@ const SettingsPageComponent = (props) => {
         currentLanguage
     ] = useTranslator('pages.profile');
     const [settings, setSetting] = useSettings();
+
     const {measure} = settings;
     const [isMeasureModalOpen, setIsMeasureModalOpen] = useState(false);
     const [clicksForDevMode, setClicksForDevMode] = useState(0);
@@ -44,7 +44,9 @@ const SettingsPageComponent = (props) => {
 
     const renderLanguageButton = ([title, language]) => (
         <Button key={language} title={title} type="outlined" selected={language === currentLanguage}
-                onPress={() => setLanguage(language)}/>
+                onPress={() => {
+                    setLanguage(language);
+                }}/>
     );
 
     return (

@@ -2,6 +2,148 @@ import {getAuthor} from "../author";
 
 export const recipes = [
     {
+        "id": 56,
+        "title": "Baked Chicken Nests with Pineapple",
+        "description": "Juicy chicken nests with a sweet and savory touch of pineapple, topped with creamy sour cream and melted cheese.",
+        "level": "Easy",
+        "servings": 4,
+        "hasVideoSteps": true,
+        "free": true,
+        "prep_time": 15,
+        "cook_time": 40,
+        "time": 55,
+        "priority": 0,
+        "instagram": "alionakarpiuk",
+        "proteins": 25,
+        "fats": 15,
+        "carbohydrates": 10,
+        "calories": 350,
+        "filters": [
+            "Dinner",
+            "Baking"
+        ],
+        "steps": [
+            {
+                "description": "Season the ground chicken with salt and pepper. Form evenly sized patties."
+            },
+            {
+                "description": "Place the patties on parchment paper, shaping them into nests. Add a pineapple ring in the center of each nest and spread a layer of sour cream on top."
+            },
+            {
+                "description": "Sprinkle with your preferred spices, then grate the cheese and place it on top. Bake in a preheated oven at 180-190°C (356-374°F) for 30-40 minutes until golden and cooked through.",
+                "duration": 2400
+            }
+        ],
+        "ingredients": [
+            { "id": 1, "title": "Ground chicken", "quantity": 500, "unit": "g" },
+            { "id": 2, "title": "Hard cheese", "quantity": 150, "unit": "g" },
+            { "id": 3, "title": "Sour cream", "quantity": 3, "unit": "tbsp" },
+            { "id": 4, "title": "Pineapple rings", "quantity": 4, "unit": "pcs" },
+            { "id": 5, "title": "Salt", "quantity": "to taste", "unit": "" },
+            { "id": 6, "title": "Black pepper", "quantity": "to taste", "unit": "" },
+            { "id": 7, "title": "Spices", "quantity": "to taste", "unit": "" }
+        ]
+    },
+    {
+        "id": 55,
+        "title": "Lazy Blueberry Dumplings",
+        "description": "Delightfully simple and elegant dumplings with fresh blueberries, perfect for a quick and delicious treat.",
+        "level": "Easy",
+        "servings": 4,
+        "hasVideoSteps": true,
+        "free": true,
+        "prep_time": 15,
+        "cook_time": 5,
+        "time": 20,
+        "priority": 0,
+        "instagram": "larisa_shtepa",
+        "proteins": 10,
+        "fats": 8,
+        "carbohydrates": 30,
+        "calories": 280,
+        "filters": [
+            "Dessert",
+            "Quick Meal"
+        ],
+        "steps": [
+            {
+                "description": "Combine cottage cheese, rice flour, sugar, vanilla, and one egg in a large bowl. Mix thoroughly until the dough forms a uniform consistency."
+            },
+            {
+                "description": "Divide the dough into equal portions, roll each portion into a small log, and cut into even pieces."
+            },
+            {
+                "description": "Press a single blueberry into the center of each dough piece and shape it into a small ball."
+            },
+            {
+                "description": "Boil salted water and gently drop the dumplings in. Cook until they rise to the surface. Remove and coat with melted butter, then serve with sour cream or yogurt."
+            }
+        ],
+        "ingredients": [
+            { "id": 1, "title": "Cottage cheese", "quantity": 330, "unit": "g" },
+            { "id": 2, "title": "Rice flour", "quantity": 3, "unit": "tbsp" },
+            { "id": 3, "title": "Sugar", "quantity": 2, "unit": "tbsp" },
+            { "id": 4, "title": "Vanilla", "quantity": "to taste", "unit": "" },
+            { "id": 5, "title": "Egg", "quantity": 1, "unit": "pcs" },
+            { "id": 6, "title": "Blueberries", "quantity": "as needed", "unit": "" },
+            { "id": 7, "title": "Butter", "quantity": "as needed", "unit": "" },
+            { "id": 8, "title": "Sour cream or yogurt", "quantity": "for serving", "unit": "" }
+        ]
+    },
+    {
+        "id": 54,
+        "title": "Apple Roll with Cream Cheese Filling",
+        "description": "A delicious apple roll combining the softness of the cream filling with the aroma of apples and cinnamon.",
+        "level": "Medium",
+        "servings": 6,
+        "hasVideoSteps": true,
+        "free": true,
+        "prep_time": 20,
+        "cook_time": 30,
+        "time": 50,
+        "priority": 0,
+        "instagram": "larisa_shtepa",
+        "proteins": 8,
+        "fats": 14,
+        "carbohydrates": 35,
+        "calories": 320,
+        "filters": [
+            "Dessert",
+            "Baking"
+        ],
+        "steps": [
+            {
+                "description": "Peel and dice apples, grate lemon zest, squeeze lemon juice, and mix everything together."
+            },
+            {
+                "description": "Mix the apples with three eggs, sour cream, coconut sugar, cinnamon, and chopped nuts. Add flour and stir until smooth."
+            },
+            {
+                "description": "Line a baking sheet with parchment paper and evenly spread the apple mixture. Bake in a preheated oven at 180°C (356°F) for 30 minutes.",
+                "duration": 1800
+            },
+            {
+                "description": "Prepare the cream by whipping soft cottage cheese with cream cheese and powdered sugar until smooth. Remove the baked apple base from the oven, roll it up with the parchment while warm, and cover with a towel. Let it cool for a few minutes."
+            },
+            {
+                "description": "Unroll the slightly cooled base, spread an even layer of cream filling, and roll it up again. Let it chill before slicing into portions and serving."
+            }
+        ],
+        "ingredients": [
+            { "id": 1, "title": "Apples", "quantity": 3, "unit": "pcs" },
+            { "id": 2, "title": "Eggs", "quantity": 3, "unit": "pcs" },
+            { "id": 3, "title": "Sour cream", "quantity": 3, "unit": "tbsp" },
+            { "id": 4, "title": "Coconut sugar", "quantity": 3, "unit": "tbsp" },
+            { "id": 5, "title": "Flour", "quantity": 150, "unit": "g" },
+            { "id": 6, "title": "Cinnamon", "quantity": 1, "unit": "tsp" },
+            { "id": 7, "title": "Lemon zest", "quantity": 1, "unit": "from 1 lemon" },
+            { "id": 8, "title": "Nuts", "quantity": "as desired", "unit": "g" },
+            { "id": 9, "title": "Soft cottage cheese", "quantity": 300, "unit": "g" },
+            { "id": 10, "title": "Cream cheese", "quantity": 200, "unit": "g" },
+            { "id": 11, "title": "Powdered sugar", "quantity": "to taste", "unit": "g" }
+        ]
+    },
+    {
         "id": 53,
         "title": "Roasted Beetroot Salad",
         "description": "A vibrant and nutritious salad with roasted beetroot, crunchy walnuts, juicy pomegranate, and creamy cheese.",

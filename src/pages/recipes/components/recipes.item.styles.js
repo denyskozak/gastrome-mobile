@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: Colors.backgroundColor,
     alignItems: 'center',
-    width: getDevice() === 'iPad' ? '50%' : '100%',
+    width: '100%',
   },
   content: {
     backgroundColor: Colors.backgroundColor,

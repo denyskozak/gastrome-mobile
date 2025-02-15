@@ -14,6 +14,7 @@ import {isFirstLaunch} from "./utilities/isFirstLaunch";
 import {IS_FIRST_LAUNCH_EVER_STORE_KEY} from "./constants/asyncStoreKeys";
 import {Navigation} from "./navigation/navigation.js";
 import {Colors} from "./styles/colors";
+// import {OnBoard, useIsOnBoarding} from "./components/molecular/on-boarding/on-boarding.component";
 
 SplashScreen.preventAutoHideAsync().then().catch(() => console.log('error-splash-prevent-auto-hide'));
 

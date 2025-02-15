@@ -1,5 +1,5 @@
 // Main onboard
-export const HAS_BEEN_ONBOARDED_KEY = 'HAS_BEEN_ONBOARDED_KEY';
+export const HAS_BEEN_ONBOARDED_KEY = 'HAS_BEEN_ONBOARDED_KEY_2';
 
 // Onboard pages
 // export const ON_BOARD_RECIPES_PAGE_KEY = 'ON_BOARD_RECIPES_PAGE_KEY';

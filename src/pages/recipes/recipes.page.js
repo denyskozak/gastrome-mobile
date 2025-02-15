@@ -170,7 +170,7 @@ const RecipesPageComponent = (props) => {
             style={styles.filterCloseButton}
             onPress={() => setFilterNames(filterNames.filter(name => name !== item))}
         >
-            {item}
+            {tFilter(item)}
             {renderFilterIcon(item)}
             {' '}
             <Icon name="close-circle-outline" size={16}/>
@@ -210,8 +210,8 @@ const RecipesPageComponent = (props) => {
             size="l"
             type="outlined"
             key={`filter-${filter}`}
-            onPress={() => setFilter(tFilter(filter))}
-            selected={filterNames.includes(tFilter(filter))}
+            onPress={() => setFilter(filter)}
+            selected={filterNames.includes(filter)}
         >
             {tFilter(filter)}
             {renderFilterIcon(filter)}
@@ -301,7 +301,7 @@ const RecipesPageComponent = (props) => {
                 estimatedItemSize={data.length}
                 getItemCount={items => items.length}
                 getItem={(items, index) => data[index]}
-                numColumns={getDevice() === 'iPad' ? 2 : 1}
+                numColumns={getDevice() === 'iPad' ? 1 : 1}
                 ListEmptyComponent={<Text style={styles.emptyList}>{t('emptyList')}</Text>}
                 ListHeaderComponent={<View>
                     {renderSelectedIngredients()}
