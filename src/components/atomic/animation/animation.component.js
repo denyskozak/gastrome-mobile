@@ -3,7 +3,6 @@ import { View } from 'react-native';
 import Lottie from 'lottie-react-native';
 import PropTypes from 'prop-types';
 
-import cookingFoodJSON from './list/cheef-cook.json';
 import voiceJSON from './list/voice.json';
 import happyAutumnShoppingJSON from './list/happy-autumn-shopping.json';
 import cookingJSON from './list/cooking.json';
@@ -21,7 +20,6 @@ const looties = {
   voice: voiceJSON,
   micro: microJSON,
   volumeUp: volumeUpJSON,
-  cookingFood: cookingFoodJSON,
   happyAutumnShopping: happyAutumnShoppingJSON,
   prepareCooking: prepareCookingJSON,
   swipeLeft: swipeLeftJSON,

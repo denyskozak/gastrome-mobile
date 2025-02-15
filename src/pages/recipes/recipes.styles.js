@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
   list: {
     // gap: Spaces.xlarge,
     alignItems: 'center',
-    width: getDevice() === 'iPhone' ? '100%' : getPercentWidth(99),
+    width: '100%',
   },
   separator: {
     height: Spaces.xlarge

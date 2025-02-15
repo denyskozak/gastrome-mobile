@@ -1,3 +1,5 @@
+import {Colors} from "../../styles/colors";
+
 export const translates = {
     navigation: {
         home: 'Welcome',
@@ -190,6 +192,14 @@ export const translates = {
         }
     },
     components: {
+        onboard: {
+            "firstTitle": "Welcome!",
+            "firstSubtitle": "Discover a vast collection of video recipes, create shopping lists, and enjoy the convenience of a voice assistant.",
+            "secondTitle": "Shopping List",
+            "secondSubtitle": "Easily turn your favorite recipes into a shopping list and share it with just one click!",
+            "thirdTitle": "Voice Assistant",
+            "thirdSubtitle": "Control video steps hands-free with the help of our voice assistant."
+        },
         filters: {
             'breakfast': 'Breakfast',
             'lunch': 'Lunch',

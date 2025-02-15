@@ -14,14 +14,14 @@ import {isFirstLaunch} from "./utilities/isFirstLaunch";
 import {IS_FIRST_LAUNCH_EVER_STORE_KEY} from "./constants/asyncStoreKeys";
 import {Navigation} from "./navigation/navigation.js";
 import {Colors} from "./styles/colors";
-// import {OnBoard, useIsOnBoarding} from "./components/molecular/on-boarding/on-boarding.component";
+import {OnBoard, useIsOnBoarding} from "./components/molecular/on-boarding/on-boarding.component";
 
 SplashScreen.preventAutoHideAsync().then().catch(() => console.log('error-splash-prevent-auto-hide'));
 
 export const App = () => {
   const [fontsLoaded] = useFonts(fonts);
   // const [appIsReady, setAppIsReady] = useState(false);
-  // const [isOnBoarding, setIsOnBoarding] = useIsOnBoarding();
+  const [isOnBoarding, setIsOnBoarding] = useIsOnBoarding();
   const [isVisibleCustomSplashScreen, setVisibleCustomSplashScreen] = useState(true);
   const [isFirstRunEver, setIsFirstRunEver] = useState(false);
 
@@ -50,8 +50,8 @@ export const App = () => {
     <View style={{ flex: 1, backgroundColor: Colors.backgroundColorLowOpacity }}>
         {!fontsLoaded || isVisibleCustomSplashScreen ? <CustomSplashScreen /> : null}
         {/*TODO Remove onboarding */}
-        {/*{fontsLoaded && !isVisibleCustomSplashScreen && isOnBoarding ? <OnBoard onEnd={() => setIsOnBoarding(false)}/> : null}*/}
-        {fontsLoaded && !isVisibleCustomSplashScreen
+        {fontsLoaded && !isVisibleCustomSplashScreen && isOnBoarding ? <AppContextWrapper><OnBoard onEnd={() => setIsOnBoarding(false)}/></AppContextWrapper> : null}
+        {fontsLoaded && !isVisibleCustomSplashScreen && !isOnBoarding
             ? (<AppContextWrapper><Layout><Navigation isFirstRunEver={isFirstRunEver} /></Layout></AppContextWrapper>)
             : null}
     </View>

@@ -285,14 +285,7 @@ const RecipesPageComponent = (props) => {
             {/*Items list*/}
             <FlashList
                 // initialNumToRender={getDevice() === 'iPad' ? 4 : 2}
-                showsVerticalScrollIndicator={true}
-                indicatorStyle="black"
-                scrollIndicatorInsets={{
-                    top: 20,
-                    left: 20,
-                    bottom: 0,
-                    right: 0,
-                }}
+                showsVerticalScrollIndicator={false}
                 showsHorizontalScrollIndicator={false}
                 ref={flatListRef}
                 contentContainerStyle={styles.list}

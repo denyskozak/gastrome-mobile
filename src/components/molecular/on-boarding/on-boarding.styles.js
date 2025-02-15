@@ -25,9 +25,10 @@ const styles = StyleSheet.create({
   },
   title: getTextStyles({
     transform: [{translateY: -Spaces.xlarge}],
+    fontSize: 24
   }),
   subTitle: getTextStyles({
-    fontSize: 14,
+    fontSize: 20,
     transform: [{translateY: -Spaces.xlarge}],
     width: getPercentWidth(80)
   }),
