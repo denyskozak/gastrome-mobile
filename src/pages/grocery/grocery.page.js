@@ -17,11 +17,9 @@ import { getIngredientsMock } from '../../mock/ingredients';
 import { Spaces } from '../../styles/spaces';
 import { PermissionModal } from '../../components/templates/permission-modal/permission-modal.component';
 import { useSearchByIngredients } from '../../contexts/searchByIngredients.context';
-import { ON_BOARD_GROCERY_PAGE_KEY } from '../../constants/asyncStoreKeys';
 import { sortIngredients } from './grocery.utilities';
 import { Animated } from '../../components/atomic/animated/animated.component';
 import { IntroVideoModal } from '../../components/organismic/intro-video-modal/intro-video-modal';
-import { useIsFirstLaunchByKey } from '../../hooks/useIsFirstLaunchByKey';
 
 import styles from './grocery.styles';
 import { HelpButton } from '../../components/molecular/help-button/help-button';
@@ -43,7 +41,8 @@ const GroceryPageComponent = (props) => {
   const [isListening, setListening] = useState(false);
   const [addedIngredients, setAddedIngredients] = useState([]);
   const [permissionModalVisible, setPermissionModalVisible] = useState(false);
-  const [isOnBoardModalVisible, setIsOnBoardModalVisible] = useIsFirstLaunchByKey(ON_BOARD_GROCERY_PAGE_KEY);
+  const [isHelpModalOpen, setHelpModalOpen] = useState(false);
+
   const [voiceTooltipText, setVoiceTooltipText] = useState('');
   const voiceAnimationRef = useRef(null);
   const flatGridRef = useRef(null);
@@ -294,11 +293,11 @@ const GroceryPageComponent = (props) => {
           }}
       />
       {/* OnBoarding modal */}
-      <IntroVideoModal isOpen={isOnBoardModalVisible} onChangeVisible={setIsOnBoardModalVisible} title={t('howItWorks')}
+      <IntroVideoModal isOpen={isHelpModalOpen} onChangeVisible={setHelpModalOpen} title={t('howItWorks')}
                        source={intoVideo}/>
       {/* Help button*/}
       <HelpButton onPress={() => {
-        setIsOnBoardModalVisible(true)
+        setHelpModalOpen(true)
       }}/>
 
       {/* Permission modal */}

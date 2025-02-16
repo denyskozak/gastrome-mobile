@@ -15,6 +15,7 @@ const ModalComponent = (props) => {
 
   return (
     <NativeModal
+
       isVisible={isVisible}
       backdropColor={Colors.backdropColor}
       backdropOpacity={0.8}

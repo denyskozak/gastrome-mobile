@@ -20,9 +20,7 @@ import {
   addSpaceWithCondition,
 } from '../../utilities/renders';
 import { ConfirmModal } from '../../components/molecular/confirm-modal/confirm-modal.component';
-import { ON_BOARD_CART_STORE_KEY } from '../../constants/asyncStoreKeys';
 import { IntroVideoModal } from '../../components/organismic/intro-video-modal/intro-video-modal';
-import { useIsFirstLaunchByKey } from '../../hooks/useIsFirstLaunchByKey';
 
 import styles from './cart.styles';
 import { HelpButton } from '../../components/molecular/help-button/help-button';
@@ -47,7 +45,8 @@ const CartPageComponent = (props) => {
   const [addIngredientValue, setAddIngredientValue] = useState('');
   const [hasIngredientAdded, setHasIngredientAdded] = useState(false);
   const [isRefreshConfirmModalOpen, setRefreshConfirmModalOpen] = useState(false);
-  const [isOnBoardModalVisible, setIsOnBoardModalVisible] = useIsFirstLaunchByKey(ON_BOARD_CART_STORE_KEY);
+  const [isHelpModalOpen, setHelpModalOpen] = useState(false);
+
   const [settings] = useSettings();
   const { measure } = settings;
 
@@ -254,8 +253,8 @@ const CartPageComponent = (props) => {
     }
 
     {/*Intro video modal*/}
-    <IntroVideoModal isOpen={isOnBoardModalVisible} onChangeVisible={setIsOnBoardModalVisible} title={t('howItWorks')} source={intoVideo} />
-    <HelpButton onPress={() => { setIsOnBoardModalVisible(true) }} />
+    <IntroVideoModal isOpen={isHelpModalOpen} onChangeVisible={setHelpModalOpen} title={t('howItWorks')} source={intoVideo} />
+    <HelpButton onPress={() => { setHelpModalOpen(true) }} />
 
     {/*Done modal*/}
     <ConfirmModal
