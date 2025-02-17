@@ -2411,14 +2411,14 @@ export const recipes = [
                 "title": "Parmesan",
                 "description": null,
                 "quantity": 1,
-                "unit": "handful"
+                "unit": "pinch"
             },
             {
                 "id": 8,
                 "title": "Mozzarella",
                 "description": null,
                 "quantity": 1,
-                "unit": "handful"
+                "unit": "pinch"
             },
             {
                 "id": 9,

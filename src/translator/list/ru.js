@@ -35,7 +35,7 @@ export const translates = {
         "tsp": "ч. ложки",
         "slices": "кусочков",
         "package": "пакетов",
-        "cloves": "гродь",
+        "cloves": "гроздь",
         "pinch": "щипотка",
         "sheet": "листы",
     },
