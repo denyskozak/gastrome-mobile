@@ -136,7 +136,7 @@ export const recipes = [
             { "id": 4, "title": "Coconut sugar", "quantity": 3, "unit": "tbsp" },
             { "id": 5, "title": "Flour", "quantity": 150, "unit": "g" },
             { "id": 6, "title": "Cinnamon", "quantity": 1, "unit": "tsp" },
-            { "id": 7, "title": "Lemon zest", "quantity": 1, "unit": "from 1 lemon" },
+            { "id": 7, "title": "Lemon zest", "quantity": 1, "unit": "pcs" },
             { "id": 8, "title": "Nuts", "quantity": "as desired", "unit": "g" },
             { "id": 9, "title": "Soft cottage cheese", "quantity": 300, "unit": "g" },
             { "id": 10, "title": "Cream cheese", "quantity": 200, "unit": "g" },
@@ -1776,14 +1776,14 @@ export const recipes = [
                 "title": "Pumpkin puree",
                 "description": "or fresh pumpkin",
                 "quantity": 1,
-                "unit": "cup"
+                "unit": "cups"
             },
             {
                 "id": 3,
                 "title": "Arborio rice",
                 "description": null,
                 "quantity": 1,
-                "unit": "cup"
+                "unit": "cups"
             },
             {
                 "id": 4,
@@ -1804,7 +1804,7 @@ export const recipes = [
                 "title": "White wine",
                 "description": "optional",
                 "quantity": "1/2",
-                "unit": "cup"
+                "unit": "cups"
             },
             {
                 "id": 7,
@@ -1825,7 +1825,7 @@ export const recipes = [
                 "title": "Parmesan",
                 "description": null,
                 "quantity": "1/2",
-                "unit": "cup"
+                "unit": "cups"
             },
             {
                 "id": 10,
@@ -2122,7 +2122,7 @@ export const recipes = [
     //       "title": "Parmesan cheese",
     //       "description": "Grated",
     //       "quantity": 0.5,
-    //       "unit": "cup"
+    //       "unit": "cups"
     //     },
     //     {
     //       "id": 3,
@@ -2369,14 +2369,14 @@ export const recipes = [
                 "title": "Orzo pasta",
                 "description": null,
                 "quantity": 1,
-                "unit": "cup"
+                "unit": "cups"
             },
             {
                 "id": 2,
                 "title": "Cherry tomatoes",
                 "description": null,
                 "quantity": 1,
-                "unit": "cup"
+                "unit": "cups"
             },
             {
                 "id": 3,
@@ -2390,14 +2390,14 @@ export const recipes = [
                 "title": "15% cream",
                 "description": null,
                 "quantity": 0.5,
-                "unit": "cup"
+                "unit": "cups"
             },
             {
                 "id": 5,
                 "title": "Water",
                 "description": "boiling water",
                 "quantity": 1,
-                "unit": "cup"
+                "unit": "cups"
             },
             {
                 "id": 6,
@@ -2594,7 +2594,7 @@ export const recipes = [
                 "title": "Fresh herbs",
                 "description": "1/3 cup basil leaves, 1/3 cup parsley",
                 "quantity": 1,
-                "unit": "cup"
+                "unit": "cups"
             },
             {
                 "id": 8,
@@ -2814,7 +2814,7 @@ export const recipes = [
                 "title": "Extra virgin olive oil",
                 "description": "",
                 "quantity": 0.25,
-                "unit": "cup"
+                "unit": "cups"
             },
             {
                 "id": 4,
@@ -3042,14 +3042,14 @@ export const recipes = [
                 "title": "Heavy whipping cream",
                 "description": "chilled",
                 "quantity": 1,
-                "unit": "cup"
+                "unit": "cups"
             },
             {
                 "id": 2,
                 "title": "Whole milk",
                 "description": "",
                 "quantity": 1,
-                "unit": "cup"
+                "unit": "cups"
             },
             {
                 "id": 3,
@@ -3063,7 +3063,7 @@ export const recipes = [
                 "title": "Espresso",
                 "description": "",
                 "quantity": 2,
-                "unit": "shots"
+                "unit": "cups"
             }
         ]
     },
@@ -3148,7 +3148,7 @@ export const recipes = [
                 "title": "Espresso shots",
                 "description": "",
                 "quantity": 4,
-                "unit": "shots"
+                "unit": "cups"
             },
             {
                 "id": 6,

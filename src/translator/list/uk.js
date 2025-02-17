@@ -28,12 +28,16 @@ export const translates = {
         "g": "гр",
         "oz": "ун",
         "packs": "упаковки",
-        "pcs": "шт.",
+        "pcs": "шт",
         "ml": "мл",
-        "tsp": "чай. ложка",
-        "tbsp": "ст. ложка",
+        "tsp": "ч. ложка",
+        "cups": "чашки",
+        "tbsp": "ст. ложки",
         "slices": "шматочків",
-        "cloves": "зубчик"
+        "package": "пакетів",
+        "cloves": "зубчик",
+        "pinch": "щіпка",
+        "sheet": "листи",
     },
     pages: {
         "authors": {

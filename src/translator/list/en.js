@@ -34,7 +34,12 @@ export const translates = {
         "ml": "ml",
         "tbsp": "tbsp",
         "tsp": "tsp",
+        "cups": "cups",
+        "cloves": "cloves",
         "slices": "slices",
+        "package": "packages",
+        "pinch": "pinches",
+        "sheet": "sheets",
     },
     pages: {
         authors: {
