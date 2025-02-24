@@ -32,13 +32,17 @@ const filters = [
         'dinner': '🥘',
     },
     {
+        'easy': '',
+        'medium': '',
+    },
+    {
         'italy': '🇮🇹',
         'ukraine': '🇺🇦',
     },
     {
         // 'Christmas': '🎄',
         'pasta': '🍝',
-        'dessert': '🍨',
+        'vegan': '🌿',
         'snack': '🥨',
         'coffee': '☕',
         'salad': '🥗',
@@ -235,7 +239,7 @@ const RecipesPageComponent = (props) => {
     const actions = [
         [t('filters'), 'filter-outline', () => setFilterOpened(true)],
         [t('ingredients'), 'nutrition-outline', () => navigation.navigate(recipesGroceryRoute)],
-        [t('favorites'), 'bookmark-outline', () => setFilter('Favorites')]
+        [t('favorites'), 'bookmark-outline', () => setFilter('favorites')]
     ];
 
     return (
@@ -291,7 +295,7 @@ const RecipesPageComponent = (props) => {
                 contentContainerStyle={styles.list}
                 data={data}
                 gap={10}
-                estimatedItemSize={data.length}
+                estimatedItemSize={data.length > 0 ? data.length : 1}
                 getItemCount={items => items.length}
                 getItem={(items, index) => data[index]}
                 numColumns={getDevice() === 'iPad' ? 1 : 1}

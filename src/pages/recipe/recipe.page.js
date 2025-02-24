@@ -237,7 +237,7 @@ const RecipePageComponent = (props) => {
 
                     {description && <Text style={styles.description}>{description}</Text>}
                     {tip && <Text style={styles.tip}>{tip}</Text>}
-                    {/*Servning manager*/}
+                    {/*Servings manager*/}
                     {servingsCount && (
                         <View>
                             <Text style={styles.servings}>
@@ -248,8 +248,8 @@ const RecipePageComponent = (props) => {
                                     type="outlined"
                                     size="m"
                                     onPress={() => {
-                                        if (servingsCount > servings) {
-                                            setServingsCount(servingsCount / 2);
+                                        if (servingsCount !== 1) {
+                                            setServingsCount(servingsCount - 1);
                                             Haptics.selectionAsync();
                                         }
                                     }}
@@ -261,7 +261,7 @@ const RecipePageComponent = (props) => {
                                     type="outlined"
                                     onPress={() => {
                                         if (servingsCount < 50) {
-                                            setServingsCount(servingsCount * 2);
+                                            setServingsCount(servingsCount + 1);
                                             Haptics.selectionAsync();
                                         }
                                     }}

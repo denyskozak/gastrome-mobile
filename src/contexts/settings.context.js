@@ -15,7 +15,7 @@ const defaultValue = {
 
 export const SettingsContext = createContext({...defaultValue});
 
-const SETTINGS_ASYNC_STORE_KEY = 'SETTINGS_ASYNC_STORE_KEY313';
+const SETTINGS_ASYNC_STORE_KEY = 'SETTINGS_ASYNC_STORE_KEY_111';
 
 // Hook
 export const useSettings = () => {
@@ -60,7 +60,7 @@ const SettingsComponent = (props) => {
       (async () => {
         const items = await AsyncStorage.getItem(SETTINGS_ASYNC_STORE_KEY);
         if (items) {
-          // setSettings(JSON.parse(items));
+          setSettings(JSON.parse(items));
         }
       })()
     } catch (e) {

@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.backgroundColorLowOpacity,
         padding: Spaces.small,
         position: 'absolute',
-        bottom: Spaces.xxxlarge + Spaces.xxxlarge,
+        bottom: Spaces.xxxlarge + Spaces.xxxlarge + Spaces.large,
     },
     author: getTextStyles({
         fontSize: 12,
