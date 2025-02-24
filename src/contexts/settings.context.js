@@ -1,7 +1,8 @@
-import React, { useState, useContext, createContext, useCallback, useEffect } from 'react';
+import React, {useState, useContext, createContext, useCallback, useLayoutEffect} from 'react';
 import PropsType from 'prop-types';
 import AsyncStorage from '@react-native-community/async-storage';
 import {defaultLanguage} from "../translator/translates";
+import {SETTINGS_ASYNC_STORE_KEY} from "../constants/asyncStoreKeys";
 
 const defaultValue = {
   measure: 'g',
@@ -13,9 +14,10 @@ const defaultValue = {
   errors: []
 };
 
-export const SettingsContext = createContext({...defaultValue});
+// const storedConfig = await AsyncStorage.getItem(SETTINGS_ASYNC_STORE_KEY);
+// const defaultConfig = storedConfig ? JSON.parse(storedConfig) : {...defaultValue};
 
-const SETTINGS_ASYNC_STORE_KEY = 'SETTINGS_ASYNC_STORE_KEY_111';
+export const SettingsContext = createContext({...defaultValue});
 
 // Hook
 export const useSettings = () => {
@@ -34,14 +36,14 @@ export const useSettings = () => {
    */
   const setSetting = useCallback((key, value) => {
     const newSettings = {...settings, [key]: value};
-    setSettings(newSettings);
     AsyncStorage.setItem(SETTINGS_ASYNC_STORE_KEY, JSON.stringify(newSettings));
+    setSettings(newSettings);
   }, [settings, setSettings])
 
   const changeSettings = useCallback((nextSettings) => {
     const newSettings = {...settings, ...nextSettings};
-    setSettings(newSettings);
     AsyncStorage.setItem(SETTINGS_ASYNC_STORE_KEY, JSON.stringify(newSettings));
+    setSettings(newSettings);
   }, [settings, setSettings])
 
   return [settings, setSetting, changeSettings];
@@ -51,22 +53,10 @@ export const useSettings = () => {
 const SettingsComponent = (props) => {
   const {
     children,
+    defaultSettings = defaultValue,
   } = props;
 
-  const [settings, setSettings] = useState({...defaultValue});
-
-  useEffect(() => {
-    try {
-      (async () => {
-        const items = await AsyncStorage.getItem(SETTINGS_ASYNC_STORE_KEY);
-        if (items) {
-          setSettings(JSON.parse(items));
-        }
-      })()
-    } catch (e) {
-      console.log('Settings restore failed');
-    }
-  }, []);
+  const [settings, setSettings] = useState(defaultSettings === null ? defaultValue : defaultSettings);
 
   const value = {
     settings,

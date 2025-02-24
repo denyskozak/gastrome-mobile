@@ -8,7 +8,7 @@ import {FavoritesContextWrapper} from './contexts/favorites.context';
 import {SubscriptionsContextWrapper} from './contexts/subscriptions.context';
 import {SettingsContextWrapper} from './contexts/settings.context';
 
-export const AppContextWrapper = ({children}) => {
+export const AppContextWrapper = ({children, defaultSettings = null}) => {
     return (
         <MenuDarkModeContextWrapper>
             <MenuCartContextWrapper>
@@ -16,7 +16,7 @@ export const AppContextWrapper = ({children}) => {
                     <SearchByIngredientsContextWrapper>
                         <FavoritesContextWrapper>
                             <SubscriptionsContextWrapper>
-                                <SettingsContextWrapper>
+                                <SettingsContextWrapper defaultSettings={defaultSettings}>
                                     {children}
                                 </SettingsContextWrapper>
                             </SubscriptionsContextWrapper>

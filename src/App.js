@@ -11,13 +11,13 @@ import { SplashScreen as CustomSplashScreen } from './components/molecular/splas
 import { delayForPromise } from './utilities/promiseDelay';
 import {Layout} from "./Layout.js";
 import {isFirstLaunch} from "./utilities/isFirstLaunch";
-import {IS_FIRST_LAUNCH_EVER_STORE_KEY} from "./constants/asyncStoreKeys";
+import {IS_FIRST_LAUNCH_EVER_STORE_KEY, SETTINGS_ASYNC_STORE_KEY} from "./constants/asyncStoreKeys";
 import {Navigation} from "./navigation/navigation.js";
 import {Colors} from "./styles/colors";
 import {OnBoard, useIsOnBoarding} from "./components/molecular/on-boarding/on-boarding.component";
 
 SplashScreen.preventAutoHideAsync().then().catch(() => console.log('error-splash-prevent-auto-hide'));
-
+let defaultSettings = null;
 export const App = () => {
   const [fontsLoaded] = useFonts(fonts);
   // const [appIsReady, setAppIsReady] = useState(false);
@@ -34,6 +34,13 @@ export const App = () => {
             setIsFirstRunEver(true);
             await AsyncStorage.setItem(IS_FIRST_LAUNCH_EVER_STORE_KEY, 'true');
           }
+
+          // set default settings
+          const storeConfigJSON = await AsyncStorage.getItem(SETTINGS_ASYNC_STORE_KEY);
+          if (storeConfigJSON) {
+            defaultSettings = JSON.parse(storeConfigJSON);
+          }
+
           await delayForPromise(500);
           SplashScreen.hideAsync().then().catch(() => console.log('error-splash-hide'));
           await delayForPromise(2000);
@@ -50,9 +57,9 @@ export const App = () => {
     <View style={{ flex: 1, backgroundColor: Colors.backgroundColorLowOpacity }}>
         {!fontsLoaded || isVisibleCustomSplashScreen ? <CustomSplashScreen /> : null}
         {/*TODO Remove onboarding */}
-        {fontsLoaded && !isVisibleCustomSplashScreen && isOnBoarding ? <AppContextWrapper><OnBoard onEnd={() => setIsOnBoarding(false)}/></AppContextWrapper> : null}
+        {fontsLoaded && !isVisibleCustomSplashScreen && isOnBoarding ? <AppContextWrapper defaultSettings={defaultSettings}><OnBoard onEnd={() => setIsOnBoarding(false)}/></AppContextWrapper> : null}
         {fontsLoaded && !isVisibleCustomSplashScreen && !isOnBoarding
-            ? (<AppContextWrapper><Layout><Navigation isFirstRunEver={isFirstRunEver} /></Layout></AppContextWrapper>)
+            ? (<AppContextWrapper defaultSettings={defaultSettings}><Layout><Navigation isFirstRunEver={isFirstRunEver} /></Layout></AppContextWrapper>)
             : null}
     </View>
   );
