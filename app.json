@@ -2,7 +2,7 @@
   "expo": {
     "name": "Gastro & Me",
     "slug": "gastro-and-me",
-    "version": "1.1.45",
+    "version": "1.1.46",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
@@ -46,6 +46,7 @@
       "supportsTablet": true,
       "googleServicesFile": "./GoogleService-Info.plist",
       "bundleIdentifier": "com.AzarovStudio.Gastro",
+      "appStoreUrl": "https://apps.apple.com/us/app/gastro-me-cook-video-recipes/id1660297807",
       "infoPlist": {
         "NSPhotoLibraryUsageDescription": "Allow $(PRODUCT_NAME) to securely user photos lib",
         "NSSpeechRecognitionUsageDescription": "Allow $(PRODUCT_NAME) to securely recognize user speech",
