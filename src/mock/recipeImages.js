@@ -39,4 +39,5 @@ export const recipeImageById = {
   56: require('./recipeImages/56.png'),
   57: require('./recipeImages/57.png'),
   58: require('./recipeImages/58.png'),
+  59: require('./recipeImages/59.png'),
 };

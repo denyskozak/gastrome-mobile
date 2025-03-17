@@ -13,7 +13,7 @@ import {Animated} from '../../atomic/animated/animated.component';
 import PropTypes from 'prop-types';
 
 const AttentionAnimationComponent = (props) => {
-    const {enabled, delay, duration, property = 'scale', start, end, children} = props;
+    const {enabled, delay, duration, style, property = 'scale', start, end, children} = props;
     const linear = useSharedValue(start);
 
     const animatedScaling = useAnimatedStyle(() => {
@@ -68,6 +68,7 @@ AttentionAnimationComponent.propTypes = {
     scale: PropTypes.number,
     duration: PropTypes.number,
     enabled: PropTypes.bool,
+    style: PropTypes.object,
     property: PropTypes.oneOf(['translateX', 'translateY', 'scale', 'opacity']),
 }
 
@@ -79,6 +80,7 @@ AttentionAnimationComponent.defaultProps = {
     duration: 1000,
     property: 'scale',
     enabled: true,
+    style: {},
 }
 
 export const AttentionAnimation = AttentionAnimationComponent;

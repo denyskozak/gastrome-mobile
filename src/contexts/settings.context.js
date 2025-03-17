@@ -10,6 +10,7 @@ const defaultValue = {
   isFirstRunEver: false,
   speechProfile: '',
   speechProfiles: [],
+  filterNames: [],
   isDevMode: false,
   errors: []
 };
@@ -35,6 +36,7 @@ export const useSettings = () => {
    * @param {string|number} value - Value of key setting
    */
   const setSetting = useCallback((key, value) => {
+    console.log('settings ', settings)
     const newSettings = {...settings, [key]: value};
     AsyncStorage.setItem(SETTINGS_ASYNC_STORE_KEY, JSON.stringify(newSettings));
     setSettings(newSettings);

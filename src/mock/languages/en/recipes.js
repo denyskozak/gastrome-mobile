@@ -2,6 +2,95 @@ import {getAuthor} from "../author";
 
 export const recipes = [
     {
+        "id": 59,
+        "title": "Red Cabbage Salad with Carrots, Apples, Walnuts",
+        "description": "Discover the perfect balance of freshness and crunch in this vibrant salad! The antioxidant-rich red cabbage combines with sweet carrots and juicy Red Delicious apples, creating an irresistible mix of colors and flavors. Walnuts add a delightful crunch, while the shavings of pecorino provide a savory touch. All of this is enveloped in a simple yet rich dressing made with extra virgin olive oil and apple cider vinegar, finished with a sprinkle of salt, pepper, and fresh thyme for a captivating aroma. Perfect as a side dish or a main course, this salad is a celebration of autumn freshness! 🍂✨",
+        "level": "easy",
+        "servings": 2,
+        "hasVideoSteps": true,
+        "free": true,
+        "prep_time": 10,
+        "cook_time": 15,
+        "time": 10,
+        "priority": 0,
+        "instagram": "mediterranean.diet.plan",
+        "proteins": 33,
+        "fats": 40,
+        "carbohydrates": 113,
+        "calories": 895,
+        "filters": [
+            "salad",
+            "healthy",
+            "vegan",
+            "breakfast",
+        ],
+        "steps": [
+            {
+                "description": "Chop the cabbage, peel the carrots, cut the apples"
+            },
+            {
+                "description": "Combine cabbage, carrots, apples, chickpeas, olive oil, salt, pepper, apple cider vinegar, cumin, stir"
+            },
+        ],
+        "ingredients": [
+            {
+                "id": 1,
+                "title": "Red cabbage",
+                "quantity": 300,
+                "unit": "g"
+            },
+            {
+                "id": 2,
+                "title": "Carrots",
+                "quantity": 2,
+                "unit": "pcs"
+            },
+            {
+                "id": 3,
+                "title": "Apples",
+                "quantity": 1,
+                "unit": "pcs"
+            },
+            {
+                "id": 4,
+                "title": "Chickpeas",
+                description: "Cooked",
+                "quantity": 200,
+                "unit": "g"
+            },
+            {
+                "id": 5,
+                "title": "Walnuts",
+                "quantity": 20,
+                "unit": "g"
+            },
+            {
+                "id": 6,
+                "title": "Olive oil",
+            },
+            {
+                "id": 7,
+                "title": "Apple Vinegar",
+            },
+            {
+                "id": 8,
+                "title": "Pecorino",
+            },
+            {
+                "id": 9,
+                "title": "Salt",
+            },
+            {
+                "id": 10,
+                "title": "Pepper",
+            },
+            {
+                "id": 11,
+                "title": "Fresh Thyme",
+            }
+        ]
+    },
+    {
         "id": 58,
         "title": "Pancakes with Cheese and Ham",
         "description": "Savory pancakes loaded with cheese, ham, and herbs. Perfect for a satisfying breakfast or brunch.",
@@ -20,6 +109,8 @@ export const recipes = [
         "calories": 450,
         "filters": [
             "Breakfast",
+            "snack",
+            "ukraine",
         ],
         "steps": [
             {
@@ -106,7 +197,9 @@ export const recipes = [
         "filters": [
             "Vegan",
             "Dessert",
-            "Baking"
+            "lunch",
+            "breakfast",
+            "healthy"
         ],
         "steps": [
 
@@ -174,8 +267,10 @@ export const recipes = [
         "carbohydrates": 10,
         "calories": 350,
         "filters": [
+            "lunch",
             "Dinner",
-            "Baking"
+            "breakfast",
+            "healthy"
         ],
         "steps": [
             {
@@ -218,7 +313,9 @@ export const recipes = [
         "calories": 280,
         "filters": [
             "Dessert",
-            "Quick Meal"
+            "ukraine",
+            "snack",
+            "dessert",
         ],
         "steps": [
             {
@@ -263,8 +360,11 @@ export const recipes = [
         "carbohydrates": 35,
         "calories": 320,
         "filters": [
-            "Dessert",
-            "Baking"
+            "vegan",
+            "snack",
+            "dessert",
+            "breakfast",
+            "italy"
         ],
         "steps": [
             {
@@ -366,8 +466,9 @@ export const recipes = [
         "carbohydrates": 25,
         "calories": 320,
         "filters": [
+            "breakfast",
             "Snack",
-            "Baking"
+            "dessert"
         ],
         "steps": [
             {
@@ -406,8 +507,11 @@ export const recipes = [
         "carbohydrates": 5,
         "calories": 300,
         "filters": [
-            "Appetizer",
-            "No-Cook"
+            "italy",
+            "breakfast",
+            "snack",
+            "healthy",
+            "lunch"
         ],
         "steps": [
             {
@@ -444,8 +548,7 @@ export const recipes = [
         "carbohydrates": 20,
         "calories": 200,
         "filters": [
-            "Dessert",
-            "No-Bake"
+            "drink",
         ],
         "steps": [
             {
@@ -483,8 +586,10 @@ export const recipes = [
         "carbohydrates": 5,
         "calories": 400,
         "filters": [
-            "Dinner",
-            "Baking"
+            "snack",
+            "ukraine",
+            "dinner",
+            "lunch"
         ],
         "steps": [
             {
@@ -524,6 +629,8 @@ export const recipes = [
         "carbohydrates": 35,
         "calories": 450,
         "filters": [
+            "lunch",
+            "ukraine",
             "Dinner",
             "Baking"
         ],
@@ -574,7 +681,10 @@ export const recipes = [
         "carbohydrates": 62,
         "calories": 360,
         "filters": [
-            "Dinner",
+            "pasta",
+            "lunch",
+            "dinner",
+            "italy",
         ],
         "steps": [
             {
@@ -647,7 +757,9 @@ export const recipes = [
         "priority": 0,
         "author": getAuthor(2),
         "filters": [
-            "Breakfast",
+            "breakfast",
+            "vegan",
+            "ukraine",
         ],
         "proteins": 14,
         "fats": 12,
@@ -724,7 +836,8 @@ export const recipes = [
         "carbohydrates": 8,
         "calories": 310,
         "filters": [
-            "Breakfast",
+            "healthy",
+            "breakfast",
         ],
         "steps": [
             {
@@ -809,9 +922,11 @@ export const recipes = [
         "carbohydrates": 60,
         "calories": 780,
         "filters": [
+            "healthy",
             "Ukraine",
             "Breakfast",
             "Dessert",
+            "snack",
         ],
         "steps": [
             {
@@ -952,6 +1067,7 @@ export const recipes = [
         "priority": 3,
         "filters": [
             "Breakfast",
+            "healthy",
             "Dessert"
         ],
         "steps": [
@@ -1041,8 +1157,9 @@ export const recipes = [
         "calories": 320,
         "priority": 3,
         "filters": [
+            "healthy",
             "Snack",
-            "Vegetarian"
+            "vegan"
         ],
         "steps": [
             {
@@ -1137,8 +1254,8 @@ export const recipes = [
         "instagram": "enjoy__taste",
         "priority": 2,
         "filters": [
-            "Japanese",
-            "Breakfast"
+            "dessert",
+            "breakfast"
         ],
         "steps": [
             {
@@ -1231,9 +1348,8 @@ export const recipes = [
         "carbohydrates": 10,
         "calories": 390,
         "filters": [
-            "Lunch",
-            "Dinner",
-            "Fish"
+            "lunch",
+            "Dinner"
         ],
         "steps": [
             {
@@ -1323,6 +1439,8 @@ export const recipes = [
         "filters": [
             "Lunch",
             "Dinner",
+            "vegan",
+            "snack",
         ],
         "steps": [
             {
@@ -1390,7 +1508,8 @@ export const recipes = [
         "instagram": "pardaev__",
         "priority": 3,
         "filters": [
-            'Salad'
+            'Salad',
+            'lunch',
         ],
         "steps": [
             {
@@ -1512,7 +1631,8 @@ export const recipes = [
         "priority": 3,
         "time": 30,
         "filters": [
-            "Dessert"
+            "dessert",
+            "vegan",
         ],
         "instagram": "noa.tasty",
         "steps": [
@@ -1584,8 +1704,7 @@ export const recipes = [
         "calories": 520,
         "filters": [
             "Ukraine",
-            "Pork",
-            "Christmas",
+            "lunch",
             "Dinner"
         ],
         "ingredients": [
@@ -1692,7 +1811,7 @@ export const recipes = [
         "cook_time": 60,
         "filters": [
             'Dinner',
-            'Christmas',
+            'lunch',
         ],
         "time": 60,
         "priority": 3,
@@ -1738,6 +1857,9 @@ export const recipes = [
         "time": 20,
         "filters": [
             'Breakfast',
+            'lunch',
+            'vegan',
+            'snack',
             'Dessert'
         ],
         "priority": 3,
@@ -1805,7 +1927,10 @@ export const recipes = [
         "carbohydrates": 20,
         "calories": 480,
         "filters": [
-            'Dinner'
+            'Dinner',
+            'lunch',
+            'healthy',
+            'vegan',
         ],
         "time": 30,
         "priority": 2,
@@ -2015,8 +2140,8 @@ export const recipes = [
         "hasVideoSteps": true,
         "free": true,
         "filters": [
-            "Vegetarian",
-            "Snack",
+            "vegan",
+            "snack",
         ],
         "steps": [
             {
@@ -2373,6 +2498,7 @@ export const recipes = [
         "filters": [
             "Turkey",
             "Breakfast",
+            "lunch",
             "Spicy"
         ],
         "steps": [
@@ -2499,6 +2625,7 @@ export const recipes = [
         "filters": [
             'Lunch',
             'Dinner',
+            'italy',
             'Pasta',
         ],
         "steps": [
@@ -2603,9 +2730,7 @@ export const recipes = [
         "filters": [
             'Italy',
             'Vegan',
-            'Gluten-free',
             'Salad',
-            'Appetizers'
         ],
         "steps": [
             {
@@ -2683,7 +2808,8 @@ export const recipes = [
         "time": 15,
         "filters": [
             'Italy',
-            'Appetizers',
+            'snack',
+            'vegan',
         ],
         "steps": [
             {
@@ -2921,7 +3047,9 @@ export const recipes = [
         "filters": [
             'Italy',
             'Pasta',
-            'Vegetarian',
+            'vegan',
+            'lunch',
+            'dinner',
         ],
         "steps": [
             {
@@ -3085,8 +3213,8 @@ export const recipes = [
         "time": 120,
         "filters": [
             'Italy',
-            'Soup',
-            'Broth'
+            'lunch',
+            'healthy'
         ],
         "steps": [
             {
@@ -3173,7 +3301,8 @@ export const recipes = [
         "filters": [
             'Breakfast',
             'Italy',
-            'Coffee'
+            'breakfast',
+            'drink'
         ],
         "steps": [
             {
@@ -3239,7 +3368,6 @@ export const recipes = [
         "filters": [
             'Dessert',
             'Italy',
-            'Vegetarian',
         ],
         "steps": [
             {
@@ -3344,9 +3472,8 @@ export const recipes = [
         "time": 10,
         "filters": [
             'Italy',
-            'Hot drink',
             'Dessert',
-            'Coffee'
+            'drink'
         ],
         "steps": [
             {
@@ -3432,8 +3559,6 @@ export const recipes = [
         "time": 30,
         "filters": [
             "Dessert",
-            "Cold",
-            "Creamy",
             "Lemon"
         ],
         "steps": [

@@ -7,9 +7,12 @@ import {Button} from '../../../components/atomic/button/button.component';
 import {Animated} from '../../../components/atomic/animated/animated.component';
 import styles from './voiceSettings.styles';
 import {useSettings} from "../../../contexts/settings.context.js";
+import {useActivateSoundIOS} from "../../../hooks/useActiveSoundIOS";
 
 const VoicePageComponent = (props) => {
     const {navigation} = props;
+
+    useActivateSoundIOS();
 
     const [
         t, , language
@@ -22,13 +25,7 @@ const VoicePageComponent = (props) => {
             .then(() => {
                 setSetting('speechProfile', identifier);
                 Speech.speak(t('chooseNewVoice'), {
-                    onError: (error) => {
-                        if (error) {
-                            Speech.stop().then(() => {
-                            }).catch(() => {
-                            });
-                        }
-                    },
+                    onDone: () => {},
                     language,
                     rate: 0.8,
                     voice: identifier

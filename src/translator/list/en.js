@@ -66,9 +66,10 @@ export const translates = {
         },
         welcome: {
             tryIt: 'Explore!',
-            title: 'Begin your improvement cooking journey right from home.',
-            subTitle: 'Try AI-powered voice cooking assistant on recipe page',
+            title: 'New taste, experience, recipes',
+            subTitle: 'Try Voice Cooking Assistant on recipe page',
             generator: 'Swipe and get random Recipe',
+            all: 'All',
         },
         grocery: {
             startVoice: 'Use voice for detection',
@@ -141,7 +142,7 @@ export const translates = {
             ingredients: 'Ingredients',
             sort: 'Sorts',
             favorites: 'Saved',
-            filtersTitle: 'You can select categories for filtering recipes: ',
+            filtersTitle: 'Select up to 3 categories for filtering recipes: ',
             onBoardingFilter: 'You could find filters here',
             close: 'Close',
             apply: 'Apply',
@@ -222,6 +223,8 @@ export const translates = {
             'easy': 'Easy',
             'medium': 'Medium',
             'vegan': 'Vegan',
+            'healthy': 'Healthy',
+            'drink': 'Drink',
         },
         autocomplete: {
             applyText: 'Apply',

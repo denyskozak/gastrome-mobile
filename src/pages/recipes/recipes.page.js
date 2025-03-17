@@ -3,6 +3,7 @@ import {Text, View, Pressable, SafeAreaView} from 'react-native';
 import SwipeablePanel from 'react-native-sheets-bottom';
 import Icon from '@expo/vector-icons/Ionicons';
 import { FlashList } from "@shopify/flash-list";
+import * as Haptics from "expo-haptics";
 
 import {RecipeItem} from './components/recipes.item.component';
 import {useTranslator} from '../../hooks/useTranslator';
@@ -12,8 +13,6 @@ import {sortRecipes} from './recipes.sortings';
 import {filterRecipes} from './recipes.filters';
 import {useSearchByIngredients} from '../../contexts/searchByIngredients.context';
 import {filterRecipesByIngredientsList} from './recipes.utilities';
-import {CountryList} from '../../components/atomic/country-flag/country-flag.list';
-import {CountryFlag} from '../../components/atomic/country-flag/country-flag.component';
 import {recipeRoute, recipesGroceryRoute} from './navigation/recipes.routes';
 import {useFavorites} from '../../contexts/favorites.context';
 import {getDevice} from '../../utilities/getCurrentDevice';
@@ -23,43 +22,25 @@ import styles from './recipes.styles';
 import {useRecipes} from "../../hooks/useRecipes";
 import {useSubscriptions} from "../../contexts/subscriptions.context";
 import {SubscriptionButton} from "../../components/templates/subscription-button/subscription-button";
-import * as Haptics from "expo-haptics";
+import {filterIcons} from "../../constants/filters";
+import {renderFilterIcon} from "../../utilities/renders";
+import {useSettings} from "../../contexts/settings.context";
 
-const filters = [
-    {
-        'breakfast': '🍳',
-        'lunch': '🍽️',
-        'dinner': '🥘',
-    },
-    {
-        'easy': '',
-        'medium': '',
-    },
-    {
-        'italy': '🇮🇹',
-        'ukraine': '🇺🇦',
-    },
-    {
-        // 'Christmas': '🎄',
-        'pasta': '🍝',
-        'vegan': '🌿',
-        'snack': '🥨',
-        'coffee': '☕',
-        'salad': '🥗',
-    }
-];
 
-const filtersFlatObject = filters.reduce((store, item) => ({...store, ...item}));
 let isFirstRun = true;
 const RecipesPageComponent = (props) => {
     const {
         navigation,
     } = props;
 
+    console.log('props ', props)
     const [t, , currentLanguage] = useTranslator('pages.recipes');
     const [tFilter] = useTranslator('components.filters');
     const [favorites] = useFavorites();
     const [isSubscriber] = useSubscriptions();
+    const [{filterNames}, setSetting] = useSettings();
+    const setFilterNames = name => setSetting('filterNames', name);
+    console.log('filterNames ', filterNames);
 
     const [recipes] = useRecipes(true);
 
@@ -79,7 +60,6 @@ const RecipesPageComponent = (props) => {
     const [listData, setListData] = useState(defaultDataList);
     const [searchedItems, setSearchedItems] = useState([]);
     const [searchText, setSearchText] = useState('');
-    const [filterNames, setFilterNames] = useState([]);
     const [listSearchByIngredients, setSearchByIngredients] = useSearchByIngredients();
     const [filteredByChosenIngredientsListData, setFilteredByChosenIngredientsListData] = useState([]);
     const [isFilterOpened, setFilterOpened] = useState(false);
@@ -163,9 +143,6 @@ const RecipesPageComponent = (props) => {
         flatListRef.current.scrollToOffset({animated: true, offset: 0});
     }, [filterNames]);
 
-    const renderFilterIcon = value => CountryList.includes(value)
-        ? <> <CountryFlag name={value} size={14}/></>
-        : <> {filtersFlatObject[value]}</>;
 
     const renderFilters = (item) => (
         <Button
@@ -223,11 +200,16 @@ const RecipesPageComponent = (props) => {
     );
 
     const setFilter = (name) => {
+        // remove if exist in list
         if (filterNames.includes(name)) {
             setFilterNames(filterNames.filter(item => item !== name));
             return;
         }
-        setFilterNames([...filterNames, name]);
+
+        // add
+        if (filterNames.length < 3) {
+            setFilterNames([...filterNames, name]);
+        }
     };
 
     // Priority: searchedItems -> listData
@@ -242,6 +224,23 @@ const RecipesPageComponent = (props) => {
         [t('favorites'), 'bookmark-outline', () => setFilter('favorites')]
     ];
 
+    const renderActions = () => (
+        actions.map(([text, iconName, onPress]) => (
+            <Fragment key={text}>
+                <Pressable onPress={onPress}>
+                    <Text style={styles.actionText}>{text}</Text>
+                </Pressable>
+                <Button
+                    style={styles.actionButton}
+                    type="outlined"
+                    onPress={onPress}
+                    size="s"
+                >
+                    <Icon name={iconName} size={24} color={Colors.black}/>
+                </Button>
+            </Fragment>
+        ))
+    )
     return (
         <SafeAreaView style={styles.container}>
             {/*Actions and search*/}
@@ -259,33 +258,18 @@ const RecipesPageComponent = (props) => {
                 {/*</View>*/}
                 <View style={styles.actionContainer}>
 
-                    {actions.map(([text, iconName, onPress]) => (
-                        <Fragment key={text}>
-                            <Pressable onPress={onPress}>
-                                <Text style={styles.actionText}>{text}</Text>
-                            </Pressable>
-                            <Button
-                                style={styles.actionButton}
-                                type="outlined"
-                                onPress={onPress}
-                                size="s"
-                            >
-                                <Icon name={iconName} size={24} color={Colors.black}/>
-                            </Button>
-                        </Fragment>
-                    ))}
-
+                    {filterNames.length > 0
+                        ? <View
+                            style={styles.filterButtons}
+                        >
+                            {filterNames.map(renderFilters)}
+                        </View>
+                        : renderActions()}
                 </View>
             </View>
 
             {/*Filters*/}
-            {filterNames.length > 0
-                ? <View
-                    style={styles.filterButtons}
-                >
-                    {filterNames.map(renderFilters)}
-                </View>
-                : null}
+
             {/*Items list*/}
             <FlashList
                 // initialNumToRender={getDevice() === 'iPad' ? 4 : 2}
@@ -356,7 +340,7 @@ const RecipesPageComponent = (props) => {
             >
                 <Text style={styles.filtersTitle}>{t('filtersTitle')}</Text>
                 <View style={styles.filtersContainer}>
-                    {filters.map(list => (
+                    {filterIcons.map(list => (
                         <View key={`filters-group-${Object.keys(list)}`} style={styles.filtersSection}>
                             {Object.keys(list).map(renderFilter)}
                         </View>

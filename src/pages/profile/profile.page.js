@@ -59,9 +59,9 @@ const SettingsPageComponent = (props) => {
 
 
                 {/*Lang switcher*/}
-                <View style={styles.languages}>
-                    {languagesList.map(renderLanguageButton)}
-                </View>
+                {/*<View style={styles.languages}>*/}
+                {/*    {languagesList.map(renderLanguageButton)}*/}
+                {/*</View>*/}
 
                 <View style={styles.settingButtons}>
                     <SubscriptionButton text={isSubscriber ? t('community') : t('join')}

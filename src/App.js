@@ -23,7 +23,6 @@ export const App = () => {
   // const [appIsReady, setAppIsReady] = useState(false);
   const [isOnBoarding, setIsOnBoarding] = useIsOnBoarding();
   const [isVisibleCustomSplashScreen, setVisibleCustomSplashScreen] = useState(true);
-  const [isFirstRunEver, setIsFirstRunEver] = useState(false);
 
   useEffect(() => {
     if (fontsLoaded) {
@@ -31,7 +30,6 @@ export const App = () => {
         (async () => {
           const isFirstLaunchEverFlag = await isFirstLaunch(IS_FIRST_LAUNCH_EVER_STORE_KEY);
           if (isFirstLaunchEverFlag) {
-            setIsFirstRunEver(true);
             await AsyncStorage.setItem(IS_FIRST_LAUNCH_EVER_STORE_KEY, 'true');
           }
 
@@ -59,7 +57,7 @@ export const App = () => {
         {/*TODO Remove onboarding */}
         {fontsLoaded && !isVisibleCustomSplashScreen && isOnBoarding ? <AppContextWrapper defaultSettings={defaultSettings}><OnBoard onEnd={() => setIsOnBoarding(false)}/></AppContextWrapper> : null}
         {fontsLoaded && !isVisibleCustomSplashScreen && !isOnBoarding
-            ? (<AppContextWrapper defaultSettings={defaultSettings}><Layout><Navigation isFirstRunEver={isFirstRunEver} /></Layout></AppContextWrapper>)
+            ? (<AppContextWrapper defaultSettings={defaultSettings}><Layout><Navigation /></Layout></AppContextWrapper>)
             : null}
     </View>
   );

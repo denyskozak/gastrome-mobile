@@ -11,8 +11,7 @@ import PropTypes from "prop-types";
 
 const Tab = createBottomTabNavigator();
 
-const NavigationTabsComponent = (props) => {
-  const { isFirstRunEver} = props;
+const NavigationTabsComponent = () => {
   const [isDarkModeMenu] = useMenuDarkMode();
   const [t] = useTranslator('navigation');
   const tabs = getNavigationTabs(t, isDarkModeMenu);
@@ -20,7 +19,7 @@ const NavigationTabsComponent = (props) => {
   return (
     <NavigationContainer theme={sceneContainerTheme}>
       <Tab.Navigator
-        initialRouteName={isFirstRunEver ? welcomePageRoute : recipesPageRoute}
+        initialRouteName={welcomePageRoute}
         screenOptions={getScreenOptions(isDarkModeMenu)}
       >
           {tabs.map(([id, component, options]) => (
@@ -36,8 +35,5 @@ const NavigationTabsComponent = (props) => {
   );
 };
 
-NavigationTabsComponent.propTypes = {
-    isFirstRunEver: PropTypes.bool.isRequired,
-}
 
 export const Navigation = NavigationTabsComponent;
