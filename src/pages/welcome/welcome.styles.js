@@ -51,10 +51,12 @@ const styles = StyleSheet.create({
         zIndex: 1
     },
     letGoButtonText: getTextStyles({
-        fontSize: 24,
-        color: Colors.second
+        fontSize: 20,
+        color: Colors.second,
+
     }),
     letGoButton: {
+
         borderColor: Colors.second,
     },
     scrollDown: {

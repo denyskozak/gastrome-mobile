@@ -29,6 +29,7 @@ import {useRecipes} from "../../hooks/useRecipes";
 import {AuthorPreview} from "../../components/molecular/author-preview/author-preview";
 import {ZoomInOut} from "../../components/molecular/zoom-in-out-animation/zoom-in-out-animation";
 import {logEvent} from "../../utilities/google-analitics";
+import {isAvailableAsync, requestReview} from "expo-store-review";
 
 const RecipePageComponent = (props) => {
     const {
@@ -121,6 +122,7 @@ const RecipePageComponent = (props) => {
             const ingredientsList = ingredients.map(item => renderIngredient(item, measure, tCommon)).join(', \n');
             await handleSocialShare(
                 `I like to share ${title} recipe, ingredients: \n\n${ingredientsList}`);
+            isAvailableAsync().then(() => requestReview());
         } catch (error) {
             alert(error.message);
         }

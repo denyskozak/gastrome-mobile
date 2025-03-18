@@ -99,6 +99,7 @@ const CartPageComponent = (props) => {
       await handleSocialShare(
         `I've prepared list of products for next shopping: \n\n${itemsList}.`,
       );
+      isAvailableAsync().then(() => requestReview())
     } catch (error) {
       alert(error.message);
     }
