@@ -1,9 +1,9 @@
 export const CountryFlagMap = {
-  'Italy': 'IT',
-  'Turkey': 'TR',
-  'Europe': 'EU',
-  'USA': 'US',
-  'Ukraine': 'UA',
-  'Czech': 'CS',
+  'italy': 'IT',
+  'turkey': 'TR',
+  'europe': 'EU',
+  'usa': 'US',
+  'ukraine': 'UA',
+  'czech': 'CS',
 };
 export const CountryList = Object.keys(CountryFlagMap);

@@ -364,7 +364,7 @@ export const recipes = [
             "snack",
             "dessert",
             "breakfast",
-            "italy"
+            "ukraine"
         ],
         "steps": [
             {
@@ -467,6 +467,7 @@ export const recipes = [
         "calories": 320,
         "filters": [
             "breakfast",
+            "roll",
             "Snack",
             "dessert"
         ],
@@ -507,7 +508,7 @@ export const recipes = [
         "carbohydrates": 5,
         "calories": 300,
         "filters": [
-            "italy",
+            "roll",
             "breakfast",
             "snack",
             "healthy",
@@ -587,7 +588,7 @@ export const recipes = [
         "calories": 400,
         "filters": [
             "snack",
-            "ukraine",
+            "roll",
             "dinner",
             "lunch"
         ],
@@ -923,7 +924,7 @@ export const recipes = [
         "calories": 780,
         "filters": [
             "healthy",
-            "Ukraine",
+            "ukraine",
             "Breakfast",
             "Dessert",
             "snack",
@@ -1440,6 +1441,7 @@ export const recipes = [
             "Lunch",
             "Dinner",
             "vegan",
+            "roll",
             "snack",
         ],
         "steps": [
@@ -1691,7 +1693,7 @@ export const recipes = [
         "servings": "4",
         "iconColor": 'white',
         "level": "easy",
-        "region": "Italy",
+        "region": "italy",
         "prep_time": 0,
         "cook_time": 15,
         "time": 15,
@@ -1703,7 +1705,7 @@ export const recipes = [
         "carbohydrates": 6,
         "calories": 520,
         "filters": [
-            "Ukraine",
+            "ukraine",
             "lunch",
             "Dinner"
         ],
@@ -2255,13 +2257,13 @@ export const recipes = [
         "free": true,
         "level": "medium",
         "priority": 0,
-        "region": "Italy",
+        "region": "italy",
         "servings": 4,
         "prep_time": 20,
         "cook_time": 10,
         "time": 30,
         "filters": [
-            "Italy",
+            "italy",
             'Lunch',
             'Dinner',
             'Pasta',
@@ -2713,8 +2715,8 @@ export const recipes = [
     {
         "id": 21,
         "title": "Insalata Caprese",
-        "region": "Italy, Campania",
-        "description": "A timeless classic, Caprese Salad is a quintessential summertime dish in Italy. Legend has it that this quintessential summer dish was born during the 1950s in the southern region of Campania on the Isle of Capri, hence the name caprese. Light to taste and easy to assemble, the key to making this salad is using the highest quality ingredients you can find, especially the tomatoes which should be at their peak of ripeness!",
+        "region": "italy, Campania",
+        "description": "A timeless classic, Caprese Salad is a quintessential summertime dish in italy. Legend has it that this quintessential summer dish was born during the 1950s in the southern region of Campania on the Isle of Capri, hence the name caprese. Light to taste and easy to assemble, the key to making this salad is using the highest quality ingredients you can find, especially the tomatoes which should be at their peak of ripeness!",
         "proteins": 18,
         "fats": 22,
         "carbohydrates": 10,
@@ -2728,7 +2730,7 @@ export const recipes = [
         "time": 15,
         "level": "easy",
         "filters": [
-            'Italy',
+            'italy',
             'Vegan',
             'Salad',
         ],
@@ -2800,14 +2802,14 @@ export const recipes = [
         "carbohydrates": 10,
         "calories": 250,
         "level": "easy",
-        "region": "Italy",
+        "region": "italy",
         "servings": 4,
         "cook_time": 0,
         "prep_time": 15,
         "priority": 2,
         "time": 15,
         "filters": [
-            'Italy',
+            'italy',
             'snack',
             'vegan',
         ],
@@ -2918,7 +2920,7 @@ export const recipes = [
         "carbohydrates": 75,
         "calories": 540,
         "level": "medium",
-        "region": "Italy",
+        "region": "italy",
         "servings": 2,
         "prep_time": null,
         "cook_time": 20,
@@ -2926,7 +2928,7 @@ export const recipes = [
         "hasVideoSteps": true,
         "priority": 2,
         "filters": [
-            "Italy",
+            "italy",
             'Lunch',
             'Dinner',
             'Pasta',
@@ -3039,13 +3041,13 @@ export const recipes = [
         "carbohydrates": 90,
         "calories": 520,
         "level": "easy",
-        "region": "Italy",
+        "region": "italy",
         "servings": 4,
         "cook_time": 25,
         "priority": 2,
         "time": 25,
         "filters": [
-            'Italy',
+            'italy',
             'Pasta',
             'vegan',
             'lunch',
@@ -3124,7 +3126,7 @@ export const recipes = [
     {
         "id": 5,
         "title": "Spaghetti Cacio e Pepe",
-        "region": "Italy, Lazio",
+        "region": "italy, Lazio",
         "tip": "Cacio e pepe means \"cheese and pepper\" in several central Italian dialects.",
         "description": "Rich cheese, bronze-extruded pasta, and freshly-ground pepper — the ultimate comfort food, spaghetti cacio e pepe is a simple Roman dish that depends on the quality of just a few ingredients",
         "proteins": 20,
@@ -3140,7 +3142,7 @@ export const recipes = [
         "hasVideoSteps": true,
         "free": true,
         "filters": [
-            'Italy',
+            'italy',
             'Lunch',
             'Dinner',
             'Pasta',
@@ -3200,7 +3202,7 @@ export const recipes = [
         "id": 11,
         "title": "Brodo di Parmigiano Reggiano (Parmesan Broth)",
         "description": "Make your Parmigiano Reggiano last longer with our simple parmesan broth. Use this rich recipe for stuffed pasta in brodo, or deepen your next soup with this base!",
-        "region": "Italy",
+        "region": "italy",
         "proteins": 20,
         "fats": 10,
         "carbohydrates": 15,
@@ -3212,7 +3214,7 @@ export const recipes = [
         "priority": 3,
         "time": 120,
         "filters": [
-            'Italy',
+            'italy',
             'lunch',
             'healthy'
         ],
@@ -3290,7 +3292,7 @@ export const recipes = [
         "carbohydrates": 20,
         "calories": 300,
         "level": "medium",
-        "region": "Italy",
+        "region": "italy",
         "hasVideoSteps": true,
         "free": true,
         "servings": 2,
@@ -3300,8 +3302,9 @@ export const recipes = [
         "tip": "The key to making a perfect bicerin is to form three distinct layers! In order to avoid 'breaking' the first layer of the hot chocolate, pour the espresso over the back of a spoon so that it gently cascades into the glass. Then, carefully top with the whipped cream. Do not stir!",
         "filters": [
             'Breakfast',
-            'Italy',
+            'italy',
             'breakfast',
+            'coffee',
             'drink'
         ],
         "steps": [
@@ -3356,10 +3359,10 @@ export const recipes = [
     {
         "id": 3,
         "title": "Tiramisù Recipe",
-        "description": "The perfect balance of coffee and sweetness, tiramisù appropriately translates to pick-me-up. The decadent Italian dessert is traditionally made with ladyfingers dipped in espresso, layered with a rich creamy mixture, and finished with a generous sprinkling of cocoa powder. Culinary legend has it that tiramisù was invented in Treviso, a small city in the romantic region of Veneto (supposedly to caffeinate the Venetian lovers!). Today, the classic dolce is made across Italy in a variety of ways; many of our colleagues claim that their family's is the best recipe. However, at Eataly, we know that at least one probably is right! Eataly USA Head Pastry Chef Katia Delogu created this classic recipe, which is simple to make and hard to beat.",
+        "description": "The perfect balance of coffee and sweetness, tiramisù appropriately translates to pick-me-up. The decadent Italian dessert is traditionally made with ladyfingers dipped in espresso, layered with a rich creamy mixture, and finished with a generous sprinkling of cocoa powder. Culinary legend has it that tiramisù was invented in Treviso, a small city in the romantic region of Veneto (supposedly to caffeinate the Venetian lovers!). Today, the classic dolce is made across italy in a variety of ways; many of our colleagues claim that their family's is the best recipe. However, at Eataly, we know that at least one probably is right! Eataly USA Head Pastry Chef Katia Delogu created this classic recipe, which is simple to make and hard to beat.",
         free: true,
         "level": "easy",
-        "region": "Italy",
+        "region": "italy",
         "servings": 10,
         "prep_time": 270,
         "cook_time": 30,
@@ -3367,7 +3370,7 @@ export const recipes = [
         "time": 300,
         "filters": [
             'Dessert',
-            'Italy',
+            'italy',
         ],
         "steps": [
             {
@@ -3450,7 +3453,7 @@ export const recipes = [
     {
         "id": 20,
         "title": "Cioccolata Calda (Italian Hot Chocolate)",
-        "description": "Dense and creamy, nothing says winter in Italy like a rich cup of cioccolata calda– hot chocolate. The key to Italian hot chocolate is its thickness and creaminess, which comes from a few key ingredients: cocoa, sugar, and milk. In some cases, a little dark chocolate and a thickening agent, such as cornstarch, are added as well. It can be served on its own or with a dollop of whipped cream.",
+        "description": "Dense and creamy, nothing says winter in italy like a rich cup of cioccolata calda– hot chocolate. The key to Italian hot chocolate is its thickness and creaminess, which comes from a few key ingredients: cocoa, sugar, and milk. In some cases, a little dark chocolate and a thickening agent, such as cornstarch, are added as well. It can be served on its own or with a dollop of whipped cream.",
         "tip": "Make sure the milk is warm before you start adding the other ingredients.\n" +
             " Keep the heat on low and be careful of burning the bottom.\n" +
             " Do not allow the chocolate to thicken too much before removing it from heat.\n" +
@@ -3461,7 +3464,7 @@ export const recipes = [
         "carbohydrates": 40,
         "calories": 600,
         "level": "easy",
-        "region": "Italy",
+        "region": "italy",
         "servings": 2,
         "prep_time": 10,
         "cook_time": null,
@@ -3471,7 +3474,7 @@ export const recipes = [
         "priority": 3,
         "time": 10,
         "filters": [
-            'Italy',
+            'italy',
             'Dessert',
             'drink'
         ],

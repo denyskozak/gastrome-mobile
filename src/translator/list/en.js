@@ -225,6 +225,7 @@ export const translates = {
             'vegan': 'Vegan',
             'healthy': 'Healthy',
             'drink': 'Drink',
+            'roll': 'Rolls',
         },
         autocomplete: {
             applyText: 'Apply',

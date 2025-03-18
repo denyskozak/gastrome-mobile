@@ -27,6 +27,7 @@ import {useRecipes} from "../../hooks/useRecipes";
 import * as Haptics from "expo-haptics";
 import {renderFilterIcon} from "../../utilities/renders";
 import {useSettings} from "../../contexts/settings.context";
+import {filterIcons} from "../../constants/filters";
 
 const videoSources = [
     require('./assets/1.mp4'),
@@ -80,11 +81,8 @@ const WelcomePageComponent = (props) => {
     ), []);
 
     const animationDelays = useMemo(() => ({
-        title: getAnimationDelay(1),
-        subTitle: getAnimationDelay(2),
-        exploreButton: getAnimationDelay(3),
-        downChevron: getAnimationDelay(4),
-        exploreButtonResizing: getAnimationDelay(6)
+        actions: getAnimationDelay(1),
+
     }), []);
 
     const filterClickHandle = (filter) => {
@@ -105,8 +103,9 @@ const WelcomePageComponent = (props) => {
 
     const renderActionButton = (translateKey) => (
         <Button
+            key={translateKey}
             type="outlined"
-            size={['healthy'].includes(translateKey) ? 'xl' : 'l'}
+            size="l"
             style={styles.letGoButton}
             textStyle={styles.letGoButtonText}
             onPress={() => filterClickHandle(translateKey)}
@@ -131,27 +130,35 @@ const WelcomePageComponent = (props) => {
                 {/*Middle text*/}
 
                 <View style={styles.text}>
-                    <Animated delay={animationDelays.title}>
-                        <Text style={styles.title}>{t('title')}</Text>
-                    </Animated>
-                    <Animated delay={animationDelays.subTitle}>
-                        <Text style={styles.subTitle}>{t('subTitle')}</Text>
-                    </Animated>
-                    <Animated delay={animationDelays.exploreButton} duration={800} name="BounceIn">
+                    {/*<Animated delay={animationDelays.title}>*/}
+                    {/*    <Text style={styles.title}>{t('title')}</Text>*/}
+                    {/*</Animated>*/}
+                    {/*<Animated delay={animationDelays.subTitle}>*/}
+                    {/*    <Text style={styles.subTitle}>{t('subTitle')}</Text>*/}
+                    {/*</Animated>*/}
+                    <Animated delay={animationDelays.actions} duration={800} name="BounceIn">
                         <View style={styles.letGoButtonContainer}>
-                            {actionButtons.map(renderActionButton)}
-                            <Button
-                                type="outlined"
-                                size="xl"
-                                style={styles.letGoButton}
-                                textStyle={styles.letGoButtonText}
-                                onPress={() => {
-                                    Haptics.impactAsync('light');
-                                    navigation.navigate(recipesPageRoute)
-                                }}
-                            >
-                                {t('all')}
-                            </Button>
+                            {filterIcons.map(list => (
+                                <View key={`filters-group-${Object.keys(list)}`} style={styles.filtersSection}>
+                                    {Object.keys(list).map(renderActionButton)}
+                                </View>
+                            ))}
+                            <View style={styles.filtersSection}>
+                                <Button
+                                    type="outlined"
+                                    size="xl"
+                                    style={styles.letGoButton}
+                                    textStyle={styles.letGoButtonText}
+                                    onPress={() => {
+                                        Haptics.impactAsync('light');
+                                        navigation.navigate(recipesPageRoute)
+                                    }}
+                                >
+                                    {t('all')}
+                                </Button>
+                            </View>
+
+
                         </View>
                     </Animated>
                 </View>

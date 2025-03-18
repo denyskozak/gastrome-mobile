@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     paddingLeft: Spaces.small,
     paddingRight: Spaces.small,
     height: Spaces.xxlarge,
-    width: Spaces.xxlarge * 3,
+    width: Spaces.xxlarge * 4,
   },
   containerXL: {
     paddingLeft: Spaces.small,

@@ -26,6 +26,7 @@ import {filterIcons} from "../../constants/filters";
 import {renderFilterIcon} from "../../utilities/renders";
 import {useSettings} from "../../contexts/settings.context";
 
+filterIcons.pop(); // remove last el for space
 
 let isFirstRun = true;
 const RecipesPageComponent = (props) => {
@@ -330,7 +331,7 @@ const RecipesPageComponent = (props) => {
 
             {/*Filters*/}
             <SwipeablePanel
-                fullWidth
+                // fullWidth
                 onlyLarge
                 closeOnTouchOutside
                 barStyle={styles.filtersBar}
@@ -339,13 +340,6 @@ const RecipesPageComponent = (props) => {
                 onClose={() => setFilterOpened(false)}
             >
                 <Text style={styles.filtersTitle}>{t('filtersTitle')}</Text>
-                <View style={styles.filtersContainer}>
-                    {filterIcons.map(list => (
-                        <View key={`filters-group-${Object.keys(list)}`} style={styles.filtersSection}>
-                            {Object.keys(list).map(renderFilter)}
-                        </View>
-                    ))}
-                </View>
                 <View style={styles.filtersClose}>
                     <Button
                         size="l"
@@ -355,6 +349,14 @@ const RecipesPageComponent = (props) => {
                         {t(filterNames.length ? 'apply' : 'close')}
                     </Button>
                 </View>
+                <View style={styles.filtersContainer}>
+                    {filterIcons.map(list => (
+                        <View key={`filters-group-${Object.keys(list)}`} style={styles.filtersSection}>
+                            {Object.keys(list).map(renderFilter)}
+                        </View>
+                    ))}
+                </View>
+
             </SwipeablePanel>
         </SafeAreaView>
     );

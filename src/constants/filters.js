@@ -4,10 +4,10 @@ export const filterIcons = [
         'lunch': '🍽️',
         'dinner': '🥘',
     },
-    {
-        'easy': '',
-        'medium': '',
-    },
+    // {
+    //     'easy': '',
+    //     'medium': '',
+    // },
     {
         'italy': '🇮🇹',
         'ukraine': '🇺🇦',
@@ -17,10 +17,13 @@ export const filterIcons = [
         'pasta': '🍝',
         'vegan': '🌿',
         'snack': '🥨',
-        'coffee': '☕',
-        'healthy': '🥦',
+        'roll': '🍣',
+
         'drink': '🍹',
         'salad': '🥗',
         'dessert': '🍨',
+    },
+    {
+        'healthy': '🥦',
     }
 ];

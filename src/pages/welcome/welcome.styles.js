@@ -18,25 +18,26 @@ const styles = StyleSheet.create({
     },
     text: {
         position: 'absolute',
-        top: getPercentHeight(20),
+        top: getPercentHeight(10),
         left: 0,
-        padding: Spaces.medium,
+        // margin: 'auto',
+        // padding: Spaces.medium,
         zIndex: 2,
     },
-    title: getTextStyles({
-        fontSize: 30,
-        fontWeight: '300',
-        fontFamily: fontEnum.PoppinsExtraBold,
-        color: Colors.second,
-        textAlign: 'center',
-    }),
-    subTitle: getTextStyles({
-        marginTop: Spaces.small,
-        fontSize: 18,
-        fontWeight: '200',
-        color: Colors.second,
-        textAlign: 'center',
-    }),
+    // title: getTextStyles({
+    //     fontSize: 30,
+    //     fontWeight: '300',
+    //     fontFamily: fontEnum.PoppinsExtraBold,
+    //     color: Colors.second,
+    //     textAlign: 'center',
+    // }),
+    // subTitle: getTextStyles({
+    //     marginTop: Spaces.small,
+    //     fontSize: 18,
+    //     fontWeight: '200',
+    //     color: Colors.second,
+    //     textAlign: 'center',
+    // }),
     video: {
         height: '100%',
         width: getPercentHeight(100),
@@ -45,7 +46,7 @@ const styles = StyleSheet.create({
         height: '100%',
         width: getPercentHeight(100),
         backgroundColor: Colors.black,
-        opacity: 0.7,
+        opacity: 0.8,
         position: 'absolute',
         zIndex: 1
     },
@@ -75,11 +76,17 @@ const styles = StyleSheet.create({
         // width: Spaces.xxxlarge * 2 + Spaces.small,
         display: 'flex',
         flexDirection: 'row',
-        gap: Spaces.medium,
+        gap: Spaces.small,
         flexWrap: 'wrap',
         justifyContent: 'center',
     },
-
+    filtersSection: {
+        flexDirection: 'row',
+        gap: Spaces.small,
+        margin: Spaces.small,
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+    },
     // modal
     modalTitle: getTextStyles({
         marginTop: Spaces.large,
