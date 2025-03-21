@@ -3,7 +3,7 @@ import { Colors } from '../../../styles/colors';
 import { getTextStyles } from '../../../styles/common.styles';
 import { fontEnum } from '../../../styles/fonts';
 import { Spaces } from '../../../styles/spaces';
-import { BorderRadius } from '../../../styles/borderRadiuses';
+import {BorderRadius as FontSizes, BorderRadius} from '../../../styles/borderRadiuses';
 import { getDevice } from '../../../utilities/getCurrentDevice';
 
 const styles = StyleSheet.create({
@@ -25,8 +25,8 @@ const styles = StyleSheet.create({
     borderRadius: BorderRadius.small
   },
   image: {
-    height: 250,
-    width: 320,
+    height: Spaces.xxxlarge * 2,
+    width: Spaces.xxxlarge * 3,
     borderRadius: BorderRadius.small
   },
   imageIcon: {
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
   },
   title: getTextStyles({
-    fontSize: 20,
+    fontSize: FontSizes.medium,
     fontFamily: fontEnum.PoppinsSemiBold,
     textAlign: 'center',
     marginTop: Spaces.small,

@@ -277,13 +277,13 @@ const RecipesPageComponent = (props) => {
                 showsVerticalScrollIndicator={false}
                 showsHorizontalScrollIndicator={false}
                 ref={flatListRef}
-                contentContainerStyle={styles.list}
+                // contentContainerStyle={styles.list}
                 data={data}
-                gap={10}
+
                 estimatedItemSize={data.length > 0 ? data.length : 1}
                 getItemCount={items => items.length}
                 getItem={(items, index) => data[index]}
-                numColumns={getDevice() === 'iPad' ? 1 : 1}
+                numColumns={2}
                 ListEmptyComponent={<Text style={styles.emptyList}>{t('emptyList')}</Text>}
                 ListHeaderComponent={<View>
                     {renderSelectedIngredients()}
@@ -309,7 +309,7 @@ const RecipesPageComponent = (props) => {
 
                     return (
                         <RecipeItem
-                            enableHint
+                            // enableHint
                             onPress={id => {
                                 navigation.navigate(recipeRoute, {id});
                                 Haptics.selectionAsync();
