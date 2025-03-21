@@ -3,6 +3,7 @@ import {View, Text, ScrollView, TouchableOpacity} from 'react-native';
 import {Video} from 'expo-av';
 
 import {
+    healthPageRoute,
     recipesPageRoute,
 } from '../../navigation/navigation.routes';
 import {useTranslator} from '../../hooks/useTranslator';
@@ -101,7 +102,8 @@ const WelcomePageComponent = (props) => {
         'healthy',
     ];
 
-    const renderActionButton = (translateKey) => (
+    const renderActionButton = (translateKey, index) => (
+        // <Animated delay={getAnimationDelay(1 + (index + 1))} duration={800} name="BounceIn">
         <Button
             key={translateKey}
             type="outlined"
@@ -112,6 +114,7 @@ const WelcomePageComponent = (props) => {
         >
             {tFilters(translateKey)}{renderFilterIcon(translateKey)}
         </Button>
+        // </Animated>
     );
 
     return (
@@ -136,7 +139,7 @@ const WelcomePageComponent = (props) => {
                     {/*<Animated delay={animationDelays.subTitle}>*/}
                     {/*    <Text style={styles.subTitle}>{t('subTitle')}</Text>*/}
                     {/*</Animated>*/}
-                    <Animated delay={animationDelays.actions} duration={800} name="BounceIn">
+
                         <View style={styles.letGoButtonContainer}>
                             {filterIcons.map(list => (
                                 <View key={`filters-group-${Object.keys(list)}`} style={styles.filtersSection}>
@@ -151,16 +154,25 @@ const WelcomePageComponent = (props) => {
                                     textStyle={styles.letGoButtonText}
                                     onPress={() => {
                                         Haptics.impactAsync('light');
+                                        navigation.navigate(healthPageRoute)
+                                    }}
+                                >
+                                    {t('supplements')}
+                                </Button>
+                                <Button
+                                    type="outlined"
+                                    size="xl"
+                                    style={styles.letGoButton}
+                                    textStyle={styles.letGoButtonText}
+                                    onPress={() => {
+                                        Haptics.impactAsync('light');
                                         navigation.navigate(recipesPageRoute)
                                     }}
                                 >
                                     {t('all')}
                                 </Button>
                             </View>
-
-
                         </View>
-                    </Animated>
                 </View>
                 <TouchableOpacity
                     onPress={() => {

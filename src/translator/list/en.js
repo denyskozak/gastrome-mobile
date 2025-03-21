@@ -14,6 +14,8 @@ export const translates = {
         subscriptions: 'Community',
         faq: 'FAQ',
         author: 'Chef',
+        health: 'Health',
+        supplement: 'Supplement',
         authors: 'Gastro Chefs',
     },
     common: {
@@ -51,6 +53,9 @@ export const translates = {
             recipes: 'Recipes (scroll down):',
             title: "Our lovely stars",
         },
+        health: {
+            benefits: 'Benefits:',
+        },
         cart: {
             notFound: 'Now is empty, you could add items from any recipe page',
             notFoundButton: 'Go to Recipes',
@@ -69,7 +74,8 @@ export const translates = {
             title: 'New taste, experience, recipes',
             subTitle: 'Try Voice Cooking Assistant on recipe page',
             generator: 'Swipe and get random Recipe',
-            all: 'All',
+            all: 'All Recipes 🧑‍🍳',
+            supplements: 'Supplements 🫚',
         },
         grocery: {
             startVoice: 'Use voice for detection',

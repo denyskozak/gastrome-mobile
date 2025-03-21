@@ -3,7 +3,7 @@ import Icon from '@expo/vector-icons/Ionicons';
 
 import {
   authorsPageRoute,
-  cartPageRoute,
+  cartPageRoute, healthPageRoute,
   profilePageRoute, recipesPageRoute,
   welcomePageRoute
 } from './navigation.routes';
@@ -17,6 +17,7 @@ import { Spaces } from '../styles/spaces';
 import { WelcomeNavigation } from '../pages/welcome/navigation/welcome.navigation';
 import {AuthorsNavigation} from "../pages/authors/navigation/recipes.navigation";
 import {AttentionAnimation} from "../components/molecular/attansion-animation/attansion-animation.component";
+import {HealthNavigation} from "../pages/health/navigation/health.navigation";
 
 const createRenderIcon = (name, size = 32, darkMode = false, delay = 2150, attention = false) => () => {
 
@@ -53,6 +54,15 @@ export const getNavigationTabs = (t, isDarkModeMenu) => {
     //     tabBarIcon: renderIcon('people-outline', 1250),
     //   },
     // ],
+    [
+      healthPageRoute,
+      HealthNavigation,
+      {
+        title: t('health'),
+        headerShown: false,
+        tabBarIcon: renderIcon('heart-half-outline', 1250),
+      },
+    ],
     [
       recipesPageRoute,
       RecipesNavigation,
