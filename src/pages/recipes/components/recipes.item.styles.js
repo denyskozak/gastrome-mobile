@@ -5,6 +5,7 @@ import { fontEnum } from '../../../styles/fonts';
 import { Spaces } from '../../../styles/spaces';
 import {BorderRadius as FontSizes, BorderRadius} from '../../../styles/borderRadiuses';
 import { getDevice } from '../../../utilities/getCurrentDevice';
+import {getImageSize} from "../../../utilities/getImageSize";
 
 const styles = StyleSheet.create({
   container: {
@@ -25,8 +26,7 @@ const styles = StyleSheet.create({
     borderRadius: BorderRadius.small
   },
   image: {
-    height: Spaces.xxxlarge * 2,
-    width: Spaces.xxxlarge * 3,
+    ...getImageSize(),
     borderRadius: BorderRadius.small
   },
   imageIcon: {

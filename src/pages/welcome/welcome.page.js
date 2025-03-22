@@ -38,6 +38,7 @@ const videoSources = [
     require('./assets/5.mp4'),
 ];
 
+
 const WelcomePageComponent = (props) => {
     const {navigation} = props;
 
@@ -140,52 +141,59 @@ const WelcomePageComponent = (props) => {
                     {/*    <Text style={styles.subTitle}>{t('subTitle')}</Text>*/}
                     {/*</Animated>*/}
 
-                        <View style={styles.letGoButtonContainer}>
-                            {filterIcons.map(list => (
-                                <View key={`filters-group-${Object.keys(list)}`} style={styles.filtersSection}>
-                                    {Object.keys(list).map(renderActionButton)}
-                                </View>
-                            ))}
-                            <View style={styles.filtersSection}>
-                                <Button
-                                    type="outlined"
-                                    size="xl"
-                                    style={styles.letGoButton}
-                                    textStyle={styles.letGoButtonText}
-                                    onPress={() => {
-                                        Haptics.impactAsync('light');
-                                        navigation.navigate(healthPageRoute)
-                                    }}
-                                >
-                                    {t('supplements')}
-                                </Button>
-                                <Button
-                                    type="outlined"
-                                    size="xl"
-                                    style={styles.letGoButton}
-                                    textStyle={styles.letGoButtonText}
-                                    onPress={() => {
-                                        Haptics.impactAsync('light');
-                                        navigation.navigate(recipesPageRoute)
-                                    }}
-                                >
-                                    {t('all')}
-                                </Button>
+                    <View style={styles.letGoButtonContainer}>
+                        {filterIcons.map(list => (
+                            <View key={`filters-group-${Object.keys(list)}`} style={styles.filtersSection}>
+                                {Object.keys(list).map(renderActionButton)}
                             </View>
+                        ))}
+                        <View style={styles.filtersSection}>
+                            <Button
+                                type="outlined"
+                                size="xl"
+                                style={styles.letGoButton}
+                                textStyle={styles.letGoButtonText}
+                                onPress={() => {
+                                    Haptics.impactAsync('light');
+                                    navigation.navigate(healthPageRoute)
+                                }}
+                            >
+                                {t('supplements')}
+                            </Button>
+                            <Button
+                                type="outlined"
+                                size="xl"
+                                style={styles.letGoButton}
+                                textStyle={styles.letGoButtonText}
+                                onPress={() => {
+                                    Haptics.impactAsync('light');
+                                    navigation.navigate(recipesPageRoute)
+                                }}
+                            >
+                                {t('all')}
+                            </Button>
                         </View>
+                    </View>
                 </View>
-                <TouchableOpacity
-                    onPress={() => {
-                        if (containerScrollViewRef && containerScrollViewRef.current && containerScrollViewRef.current.scrollTo instanceof Function) {
-                            containerScrollViewRef.current.scrollToEnd();
-                        }
-                    }}
-                    style={styles.scrollDown}>
-                    <Animated style={styles.scrollDownButton} delay={animationDelays.downChevron} duration={1000}>
-                        <Icon name="chevron-down-outline" size={Spaces.xxlarge} color={Colors.second}/>
-                        <Text style={styles.scrollDownText}>{t('generator')}</Text>
-                    </Animated>
-                </TouchableOpacity>
+                {
+                    !isIPhoneLowerX()
+                        ? (
+                            <TouchableOpacity
+                                onPress={() => {
+                                    if (containerScrollViewRef && containerScrollViewRef.current && containerScrollViewRef.current.scrollTo instanceof Function) {
+                                        containerScrollViewRef.current.scrollToEnd();
+                                    }
+                                }}
+                                style={styles.scrollDown}>
+                                <Animated style={styles.scrollDownButton} delay={animationDelays.downChevron}
+                                          duration={1000}>
+                                    <Icon name="chevron-down-outline" size={Spaces.xxlarge} color={Colors.second}/>
+                                    <Text style={styles.scrollDownText}>{t('generator')}</Text>
+                                </Animated>
+                            </TouchableOpacity>
+                        )
+                        : null
+                }
 
                 {/*todo move to single component*/}
                 {/*<Modal isVisible={modalVisible} onChangeVisible={setModalVisible}>*/}

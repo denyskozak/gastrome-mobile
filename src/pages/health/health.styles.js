@@ -4,6 +4,7 @@ import {StyleSheet} from 'react-native';
 import {Spaces} from '../../styles/spaces';
 import {Colors} from '../../styles/colors';
 import {BorderRadius as FontSize, BorderRadius} from "../../styles/borderRadiuses";
+import {getImageSize} from "../../utilities/getImageSize";
 
 const styles = StyleSheet.create({
     container: {
@@ -13,18 +14,16 @@ const styles = StyleSheet.create({
 
 
     list: {
-        gap: Spaces.xlarge,
     },
     item: {
-      justifyContent: 'center',
         display: 'flex',
         alignItems: 'center',
+        justifyContent: 'center',
+        width: '100%',
     },
     image: {
-        height: Spaces.xxxlarge * 2,
-        width: Spaces.xxxlarge * 3,
+        ...getImageSize(),
         marginTop: Spaces.large,
-        alignSelf: 'center',
         borderRadius: BorderRadius.small
     },
     text: getTextStyles({

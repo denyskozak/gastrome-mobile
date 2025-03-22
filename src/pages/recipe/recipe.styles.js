@@ -10,7 +10,7 @@ const IPadImage = {
   height: 250,
   width: 320,
   alignSelf: 'center',
-  borderRadius: BorderRadius.small
+  borderRadius: BorderRadius.medium
 };
 
 const IPhoneImage = {
@@ -60,6 +60,8 @@ const styles = StyleSheet.create({
 
   imageContainer: {
     alignItems: "center",
+
+    ...(getDevice() === 'iPad' ? {  borderRadius: BorderRadius.medium } : {})
   },
   image: {
     marginTop: Spaces.large,
