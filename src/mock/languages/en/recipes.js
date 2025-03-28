@@ -285,13 +285,13 @@ export const recipes = [
             }
         ],
         "ingredients": [
-            { "id": 1, "title": "Ground chicken", "quantity": 500, "unit": "g" },
-            { "id": 2, "title": "Hard cheese", "quantity": 150, "unit": "g" },
-            { "id": 3, "title": "Sour cream", "quantity": 3, "unit": "tbsp" },
-            { "id": 4, "title": "Pineapple rings", "quantity": 4, "unit": "pcs" },
-            { "id": 5, "title": "Salt", "quantity": "to taste", "unit": "" },
-            { "id": 6, "title": "Black pepper", "quantity": "to taste", "unit": "" },
-            { "id": 7, "title": "Spices", "quantity": "to taste", "unit": "" }
+            {"id": 1, "title": "Ground chicken", "quantity": 500, "unit": "g"},
+            {"id": 2, "title": "Hard cheese", "quantity": 150, "unit": "g"},
+            {"id": 3, "title": "Sour cream", "quantity": 3, "unit": "tbsp"},
+            {"id": 4, "title": "Pineapple rings", "quantity": 4, "unit": "pcs"},
+            {"id": 5, "title": "Salt", "quantity": "to taste", "unit": ""},
+            {"id": 6, "title": "Black pepper", "quantity": "to taste", "unit": ""},
+            {"id": 7, "title": "Spices", "quantity": "to taste", "unit": ""}
         ]
     },
     {
@@ -332,14 +332,14 @@ export const recipes = [
             }
         ],
         "ingredients": [
-            { "id": 1, "title": "Cottage cheese", "quantity": 330, "unit": "g" },
-            { "id": 2, "title": "Rice flour", "quantity": 3, "unit": "tbsp" },
-            { "id": 3, "title": "Sugar", "quantity": 2, "unit": "tbsp" },
-            { "id": 4, "title": "Vanilla", "quantity": "to taste", "unit": "" },
-            { "id": 5, "title": "Egg", "quantity": 1, "unit": "pcs" },
-            { "id": 6, "title": "Blueberries", "quantity": "as needed", "unit": "" },
-            { "id": 7, "title": "Butter", "quantity": "as needed", "unit": "" },
-            { "id": 8, "title": "Sour cream or yogurt", "quantity": "for serving", "unit": "" }
+            {"id": 1, "title": "Cottage cheese", "quantity": 330, "unit": "g"},
+            {"id": 2, "title": "Rice flour", "quantity": 3, "unit": "tbsp"},
+            {"id": 3, "title": "Sugar", "quantity": 2, "unit": "tbsp"},
+            {"id": 4, "title": "Vanilla", "quantity": "to taste", "unit": ""},
+            {"id": 5, "title": "Egg", "quantity": 1, "unit": "pcs"},
+            {"id": 6, "title": "Blueberries", "quantity": "as needed", "unit": ""},
+            {"id": 7, "title": "Butter", "quantity": "as needed", "unit": ""},
+            {"id": 8, "title": "Sour cream or yogurt", "quantity": "for serving", "unit": ""}
         ]
     },
     {
@@ -385,17 +385,17 @@ export const recipes = [
             }
         ],
         "ingredients": [
-            { "id": 1, "title": "Apples", "quantity": 3, "unit": "pcs" },
-            { "id": 2, "title": "Eggs", "quantity": 3, "unit": "pcs" },
-            { "id": 3, "title": "Sour cream", "quantity": 3, "unit": "tbsp" },
-            { "id": 4, "title": "Coconut sugar", "quantity": 3, "unit": "tbsp" },
-            { "id": 5, "title": "Flour", "quantity": 150, "unit": "g" },
-            { "id": 6, "title": "Cinnamon", "quantity": 1, "unit": "tsp" },
-            { "id": 7, "title": "Lemon zest", "quantity": 1, "unit": "pcs" },
-            { "id": 8, "title": "Nuts", "quantity": "as desired", "unit": "g" },
-            { "id": 9, "title": "Soft cottage cheese", "quantity": 300, "unit": "g" },
-            { "id": 10, "title": "Cream cheese", "quantity": 200, "unit": "g" },
-            { "id": 11, "title": "Powdered sugar", "quantity": "to taste", "unit": "g" }
+            {"id": 1, "title": "Apples", "quantity": 3, "unit": "pcs"},
+            {"id": 2, "title": "Eggs", "quantity": 3, "unit": "pcs"},
+            {"id": 3, "title": "Sour cream", "quantity": 3, "unit": "tbsp"},
+            {"id": 4, "title": "Coconut sugar", "quantity": 3, "unit": "tbsp"},
+            {"id": 5, "title": "Flour", "quantity": 150, "unit": "g"},
+            {"id": 6, "title": "Cinnamon", "quantity": 1, "unit": "tsp"},
+            {"id": 7, "title": "Lemon zest", "quantity": 1, "unit": "pcs"},
+            {"id": 8, "title": "Nuts", "quantity": "as desired", "unit": "g"},
+            {"id": 9, "title": "Soft cottage cheese", "quantity": 300, "unit": "g"},
+            {"id": 10, "title": "Cream cheese", "quantity": 200, "unit": "g"},
+            {"id": 11, "title": "Powdered sugar", "quantity": "to taste", "unit": "g"}
         ]
     },
     {
@@ -435,17 +435,17 @@ export const recipes = [
             }
         ],
         "ingredients": [
-            { "id": 1, "title": "Beetroot", "quantity": 3, "unit": "pcs" },
-            { "id": 2, "title": "Olive oil", "quantity": 30, "unit": "ml" },
-            { "id": 3, "title": "Walnuts", "quantity": 50, "unit": "g" },
-            { "id": 4, "title": "Pomegranate seeds", "quantity": 50, "unit": "g" },
-            { "id": 5, "title": "Parsley", "quantity": 10, "unit": "g" },
-            { "id": 6, "title": "Feta or Philadelphia cheese", "quantity": 100, "unit": "g" },
-            { "id": 7, "title": "Balsamic vinegar", "quantity": 15, "unit": "ml" },
-            { "id": 8, "title": "Olive oil (for dressing)", "quantity": 30, "unit": "ml" },
-            { "id": 9, "title": "Honey", "quantity": 15, "unit": "ml" },
-            { "id": 10, "title": "Lemon juice", "quantity": 10, "unit": "ml" },
-            { "id": 11, "title": "Salt and pepper", "quantity": "to taste", "unit": "" }
+            {"id": 1, "title": "Beetroot", "quantity": 3, "unit": "pcs"},
+            {"id": 2, "title": "Olive oil", "quantity": 30, "unit": "ml"},
+            {"id": 3, "title": "Walnuts", "quantity": 50, "unit": "g"},
+            {"id": 4, "title": "Pomegranate seeds", "quantity": 50, "unit": "g"},
+            {"id": 5, "title": "Parsley", "quantity": 10, "unit": "g"},
+            {"id": 6, "title": "Feta or Philadelphia cheese", "quantity": 100, "unit": "g"},
+            {"id": 7, "title": "Balsamic vinegar", "quantity": 15, "unit": "ml"},
+            {"id": 8, "title": "Olive oil (for dressing)", "quantity": 30, "unit": "ml"},
+            {"id": 9, "title": "Honey", "quantity": 15, "unit": "ml"},
+            {"id": 10, "title": "Lemon juice", "quantity": 10, "unit": "ml"},
+            {"id": 11, "title": "Salt and pepper", "quantity": "to taste", "unit": ""}
         ]
     },
     {
@@ -3771,13 +3771,13 @@ export const recipes = [
             }
         ],
         "ingredients": [
-            { "id": 1, "title": "Large onion", "quantity": 1, "unit": "pcs" },
-            { "id": 2, "title": "Bacon", "quantity": 300, "unit": "g" },
-            { "id": 3, "title": "Salt",  },
-            { "id": 4, "title": "Sour cream", "quantity": 2, "unit": "tbsp" },
-            { "id": 5, "title": "Mayonnaise", "quantity": 1, "unit": "tbsp" },
-            { "id": 6, "title": "Garlic clove", "quantity": 1, "unit": "pcs" },
-            { "id": 7, "title": "Dill" }
+            {"id": 1, "title": "Large onion", "quantity": 1, "unit": "pcs"},
+            {"id": 2, "title": "Bacon", "quantity": 300, "unit": "g"},
+            {"id": 3, "title": "Salt",},
+            {"id": 4, "title": "Sour cream", "quantity": 2, "unit": "tbsp"},
+            {"id": 5, "title": "Mayonnaise", "quantity": 1, "unit": "tbsp"},
+            {"id": 6, "title": "Garlic clove", "quantity": 1, "unit": "pcs"},
+            {"id": 7, "title": "Dill"}
         ]
     },
     {
@@ -3810,13 +3810,13 @@ export const recipes = [
             }
         ],
         "ingredients": [
-            { "id": 1, "title": "Feta cheese", "quantity": 200, "unit": "g" },
-            { "id": 2, "title": "Olive oil", "quantity": 1, "unit": "tbsp" },
-            { "id": 3, "title": "Figs", "quantity": 2, "unit": "pcs" },
-            { "id": 4, "title": "Honey", "quantity": 1, "unit": "tbsp" },
-            { "id": 5, "title": "Thyme" },
-            { "id": 6, "title": "Nuts", "quantity": 30, "unit": "g" },
-            { "id": 7, "title": "Bread", "quantity": 4, "unit": "slices" }
+            {"id": 1, "title": "Feta cheese", "quantity": 200, "unit": "g"},
+            {"id": 2, "title": "Olive oil", "quantity": 1, "unit": "tbsp"},
+            {"id": 3, "title": "Figs", "quantity": 2, "unit": "pcs"},
+            {"id": 4, "title": "Honey", "quantity": 1, "unit": "tbsp"},
+            {"id": 5, "title": "Thyme"},
+            {"id": 6, "title": "Nuts", "quantity": 30, "unit": "g"},
+            {"id": 7, "title": "Bread", "quantity": 4, "unit": "slices"}
         ]
     },
     {
@@ -3849,10 +3849,10 @@ export const recipes = [
             }
         ],
         "ingredients": [
-            { "id": 1, "title": "Apricots or peaches", "quantity": 8, "unit": "pcs" },
-            { "id": 2, "title": "Favorite cheese", "quantity": 100, "unit": "g" },
-            { "id": 3, "title": "Nuts", "quantity": 30, "unit": "g" },
-            { "id": 4, "title": "Honey", "quantity": 1, "unit": "tbsp" }
+            {"id": 1, "title": "Apricots or peaches", "quantity": 8, "unit": "pcs"},
+            {"id": 2, "title": "Favorite cheese", "quantity": 100, "unit": "g"},
+            {"id": 3, "title": "Nuts", "quantity": 30, "unit": "g"},
+            {"id": 4, "title": "Honey", "quantity": 1, "unit": "tbsp"}
         ]
     },
     {
@@ -3884,13 +3884,13 @@ export const recipes = [
             }
         ],
         "ingredients": [
-            { "id": 1, "title": "Mixed salad greens", "quantity": 100, "unit": "g" },
-            { "id": 2, "title": "Prosciutto", "quantity": 50, "unit": "g" },
-            { "id": 3, "title": "Red onion", "quantity": 0.5, "unit": "pcs" },
-            { "id": 4, "title": "Sun-dried tomatoes", "quantity": 40, "unit": "g" },
-            { "id": 5, "title": "Cream cheese", "quantity": 50, "unit": "g" },
-            { "id": 6, "title": "Balsamic glaze", "quantity": 1, "unit": "tbsp" },
-            { "id": 7, "title": "Olive oil", "quantity": 1, "unit": "tbsp" }
+            {"id": 1, "title": "Mixed salad greens", "quantity": 100, "unit": "g"},
+            {"id": 2, "title": "Prosciutto", "quantity": 50, "unit": "g"},
+            {"id": 3, "title": "Red onion", "quantity": 0.5, "unit": "pcs"},
+            {"id": 4, "title": "Sun-dried tomatoes", "quantity": 40, "unit": "g"},
+            {"id": 5, "title": "Cream cheese", "quantity": 50, "unit": "g"},
+            {"id": 6, "title": "Balsamic glaze", "quantity": 1, "unit": "tbsp"},
+            {"id": 7, "title": "Olive oil", "quantity": 1, "unit": "tbsp"}
         ]
     },
     {
@@ -3929,15 +3929,167 @@ export const recipes = [
             }
         ],
         "ingredients": [
-            { "id": 1, "title": "Napa cabbage", "quantity": 150, "unit": "g" },
-            { "id": 2, "title": "Crab sticks", "quantity": 200, "unit": "g" },
-            { "id": 3, "title": "Cucumber", "quantity": 1, "unit": "pcs" },
-            { "id": 4, "title": "Daikon radish", "quantity": 100, "unit": "g" },
-            { "id": 5, "title": "Boiled egg", "quantity": 1, "unit": "pcs" },
-            { "id": 6, "title": "Fresh herbs", "quantity": "", "unit": "", description: "to taste" },
-            { "id": 7, "title": "Canned corn", "quantity": 100, "unit": "g" },
-            { "id": 8, "title": "Sour cream", "quantity": 2, "unit": "tbsp" },
-            { "id": 9, "title": "Salt and pepper", "quantity": "", "unit": "", description: "to taste" }
+            {"id": 1, "title": "Napa cabbage", "quantity": 150, "unit": "g"},
+            {"id": 2, "title": "Crab sticks", "quantity": 200, "unit": "g"},
+            {"id": 3, "title": "Cucumber", "quantity": 1, "unit": "pcs"},
+            {"id": 4, "title": "Daikon radish", "quantity": 100, "unit": "g"},
+            {"id": 5, "title": "Boiled egg", "quantity": 1, "unit": "pcs"},
+            {"id": 6, "title": "Fresh herbs", "quantity": "", "unit": "", description: "to taste"},
+            {"id": 7, "title": "Canned corn", "quantity": 100, "unit": "g"},
+            {"id": 8, "title": "Sour cream", "quantity": 2, "unit": "tbsp"},
+            {"id": 9, "title": "Salt and pepper", "quantity": "", "unit": "", description: "to taste"}
+        ]
+    },
+
+    {
+        "id": 66,
+        "title": "Carrot Orange Smoothie",
+        "description": "A refreshing and nutritious smoothie made with fresh carrot, orange, apple, and lemon juice.",
+        "level": "Easy",
+        "servings": 1,
+        "hasVideoSteps": true,
+        "free": true,
+        "prep_time": 5,
+        "cook_time": 0,
+        "time": 5,
+        "priority": 0,
+        "instagram": "@recipes.smoothie",
+        "proteins": 1,
+        "fats": 0,
+        "carbohydrates": 20,
+        "calories": 90,
+        "filters": [
+            "Drink",
+            "Healthy"
+        ],
+        "steps": [
+            {
+                "description": "Peel and chop the carrot, orange, and half an apple into small pieces.Add the chopped ingredients to a blender. Pour in the lemon juice and a cup of water. Blend until smooth. Pour the smoothie into a glass and enjoy immediately."
+            },
+        ],
+        "ingredients": [
+            {"id": 1, "title": "Carrot", "quantity": 1, "unit": "pcs"},
+            {"id": 2, "title": "Orange", "quantity": 1, "unit": "pcs"},
+            {"id": 3, "title": "Apple", "quantity": 0.5, "unit": "pcs"},
+            {"id": 4, "title": "Lemon juice", "quantity": 1, "unit": "tbsp"},
+            {"id": 5, "title": "Water", "quantity": 1, "unit": "cup"}
+        ]
+    },
+    {
+        "id": 67,
+        "title": "Stuffed Chicken Meat Roll in Healthy Gluten-Free Crust",
+        "description": "A juicy chicken meat roll filled with pesto, sun-dried tomatoes, cheese, and spinach, wrapped in a golden, crispy, gluten-free crust made from crushed nuts and seeds — healthy, simple, and delicious! If you use beef, pork, or mixed ground meat instead of chicken, just add about 5 extra minutes in the air fryer for perfect doneness.",
+        "level": "Medium",
+        "servings": 2,
+        "hasVideoSteps": true,
+        "free": true,
+        "prep_time": 15,
+        "cook_time": 25,
+        "time": 40,
+        "priority": 0,
+        "instagram": "@recipesbyvictoria",
+        "proteins": 57,
+        "fats": 45,
+        "carbohydrates": 20,
+        "calories": 697,
+        "filters": [
+            "Dinner",
+            "Healthy",
+            "Gluten-Free"
+        ],
+        "steps": [
+            {
+                "description": "Place the chicken ground meat between two sheets of parchment paper and roll it out evenly into a thin rectangle."
+            },
+            {
+                "description": "Spread a layer of pesto over the meat. Add sun-dried tomatoes, grated or sliced cheese, and fresh spinach leaves. Carefully roll everything up into a tight log."
+            },
+            {
+                "description": "Prepare a healthy crust using ground nuts and seeds (e.g., almond flour, flax seeds, sesame). Coat the meat roll with this mixture. Place into an air fryer and cook at 180°C (350°F) for 20–25 minutes until golden and fully cooked. Optionally, increase to 200°C for the last 5 minutes for extra crispiness."
+            }
+        ],
+        "ingredients": [
+            {"id": 1, "title": "Ground chicken meat", "quantity": 400, "unit": "g"},
+            {"id": 2, "title": "Pesto", "quantity": 2, "unit": "tbsp"},
+            {"id": 3, "title": "Sun-dried tomatoes", "quantity": 40, "unit": "g"},
+            {"id": 4, "title": "Cheese", "quantity": 80, "unit": "g"},
+            {"id": 5, "title": "Fresh spinach", "quantity": 30, "unit": "g"},
+            {"id": 6, "title": "Almond flour or ground nuts", "quantity": 3, "unit": "tbsp"},
+            {"id": 7, "title": "Seeds (flax, sesame, or mixed)", "quantity": 2, "unit": "tbsp"},
+            {"id": 8, "title": "Salt and pepper", "quantity": "to taste", "unit": ""}
+        ]
+    },
+    {
+        "id": 68,
+        "title": "Cheesy Garlic Baguette with Caramelized Roasted Garlic",
+        "description": "Crispy on the outside, tender inside, with a creamy garlic aroma and melted cheese — the ultimate comfort bite. Perfect as a side for soup, salad, or a moment of pure food joy. Optionally finished with a drizzle of spicy honey!",
+        "level": "Easy",
+        "servings": 4,
+        "hasVideoSteps": true,
+        "free": true,
+        "prep_time": 10,
+        "cook_time": 50,
+        "time": 60,
+        "priority": 0,
+        "instagram": "@gastronomica.daily",
+        "proteins": 10,
+        "fats": 18,
+        "carbohydrates": 25,
+        "calories": 320,
+        "filters": [
+            "Snack",
+            "Baking"
+        ],
+        "steps": [
+            {
+                "description": "Slice the top off a head of garlic to expose the cloves. Place on foil, drizzle with olive oil, season with salt and pepper, wrap tightly, and roast at 180°C (356°F) for 30–40 minutes until soft and caramelized."
+            },
+            {
+                "description": "Once slightly cooled, squeeze out the roasted garlic into a bowl. Mix with soft butter, chopped parsley, salt, and pepper. Slice the baguette and generously spread the garlic butter mixture over each piece."
+            },
+            {
+                "description": "Top with grated cheese (mozzarella, parmesan, or gouda) and bake for another 10–15 minutes at 180°C (356°F) until the cheese is melted and golden. Optionally finish with chili honey and enjoy hot!"
+            }
+        ],
+    },
+    {
+        "id": 69,
+        "title": "Chocolate Oaty Peanut Butter Cups",
+        "description": "Rich, chewy, salty-sweet peanut butter oat cups topped with silky melted chocolate. No baking needed — just mix, chill, and enjoy! With around 50g of healthy fats per serving, these are super satisfying and perfect after a workout, on-the-go, or when you're craving something sweet but wholesome. Optional: make a lighter version for everyday snacking!",
+        "level": "Easy",
+        "servings": 2,
+        "hasVideoSteps": true,
+        "free": true,
+        "prep_time": 10,
+        "cook_time": 0,
+        "time": 10,
+        "priority": 0,
+        "instagram": "@kittys_kitchen",
+        "proteins": 60,
+        "fats": 105,
+        "carbohydrates": 120,
+        "calories": 1577,
+        "filters": [
+            "Dessert",
+            "No-Bake"
+        ],
+        "steps": [
+            {
+                "description": "In a large bowl, mix together rolled oats, smooth peanut butter, and maple syrup until well combined."
+            },
+            {
+                "description": "Spoon about 1 tablespoon of the mixture into each baking cup. Flatten with the back of a spoon. Melt chocolate and pour over each cup. Move the cups around to let the chocolate spread evenly to the edges. Place in the freezer to set."
+            },
+            {
+                "description": "Remove the cups from the freezer and peel off the baking liners. Sprinkle with flaky sea salt and enjoy!"
+            }
+        ],
+        "ingredients": [
+            { "id": 1, "title": "Smooth peanut butter", "quantity": 24, "unit": "tbsp" },
+            { "id": 2, "title": "Rolled oats", "quantity": 16, "unit": "tbsp" },
+            { "id": 3, "title": "Maple syrup", "quantity": 4, "unit": "tbsp" },
+            { "id": 4, "title": "Chocolate (melted)", "quantity": 0.5, "unit": "pcs" },
+            { "id": 5, "title": "Sea salt", "quantity": "for topping", "unit": "" }
         ]
     }
 

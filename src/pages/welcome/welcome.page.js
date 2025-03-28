@@ -103,7 +103,7 @@ const WelcomePageComponent = (props) => {
         'healthy',
     ];
 
-    const renderActionButton = (translateKey, index) => (
+    const renderActionButton = (translateKey) => (
         // <Animated delay={getAnimationDelay(1 + (index + 1))} duration={800} name="BounceIn">
         <Button
             key={translateKey}

@@ -18,12 +18,10 @@ export const filterIcons = [
         'vegan': '🌿',
         'snack': '🥨',
         'roll': '🍣',
-
         'drink': '🍹',
         'salad': '🥗',
         'dessert': '🍨',
-    },
-    {
         'healthy': '🥦',
-    }
+    },
 ];
+

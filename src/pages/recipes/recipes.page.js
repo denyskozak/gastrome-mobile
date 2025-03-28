@@ -26,7 +26,6 @@ import {filterIcons} from "../../constants/filters";
 import {renderFilterIcon} from "../../utilities/renders";
 import {useSettings} from "../../contexts/settings.context";
 
-filterIcons.pop(); // remove last el for space
 
 let isFirstRun = true;
 const RecipesPageComponent = (props) => {
@@ -34,14 +33,12 @@ const RecipesPageComponent = (props) => {
         navigation,
     } = props;
 
-    console.log('props ', props)
     const [t, , currentLanguage] = useTranslator('pages.recipes');
     const [tFilter] = useTranslator('components.filters');
     const [favorites] = useFavorites();
     const [isSubscriber] = useSubscriptions();
     const [{filterNames}, setSetting] = useSettings();
     const setFilterNames = name => setSetting('filterNames', name);
-    console.log('filterNames ', filterNames);
 
     const [recipes] = useRecipes(true);
 
@@ -243,7 +240,7 @@ const RecipesPageComponent = (props) => {
         ))
     )
     return (
-        <SafeAreaView style={styles.container}>
+        <View style={styles.container}>
             {/*Actions and search*/}
             <View style={styles.actionButtonsContainer}>
                 {/* Hidden search by name, return in future */}
@@ -358,7 +355,7 @@ const RecipesPageComponent = (props) => {
                 </View>
 
             </SwipeablePanel>
-        </SafeAreaView>
+        </View>
     );
 };
 
