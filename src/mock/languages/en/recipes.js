@@ -2,6 +2,370 @@ import {getAuthor} from "../author";
 
 export const recipes = [
     {
+        "id": 60,
+        "title": "Bacon-Wrapped Onion Rings",
+        "description": "Crispy and flavorful onion rings wrapped in bacon, served with a creamy garlic dipping sauce.",
+        "level": "Easy",
+        "servings": 4,
+        "hasVideoSteps": true,
+        "free": true,
+        "prep_time": 10,
+        "cook_time": 20,
+        "time": 30,
+        "priority": 0,
+        "instagram": "liliya.cooking",
+        "proteins": 77,
+        "fats": 137,
+        "carbohydrates": 17,
+        "calories": 1570,
+        "filters": [
+            "snack",
+            "Baking"
+        ],
+        "steps": [
+            {
+                "description": "Peel and slice a large onion into thick rings."
+            },
+            {
+                "description": "Wrap each onion ring with a strip of bacon, securing it tightly. Place the wrapped rings on a baking sheet and bake in a preheated oven at 200°C (392°F) for 15-20 minutes until crispy and golden."
+            },
+            {
+                "description": "For the perfect dipping sauce, mix sour cream, mayonnaise, minced garlic, chopped dill, and a pinch of salt. Serve alongside the warm bacon-wrapped onion rings."
+            }
+        ],
+        "ingredients": [
+            {"id": 1, "title": "Large onion", "quantity": 1, "unit": "pcs"},
+            {"id": 2, "title": "Bacon", "quantity": 300, "unit": "g"},
+            {"id": 3, "title": "Salt",},
+            {"id": 4, "title": "Sour cream", "quantity": 2, "unit": "tbsp"},
+            {"id": 5, "title": "Mayonnaise", "quantity": 1, "unit": "tbsp"},
+            {"id": 6, "title": "Garlic clove", "quantity": 1, "unit": "pcs"},
+            {"id": 7, "title": "Dill"}
+        ]
+    },
+    {
+        "id": 61,
+        "title": "Baked Feta with Figs and Honey",
+        "description": "A rich and flavorful dish with creamy feta, sweet figs, crunchy nuts, and aromatic thyme, served over crispy toast.",
+        "level": "Easy",
+        "servings": 4,
+        "hasVideoSteps": true,
+        "free": true,
+        "prep_time": 10,
+        "cook_time": 20,
+        "time": 30,
+        "priority": 0,
+        "instagram": "larisa_shtepa",
+        "proteins": 44,
+        "fats": 80,
+        "carbohydrates": 104,
+        "calories": 1299,
+        "filters": [
+            "healthy",
+            "snack"
+        ],
+        "steps": [
+            {
+                "description": "Drizzle feta with olive oil, slice figs, add a spoonful of honey, sprigs of thyme, and nuts. Bake in a preheated oven at 180°C (356°F) for 20 minutes until golden and soft."
+            },
+            {
+                "description": "Remove the dried thyme sprigs. Prepare crispy toast and top it with the warm baked feta and fig mixture. Serve immediately."
+            }
+        ],
+        "ingredients": [
+            {"id": 1, "title": "Feta cheese", "quantity": 200, "unit": "g"},
+            {"id": 2, "title": "Olive oil", "quantity": 1, "unit": "tbsp"},
+            {"id": 3, "title": "Figs", "quantity": 2, "unit": "pcs"},
+            {"id": 4, "title": "Honey", "quantity": 1, "unit": "tbsp"},
+            {"id": 5, "title": "Thyme"},
+            {"id": 6, "title": "Nuts", "quantity": 30, "unit": "g"},
+            {"id": 7, "title": "Bread", "quantity": 4, "unit": "slices"}
+        ]
+    },
+    {
+        "id": 62,
+        "title": "Baked Apricots or Peaches with Cheese and Honey",
+        "description": "A delightful combination of sweet fruit, melted cheese, crunchy nuts, and honey, baked to perfection.",
+        "level": "Easy",
+        "servings": 2,
+        "hasVideoSteps": true,
+        "free": true,
+        "prep_time": 10,
+        "cook_time": 15,
+        "time": 25,
+        "priority": 0,
+        "instagram": "Larisa_shtepa",
+        "proteins": 19,
+        "fats": 50,
+        "carbohydrates": 51,
+        "calories": 694,
+        "filters": [
+            "healthy",
+            "snack"
+        ],
+        "steps": [
+            {
+                "description": "Slice apricots or peaches in half and remove the pits. Cut your favorite cheese into small pieces and place them inside the fruit halves."
+            },
+            {
+                "description": "Top with nuts of your choice and drizzle with honey. Bake in a preheated oven at 180°C (356°F) for 10-15 minutes until warm and slightly caramelized."
+            }
+        ],
+        "ingredients": [
+            {"id": 1, "title": "Apricots or peaches", "quantity": 8, "unit": "pcs"},
+            {"id": 2, "title": "Favorite cheese", "quantity": 100, "unit": "g"},
+            {"id": 3, "title": "Nuts", "quantity": 30, "unit": "g"},
+            {"id": 4, "title": "Honey", "quantity": 1, "unit": "tbsp"}
+        ]
+    },
+    {
+        "id": 63,
+        "title": "Mixed Green Salad with Prosciutto and Sun-Dried Tomatoes",
+        "description": "A fresh and flavorful salad with a mix of greens, creamy cheese, and savory prosciutto, drizzled with balsamic glaze and olive oil.",
+        "level": "Easy",
+        "servings": 2,
+        "hasVideoSteps": true,
+        "free": true,
+        "prep_time": 10,
+        "cook_time": 0,
+        "time": 10,
+        "priority": 0,
+        "instagram": "@zefirka_recipes",
+        "proteins": 20,
+        "fats": 42,
+        "carbohydrates": 38,
+        "calories": 620,
+        "filters": [
+            "salad"
+        ],
+        "steps": [
+            {
+                "description": "Arrange a mix of salad greens, thinly sliced red onion, and sun-dried tomatoes (chop if large) on a serving plate."
+            },
+            {
+                "description": "Tear the prosciutto into smaller pieces and place on top. Form small dollops of cream cheese and distribute evenly. Drizzle with balsamic glaze and olive oil for the perfect finish."
+            }
+        ],
+        "ingredients": [
+            {"id": 1, "title": "Mixed salad greens", "quantity": 100, "unit": "g"},
+            {"id": 2, "title": "Prosciutto", "quantity": 50, "unit": "g"},
+            {"id": 3, "title": "Red onion", "quantity": 0.5, "unit": "pcs"},
+            {"id": 4, "title": "Sun-dried tomatoes", "quantity": 40, "unit": "g"},
+            {"id": 5, "title": "Cream cheese", "quantity": 50, "unit": "g"},
+            {"id": 6, "title": "Balsamic glaze", "quantity": 1, "unit": "tbsp"},
+            {"id": 7, "title": "Olive oil", "quantity": 1, "unit": "tbsp"}
+        ]
+    },
+    {
+        "id": 64,
+        "title": "Crab Stick Salad with Daikon and Cucumber",
+        "description": "A refreshing and light salad with crab sticks, crunchy vegetables, and a creamy dressing.",
+        "level": "Easy",
+        "servings": 4,
+        "hasVideoSteps": true,
+        "free": true,
+        "prep_time": 15,
+        "cook_time": 0,
+        "time": 15,
+        "priority": 0,
+        "instagram": "@katarina_movchan",
+        "proteins": 31,
+        "fats": 18,
+        "carbohydrates": 54,
+        "calories": 480,
+        "filters": [
+            "salad",
+            "Quick Meal"
+        ],
+        "steps": [
+            {
+                "description": "Chop the napa cabbage and crab sticks into small pieces."
+            },
+            {
+                "description": "Slice the cucumber and daikon into thin strips."
+            },
+            {
+                "description": "Chop the boiled egg and fresh herbs, then add the corn. Mix everything together."
+            },
+            {
+                "description": "Season with salt and pepper, add sour cream, and mix well. Serve immediately."
+            }
+        ],
+        "ingredients": [
+            {"id": 1, "title": "Napa cabbage", "quantity": 150, "unit": "g"},
+            {"id": 2, "title": "Crab sticks", "quantity": 200, "unit": "g"},
+            {"id": 3, "title": "Cucumber", "quantity": 1, "unit": "pcs"},
+            {"id": 4, "title": "Daikon radish", "quantity": 100, "unit": "g"},
+            {"id": 5, "title": "Boiled egg", "quantity": 1, "unit": "pcs"},
+            {"id": 6, "title": "Fresh herbs", "quantity": "", "unit": "", description: "to taste"},
+            {"id": 7, "title": "Canned corn", "quantity": 100, "unit": "g"},
+            {"id": 8, "title": "Sour cream", "quantity": 2, "unit": "tbsp"},
+            {"id": 9, "title": "Salt and pepper", "quantity": "", "unit": "", description: "to taste"}
+        ]
+    },
+
+    {
+        "id": 66,
+        "title": "Carrot Orange Smoothie",
+        "description": "A refreshing and nutritious smoothie made with fresh carrot, orange, apple, and lemon juice.",
+        "level": "Easy",
+        "servings": 1,
+        "hasVideoSteps": true,
+        "free": true,
+        "prep_time": 5,
+        "cook_time": 0,
+        "time": 5,
+        "priority": 0,
+        "instagram": "@recipes.smoothie",
+        "proteins": 1,
+        "fats": 0,
+        "carbohydrates": 20,
+        "calories": 90,
+        "filters": [
+            "Drink",
+            "Healthy"
+        ],
+        "steps": [
+            {
+                "description": "Peel and chop the carrot, orange, and half an apple into small pieces.Add the chopped ingredients to a blender. Pour in the lemon juice and a cup of water. Blend until smooth. Pour the smoothie into a glass and enjoy immediately."
+            },
+        ],
+        "ingredients": [
+            {"id": 1, "title": "Carrot", "quantity": 1, "unit": "pcs"},
+            {"id": 2, "title": "Orange", "quantity": 1, "unit": "pcs"},
+            {"id": 3, "title": "Apple", "quantity": 0.5, "unit": "pcs"},
+            {"id": 4, "title": "Lemon juice", "quantity": 1, "unit": "tbsp"},
+            {"id": 5, "title": "Water", "quantity": 1, "unit": "cup"}
+        ]
+    },
+    {
+        "id": 67,
+        "title": "Stuffed Chicken Meat Roll in Healthy Gluten-Free Crust",
+        "description": "A juicy chicken meat roll filled with pesto, sun-dried tomatoes, cheese, and spinach, wrapped in a golden, crispy, gluten-free crust made from crushed nuts and seeds — healthy, simple, and delicious! If you use beef, pork, or mixed ground meat instead of chicken, just add about 5 extra minutes in the air fryer for perfect doneness.",
+        "level": "Medium",
+        "servings": 2,
+        "hasVideoSteps": true,
+        "free": true,
+        "prep_time": 15,
+        "cook_time": 25,
+        "time": 40,
+        "priority": 0,
+        "instagram": "@recipesbyvictoria",
+        "proteins": 57,
+        "fats": 45,
+        "carbohydrates": 20,
+        "calories": 697,
+        "filters": [
+            "Dinner",
+            "Healthy",
+            "Gluten-Free"
+        ],
+        "steps": [
+            {
+                "description": "Place the chicken ground meat between two sheets of parchment paper and roll it out evenly into a thin rectangle."
+            },
+            {
+                "description": "Spread a layer of pesto over the meat. Add sun-dried tomatoes, grated or sliced cheese, and fresh spinach leaves. Carefully roll everything up into a tight log."
+            },
+            {
+                "description": "Prepare a healthy crust using ground nuts and seeds (e.g., almond flour, flax seeds, sesame). Coat the meat roll with this mixture. Place into an air fryer and cook at 180°C (350°F) for 20–25 minutes until golden and fully cooked. Optionally, increase to 200°C for the last 5 minutes for extra crispiness."
+            }
+        ],
+        "ingredients": [
+            {"id": 1, "title": "Ground chicken meat", "quantity": 400, "unit": "g"},
+            {"id": 2, "title": "Pesto", "quantity": 2, "unit": "tbsp"},
+            {"id": 3, "title": "Sun-dried tomatoes", "quantity": 40, "unit": "g"},
+            {"id": 4, "title": "Cheese", "quantity": 80, "unit": "g"},
+            {"id": 5, "title": "Fresh spinach", "quantity": 30, "unit": "g"},
+            {"id": 6, "title": "Almond flour or ground nuts", "quantity": 3, "unit": "tbsp"},
+            {"id": 7, "title": "Seeds (flax, sesame, or mixed)", "quantity": 2, "unit": "tbsp"},
+            {"id": 8, "title": "Salt and pepper", "quantity": "to taste", "unit": ""}
+        ]
+    },
+    {
+        "id": 68,
+        "title": "Cheesy Garlic Baguette with Caramelized Roasted Garlic",
+        "description": "Crispy on the outside, tender inside, with a creamy garlic aroma and melted cheese — the ultimate comfort bite. Perfect as a side for soup, salad, or a moment of pure food joy. Optionally finished with a drizzle of spicy honey!",
+        "level": "Easy",
+        "servings": 4,
+        "hasVideoSteps": true,
+        "free": true,
+        "prep_time": 10,
+        "cook_time": 50,
+        "time": 60,
+        "priority": 0,
+        "instagram": "@gastronomica.daily",
+        "proteins": 10,
+        "fats": 18,
+        "carbohydrates": 25,
+        "calories": 320,
+        "filters": [
+            "Snack",
+            "Baking"
+        ],
+        "steps": [
+            {
+                "description": "Slice the top off a head of garlic to expose the cloves. Place on foil, drizzle with olive oil, season with salt and pepper, wrap tightly, and roast at 180°C (356°F) for 30–40 minutes until soft and caramelized."
+            },
+            {
+                "description": "Once slightly cooled, squeeze out the roasted garlic into a bowl. Mix with soft butter, chopped parsley, salt, and pepper. Slice the baguette and generously spread the garlic butter mixture over each piece."
+            },
+            {
+                "description": "Top with grated cheese (mozzarella, parmesan, or gouda) and bake for another 10–15 minutes at 180°C (356°F) until the cheese is melted and golden. Optionally finish with chili honey and enjoy hot!"
+            }
+        ],
+        "ingredients": [
+            { "id": 1, "title": "Baguette", "quantity": 1, "unit": "pcs" },
+            { "id": 2, "title": "Garlic head", "quantity": 1, "unit": "pcs" },
+            { "id": 3, "title": "Butter (softened)", "quantity": 100, "unit": "g" },
+            { "id": 4, "title": "Cheese (mozzarella, parmesan or gouda)", "quantity": 150, "unit": "g" },
+            { "id": 5, "title": "Olive oil", "quantity": 1, "unit": "tbsp" },
+            { "id": 6, "title": "Salt", "quantity": 0.5, "unit": "tsp" },
+            { "id": 7, "title": "Black pepper", "quantity": 0.5, "unit": "tsp" },
+            { "id": 8, "title": "Chopped parsley", "quantity": 1, "unit": "tbsp" }
+        ]
+    },
+    {
+        "id": 69,
+        "title": "Chocolate Oaty Peanut Butter Cups",
+        "description": "Rich, chewy, salty-sweet peanut butter oat cups topped with silky melted chocolate. No baking needed — just mix, chill, and enjoy! With around 50g of healthy fats per serving, these are super satisfying and perfect after a workout, on-the-go, or when you're craving something sweet but wholesome. Optional: make a lighter version for everyday snacking!",
+        "level": "Easy",
+        "servings": 2,
+        "hasVideoSteps": true,
+        "free": true,
+        "prep_time": 10,
+        "cook_time": 0,
+        "time": 10,
+        "priority": 0,
+        "instagram": "@kittys_kitchen",
+        "proteins": 60,
+        "fats": 105,
+        "carbohydrates": 120,
+        "calories": 1577,
+        "filters": [
+            "Dessert",
+            "No-Bake"
+        ],
+        "steps": [
+            {
+                "description": "In a large bowl, mix together rolled oats, smooth peanut butter, and maple syrup until well combined."
+            },
+            {
+                "description": "Spoon about 1 tablespoon of the mixture into each baking cup. Flatten with the back of a spoon. Melt chocolate and pour over each cup. Move the cups around to let the chocolate spread evenly to the edges. Place in the freezer to set."
+            },
+            {
+                "description": "Remove the cups from the freezer and peel off the baking liners. Sprinkle with flaky sea salt and enjoy!"
+            }
+        ],
+        "ingredients": [
+            { "id": 1, "title": "Smooth peanut butter", "quantity": 24, "unit": "tbsp" },
+            { "id": 2, "title": "Rolled oats", "quantity": 16, "unit": "tbsp" },
+            { "id": 3, "title": "Maple syrup", "quantity": 4, "unit": "tbsp" },
+            { "id": 4, "title": "Chocolate (melted)", "quantity": 0.5, "unit": "pcs" },
+            { "id": 5, "title": "Sea salt", "quantity": "for topping", "unit": "" }
+        ]
+    },
+    {
         "id": 59,
         "title": "Red Cabbage Salad with Carrots, Apples, Walnuts",
         "description": "Discover the perfect balance of freshness and crunch in this vibrant salad! The antioxidant-rich red cabbage combines with sweet carrots and juicy Red Delicious apples, creating an irresistible mix of colors and flavors. Walnuts add a delightful crunch, while the shavings of pecorino provide a savory touch. All of this is enveloped in a simple yet rich dressing made with extra virgin olive oil and apple cider vinegar, finished with a sprinkle of salt, pepper, and fresh thyme for a captivating aroma. Perfect as a side dish or a main course, this salad is a celebration of autumn freshness! 🍂✨",
@@ -204,7 +568,7 @@ export const recipes = [
         "steps": [
 
             {
-                "description": "Rinse the dry red lentils and soak them overnight in water. In the morning, drain and rinse again. Transfer the lentils to a blender. Add the banana, melted butter, carob (or cocoa), baking soda, and a pinch of salt. Blend until you get a smooth batter. If using cocoa instead of carob, consider adding a sweetener of your choice."
+                "description": "Rinse the dry red lentils and soak them for 4 hours or overnight in water. In the morning, drain and rinse again. Transfer the lentils to a blender. Add the banana, melted butter, carob (or cocoa), baking soda, and a pinch of salt. Blend until you get a smooth batter. If using cocoa instead of carob, consider adding a sweetener of your choice."
             },
             {
                 "description": "Pour the batter into a baking mold and place in a preheated oven at 180°C (350°F) for 20-25 minutes. Allow to cool after baking. Optional: Top with melted chocolate, hazelnut spread, or freeze-dried berries before serving."
@@ -285,13 +649,13 @@ export const recipes = [
             }
         ],
         "ingredients": [
-            { "id": 1, "title": "Ground chicken", "quantity": 500, "unit": "g" },
-            { "id": 2, "title": "Hard cheese", "quantity": 150, "unit": "g" },
-            { "id": 3, "title": "Sour cream", "quantity": 3, "unit": "tbsp" },
-            { "id": 4, "title": "Pineapple rings", "quantity": 4, "unit": "pcs" },
-            { "id": 5, "title": "Salt", "quantity": "to taste", "unit": "" },
-            { "id": 6, "title": "Black pepper", "quantity": "to taste", "unit": "" },
-            { "id": 7, "title": "Spices", "quantity": "to taste", "unit": "" }
+            {"id": 1, "title": "Ground chicken", "quantity": 500, "unit": "g"},
+            {"id": 2, "title": "Hard cheese", "quantity": 150, "unit": "g"},
+            {"id": 3, "title": "Sour cream", "quantity": 3, "unit": "tbsp"},
+            {"id": 4, "title": "Pineapple rings", "quantity": 4, "unit": "pcs"},
+            {"id": 5, "title": "Salt", "quantity": "to taste", "unit": ""},
+            {"id": 6, "title": "Black pepper", "quantity": "to taste", "unit": ""},
+            {"id": 7, "title": "Spices", "quantity": "to taste", "unit": ""}
         ]
     },
     {
@@ -332,14 +696,14 @@ export const recipes = [
             }
         ],
         "ingredients": [
-            { "id": 1, "title": "Cottage cheese", "quantity": 330, "unit": "g" },
-            { "id": 2, "title": "Rice flour", "quantity": 3, "unit": "tbsp" },
-            { "id": 3, "title": "Sugar", "quantity": 2, "unit": "tbsp" },
-            { "id": 4, "title": "Vanilla", "quantity": "to taste", "unit": "" },
-            { "id": 5, "title": "Egg", "quantity": 1, "unit": "pcs" },
-            { "id": 6, "title": "Blueberries", "quantity": "as needed", "unit": "" },
-            { "id": 7, "title": "Butter", "quantity": "as needed", "unit": "" },
-            { "id": 8, "title": "Sour cream or yogurt", "quantity": "for serving", "unit": "" }
+            {"id": 1, "title": "Cottage cheese", "quantity": 330, "unit": "g"},
+            {"id": 2, "title": "Rice flour", "quantity": 3, "unit": "tbsp"},
+            {"id": 3, "title": "Sugar", "quantity": 2, "unit": "tbsp"},
+            {"id": 4, "title": "Vanilla", "quantity": "to taste", "unit": ""},
+            {"id": 5, "title": "Egg", "quantity": 1, "unit": "pcs"},
+            {"id": 6, "title": "Blueberries", "quantity": "as needed", "unit": ""},
+            {"id": 7, "title": "Butter", "quantity": "as needed", "unit": ""},
+            {"id": 8, "title": "Sour cream or yogurt", "quantity": "for serving", "unit": ""}
         ]
     },
     {
@@ -385,17 +749,17 @@ export const recipes = [
             }
         ],
         "ingredients": [
-            { "id": 1, "title": "Apples", "quantity": 3, "unit": "pcs" },
-            { "id": 2, "title": "Eggs", "quantity": 3, "unit": "pcs" },
-            { "id": 3, "title": "Sour cream", "quantity": 3, "unit": "tbsp" },
-            { "id": 4, "title": "Coconut sugar", "quantity": 3, "unit": "tbsp" },
-            { "id": 5, "title": "Flour", "quantity": 150, "unit": "g" },
-            { "id": 6, "title": "Cinnamon", "quantity": 1, "unit": "tsp" },
-            { "id": 7, "title": "Lemon zest", "quantity": 1, "unit": "pcs" },
-            { "id": 8, "title": "Nuts", "quantity": "as desired", "unit": "g" },
-            { "id": 9, "title": "Soft cottage cheese", "quantity": 300, "unit": "g" },
-            { "id": 10, "title": "Cream cheese", "quantity": 200, "unit": "g" },
-            { "id": 11, "title": "Powdered sugar", "quantity": "to taste", "unit": "g" }
+            {"id": 1, "title": "Apples", "quantity": 3, "unit": "pcs"},
+            {"id": 2, "title": "Eggs", "quantity": 3, "unit": "pcs"},
+            {"id": 3, "title": "Sour cream", "quantity": 3, "unit": "tbsp"},
+            {"id": 4, "title": "Coconut sugar", "quantity": 3, "unit": "tbsp"},
+            {"id": 5, "title": "Flour", "quantity": 150, "unit": "g"},
+            {"id": 6, "title": "Cinnamon", "quantity": 1, "unit": "tsp"},
+            {"id": 7, "title": "Lemon zest", "quantity": 1, "unit": "pcs"},
+            {"id": 8, "title": "Nuts", "quantity": "as desired", "unit": "g"},
+            {"id": 9, "title": "Soft cottage cheese", "quantity": 300, "unit": "g"},
+            {"id": 10, "title": "Cream cheese", "quantity": 200, "unit": "g"},
+            {"id": 11, "title": "Powdered sugar", "quantity": "to taste", "unit": "g"}
         ]
     },
     {
@@ -435,17 +799,17 @@ export const recipes = [
             }
         ],
         "ingredients": [
-            { "id": 1, "title": "Beetroot", "quantity": 3, "unit": "pcs" },
-            { "id": 2, "title": "Olive oil", "quantity": 30, "unit": "ml" },
-            { "id": 3, "title": "Walnuts", "quantity": 50, "unit": "g" },
-            { "id": 4, "title": "Pomegranate seeds", "quantity": 50, "unit": "g" },
-            { "id": 5, "title": "Parsley", "quantity": 10, "unit": "g" },
-            { "id": 6, "title": "Feta or Philadelphia cheese", "quantity": 100, "unit": "g" },
-            { "id": 7, "title": "Balsamic vinegar", "quantity": 15, "unit": "ml" },
-            { "id": 8, "title": "Olive oil (for dressing)", "quantity": 30, "unit": "ml" },
-            { "id": 9, "title": "Honey", "quantity": 15, "unit": "ml" },
-            { "id": 10, "title": "Lemon juice", "quantity": 10, "unit": "ml" },
-            { "id": 11, "title": "Salt and pepper", "quantity": "to taste", "unit": "" }
+            {"id": 1, "title": "Beetroot", "quantity": 3, "unit": "pcs"},
+            {"id": 2, "title": "Olive oil", "quantity": 30, "unit": "ml"},
+            {"id": 3, "title": "Walnuts", "quantity": 50, "unit": "g"},
+            {"id": 4, "title": "Pomegranate seeds", "quantity": 50, "unit": "g"},
+            {"id": 5, "title": "Parsley", "quantity": 10, "unit": "g"},
+            {"id": 6, "title": "Feta or Philadelphia cheese", "quantity": 100, "unit": "g"},
+            {"id": 7, "title": "Balsamic vinegar", "quantity": 15, "unit": "ml"},
+            {"id": 8, "title": "Olive oil (for dressing)", "quantity": 30, "unit": "ml"},
+            {"id": 9, "title": "Honey", "quantity": 15, "unit": "ml"},
+            {"id": 10, "title": "Lemon juice", "quantity": 10, "unit": "ml"},
+            {"id": 11, "title": "Salt and pepper", "quantity": "to taste", "unit": ""}
         ]
     },
     {
@@ -3737,5 +4101,7 @@ export const recipes = [
                 "unit": "tsp"
             }
         ]
-    }
+    },
+
+
 ];

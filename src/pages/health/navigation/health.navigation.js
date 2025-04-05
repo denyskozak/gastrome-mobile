@@ -22,12 +22,12 @@ const HealthNavigationComponent = (props) => {
   const tabs = getStack(t);
 
   return (
-      <View style={{ flex: 1 }}>
+      <SafeAreaView style={{ flex: 1 }}>
         <StackNavigator
             tabs={tabs}
             initialRouteName={healthRoute}
         />
-      </View>
+      </SafeAreaView>
 
   );
 };

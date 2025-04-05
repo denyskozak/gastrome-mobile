@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native';
-import {getTextStyles} from "../../../styles/common.styles";
+import {getPercentWidth, getTextStyles} from "../../../styles/common.styles";
 import {Colors} from "../../../styles/colors";
+import {Spaces} from "../../../styles/spaces";
 
 const styles = StyleSheet.create({
     subscriptionsButton: { backgroundColor: Colors.black },

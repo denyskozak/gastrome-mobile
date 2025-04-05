@@ -7,11 +7,9 @@ import {getDevice} from "../../utilities/getCurrentDevice";
 
 const styles = StyleSheet.create({
   container: {
-    marginLeft: Spaces.xsmall,
-    marginRight: Spaces.xsmall,
-    alignSelf: 'center',
-    alignItems: 'center',
-    paddingBottom: Spaces.large,
+    // marginLeft: Spaces.xsmall,
+    // marginRight: Spaces.xsmall,
+    flex: 1,
   },
   actionButtonsContainer: {
     // height: Spaces.xxlarge,
@@ -46,8 +44,7 @@ const styles = StyleSheet.create({
     color: Colors.primary
   }),
   firstSubscriptionButton: {
-    marginTop: Spaces.medium,
-    marginBottom: Spaces.medium,
+    margin: Spaces.medium,
     // width: 320,
   },
   actionText: getTextStyles({
@@ -123,17 +120,14 @@ const styles = StyleSheet.create({
   }),
 
   //list
-  list: {
+  // list: {
     // gap: Spaces.xlarge,
-    alignItems: 'center',
-    width: '100%',
-  },
+  // },
   separator: {
-    height: Spaces.xlarge
+    height: Spaces.large
   },
   subscriptions: {
-    marginTop: Spaces.medium,
-    paddingBottom: Spaces.large,
+    padding: Spaces.medium,
   },
   // Voice assistant button
   assistant: {

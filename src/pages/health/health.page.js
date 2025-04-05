@@ -37,7 +37,7 @@ const HealthPageComponent = (props) => {
     const [t] = useTranslator('pages.health');
 
     return (
-        <SafeAreaView style={styles.container}>
+        <View style={styles.container}>
             <FlashList
                 showsVerticalScrollIndicator={false}
                 // contentContainerStyle={styles.list}
@@ -55,7 +55,7 @@ const HealthPageComponent = (props) => {
                     </Pressable>
                 )}
             />
-        </SafeAreaView>
+        </View>
     );
 };
 

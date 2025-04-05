@@ -23,7 +23,7 @@ const SupplementPageComponent = (props) => {
 
 
     return (
-        <SafeAreaView style={styles.container}>
+        <View style={styles.container}>
             <Text  style={styles.text}>{item.name}</Text>
 
             <Image source={item.img} style={styles.image}/>
@@ -36,7 +36,7 @@ const SupplementPageComponent = (props) => {
                 />
             </View>
 
-        </SafeAreaView>
+        </View>
     );
 };
 

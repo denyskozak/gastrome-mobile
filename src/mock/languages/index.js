@@ -17,17 +17,17 @@ const prepareItems = items => items
     .map(addImageSource)
     .filter(filterByHasVideo);
 
-const mergeBaseOnOriginLanguage = (recipe, index) => ({
-    ...enRecipes[index],
-    ...recipe,
-    steps: enRecipes[index].steps.map((step, indexStep) => ({...step, ...recipe.steps[indexStep]})),
-    ingredients: enRecipes[index].ingredients.map((ingredient, indexIngredient) => ({...ingredient, description: '', ...recipe.ingredients[indexIngredient]})),
-})
+// const mergeBaseOnOriginLanguage = (recipe, index) => ({
+//     ...enRecipes[index],
+//     ...recipe,
+//     steps: enRecipes[index].steps.map((step, indexStep) => ({...step, ...recipe.steps[indexStep]})),
+//     ingredients: enRecipes[index].ingredients.map((ingredient, indexIngredient) => ({...ingredient, description: '', ...recipe.ingredients[indexIngredient]})),
+// })
 
 const translates = {
     en: enRecipes,
-    ru: ruRecipes.map(mergeBaseOnOriginLanguage),
-    uk: ukRecipes.map(mergeBaseOnOriginLanguage),
+    // ru: ruRecipes.map(mergeBaseOnOriginLanguage),
+    // uk: ukRecipes.map(mergeBaseOnOriginLanguage),
 };
 
 const getRecipesByLanguage = (language = 'en') => {

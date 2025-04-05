@@ -15,10 +15,9 @@ export const filterIcons = [
     {
         // 'Christmas': '🎄',
         'pasta': '🍝',
-        'vegan': '🌿',
+        // 'vegan': '🌿',
         'snack': '🥨',
         'roll': '🍣',
-
         'drink': '🍹',
         'salad': '🥗',
         'dessert': '🍨',
@@ -27,3 +26,4 @@ export const filterIcons = [
         'healthy': '🥦',
     }
 ];
+

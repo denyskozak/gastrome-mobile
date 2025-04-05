@@ -46,15 +46,15 @@ const RecipeItemComponent = (props) => {
             .map(item => item.title)
     }, [selectedIngredients, ingredients]);
 
-    const ingredientsList = useMemo(() =>
-            ingredients
-                .slice(0, 5 - selectedIngredientsList.length)
-                .map(item => item.title)
-                .join(', '),
-        [ingredients, selectedIngredientsList]
-    );
+    // const ingredientsList = useMemo(() =>
+    //         ingredients
+    //             .slice(0, 5 - selectedIngredientsList.length)
+    //             .map(item => item.title)
+    //             .join(', '),
+    //     [ingredients, selectedIngredientsList]
+    // );
 
-    const renderThreeDots = items => items.length > 4 ? '...' : '';
+    // const renderThreeDots = items => items.length > 4 ? '...' : '';
 
     return (<Pressable style={styles.container} onPress={() => onPress(id)}>
         {image && !hideImage && (
@@ -68,14 +68,14 @@ const RecipeItemComponent = (props) => {
                     </View>
 
                     {/*<AttentionAnimation duration={1200} start={0.5} end={1} property="opacity">*/}
-                    {enableHint && (
-                        <View style={styles.imageIcon}>
-                                <Animation name="click" autoPlay={false} height={Spaces.xxxlarge * 1.4}
-                                           width={Spaces.xxxlarge * 1.4}/>
-                                {/*<Icon name={'play-circle-outline'} color={Colors[iconColor]}*/}
-                                {/*      size={Spaces.xxlarge + Spaces.small}/>*/}
-                        </View>
-                    )}
+                    {/*{enableHint && (*/}
+                    {/*    <View style={styles.imageIcon}>*/}
+                    {/*            <Animation name="click" autoPlay={false} height={Spaces.xxxlarge * 1.4}*/}
+                    {/*                       width={Spaces.xxxlarge * 1.4}/>*/}
+                    {/*            /!*<Icon name={'play-circle-outline'} color={Colors[iconColor]}*!/*/}
+                    {/*            /!*      size={Spaces.xxlarge + Spaces.small}/>*!/*/}
+                    {/*    </View>*/}
+                    {/*)}*/}
                     {/*Locked for unsubscribed user, removed since all recipes free*/}
                     {/*{!free && !isSubscriber && (*/}
                     {/*    <View style={styles.imageBlockIcon}>*/}
