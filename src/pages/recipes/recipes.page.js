@@ -280,7 +280,7 @@ const RecipesPageComponent = (props) => {
                 estimatedItemSize={data.length > 0 ? data.length : 1}
                 getItemCount={items => items.length}
                 getItem={(items, index) => data[index]}
-                numColumns={2}
+                numColumns={1}
                 ListEmptyComponent={<Text style={styles.emptyList}>{t('emptyList')}</Text>}
                 ListHeaderComponent={<View>
                     {renderSelectedIngredients()}
