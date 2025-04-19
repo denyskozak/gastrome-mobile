@@ -2,6 +2,40 @@ import {getAuthor} from "../author";
 
 export const recipes = [
     {
+        "id": 70,
+        "title": "🫒🥘 BROCCOLI & CARROT FRITTATA",
+        "description": "A quick and easy Mediterranean-style veggie frittata with broccoli, carrots, and cheese.",
+        "level": "easy",
+        "servings": 2,
+        "hasVideoSteps": true,
+        "free": true,
+        "prep_time": 10,
+        "cook_time": 25,
+        "time": 35,
+        "priority": 0,
+        "instagram": "@mediterraneandiet.challenge",
+        "proteins": 27,
+        "fats": 35,
+        "carbohydrates": 8,
+        "calories": 420,
+        "filters": [
+            "Vegan",
+        ],
+        "steps": [
+
+            {
+                "description": "Add all the ingredients to a baking dish Smash the broccoli and beat the eggs, then mix everything together. Bake for 20-25 minutes 180°C (350°F) or until golden on top."
+            },
+
+        ],
+        "ingredients": [
+            { "id": 1, "title": "Broccoli", "quantity": 80, "unit": "g" },
+            { "id": 2, "title": "Carrots", "quantity": 50, "unit": "g", "description": "grated" },
+            { "id": 3, "title": "Eggs", "quantity": 3, "unit": "pcs" },
+            { "id": 4, "title": "Cheddar cheese", "quantity": 1, "description": "grated" }
+        ]
+    },
+    {
         "id": 60,
         "title": "Bacon-Wrapped Onion Rings",
         "description": "Crispy and flavorful onion rings wrapped in bacon, served with a creamy garlic dipping sauce.",
