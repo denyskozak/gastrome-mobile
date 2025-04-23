@@ -20,14 +20,12 @@ const PermissionModalComponent = ({ isVisible, onChangeVisible, onPress }) => {
       </Text>
       <Button
         style={styles.helpModalButton}
-        textStyle={styles.helpModalButtonText}
         onPress={() => Linking.openSettings()}
         title={t('button')}
       />
       <Button
         type="outlined"
         style={styles.helpModalButton}
-        textStyle={styles.helpModalButtonText}
 
         onPress={onPress}
         title={t('close')}

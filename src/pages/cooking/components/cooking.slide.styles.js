@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
         bottom: '50%',
     },
     backButton: {
-        backgroundColor: Colors.backgroundColorLowOpacity,
+        backgroundColor: Colors.white,
     },
     backButtonText: getTextStyles({
         fontSize: 18,
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderRadius: BorderRadius.small,
         padding: Spaces.small,
-        borderColor: Colors.black,
+        borderColor: Colors.white,
         backgroundColor: Colors.backgroundColorLowOpacity
     },
     textContainerActive: {
@@ -105,14 +105,14 @@ const styles = StyleSheet.create({
     },
     step: getTextStyles({
         fontSize: 18,
-        color: Colors.black,
+        color: Colors.white,
         textAlign: 'center',
         // maxHeight: Spaces.xxxlarge + Spaces.xxlarge,
     }),
     text: getTextStyles({
         marginTop: Spaces.small,
         fontSize: 18,
-        color: Colors.black,
+        color: Colors.white,
         textAlign: 'center',
         // maxHeight: Spaces.xxxlarge + Spaces.xxlarge,
     }),

@@ -13,11 +13,11 @@ export const SubscriptionButton = (props) => {
             onPress?.()
         }}>
             <Text style={styles.subscriptionsButtonText}>
-                <Icon name="heart" size={24} color={Colors.white}/>
+                <Icon name="heart" size={24} color={Colors.black}/>
                 {' '}
                 {text}
                 {' '}
-                <Icon name="heart" size={24} color={Colors.white}/>
+                <Icon name="heart" size={24} color={Colors.black}/>
             </Text>
         </Button>
 

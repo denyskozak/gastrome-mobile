@@ -19,7 +19,7 @@ export const getTextStyles = (
     fontFamily: fontEnum.PoppinsNormal,
     textDecorationLine: 'none',
     fontWeight: '400',
-    color: Colors.black
+    color: Colors.white
   };
 
   return {

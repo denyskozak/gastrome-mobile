@@ -129,10 +129,10 @@ export const CookingSlideComponent = (props) => {
                         Haptics.selectionAsync();
                         onBackClick?.();
                     }}>
-                        <Icon name='chevron-back-outline' color={Colors.black} size={Spaces.large}/>
+                        <Icon name='chevron-back-outline' color={Colors.white} size={Spaces.large}/>
                     </Pressable>
                     <Pressable style={styles.textHideIcon} onPress={() => setIsTextHidden(!isTextHidden)}>
-                        <Icon name={isTextHidden ? 'eye-outline' : 'eye-off-outline'} color={Colors.black}
+                        <Icon name={isTextHidden ? 'eye-outline' : 'eye-off-outline'} color={Colors.white}
                               size={Spaces.large}/>
                     </Pressable>
                     <Text style={styles.step}>

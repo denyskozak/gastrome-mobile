@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
   getNewButton: {},
   getNewText: {
     fontSize: 20,
-    color: Colors.white
+    color: Colors.black
   },
 });
 

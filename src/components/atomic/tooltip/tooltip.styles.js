@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
   text: getTextStyles({
     fontSize: 18,
     padding: Spaces.small,
-    color: Colors.white,
+    color: Colors.primary,
     textAlign: 'center',
   })
 });

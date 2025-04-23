@@ -58,6 +58,7 @@ const styles = StyleSheet.create({
     paddingLeft: Spaces.medium,
     paddingRight: Spaces.medium,
   },
+  timeText: getTextStyles(),
   hasVideoSteps: getTextStyles({
     fontSize: 16,
     fontFamily: fontEnum.PoppinsBold,
@@ -69,7 +70,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
   },
   title: getTextStyles({
-    fontSize: FontSizes.medium,
+    fontSize: FontSizes.large,
     fontFamily: fontEnum.PoppinsSemiBold,
     textAlign: 'center',
     marginTop: Spaces.small,

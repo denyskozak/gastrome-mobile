@@ -227,7 +227,7 @@ const CartPageComponent = (props) => {
           style={styles.actionButton}
           onPress={handleShare}
         >
-          <Icon name="share-outline" size={24} color={Colors.black}/>
+          <Icon name="share-outline" size={24} color={Colors.white}/>
         </Button>)}
         <Button
           type="outlined"
@@ -237,7 +237,7 @@ const CartPageComponent = (props) => {
             setRefreshConfirmModalOpen(true);
           }}
         >
-          <Icon name="refresh-outline" size={24} color={Colors.black}/>
+          <Icon name="refresh-outline" size={24} color={Colors.white}/>
         </Button>
         {isDeleteButtonDisplays && (<Button
           type="outlined"

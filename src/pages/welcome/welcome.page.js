@@ -187,7 +187,7 @@ const WelcomePageComponent = (props) => {
                                 style={styles.scrollDown}>
                                 <Animated style={styles.scrollDownButton} delay={animationDelays.downChevron}
                                           duration={1000}>
-                                    <Icon name="chevron-down-outline" size={Spaces.xxlarge} color={Colors.second}/>
+                                    <Icon name="chevron-down-outline" size={Spaces.xxlarge} color={Colors.white}/>
                                     <Text style={styles.scrollDownText}>{t('generator')}</Text>
                                 </Animated>
                             </TouchableOpacity>

@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
   },
   itemContainer: {
     borderWidth: Spaces.xxsmall,
-    borderColor: Colors.primary,
+    borderColor: Colors.red,
     borderRadius: BorderRadius.small,
     height: Spaces.mxxlarge,
     alignItems: 'center',

@@ -6,6 +6,7 @@ import { Spaces } from '../../styles/spaces';
 import { Button } from '../../components/atomic/button/button.component';
 import { Modal } from '../../components/atomic/modal/modal.component';
 import styles from './commonModal.styles';
+import {Colors} from "../../styles/colors";
 
 export const CommonModalContext = createContext(false);
 
@@ -74,6 +75,7 @@ const CommonModalComponent = (props) => {
           <Icon
             name={icon}
             size={Spaces.xxlarge}
+            color={Colors.white}
           />
           <Text style={styles.title}>
             {title}

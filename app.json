@@ -2,7 +2,7 @@
   "expo": {
     "name": "Gastro & Me",
     "slug": "gastro-and-me",
-    "version": "1.1.51",
+    "version": "1.1.53",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
@@ -25,7 +25,7 @@
           },
           "ios": {
             "useFrameworks": "static",
-            "deploymentTarget": "13.0"
+            "deploymentTarget": "15.0"
           }
         }
       ],

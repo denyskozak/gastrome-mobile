@@ -3,7 +3,7 @@ import { fontEnum } from '../../styles/fonts';
 import { StyleSheet } from 'react-native';
 import { Spaces } from '../../styles/spaces';
 import { Colors } from '../../styles/colors';
-import { BorderRadius } from '../../styles/borderRadiuses';
+import {BorderRadius as FontSizes, BorderRadius} from '../../styles/borderRadiuses';
 import {getDevice} from "../../utilities/getCurrentDevice";
 
 const IPadImage = {
@@ -25,9 +25,15 @@ const styles = StyleSheet.create({
   list: {
   },
   button: {
-    backgroundColor: Colors.black,
+    backgroundColor: Colors.primary,
+
     // flex: 0.1,
   },
+  buttonText: getTextStyles({
+    color: Colors.black,
+    fontSize: FontSizes.large,
+    fontFamily: fontEnum.PoppinsBold,
+  }),
   // Time
   timeContainer: {
     marginTop: Spaces.large,
@@ -38,7 +44,7 @@ const styles = StyleSheet.create({
     paddingLeft: Spaces.medium,
     paddingRight: Spaces.medium,
   },
-  time: getTextStyles({
+  timeText: getTextStyles({
     fontSize: 14,
   }),
   //Title
@@ -175,6 +181,7 @@ const styles = StyleSheet.create({
   stepName: getTextStyles({
     fontSize: 20,
     fontFamily: fontEnum.PoppinsBold,
+    color: Colors.red
   }),
   underline: {
     textDecorationLine: 'underline',
