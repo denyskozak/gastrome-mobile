@@ -2,6 +2,120 @@ import {getAuthor} from "../author";
 
 export const recipes = [
     {
+        "id": 72,
+        "title": "🧄🥔 Garlic Butter Potatoes",
+        "description": "Crispy hasselback-style potatoes roasted with garlic and smothered in garlic-parsley butter. A cozy and delicious side dish.",
+        "level": "easy",
+        "servings": 4,
+        "hasVideoSteps": true,
+        "free": true,
+        "prep_time": 15,
+        "cook_time": 50,
+        "time": 65,
+        "priority": 0,
+        "instagram": "@dontgobaconmyheart_",
+        "proteins": 20,
+        "fats": 100,
+        "carbohydrates": 200,
+        "calories": 1800,
+        "filters": [
+            "snack",
+            "vegetarian",
+            "comfort food",
+            "side dish"
+        ],
+        "steps": [
+            {
+                "description": "Wash and slice each potato thinly, being careful not to cut all the way through. Toss with olive oil, salt and pepper. Add the garlic heads in foil as in the video, roast for 30 minutes at 200C/390F (until the potatoes are golden and the garlic is soft)." },
+            {
+                "description": "Press the roasted garlic into a bowl with the oil, parsley and a pinch of salt and pepper. Toss and spread generously over the hot potatoes."
+            }
+        ],
+        "ingredients": [
+            { "id": 1, "title": "Garlic bulbs", "quantity": 2, "unit": "pcs" },
+            { "id": 2, "title": "Small potatoes", "quantity": 1000, "unit": "g" },
+            { "id": 3, "title": "Olive oil", "quantity": 3, "unit": "tbsp" },
+            { "id": 4, "title": "Salt", "quantity": 0.5, "unit": "tsp" },
+            { "id": 5, "title": "Black pepper", "quantity": 0.25, "unit": "tsp" },
+            { "id": 6, "title": "Butter", "quantity": 90, "unit": "g" },
+            { "id": 7, "title": "Fresh parsley", "quantity": 2, "unit": "tbsp", "description": "very finely diced" }
+        ]
+    },
+    {
+        "id": 71,
+        "title": "🫒🥘 Tomato Burrata Salad",
+        "description": "A fresh and creamy Mediterranean salad featuring plum tomatoes, avocado, burrata, and a tangy-sweet dressing.",
+        "level": "easy",
+        "servings": 2,
+        "hasVideoSteps": true,
+        "free": true,
+        "prep_time": 10,
+        "cook_time": 0,
+        "time": 10,
+        "priority": 0,
+        "instagram": "@mediterraneandiet.challenge",
+        "proteins": 23,
+        "fats": 75,
+        "carbohydrates": 37,
+        "calories": 889,
+        "filters": [
+            "salad",
+            "vegan",
+            "healthy"
+        ],
+        "steps": [
+            {
+                "description": "Slice plum tomatoes and avocado. Roughly chop parsley and pistachios.Mix Serve immediately and enjoy!"
+            }
+        ],
+        "ingredients": [
+            { "id": 1, "title": "Avocado", "quantity": 1, "unit": "pcs" },
+            { "id": 2, "title": "Plum tomatoes", "quantity": 3, "unit": "pcs" },
+            { "id": 3, "title": "Parsley", "quantity": 2, "unit": "tbsp" },
+            { "id": 4, "title": "Burrata", "quantity": 1, "unit": "pcs" },
+            { "id": 5, "title": "Pistachios", "quantity": 2, "unit": "tbsp" },
+            { "id": 6, "title": "Salt", "quantity": 1, "unit": "pinch" },
+            { "id": 7, "title": "Olive oil", "quantity": 1, "unit": "tbsp" },
+            { "id": 8, "title": "Balsamic vinegar", "quantity": 1, "unit": "tsp" },
+            { "id": 9, "title": "Pomegranate molasses", "quantity": 1, "unit": "tsp" }
+        ]
+    },
+    {
+        "id": 70,
+        "title": "🫒🥘 BROCCOLI & CARROT FRITTATA",
+        "description": "A quick and easy Mediterranean-style veggie frittata with broccoli, carrots, and cheese.",
+        "level": "easy",
+        "servings": 2,
+        "hasVideoSteps": true,
+        "free": true,
+        "prep_time": 10,
+        "cook_time": 25,
+        "time": 35,
+        "priority": 0,
+        "instagram": "@mediterraneandiet.challenge",
+        "proteins": 27,
+        "fats": 35,
+        "carbohydrates": 8,
+        "calories": 420,
+        "filters": [
+            "vegan",
+            "breakfast"
+        ],
+        "steps": [
+
+            {
+                "description": "Add all the ingredients to a baking dish Smash the broccoli and beat the eggs, then mix everything together. Bake for 20-25 minutes 180°C (350°F) or until golden on top."
+            },
+
+        ],
+        "ingredients": [
+            { "id": 1, "title": "Broccoli", "quantity": 80, "unit": "g" },
+            { "id": 2, "title": "Carrots", "quantity": 50, "unit": "g", "description": "grated" },
+            { "id": 3, "title": "Eggs", "quantity": 3, "unit": "pcs" },
+            { "id": 4, "title": "Cheddar cheese", "quantity": 1, "description": "grated" }
+        ]
+    },
+    {
         "id": 60,
         "title": "Bacon-Wrapped Onion Rings",
         "description": "Crispy and flavorful onion rings wrapped in bacon, served with a creamy garlic dipping sauce.",
