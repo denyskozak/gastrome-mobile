@@ -37,6 +37,7 @@ const ButtonComponent = (props) => {
         <Text style={[
           styles.text,
           highlight ? styles.highlight : null,
+          type === 'outlined' ? styles.textOutlined : null,
           type === 'contained' ? styles.textContained : null,
           type === 'fulled' ? styles.textFulled : null,
           type === 'wide' ? styles.wideText : null,

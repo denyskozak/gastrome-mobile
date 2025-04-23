@@ -29,6 +29,7 @@ import * as Haptics from "expo-haptics";
 import {renderFilterIcon} from "../../utilities/renders";
 import {useSettings} from "../../contexts/settings.context";
 import {filterIcons} from "../../constants/filters";
+import {recipesRoute} from "../recipes/navigation/recipes.routes";
 
 const videoSources = [
     require('./assets/1.mp4'),
@@ -90,7 +91,7 @@ const WelcomePageComponent = (props) => {
     const filterClickHandle = (filter) => {
         Haptics.impactAsync('light');
         setSetting('filterNames', [filter]);
-        navigation.navigate(recipesPageRoute)
+        navigation.navigate(recipesPageRoute, {screen: recipesRoute});
     };
 
     const actionButtons = [
@@ -167,7 +168,7 @@ const WelcomePageComponent = (props) => {
                                 textStyle={styles.letGoButtonText}
                                 onPress={() => {
                                     Haptics.impactAsync('light');
-                                    navigation.navigate(recipesPageRoute)
+                                    navigation.navigate(recipesPageRoute, {screen: recipesRoute});
                                 }}
                             >
                                 {t('all')}
@@ -187,7 +188,7 @@ const WelcomePageComponent = (props) => {
                                 style={styles.scrollDown}>
                                 <Animated style={styles.scrollDownButton} delay={animationDelays.downChevron}
                                           duration={1000}>
-                                    <Icon name="chevron-down-outline" size={Spaces.xxlarge} color={Colors.second}/>
+                                    <Icon name="chevron-down-outline" size={Spaces.xxlarge} color={Colors.white}/>
                                     <Text style={styles.scrollDownText}>{t('generator')}</Text>
                                 </Animated>
                             </TouchableOpacity>

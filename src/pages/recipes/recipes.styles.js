@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     marginLeft: Spaces.small,
     // width: Spaces.xxxlarge,
     borderRadius: BorderRadius.small,
-    borderColor: Colors.black
+    borderColor: Colors.white
   },
   actionContainer: {
     flexDirection: 'row',

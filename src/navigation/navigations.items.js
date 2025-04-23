@@ -21,7 +21,7 @@ import {HealthNavigation} from "../pages/health/navigation/health.navigation";
 
 const createRenderIcon = (name, size = 32, darkMode = false, delay = 2150, attention = false) => () => {
 
-  const element = <Animated style={{ width: size, }} name="FadeInDown" delay={delay}><Icon name={name} size={size} color={darkMode ? Colors.black : Colors.second}/></Animated>;
+  const element = <Animated style={{ width: size, }} name="FadeInDown" delay={delay}><Icon name={name} size={size} color={Colors.white}/></Animated>;
   return attention === false
       ? element
       : <AttentionAnimation property="translateY" start={0} end={-5} delay={2000}>{element}</AttentionAnimation>

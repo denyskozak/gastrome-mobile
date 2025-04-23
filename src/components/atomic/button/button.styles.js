@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
   outlined: {
     backgroundColor: 'rgba(52, 52, 52, 0)',
     borderWidth: 1,
-    borderColor: Colors.black,
+    borderColor: Colors.white,
     borderRadius: BorderRadius.small,
   },
   contained: {
@@ -68,13 +68,17 @@ const styles = StyleSheet.create({
 
   selected: {
     backgroundColor: Colors.black,
-    borderColor: Colors.black
+    borderColor: Colors.primary
   },
   text: getTextStyles({
     fontSize: 16,
+    color: Colors.black,
   }),
   textContained: {
     color: Colors.second,
+  },
+  textOutlined: {
+    color: Colors.white,
   },
   textFulled: {
     color: Colors.second,

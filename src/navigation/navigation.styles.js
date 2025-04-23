@@ -26,7 +26,7 @@ export const sceneContainerTheme = {
 
 
 export const headerStyles = {
-  headerTintColor: Colors.black,
+  headerTintColor: Colors.white,
   headerTitleStyle,
   headerStyle: {
     backgroundColor: Colors.backgroundColor,

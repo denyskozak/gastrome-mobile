@@ -10,9 +10,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: Colors.white
   }),
-  helpModalButtonText: getTextStyles({
-    color: Colors.white,
-  }),
+
   helpModalButton: {
     marginTop: Spaces.medium,
     color: Colors.white,

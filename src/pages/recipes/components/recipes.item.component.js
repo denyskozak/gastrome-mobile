@@ -103,7 +103,7 @@ const RecipeItemComponent = (props) => {
                 {recipeCountry && <View style={styles.flag}><CountryFlag name={recipeCountry}/></View>}
             </View>
             <View style={styles.timeContainer}>
-                <Text>
+                <Text style={styles.timeText}>
                     <Icon name="time-outline" size={14}/>
                     {'  '}
                     {t('time', {time})}

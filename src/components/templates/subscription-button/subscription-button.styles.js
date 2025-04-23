@@ -4,9 +4,9 @@ import {Colors} from "../../../styles/colors";
 import {Spaces} from "../../../styles/spaces";
 
 const styles = StyleSheet.create({
-    subscriptionsButton: { backgroundColor: Colors.black },
+    subscriptionsButton: {  },
     subscriptionsButtonText: getTextStyles({
-        color: Colors.white
+        color: Colors.black
     }),
 });
 

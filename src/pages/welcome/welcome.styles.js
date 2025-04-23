@@ -45,19 +45,18 @@ const styles = StyleSheet.create({
     videoLayer: {
         height: '100%',
         width: getPercentHeight(100),
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.backgroundColor,
         opacity: 0.8,
         position: 'absolute',
         zIndex: 1
     },
     letGoButtonText: getTextStyles({
         fontSize: 20,
-        color: Colors.second,
 
     }),
     letGoButton: {
 
-        borderColor: Colors.second,
+        borderColor: Colors.white,
     },
     scrollDown: {
         position: 'absolute',
@@ -70,7 +69,7 @@ const styles = StyleSheet.create({
     },
     scrollDownText: getTextStyles({
         fontSize: 18,
-        color: Colors.second,
+        color: Colors.white,
         fontWeight: '200',
     }),
     letGoButtonContainer: {

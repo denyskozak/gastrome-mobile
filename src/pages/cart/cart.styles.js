@@ -89,7 +89,6 @@ const styles = StyleSheet.create({
   notFound: getTextStyles({
     fontSize: 18,
     textAlign: 'center',
-    color: Colors.primary
   }),
   notFoundButtonText: getTextStyles({
     fontSize: 18,

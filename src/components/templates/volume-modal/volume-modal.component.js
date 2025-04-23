@@ -21,14 +21,12 @@ const VolumeModalComponent = ({ isVisible, onChangeVisible, onTryAgainPress, onP
       </Text>
       <Button
         style={styles.helpModalButton}
-        textStyle={styles.helpModalButtonText}
         onPress={onTryAgainPress}
         title={t('tryAgain')}
       />
       <Button
         type="outlined"
         style={styles.helpModalButton}
-        textStyle={styles.helpModalButtonText}
         onPress={() => {
           onChangeVisible(false);
         }}

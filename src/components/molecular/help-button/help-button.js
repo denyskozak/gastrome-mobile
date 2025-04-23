@@ -11,7 +11,7 @@ const HelpButtonComponent = (props) => {
 
   return (
     <Button style={styles.container} type="outlined" size="s" onPress={onPress}>
-      <Icon name="help-outline" size={18} color={Colors.black}/>
+      <Icon name="help-outline" size={18} color={Colors.white}/>
     </Button>
   );
 }

@@ -2,7 +2,7 @@
   "expo": {
     "name": "Gastro & Me",
     "slug": "gastro-and-me",
-    "version": "1.1.51",
+    "version": "1.1.54",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
@@ -25,7 +25,7 @@
           },
           "ios": {
             "useFrameworks": "static",
-            "deploymentTarget": "13.0"
+            "deploymentTarget": "15.0"
           }
         }
       ],
@@ -34,7 +34,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "cover",
-      "backgroundColor": "#f8dfdb"
+      "backgroundColor": "#000"
     },
     "updates": {
       "fallbackToCacheTimeout": 0

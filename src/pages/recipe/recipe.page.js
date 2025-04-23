@@ -152,7 +152,7 @@ const RecipePageComponent = (props) => {
             ListHeaderComponent={<>
                 {/* Image section */}
                 <View style={styles.timeContainer}>
-                    <Text>
+                    <Text style={styles.timeText}>
                         <Icon name="time-outline" size={14}/>
                         {'  '}
                         {t('time', {time})}
@@ -232,9 +232,9 @@ const RecipePageComponent = (props) => {
                     {subTitle && <Text style={styles.sub}>{subTitle}</Text>}
                     {calories && <Text style={styles.calories}>{t('calories')}: {multiplyByServings(calories)}</Text>}
                     <View style={styles.PFC}>
-                        {proteins && <Text style={styles.PFCText}>{t('proteins')}: {renderPFC(proteins)}</Text>}
-                        {carbohydrates && <Text style={styles.PFCText}>{t('carbs')}:  {renderPFC(carbohydrates)}</Text>}
-                        {fats && <Text style={styles.PFCText}>{t('fats')}:  {renderPFC(fats)}</Text>}
+                        {proteins === undefined && <Text style={styles.PFCText}>{t('proteins')}: {renderPFC(proteins)}</Text>}
+                        {carbohydrates  === undefined && <Text style={styles.PFCText}>{t('carbs')}:  {renderPFC(carbohydrates)}</Text>}
+                        {fats  === undefined && <Text style={styles.PFCText}>{t('fats')}:  {renderPFC(fats)}</Text>}
                     </View>
 
                     {description && <Text style={styles.description}>{description}</Text>}
@@ -256,7 +256,7 @@ const RecipePageComponent = (props) => {
                                         }
                                     }}
                                 >
-                                    <Icon name="remove-circle-outline" color={Colors.black} size={20}/>
+                                    <Icon name="remove-circle-outline" color={Colors.white} size={20}/>
                                 </Button>
 
                                 <Button
@@ -269,7 +269,7 @@ const RecipePageComponent = (props) => {
                                     }}
                                     size="m"
                                 >
-                                    <Icon name="add-circle-outline" color={Colors.black} size={20}/>
+                                    <Icon name="add-circle-outline" color={Colors.white} size={20}/>
                                 </Button>
                             </View>
                         </View>
@@ -341,8 +341,9 @@ const RecipePageComponent = (props) => {
                             navigation.push(cookingRoute, {id});
                         }}
                         style={styles.button}
+                        textStyle={styles.buttonText}
                     >
-                        <Icon name="play-outline" size={24} color={Colors.white}/>
+                        <Icon name="play-outline" size={24} color={Colors.black}/>
                         {' '}
                         {t('watchVideo')}
                     </Button>
