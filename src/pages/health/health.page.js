@@ -21,23 +21,15 @@ import {AttentionAnimation} from "../../components/molecular/attansion-animation
 import * as Haptics from "expo-haptics";
 import {supplementRoute} from "./navigation/health.routes";
 
-let isFirstRun = true;
-
 const HealthPageComponent = (props) => {
     const {
         navigation,
     } = props;
 
-    useEffect(() => {
-        isFirstRun = false;
-    }, []);
-
-    const [authors] = useAuthors();
-
     const [t] = useTranslator('pages.health');
 
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             <FlashList
                 showsVerticalScrollIndicator={false}
                 // contentContainerStyle={styles.list}
@@ -55,7 +47,7 @@ const HealthPageComponent = (props) => {
                     </Pressable>
                 )}
             />
-        </View>
+        </SafeAreaView>
     );
 };
 

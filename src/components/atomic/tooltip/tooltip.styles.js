@@ -1,7 +1,8 @@
 import { StyleSheet } from 'react-native';
-import { getTextStyles } from '../../../styles/common.styles';
+import {getTextStyles} from '../../../styles/common.styles';
 import { Colors } from '../../../styles/colors';
 import { Spaces } from '../../../styles/spaces';
+import {BorderRadius} from "../../../styles/borderRadiuses";
 
 const styles = StyleSheet.create({
   container: {
@@ -14,12 +15,16 @@ const styles = StyleSheet.create({
   },
   popover: {
     width: 200,
+
   },
   text: getTextStyles({
     fontSize: 18,
     padding: Spaces.small,
     color: Colors.primary,
     textAlign: 'center',
+    borderWidth: 1,
+    borderColor: Colors.primary,
+    borderRadius: BorderRadius.medium,
   })
 });
 

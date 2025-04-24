@@ -20,10 +20,8 @@ const SupplementPageComponent = (props) => {
     const item = useMemo(() => supplements.find(item => item.id === id), [id]);
     const [t] = useTranslator('pages.health');
 
-
-
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             <Text  style={styles.text}>{item.name}</Text>
 
             <Image source={item.img} style={styles.image}/>
@@ -36,7 +34,7 @@ const SupplementPageComponent = (props) => {
                 />
             </View>
 
-        </View>
+        </SafeAreaView>
     );
 };
 
