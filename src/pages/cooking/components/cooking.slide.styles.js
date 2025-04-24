@@ -87,16 +87,14 @@ const styles = StyleSheet.create({
         right: 0,
         top: Spaces.large,
     },
-    authorContainer: {
-        borderRadius: BorderRadius.small,
-        backgroundColor: Colors.backgroundColorLowOpacity,
-        padding: Spaces.small,
-        position: 'absolute',
-        bottom: Spaces.xxxlarge + Spaces.xxxlarge + Spaces.large,
-    },
-    author: getTextStyles({
-        fontSize: 12,
-    }),
+    // authorContainer: {
+    //     borderRadius: BorderRadius.small,
+    //     backgroundColor: Colors.backgroundColorLowOpacity,
+    //     padding: Spaces.small,
+    //     position: 'absolute',
+    //     bottom: Spaces.xxxlarge + Spaces.xxxlarge + Spaces.large,
+    // },
+
     helpArrow: {
         position: 'absolute',
         opacity: 1,

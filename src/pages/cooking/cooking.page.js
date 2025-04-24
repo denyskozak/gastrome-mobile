@@ -315,11 +315,6 @@ export const CookingPage = (props) => {
             withVoiceAssistant={withVoiceAssistant}
 
             additionalText={recipe.isSingleVideo ? t('singleVideo') : ''}
-            author={
-                steps.length - 1 === index && recipe.instagram
-                    ? t('madeBy', {name: recipe.instagram})
-                    : null
-            }
             backLabel={t('back')}
             loadingText={t('loading')}
         />

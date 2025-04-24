@@ -125,6 +125,10 @@ const styles = StyleSheet.create({
     color: Colors.red,
     marginTop: Spaces.small,
   }),
+  author: getTextStyles({
+    marginTop: Spaces.small,
+    color: Colors.red,
+  }),
   servings: getTextStyles({
     fontSize: 20,
     textAlign: 'center',

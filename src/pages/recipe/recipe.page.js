@@ -58,6 +58,7 @@ const RecipePageComponent = (props) => {
         proteins,
         fats,
         carbohydrates,
+        instagram,
         calories
     } = recipe;
 
@@ -85,7 +86,7 @@ const RecipePageComponent = (props) => {
     }, []);
 
     useEffect(() => {
-        flatListRef.current?.scrollToOffset({ offset: 0, animated: true });
+        flatListRef.current?.scrollToOffset({offset: 0, animated: true});
     }, [id]);
 
     const recipeCountry = useMemo(() => {
@@ -143,8 +144,9 @@ const RecipePageComponent = (props) => {
     };
 
     const renderPFC = (value) => (
-        renderQuantity(multiplyByServings(value), 'g' , tCommon, '', ['g', 'oz'].includes(measure) ? measure : 'g')
-    )
+        renderQuantity(multiplyByServings(value), 'g', tCommon, '', ['g', 'oz'].includes(measure) ? measure : 'g')
+    );
+
     return (<SafeAreaView style={styles.container}>
         <FlatList
             ref={flatListRef}
@@ -232,13 +234,19 @@ const RecipePageComponent = (props) => {
                     {subTitle && <Text style={styles.sub}>{subTitle}</Text>}
                     {calories && <Text style={styles.calories}>{t('calories')}: {multiplyByServings(calories)}</Text>}
                     <View style={styles.PFC}>
-                        {proteins === undefined && <Text style={styles.PFCText}>{t('proteins')}: {renderPFC(proteins)}</Text>}
-                        {carbohydrates  === undefined && <Text style={styles.PFCText}>{t('carbs')}:  {renderPFC(carbohydrates)}</Text>}
-                        {fats  === undefined && <Text style={styles.PFCText}>{t('fats')}:  {renderPFC(fats)}</Text>}
+                        {typeof proteins === 'number' ?
+                            <Text style={styles.PFCText}>{t('proteins')}: {renderPFC(proteins)}</Text> : null}
+                        {typeof carbohydrates === 'number' ?
+                            <Text style={styles.PFCText}>{t('carbs')}: {renderPFC(carbohydrates)}</Text> : null}
+                        {typeof fats === 'number' ?
+                            <Text style={styles.PFCText}>{t('fats')}: {renderPFC(fats)}</Text> : null}
                     </View>
 
                     {description && <Text style={styles.description}>{description}</Text>}
                     {tip && <Text style={styles.tip}>{tip}</Text>}
+                    {instagram && <Text style={styles.author}>{instagram
+                        ? t('madeBy', {name: instagram})
+                        : null}</Text>}
                     {/*Servings manager*/}
                     {servingsCount && (
                         <View>
