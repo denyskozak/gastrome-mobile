@@ -21,7 +21,7 @@ import {getDevice} from "../../../utilities/getCurrentDevice";
 
 export const CookingSlideComponent = (props) => {
     const {
-        author,
+        // author,
         index,
         videoURL,
         backLabel,
@@ -155,11 +155,11 @@ export const CookingSlideComponent = (props) => {
                         </Text>
                     )}
                 </Animated>
-                {author && (
-                    <View style={styles.authorContainer}>
-                        <Text style={styles.author}>{author}</Text>
-                    </View>
-                )}
+                {/*{author && (*/}
+                {/*    <View style={styles.authorContainer}>*/}
+                {/*        <Text style={styles.author}>{author}</Text>*/}
+                {/*    </View>*/}
+                {/*)}*/}
                 {showArrow && stepsCount > 1 && (
                     <Animated style={styles.helpArrow} delay={500}>
                         <Animation name="swipeLeft" height={Spaces.xxxlarge * 2.5} width={Spaces.xxxlarge * 2.5}/>
@@ -179,7 +179,7 @@ CookingSlideComponent.propTypes = {
     stepTitle: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     activeIndex: PropTypes.number.isRequired,
-    author: PropTypes.string,
+    // author: PropTypes.string,
     backLabel: PropTypes.string,
     hideButtons: PropTypes.bool,
     isPause: PropTypes.bool,

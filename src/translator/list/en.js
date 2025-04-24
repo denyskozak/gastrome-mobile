@@ -157,6 +157,7 @@ export const translates = {
             time: '{time} min',
         },
         recipe: {
+            madeBy: 'Author Instagram @{name}',
             time: '{time} min',
             step: 'Step {number}.',
             start: 'Start',
@@ -186,7 +187,6 @@ export const translates = {
             startVoice: 'Run Assistant',
             assistantCommandsTitle: 'Use commands "next", "back", "repeat" for interact with Voice Assistant',
             start: 'Start',
-            madeBy: 'Video Instagram @{name}',
             loading: 'Downloading video...',
             voiceSelect: 'Voices',
             lastStep: ', Its last step, use command "Done" for end cooking',

@@ -43,9 +43,9 @@ const renderIngredientQuantity = (quantity, unit, measureSystem = 'g', t) => {
 export const mapRenderCartQuantity = ({ quantity, unit, comment }, measureSystem = 'g', t) => renderQuantity(quantity, unit, t, comment, measureSystem);
 
 export const renderQuantity = (quantity, unit, t, comment = '', measureSystem = 'g') => {
-  if (quantity) {
+  if (typeof quantity === 'number') {
     const [parsedQuantity, parsedUnit] = measureConvertors[measureSystem](quantity, unit, t);
-    return quantity ? `${parsedQuantity}${renderValue(parsedUnit)}${renderValue(comment)}` : '';
+    return typeof quantity === 'number' ? `${parsedQuantity}${renderValue(parsedUnit)}${renderValue(comment)}` : '';
   } else {
     return '';
   }

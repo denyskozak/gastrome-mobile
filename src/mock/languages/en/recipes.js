@@ -349,7 +349,7 @@ export const recipes = [
             {"id": 2, "title": "Orange", "quantity": 1, "unit": "pcs"},
             {"id": 3, "title": "Apple", "quantity": 0.5, "unit": "pcs"},
             {"id": 4, "title": "Lemon juice", "quantity": 1, "unit": "tbsp"},
-            {"id": 5, "title": "Water", "quantity": 1, "unit": "cup"}
+            {"id": 5, "title": "Water", "quantity": 1, "unit": "cups"}
         ]
     },
     {
