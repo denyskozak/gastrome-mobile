@@ -4,13 +4,13 @@ import { StackNavigator } from '../../../components/molecular/stack-navigation/s
 import { RecipePage } from '../../recipe/recipe.page';
 
 import { welcomeRoute, recipeRoute } from './welcome.routes';
-import { WelcomePage } from '../welcome.page';
+import { HomeScreen } from '../../home/HomeScreen';
 import { cookingRoute, voiceSettingsRecipeRoute } from '../../recipes/navigation/recipes.routes';
 import { CookingPage } from '../../cooking/cooking.page';
 import { VoicePage } from '../../profile/voiceSettings/voiceSettings.page';
 
 export const getStack = (t) => ([
-  [welcomeRoute, WelcomePage, { title: t('welcome'), headerShown: false,}],
+  [welcomeRoute, HomeScreen, { title: t('welcome'), headerShown: false,}],
   [cookingRoute, CookingPage, { title: '', headerShown: false }],
   [recipeRoute, RecipePage, { title: t('recipe'), headerShown: true }],
   [voiceSettingsRecipeRoute, VoicePage, { title: t('voice') }],
