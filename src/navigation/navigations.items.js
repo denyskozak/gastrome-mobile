@@ -9,7 +9,6 @@ import {
 } from './navigation.routes';
 import { Animated } from '../components/atomic/animated/animated.component';
 
-import { Colors } from '../styles/colors';
 import { CartPage } from '../pages/cart/cart.page';
 import { ProfileNavigation } from '../pages/profile/navigation/profile.navigation';
 import { RecipesNavigation } from '../pages/recipes/navigation/recipes.navigation';
@@ -19,17 +18,18 @@ import {AuthorsNavigation} from "../pages/authors/navigation/recipes.navigation"
 import {AttentionAnimation} from "../components/molecular/attansion-animation/attansion-animation.component";
 import {HealthNavigation} from "../pages/health/navigation/health.navigation";
 
-const createRenderIcon = (name, size = 32, darkMode = false, delay = 2150, attention = false) => () => {
+const createRenderIcon = (name, color, size = 32, darkMode = false, delay = 2150, attention = false) => () => {
 
-  const element = <Animated style={{ width: size, }} name="FadeInDown" delay={delay}><Icon name={name} size={size} color={Colors.white}/></Animated>;
+  const element = <Animated style={{ width: size, }} name="FadeInDown" delay={delay}><Icon name={name} size={size} color={color}/></Animated>;
   return attention === false
       ? element
       : <AttentionAnimation property="translateY" start={0} end={-5} delay={2000}>{element}</AttentionAnimation>
 };
 
-export const getNavigationTabs = (t, isDarkModeMenu) => {
+export const getNavigationTabs = (t, isDarkModeMenu, theme) => {
   const renderIcon = (title, delay = 1000, attention = false) => createRenderIcon(
     title,
+    theme.colors.white,
     Spaces.xlarge,
     isDarkModeMenu,
     delay,

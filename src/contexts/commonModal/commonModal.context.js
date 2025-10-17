@@ -5,8 +5,8 @@ import Icon from '@expo/vector-icons/Ionicons';
 import { Spaces } from '../../styles/spaces';
 import { Button } from '../../components/atomic/button/button.component';
 import { Modal } from '../../components/atomic/modal/modal.component';
-import styles from './commonModal.styles';
-import {Colors} from "../../styles/colors";
+import { useCommonModalStyles } from './commonModal.styles';
+import { useTheme } from '../../hooks/useTheme';
 
 export const CommonModalContext = createContext(false);
 
@@ -52,6 +52,8 @@ const CommonModalComponent = (props) => {
   } = props;
 
   const [modalConfig, setModalConfig] = useState({...defaultValue});
+  const styles = useCommonModalStyles();
+  const { theme } = useTheme();
 
   const {isOpen, icon, title, text, buttonText, onPress, secondButton} = modalConfig;
   const value = {
@@ -75,7 +77,7 @@ const CommonModalComponent = (props) => {
           <Icon
             name={icon}
             size={Spaces.xxlarge}
-            color={Colors.white}
+            color={theme.colors.white}
           />
           <Text style={styles.title}>
             {title}

@@ -10,12 +10,11 @@ import {useTranslator} from '../../hooks/useTranslator';
 import {Button} from '../../components/atomic/button/button.component';
 import {useMenuDarkMode} from '../../contexts/menuDarkMode.context';
 
-import {Colors} from '../../styles/colors';
 // import { Modal } from '../../components/molecular/modal/modal.component';
 // import { Spaces } from '../../styles/spaces';
 
 import {Animated} from '../../components/atomic/animated/animated.component';
-import styles from './welcome.styles';
+import { useWelcomeStyles } from './welcome.styles';
 import Icon from '@expo/vector-icons/Ionicons';
 import {Spaces} from '../../styles/spaces';
 import {RecipesGenerator} from './recipesGenerator/recipes-generator';
@@ -30,6 +29,7 @@ import {renderFilterIcon} from "../../utilities/renders";
 import {useSettings} from "../../contexts/settings.context";
 import {filterIcons} from "../../constants/filters";
 import {recipesRoute} from "../recipes/navigation/recipes.routes";
+import { useTheme } from '../../hooks/useTheme';
 
 const videoSources = [
     require('./assets/1.mp4'),
@@ -46,6 +46,8 @@ const WelcomePageComponent = (props) => {
     const [t] = useTranslator('pages.welcome');
     const [tFilters] = useTranslator('components.filters');
     const [, setSetting] = useSettings();
+    const { theme } = useTheme();
+    const styles = useWelcomeStyles();
 
     const [, setModalVisible] = useState(false);
     const [isVideoCover, setIsVideoCover] = useState(false);
@@ -188,7 +190,7 @@ const WelcomePageComponent = (props) => {
                                 style={styles.scrollDown}>
                                 <Animated style={styles.scrollDownButton} delay={animationDelays.downChevron}
                                           duration={1000}>
-                                    <Icon name="chevron-down-outline" size={Spaces.xxlarge} color={Colors.white}/>
+                                    <Icon name="chevron-down-outline" size={Spaces.xxlarge} color={theme.colors.white}/>
                                     <Text style={styles.scrollDownText}>{t('generator')}</Text>
                                 </Animated>
                             </TouchableOpacity>

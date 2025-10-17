@@ -1,8 +1,8 @@
 import React from 'react';
 import NativeModal from 'react-native-modal';
 import { View } from 'react-native';
-import { Colors } from '../../../styles/colors';
-import styles from './modal.styles';
+import { useTheme } from '../../../hooks/useTheme';
+import { useModalStyles } from './modal.styles';
 
 const ModalComponent = (props) => {
   const {
@@ -13,17 +13,20 @@ const ModalComponent = (props) => {
     isBlack = true,
   } = props;
 
+  const { theme } = useTheme();
+  const { styles: modalStyles, getContainer } = useModalStyles();
+
   return (
     <NativeModal
 
       isVisible={isVisible}
-      backdropColor={Colors.backdropColor}
+      backdropColor={theme.colors.backgroundColor}
       backdropOpacity={0.8}
       animationInTiming={animationTiming}
       animationOutTiming={animationTiming}
       onBackdropPress={() => onChangeVisible instanceof Function && onChangeVisible(false)}
     >
-      <View style={styles.getContainer(isBlack)}>
+      <View style={[modalStyles.containerBase, getContainer(isBlack)]}>
         {children}
       </View>
     </NativeModal>

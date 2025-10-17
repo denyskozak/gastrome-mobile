@@ -1,4 +1,4 @@
-import React, {useState, useContext, createContext, useCallback, useLayoutEffect} from 'react';
+import React, {useState, useContext, createContext, useCallback, useEffect} from 'react';
 import PropsType from 'prop-types';
 import AsyncStorage from '@react-native-community/async-storage';
 import {defaultLanguage} from "../translator/translates";
@@ -12,7 +12,8 @@ const defaultValue = {
   speechProfiles: [],
   filterNames: [],
   isDevMode: false,
-  errors: []
+  errors: [],
+  theme: 'midnight'
 };
 
 // const storedConfig = await AsyncStorage.getItem(SETTINGS_ASYNC_STORE_KEY);
@@ -59,6 +60,12 @@ const SettingsComponent = (props) => {
   } = props;
 
   const [settings, setSettings] = useState(defaultSettings === null ? defaultValue : defaultSettings);
+
+  useEffect(() => {
+    if (defaultSettings !== null) {
+      setSettings(defaultSettings);
+    }
+  }, [defaultSettings]);
 
   const value = {
     settings,

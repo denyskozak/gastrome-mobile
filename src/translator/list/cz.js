@@ -94,6 +94,7 @@ export const translates = {
       howToCancel: 'Spravovat vaše předplatné',
       cancel: 'Zrušit',
       inActiveSubscriberTitle: 'Vaše podpora pro nás znamená svět 🫡',
+      themeTitle: 'Vyberte si vzhled aplikace',
       storage: 'Úložiště',
       feedback: 'Ohodnoťte aplikaci 🤩',
       join: 'Připojit se ke komunitě',
