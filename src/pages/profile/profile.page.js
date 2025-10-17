@@ -8,7 +8,7 @@ import {Button} from '../../components/atomic/button/button.component';
 import {Spaces} from '../../styles/spaces';
 import {devModeRoute, subscriptionsSettingsRoute, voiceSettingsRoute} from './navigation/profile.routes';
 
-import styles from './profile.styles';
+import { useProfileStyles } from './profile.styles';
 import {MeasureModal} from '../../components/templates/measure-modal/measure-modal.component';
 import {useSettings} from '../../contexts/settings.context';
 import {isAvailableAsync, requestReview} from 'expo-store-review';
@@ -16,6 +16,7 @@ import {contactURL, privacyURL, termsURL} from "../../constants/links";
 import {SubscriptionButton} from "../../components/templates/subscription-button/subscription-button";
 import {useSubscriptions} from "../../contexts/subscriptions.context";
 import {AnimatedLogo} from "../../components/atomic/logo/animated-logo.component";
+import { useTheme } from '../../hooks/useTheme';
 
 const languagesList = [
     ['UA', 'uk'],
@@ -31,6 +32,8 @@ const SettingsPageComponent = (props) => {
         currentLanguage
     ] = useTranslator('pages.profile');
     const [settings, setSetting] = useSettings();
+    const { themeId, availableThemes, setTheme } = useTheme();
+    const styles = useProfileStyles();
 
     const {measure} = settings;
     const [isMeasureModalOpen, setIsMeasureModalOpen] = useState(false);
@@ -62,6 +65,22 @@ const SettingsPageComponent = (props) => {
                 {/*<View style={styles.languages}>*/}
                 {/*    {languagesList.map(renderLanguageButton)}*/}
                 {/*</View>*/}
+
+                <View style={styles.themePicker}>
+                    <Text style={styles.themePickerTitle}>{t('themeTitle')}</Text>
+                    <View style={styles.themeOptions}>
+                        {availableThemes.map((option) => (
+                            <Button
+                                key={option.id}
+                                type="outlined"
+                                size="m"
+                                title={option.label}
+                                selected={option.id === themeId}
+                                onPress={() => setTheme(option.id)}
+                            />
+                        ))}
+                    </View>
+                </View>
 
                 <View style={styles.settingButtons}>
                     <SubscriptionButton text={isSubscriber ? t('community') : t('join')}

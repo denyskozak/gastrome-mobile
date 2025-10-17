@@ -1,57 +1,65 @@
+import { useCallback, useMemo } from 'react';
 import { StyleSheet } from 'react-native';
-import { Colors } from '../styles/colors';
 import { getTextStyles } from '../styles/common.styles';
 import { Spaces } from '../styles/spaces';
+import { useTheme } from '../hooks/useTheme';
 
-const headerTitleStyle = getTextStyles({
-  fontSize: 24,
-  textDecorationLine: 'none',
-});
+export const useNavigationStyles = () => {
+  const { theme } = useTheme();
 
-const styles = StyleSheet.create({
-  container: {
-    marginTop: Spaces.xxlarge,
-    backgroundColor: Colors.backgroundColor
-  },
-  navigation: {
-    backgroundColor: Colors.backgroundColor
-  },
-});
+  const headerTitleStyle = useMemo(() => getTextStyles({
+    fontSize: 24,
+    textDecorationLine: 'none',
+  }, theme), [theme]);
 
-export const sceneContainerTheme = {
-  colors: {
-    background: Colors.backgroundColor,
-  },
-};
-
-
-export const headerStyles = {
-  headerTintColor: Colors.white,
-  headerTitleStyle,
-  headerStyle: {
-    backgroundColor: Colors.backgroundColor,
-    elevation: 0,
-    shadowOpacity: 0,
-  },
-};
-
-export const getScreenOptions = (isDarkModeMenu) => ({
-  ...headerStyles,
-  tabBarStyle: isDarkModeMenu
-    ? {
-      borderColor: Colors.black,
-      backgroundColor: Colors.backgroundColor,
-    }
-    : {
-      backgroundColor: 'rgba(52, 52, 52, 0.7)',
-      position: 'absolute',
-      bottom: 0,
-      borderColor: Colors.backgroundColor,
+  const styles = useMemo(() => StyleSheet.create({
+    container: {
+      marginTop: Spaces.xxlarge,
+      backgroundColor: theme.colors.backgroundColor,
     },
-  tabBarIconStyle: {marginTop: Spaces.small},
-  tabBarLabelStyle: {
-    display: 'none'
-  },
-});
+    navigation: {
+      backgroundColor: theme.colors.backgroundColor,
+    },
+  }), [theme]);
 
-export default styles;
+  const sceneContainerTheme = useMemo(() => ({
+    colors: {
+      background: theme.colors.backgroundColor,
+    },
+  }), [theme]);
+
+  const headerStyles = useMemo(() => ({
+    headerTintColor: theme.colors.white,
+    headerTitleStyle,
+    headerStyle: {
+      backgroundColor: theme.colors.backgroundColor,
+      elevation: 0,
+      shadowOpacity: 0,
+    },
+  }), [headerTitleStyle, theme]);
+
+  const getScreenOptions = useCallback((isDarkModeMenu) => ({
+    ...headerStyles,
+    tabBarStyle: isDarkModeMenu
+      ? {
+        borderColor: theme.colors.black,
+        backgroundColor: theme.colors.backgroundColor,
+      }
+      : {
+        backgroundColor: 'rgba(52, 52, 52, 0.7)',
+        position: 'absolute',
+        bottom: 0,
+        borderColor: theme.colors.backgroundColor,
+      },
+    tabBarIconStyle: { marginTop: Spaces.small },
+    tabBarLabelStyle: {
+      display: 'none',
+    },
+  }), [headerStyles, theme]);
+
+  return {
+    styles,
+    sceneContainerTheme,
+    getScreenOptions,
+  };
+};

@@ -3,7 +3,7 @@ import PropsType from 'prop-types';
 import { Text, View, TouchableOpacity } from 'react-native';
 
 import { StyleType } from '../../../types/style.types';
-import styles from './button.styles';
+import { useButtonStyles } from './button.styles';
 
 const ButtonComponent = (props) => {
   const {
@@ -20,6 +20,7 @@ const ButtonComponent = (props) => {
   } = props;
 
   const upperCaseSize = size.toUpperCase();
+  const styles = useButtonStyles();
 
   return (
     <TouchableOpacity activeOpacity={0.8} onPress={onPress} disabled={disabled} style={[

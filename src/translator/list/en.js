@@ -119,6 +119,7 @@ export const translates = {
             howToCancel: 'Manage your subscription',
             cancel: 'Cancel',
             inActiveSubscriberTitle: 'more and more features and platform grow soon 🫡',
+            themeTitle: 'Choose app theme',
             // faq: 'About us',
             storage: 'Storage',
             feedback: 'Rate app 🤩',

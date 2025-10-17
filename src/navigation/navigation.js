@@ -3,18 +3,21 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { getNavigationTabs } from './navigations.items';
-import { sceneContainerTheme, getScreenOptions } from './navigation.styles';
+import { useNavigationStyles } from './navigation.styles';
 import { useTranslator } from '../hooks/useTranslator';
 import { useMenuDarkMode } from '../contexts/menuDarkMode.context';
 import {recipesPageRoute, welcomePageRoute} from "./navigation.routes";
 import PropTypes from "prop-types";
+import { useTheme } from '../hooks/useTheme';
 
 const Tab = createBottomTabNavigator();
 
 const NavigationTabsComponent = () => {
   const [isDarkModeMenu] = useMenuDarkMode();
   const [t] = useTranslator('navigation');
-  const tabs = getNavigationTabs(t, isDarkModeMenu);
+  const { sceneContainerTheme, getScreenOptions } = useNavigationStyles();
+  const { theme } = useTheme();
+  const tabs = getNavigationTabs(t, isDarkModeMenu, theme);
 
   return (
     <NavigationContainer theme={sceneContainerTheme}>

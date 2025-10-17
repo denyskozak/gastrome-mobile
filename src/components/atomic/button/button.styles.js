@@ -1,21 +1,20 @@
 import { StyleSheet } from 'react-native';
-import { Colors } from '../../../styles/colors';
+import { createThemedStyles } from '../../../styles/useThemedStyles';
 import { getTextStyles } from '../../../styles/common.styles';
 import { Spaces } from '../../../styles/spaces';
 import { BorderRadius } from '../../../styles/borderRadiuses';
 
-const styles = StyleSheet.create({
+export const useButtonStyles = createThemedStyles((theme) => StyleSheet.create({
   container: {
     paddingLeft: Spaces.large,
     paddingRight: Spaces.large,
     height: Spaces.mxxlarge,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: Colors.primary,
+    backgroundColor: theme.colors.primary,
     borderRadius: BorderRadius.small,
   },
 
-  // Sizes:
   containerS: {
     paddingLeft: Spaces.small,
     paddingRight: Spaces.small,
@@ -44,14 +43,14 @@ const styles = StyleSheet.create({
   outlined: {
     backgroundColor: 'rgba(52, 52, 52, 0)',
     borderWidth: 1,
-    borderColor: Colors.white,
+    borderColor: theme.colors.white,
     borderRadius: BorderRadius.small,
   },
   contained: {
-    borderRadius: BorderRadius.small
+    borderRadius: BorderRadius.small,
+    backgroundColor: theme.colors.primary,
   },
-  fulled: {
-  },
+  fulled: {},
   wide: {
     width: '100%',
     height: Spaces.xxlarge + Spaces.small,
@@ -59,39 +58,38 @@ const styles = StyleSheet.create({
   },
   wideText: getTextStyles({
     fontSize: 24,
-    color: Colors.white,
+    color: theme.colors.white,
     justifyContent: 'center',
-  }),
+  }, theme),
   disabledContainer: {
-    borderColor: Colors.grey,
+    borderColor: theme.colors.grey,
+    backgroundColor: `${theme.colors.primary}33`,
   },
 
   selected: {
-    backgroundColor: Colors.black,
-    borderColor: Colors.primary
+    backgroundColor: theme.colors.black,
+    borderColor: theme.colors.primary,
   },
   text: getTextStyles({
     fontSize: 16,
-    color: Colors.black,
-  }),
+    color: theme.colors.black,
+  }, theme),
   textContained: {
-    color: Colors.second,
+    color: theme.colors.second,
   },
   textOutlined: {
-    color: Colors.white,
+    color: theme.colors.white,
   },
   textFulled: {
-    color: Colors.second,
+    color: theme.colors.second,
   },
   textDisabled: {
-    color: Colors.grey,
+    color: theme.colors.grey,
   },
   textSelected: {
-    color: Colors.white,
+    color: theme.colors.white,
   },
   highlight: {
     textDecorationLine: 'underline',
   },
-});
-
-export default styles;
+}));
