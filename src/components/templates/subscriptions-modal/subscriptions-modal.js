@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { Text, View } from 'react-native';
+import React, { useMemo, useState } from 'react';
+import NativeModal from 'react-native-modal';
+import { ImageBackground, SafeAreaView, ScrollView, Text, View } from 'react-native';
 import Icon from '@expo/vector-icons/Ionicons';
 
 import PropTypes from 'prop-types';
-import { Modal } from '../../atomic/modal/modal.component';
 import { Button } from '../../atomic/button/button.component';
 
 import styles from './subscriptions-modal.styles';
@@ -13,34 +13,36 @@ import { AnimatedLogo } from '../../atomic/logo/animated-logo.component';
 import Purchases from 'react-native-purchases';
 import { useSubscriptions } from '../../../contexts/subscriptions.context';
 import { Spaces } from '../../../styles/spaces';
-import * as Haptics from "expo-haptics";
+import * as Haptics from 'expo-haptics';
+import PaywallBackground from '../../../../assets/paywall-background.jpg';
 
 const SubscriptionsModalComponent = (props) => {
-  const {isOpen, onChangeVisible} = props;
+  const { isOpen, onChangeVisible } = props;
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [isError, setIsError] = useState(false);
 
   const [t] = useTranslator('components.subscriptionsModal');
   const [, , subscriptions, setCurrentSubscription] = useSubscriptions();
-  const options = subscriptions ? subscriptions.availablePackages : [];
+  const options = useMemo(
+    () => (subscriptions ? subscriptions.availablePackages : []),
+    [subscriptions],
+  );
 
   const handleOptionClick = (item) => {
     setIsLoading(true);
 
     Purchases.purchasePackage(item)
-      .then(({customerInfo}) => {
+      .then(({ customerInfo }) => {
         setIsLoading(false);
         setIsSuccess(true);
         setCurrentSubscription(customerInfo);
       })
-      .catch(
-        (e) => {
-          console.log('Purchase Subscription error: ', e);
-          setIsError(true);
-          setIsLoading(false);
-        }
-      )
+      .catch((e) => {
+        console.log('Purchase Subscription error: ', e);
+        setIsError(true);
+        setIsLoading(false);
+      });
   };
 
   const handleRestoreClick = () => {
@@ -52,82 +54,113 @@ const SubscriptionsModalComponent = (props) => {
         setIsSuccess(true);
         setCurrentSubscription(customerInfo);
       })
-      .catch(
-        () => {
-          setIsError(true);
-          setIsLoading(false);
-        }
-      )
+      .catch(() => {
+        setIsError(true);
+        setIsLoading(false);
+      });
+  };
+
+  const handleVisibilityChange = (value) => {
+    if (isLoading) {
+      return;
+    }
+
+    onChangeVisible(value);
+    if (!value) {
+      setIsError(false);
+    }
   };
 
   return (
-    <Modal isVisible={isOpen} onChangeVisible={(value) => {
-        if (isLoading) return;
-      onChangeVisible(value);
-      setIsError(false)
-    }}>
-      <Text style={styles.title}>{t('benefits')}</Text>
-      <View style={styles.benefits}>
-        <Text style={styles.benefitsText}>{t('benefitsOne')}</Text>
-        <Text style={styles.benefitsText}>{t('benefitsTwo')}</Text>
-        <Text style={styles.benefitsText}>{t('benefitsThree')}</Text>
-      </View>
-      {isLoading && (<View style={styles.logoWrapper}><AnimatedLogo size="medium" color="white" isInfinity/></View>)}
-      {!isLoading && (<View style={styles.buttons}>
-        {!isError && !isSuccess && (
-          <>
-            {options.map((item) => (
-              <Button
-                key={item.product.identifier}
-                type="outlined"
-                size="xl"
-                style={styles.button}
-                textStyle={styles.buttonText}
-                onPress={() => {
-                  Haptics.impactAsync('light');
-                  handleOptionClick(item)
-                }}
-              >
-                {item.product.priceString} / {item.product.identifier}
-              </Button>
-            ))}
+    <NativeModal
+      isVisible={isOpen}
+      style={styles.modal}
+      backdropColor={Colors.backdropColor}
+      backdropOpacity={0.8}
+      animationInTiming={400}
+      animationOutTiming={400}
+      onBackdropPress={() => handleVisibilityChange(false)}
+      onBackButtonPress={() => handleVisibilityChange(false)}
+      useNativeDriver
+    >
+      <ImageBackground
+        source={PaywallBackground}
+        style={styles.background}
+        resizeMode="cover"
+      >
+        <SafeAreaView style={styles.safeArea}>
+          <ScrollView
+            bounces={false}
+            contentContainerStyle={styles.scrollContent}
+          >
+            <View style={styles.content}>
+              <Text style={styles.title}>{t('benefits')}</Text>
+              <View style={styles.benefits}>
+                <Text style={[styles.benefitsText, styles.firstBenefitText]}>{t('benefitsOne')}</Text>
+                <Text style={styles.benefitsText}>{t('benefitsTwo')}</Text>
+                <Text style={styles.benefitsText}>{t('benefitsThree')}</Text>
+              </View>
+              {isLoading && (
+                <View style={styles.logoWrapper}>
+                  <AnimatedLogo size="medium" color="white" isInfinity />
+                </View>
+              )}
+              {!isLoading && (
+                <View style={styles.buttons}>
+                  {!isError && !isSuccess && (
+                    <>
+                      {options.map((item) => (
+                        <Button
+                          key={item.product.identifier}
+                          type="outlined"
+                          size="xl"
+                          style={styles.button}
+                          textStyle={styles.buttonText}
+                          onPress={() => {
+                            Haptics.impactAsync('light');
+                            handleOptionClick(item);
+                          }}
+                        >
+                          {item.product.priceString} / {item.product.identifier}
+                        </Button>
+                      ))}
+                      <Button
+                        type="outlined"
+                        size="xl"
+                        style={styles.button}
+                        textStyle={styles.buttonText}
+                        onPress={handleRestoreClick}
+                      >
+                        {t('restore')}
+                      </Button>
+                    </>
+                  )}
+                  {isError && <Text style={styles.error}>{t('error')}</Text>}
+                  {isSuccess && <Text style={styles.success}>{t('success')}</Text>}
+                </View>
+              )}
+            </View>
+          </ScrollView>
+          <View style={styles.closeButtonWrapper}>
             <Button
               type="outlined"
-              size="xl"
-              style={styles.button}
-              textStyle={styles.buttonText}
-              onPress={handleRestoreClick}
+              size="m"
+              style={styles.closeButton}
+              textStyle={styles.closeButtonText}
+              onPress={() => handleVisibilityChange(false)}
             >
-              {t('restore')}
+              <Icon name="close-outline" size={Spaces.large} color={Colors.white} />
             </Button>
-          </>
-        )}
-        {isError && (
-          <Text style={styles.error}>{t('error')}</Text>
-        )}
-        {isSuccess && (
-          <Text style={styles.success}>{t('success')}</Text>
-        )}
-        <Button
-          type="outlined"
-          size="m"
-          style={styles.closeButton}
-          styleText={styles.closeButtonText}
-          onPress={() => {
-            onChangeVisible(false);
-            setIsError(false)
-          }}
-        >
-          <Icon name="close-outline" size={Spaces.large} color={Colors.white}/>
-        </Button>
-      </View>)}
-    </Modal>
+          </View>
+        </SafeAreaView>
+      </ImageBackground>
+    </NativeModal>
   );
-}
+};
 
 SubscriptionsModalComponent.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onChangeVisible: PropTypes.func.isRequired,
-}
+};
 
 export const SubscriptionsModal = SubscriptionsModalComponent;
