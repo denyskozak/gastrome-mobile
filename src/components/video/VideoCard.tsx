@@ -381,7 +381,7 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
           ref={videoRef}
           style={StyleSheet.absoluteFill}
           source={{ uri: item.source }}
-          resizeMode={ExpoResizeMode?.COVER ?? 'cover'}
+          resizeMode={ExpoResizeMode?.CONTAIN ?? 'contain'}
           shouldPlay={shouldPlay}
           isLooping
           isMuted={isMuted}
