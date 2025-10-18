@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "869269976514",
+    "project_id": "gastro-and-me-39bf0",
+    "storage_bucket": "gastro-and-me-39bf0.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:869269976514:android:ebc2f83604a1cf6b2f925b",
+        "android_client_info": {
+          "package_name": "com.AzarovStudio.Gastro"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJUH-c_oW6df_sXWWfF_TeqqxXpozgOm4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

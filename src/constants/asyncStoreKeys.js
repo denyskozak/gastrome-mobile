@@ -1,0 +1,21 @@
+// Main onboard
+export const HAS_BEEN_ONBOARDED_KEY = 'HAS_BEEN_ONBOARDED_KEY_344';
+
+// Onboard pages
+// export const ON_BOARD_RECIPES_PAGE_KEY = 'ON_BOARD_RECIPES_PAGE_KEY';
+// export const ON_BOARD_RECIPE_PAGE_KEY = 'ON_BOARD_RECIPE_PAGE_KEY';
+export const IS_FIRST_LAUNCH_EVER_STORE_KEY = 'IS_FIRST_LAUNCH_EVER_STORE_KEY';
+
+// Cart list
+export const CART_KEY = 'CART_KEY_122';
+
+// Favorites list
+export const FAVORITES_RECIPE_ID_KEY = 'FAVORITES_RECIPE_ID_KEY';
+
+// Translate language
+export const TRANSLATE_ID_KEY = 'TRANSLATE_ID_KEY_21';
+
+
+// Cooking
+export const VOICE_ASSISTANT_TIP = 'VOICE_ASSISTANT_TIP_2';
+export const SETTINGS_ASYNC_STORE_KEY = 'SETTINGS_ASYNC_STORE_KEY_1';

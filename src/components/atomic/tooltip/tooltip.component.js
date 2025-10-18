@@ -1,0 +1,59 @@
+import React, { useMemo } from 'react';
+import { Popover } from 'react-native-popable';
+import { View, Text } from 'react-native';
+import PropTypes from 'prop-types';
+import { Animated } from '../animated/animated.component';
+
+import styles from './tooltip.styles';
+import { Colors } from '../../../styles/colors';
+
+const TooltipComponent = (props) => {
+  const {isVisible, children, text, placement, delay} = props;
+
+  const positionStyle = useMemo(() => {
+    switch (placement) {
+      case 'top':
+        return {bottom: '100%'};
+      case 'bottom':
+        return {top: '100%'};
+      case 'middle':
+        return {bottom: '30%'};
+    }
+  }, [placement]);
+
+  const calculatedPlacement = placement === 'middle' ? 'bottom' : placement;
+
+  return (
+    <View>
+      {isVisible && (
+        <View style={[positionStyle, styles.container]}>
+          <Animated name="FadeIn" outName="FadeOut" delay={delay}>
+            <Popover
+              style={styles.popover}
+              visible={isVisible}
+              position={calculatedPlacement}
+              backgroundColor={Colors.black}
+            >
+              <Text style={styles.text}>{text}</Text>
+            </Popover>
+          </Animated>
+        </View>
+      )}
+      {children}
+    </View>
+  )
+};
+
+TooltipComponent.propTypes = {
+  isVisible: PropTypes.bool.isRequired,
+  text: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
+  delay: PropTypes.number,
+  placement: PropTypes.oneOf(['top', 'bottom', 'middle']).isRequired,
+};
+
+TooltipComponent.defaultProps = {
+  delay: 0,
+};
+
+export const Tooltip = TooltipComponent;
