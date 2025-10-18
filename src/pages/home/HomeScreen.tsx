@@ -6,11 +6,14 @@ import {
   StatusBar,
   StyleSheet,
   View,
+  Image,
 } from 'react-native';
 import { VideoCard, VideoPlayerHandle } from '../../components/video/VideoCard';
-import { mockVideos } from '../../data/mockVideos';
 import type { VideoItem } from '../../types/video';
 import { useActiveItem } from '../../hooks/useActiveItem';
+import { useRecipes } from '../../hooks/useRecipes';
+import { useAWS } from '../../hooks/useAWS';
+import type { ImageSourcePropType } from 'react-native';
 
 const { height: SCREEN_HEIGHT } = Dimensions.get('window');
 const MAX_BUFFER_DISTANCE = 2;
@@ -22,6 +25,15 @@ const withUniqueId = (video: VideoItem, suffix: string, index: number): VideoIte
   ...video,
   id: createUniqueId(video, suffix, index),
 });
+
+const resolveAssetUri = (asset: ImageSourcePropType | null | undefined) => {
+  if (!asset) return undefined;
+  const resolved = Image.resolveAssetSource(asset);
+  return resolved?.uri ?? undefined;
+};
+
+const DEFAULT_AUTHOR_AVATAR =
+  'https://images.pexels.com/photos/3771811/pexels-photo-3771811.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=120';
 
 const shuffleVideos = (videos: VideoItem[]) => {
   const copy = [...videos];
@@ -40,11 +52,65 @@ type RegistryEntry = {
 export const HomeScreen: React.FC = () => {
   const iterationRef = useRef(0);
   const [refreshing, setRefreshing] = useState(false);
-  const [videos, setVideos] = useState<VideoItem[]>(() =>
-    mockVideos.map((video, index) => withUniqueId(video, 'initial', index)),
-  );
+  const [recipes] = useRecipes(true);
+  const { getCookingStepURL } = useAWS();
+  const getCookingStepUrlRef = useRef(getCookingStepURL);
+
+  useEffect(() => {
+    getCookingStepUrlRef.current = getCookingStepURL;
+  }, [getCookingStepURL]);
+
+  const baseVideos = useMemo(() => {
+    return recipes
+      .map((recipe) => {
+        if (!recipe?.id) {
+          return null;
+        }
+        const stepsCount = Array.isArray(recipe.steps) ? recipe.steps.length : 0;
+        const stepNumber = stepsCount > 0 ? stepsCount : 1;
+        const source = getCookingStepUrlRef.current(recipe.id, stepNumber);
+        if (!source) {
+          return null;
+        }
+
+        const poster = resolveAssetUri(recipe.image);
+        const authorAvatar = resolveAssetUri(recipe.author?.image) ?? DEFAULT_AUTHOR_AVATAR;
+
+        return {
+          id: `recipe-${recipe.id}`,
+          source,
+          poster,
+          title: recipe.title ?? 'Recipe',
+          author: {
+            name: recipe.author?.name ?? 'Gastro & Me',
+            avatar: authorAvatar,
+          },
+          description: recipe.description,
+          tags: recipe.filters,
+        } satisfies VideoItem;
+      })
+      .filter((item): item is VideoItem => Boolean(item));
+  }, [recipes]);
+  const [videos, setVideos] = useState<VideoItem[]>([]);
   const registryRef = useRef<Map<string, RegistryEntry>>(new Map());
   const { activeIndex, onViewableItemsChanged, viewabilityConfig } = useActiveItem();
+  const videosLength = videos.length;
+
+  useEffect(() => {
+    if (!baseVideos.length) {
+      if (videosLength) {
+        registryRef.current.clear();
+        setVideos([]);
+      }
+      iterationRef.current = 0;
+      return;
+    }
+    const suffix = `initial-${Date.now()}`;
+    const prepared = baseVideos.map((video, index) => withUniqueId(video, suffix, index));
+    registryRef.current.clear();
+    setVideos(prepared);
+    iterationRef.current = 0;
+  }, [baseVideos, videosLength]);
 
   const handleToggleMute = useCallback((videoIndex: number, muted: boolean) => {
     console.log('toggle-mute', videoIndex, muted);
@@ -145,25 +211,30 @@ export const HomeScreen: React.FC = () => {
   const onRefresh = useCallback(() => {
     setRefreshing(true);
     registryRef.current.clear();
-    const shuffled = shuffleVideos(mockVideos).map((video, index) =>
-      withUniqueId(video, `refresh-${Date.now()}`, index),
-    );
-    setVideos(shuffled);
-    iterationRef.current = 0;
+    if (baseVideos.length) {
+      const suffix = `refresh-${Date.now()}`;
+      const shuffled = shuffleVideos(baseVideos).map((video, index) =>
+        withUniqueId(video, suffix, index),
+      );
+      setVideos(shuffled);
+      iterationRef.current = 0;
+    }
     setTimeout(() => {
       setRefreshing(false);
     }, 400);
-  }, []);
+  }, [baseVideos]);
 
   const onEndReached = useCallback(() => {
+    if (!baseVideos.length) {
+      return;
+    }
     iterationRef.current += 1;
+    const suffix = `more-${iterationRef.current}-${Date.now()}`;
     setVideos((prev) => [
       ...prev,
-      ...mockVideos.map((video, index) =>
-        withUniqueId(video, `more-${iterationRef.current}`, index),
-      ),
+      ...baseVideos.map((video, index) => withUniqueId(video, suffix, index)),
     ]);
-  }, []);
+  }, [baseVideos]);
 
   const renderItem = useCallback(
     ({ item, index }: { item: VideoItem; index: number }) => (
