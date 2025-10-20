@@ -530,7 +530,13 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
             accessibilityLabel="Поставить лайк"
             accessible
           >
-            <Icon name={liked ? 'heart' : 'heart-outline'} size={28} color={liked ? '#ff4d6d' : '#ffffff'} />
+            <View style={styles.actionIcon}>
+              <Icon
+                name={liked ? 'heart' : 'heart-outline'}
+                size={28}
+                color={liked ? '#ff4d6d' : '#ffffff'}
+              />
+            </View>
             <Text style={styles.actionLabel}>Лайк</Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -539,7 +545,9 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
             accessibilityLabel="Открыть комментарии"
             accessible
           >
-            <Icon name="chatbubble-ellipses-outline" size={28} color="#ffffff" />
+            <View style={styles.actionIcon}>
+              <Icon name="chatbubble-ellipses-outline" size={28} color="#ffffff" />
+            </View>
             <Text style={styles.actionLabel}>Коммент.</Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -548,7 +556,9 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
             accessibilityLabel="Поделиться видео"
             accessible
           >
-            <Icon name="share-social-outline" size={28} color="#ffffff" />
+            <View style={styles.actionIcon}>
+              <Icon name="share-social-outline" size={28} color="#ffffff" />
+            </View>
             <Text style={styles.actionLabel}>Поделиться</Text>
           </TouchableOpacity>
         </View>

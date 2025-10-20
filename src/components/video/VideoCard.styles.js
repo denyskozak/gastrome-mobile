@@ -90,6 +90,14 @@ export const getStyles = (tabBarHeight) => StyleSheet.create({
         alignItems: 'center',
         marginBottom: 18,
     },
+    actionIcon: {
+        width: 48,
+        height: 48,
+        borderRadius: 24,
+        backgroundColor: 'rgba(60,60,67,0.45)',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
     actionLabel: {
         color: '#fff',
         marginTop: 4,
