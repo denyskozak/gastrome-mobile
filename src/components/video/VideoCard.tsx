@@ -66,7 +66,8 @@ export type VideoCardProps = {
   onToggleMute?: (index: number, muted: boolean) => void;
   onLike?: (item: VideoItem) => void;
   onComment?: (item: VideoItem) => void;
-  onShare?: (item: VideoItem) => void;
+  onShare?: (item: VideoItem) => void | Promise<void>;
+  onPressMeta?: (item: VideoItem) => void;
   onRegister?: (index: number, handle: VideoPlayerHandle | null) => void;
 };
 
@@ -83,6 +84,7 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
   onLike,
   onComment,
   onShare,
+  onPressMeta,
   onRegister,
 }) => {
   const insets = useSafeAreaInsets();
@@ -498,7 +500,11 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
       </View>
 
       <View style={[styles.overlay, { paddingBottom: insets.bottom + 24 }]}> 
-        <View style={styles.metaContainer}>
+        <TouchableOpacity
+          activeOpacity={0.8}
+          style={styles.metaContainer}
+          onPress={() => onPressMeta?.(item)}
+        >
           <View style={styles.authorRow}>
             <Image source={{ uri: item.author.avatar }} style={styles.avatar} />
             <View style={styles.metaText}>
@@ -510,7 +516,7 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
           {item.tags?.length ? (
             <Text style={styles.tags}>{item.tags.join(' ')}</Text>
           ) : null}
-        </View>
+        </TouchableOpacity>
 
         <View style={styles.actionsContainer}>
           <TouchableOpacity

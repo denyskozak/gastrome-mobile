@@ -1,4 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
+import * as Haptics from 'expo-haptics';
+import { isAvailableAsync, requestReview } from 'expo-store-review';
 import {
   Dimensions,
   FlatList,
@@ -14,6 +17,11 @@ import { useActiveItem } from '../../hooks/useActiveItem';
 import { useRecipes } from '../../hooks/useRecipes';
 import { useAWS } from '../../hooks/useAWS';
 import type { ImageSourcePropType } from 'react-native';
+import { recipeRoute } from '../recipes/navigation/recipes.routes';
+import { handleSocialShare } from '../../utilities/socialShare';
+import { renderIngredient } from '../recipe/recipe.renders';
+import { useSettings } from '../../contexts/settings.context';
+import { useTranslator } from '../../hooks/useTranslator';
 
 const { height: SCREEN_HEIGHT } = Dimensions.get('window');
 const MAX_BUFFER_DISTANCE = 2;
@@ -51,14 +59,30 @@ type RegistryEntry = {
 
 export const HomeScreen: React.FC = () => {
   const iterationRef = useRef(0);
+  const loadingMoreRef = useRef(false);
   const [refreshing, setRefreshing] = useState(false);
   const [recipes] = useRecipes(true);
   const { getCookingStepURL } = useAWS();
   const getCookingStepUrlRef = useRef(getCookingStepURL);
+  const navigation = useNavigation<any>();
+  const [settings] = useSettings();
+  const [tCommon] = useTranslator('common');
+
+  const measure = settings?.measure ?? 'g';
 
   useEffect(() => {
     getCookingStepUrlRef.current = getCookingStepURL;
   }, [getCookingStepURL]);
+
+  const recipeMap = useMemo(() => {
+    const map = new Map<string, any>();
+    recipes.forEach((recipeItem: any) => {
+      if (recipeItem?.id) {
+        map.set(recipeItem.id, recipeItem);
+      }
+    });
+    return map;
+  }, [recipes]);
 
   const baseVideos = useMemo(() => {
     return recipes
@@ -78,6 +102,7 @@ export const HomeScreen: React.FC = () => {
 
         return {
           id: `recipe-${recipe.id}`,
+          recipeId: recipe.id,
           source,
           poster,
           title: recipe.title ?? 'Recipe',
@@ -124,9 +149,45 @@ export const HomeScreen: React.FC = () => {
     console.log('comment', video.id);
   }, []);
 
-  const handleShare = useCallback((video: VideoItem) => {
-    console.log('share', video.id);
-  }, []);
+  const handleShare = useCallback(
+    async (video: VideoItem) => {
+      if (!video.recipeId) {
+        return;
+      }
+
+      const recipe = recipeMap.get(video.recipeId);
+      if (!recipe) {
+        return;
+      }
+
+      try {
+        await Haptics.selectionAsync();
+        const ingredientsList = Array.isArray(recipe.ingredients)
+          ? recipe.ingredients
+              .map((ingredient: any) => renderIngredient(ingredient, measure, tCommon))
+              .join(', \n')
+          : '';
+        await handleSocialShare(
+          `I like to share ${recipe.title ?? 'Recipe'} recipe, ingredients: \n\n${ingredientsList}`,
+        );
+        isAvailableAsync().then(() => requestReview());
+      } catch (error: any) {
+        alert(error?.message ?? 'Unable to share');
+      }
+    },
+    [measure, recipeMap, tCommon],
+  );
+
+  const handleOpenRecipe = useCallback(
+    (video: VideoItem) => {
+      if (!video.recipeId) {
+        return;
+      }
+
+      navigation.navigate(recipeRoute, { id: video.recipeId });
+    },
+    [navigation],
+  );
 
   const keyExtractor = useCallback((item: VideoItem) => item.id, []);
 
@@ -224,10 +285,12 @@ export const HomeScreen: React.FC = () => {
     }, 400);
   }, [baseVideos]);
 
-  const onEndReached = useCallback(() => {
-    if (!baseVideos.length) {
+  const loadMoreVideos = useCallback(() => {
+    if (!baseVideos.length || loadingMoreRef.current) {
       return;
     }
+
+    loadingMoreRef.current = true;
     iterationRef.current += 1;
     const suffix = `more-${iterationRef.current}-${Date.now()}`;
     setVideos((prev) => [
@@ -235,6 +298,22 @@ export const HomeScreen: React.FC = () => {
       ...baseVideos.map((video, index) => withUniqueId(video, suffix, index)),
     ]);
   }, [baseVideos]);
+
+  useEffect(() => {
+    if (loadingMoreRef.current) {
+      loadingMoreRef.current = false;
+    }
+  }, [videos]);
+
+  useEffect(() => {
+    if (!videos.length || !baseVideos.length) {
+      return;
+    }
+
+    if (videos.length - activeIndex <= 2) {
+      loadMoreVideos();
+    }
+  }, [activeIndex, baseVideos.length, loadMoreVideos, videos.length]);
 
   const renderItem = useCallback(
     ({ item, index }: { item: VideoItem; index: number }) => (
@@ -247,11 +326,20 @@ export const HomeScreen: React.FC = () => {
           onLike={handleLike}
           onComment={handleComment}
           onShare={handleShare}
+          onPressMeta={handleOpenRecipe}
           onRegister={registerHandle}
         />
       </View>
     ),
-    [activeIndex, handleComment, handleLike, handleShare, handleToggleMute, registerHandle],
+    [
+      activeIndex,
+      handleComment,
+      handleLike,
+      handleOpenRecipe,
+      handleShare,
+      handleToggleMute,
+      registerHandle,
+    ],
   );
 
   const refreshControl = useMemo(
@@ -286,7 +374,7 @@ export const HomeScreen: React.FC = () => {
         maxToRenderPerBatch={3}
         removeClippedSubviews
         refreshControl={refreshControl}
-        onEndReached={onEndReached}
+        onEndReached={loadMoreVideos}
         onEndReachedThreshold={0.6}
       />
     </View>
