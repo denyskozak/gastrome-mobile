@@ -5,19 +5,18 @@ import { Text, View, TouchableOpacity } from 'react-native';
 import { StyleType } from '../../../types/style.types';
 import { useButtonStyles } from './button.styles';
 
-const ButtonComponent = (props) => {
-  const {
-    onPress,
-    title,
-    style,
-    textStyle,
-    highlight,
-    children,
-    type,
-    disabled,
-    selected,
-    size = '',
-  } = props;
+const ButtonComponent = ({
+  onPress = () => {},
+  title = '',
+  style = {},
+  textStyle = {},
+  highlight = false,
+  children,
+  type = 'clear',
+  disabled = false,
+  selected = false,
+  size = '',
+}) => {
 
   const upperCaseSize = size.toUpperCase();
   const styles = useButtonStyles();
@@ -62,17 +61,6 @@ ButtonComponent.propTypes = {
   onPress: PropsType.func,
   size: PropsType.oneOf(['s', 'm', 'l', 'xl']),
   selected: PropsType.bool,
-};
-
-ButtonComponent.defaultProps = {
-  title: '',
-  highlight: false,
-  style: {},
-  textStyle: {},
-  onPress: () => {},
-  type: 'clear',
-  disabled: false,
-  selected: false,
 };
 
 

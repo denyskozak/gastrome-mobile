@@ -7,8 +7,7 @@ import { Colors } from '../../../styles/colors';
 import styles from './circle-timer.styles';
 import { secondsToMinutesTimer } from '../../../utilities/timeParsers';
 
-const CircleTimerComponent = (props) => {
-  const { size, duration, onComplete } = props;
+const CircleTimerComponent = ({ size = 100, duration, onComplete }) => {
 
   return (
     <View style={styles.container}>
@@ -34,7 +33,4 @@ CircleTimerComponent.propTypes = {
   onComplete: PropTypes.func.isRequired
 }
 
-CircleTimerComponent.defaultProps = {
-  size: 100
-}
 export const CircleTimer = CircleTimerComponent;

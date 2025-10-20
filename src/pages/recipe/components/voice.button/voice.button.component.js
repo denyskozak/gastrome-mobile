@@ -17,8 +17,17 @@ import {FirstLaunchTooltip} from "../../../../components/molecular/first-launch-
 import {VOICE_ASSISTANT_TIP} from "../../../../constants/asyncStoreKeys";
 import * as Haptics from "expo-haptics";
 
-const VoiceButtonComponent = (props) => {
-  const {isListening, onButtonPress, isUpper, lootieName, autoPlay, startText, hideButtonWhenSpeaking, animationRef, voiceTooltipText} = props;
+const VoiceButtonComponent = ({
+  isListening = false,
+  onButtonPress = () => {},
+  isUpper = false,
+  lootieName = 'cookOnFire',
+  autoPlay = true,
+  startText,
+  hideButtonWhenSpeaking = true,
+  animationRef,
+  voiceTooltipText = ''
+}) => {
   const [t] = useTranslator('components.voiceButton');
 
   return (
@@ -71,17 +80,6 @@ VoiceButtonComponent.propTypes = {
   isUpper: PropTypes.bool,
   autoPlay: PropTypes.bool,
   lootieName: PropTypes.oneOf(['cookOnFire', 'voice']),
-};
-
-VoiceButtonComponent.defaultProps = {
-  onButtonPress: () => {
-  },
-  isUpper: false,
-  hideButtonWhenSpeaking: true,
-  autoPlay: true,
-  isListening: false,
-  voiceTooltipText: '',
-  lootieName: 'cookOnFire',
 };
 
 export const VoiceButton = VoiceButtonComponent;

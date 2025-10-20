@@ -19,32 +19,32 @@ import {StoryProgressBar} from "../../../components/atomic/story-bar/story-bar";
 import * as Haptics from "expo-haptics";
 import {getDevice} from "../../../utilities/getCurrentDevice";
 
-export const CookingSlideComponent = (props) => {
-    const {
-        // author,
-        index,
-        videoURL,
-        backLabel,
-        stepTitle,
-        description,
-        showHelpArrow,
-        onBackClick,
-        activeIndex,
-        additionalText,
-        hideButtons,
-        loadingText,
-        duration,
-        onStartTimePress,
-        isTimerActive,
-        readCharIndex,
-        isListening,
-        withVoiceAssistant,
-        stepsCount,
-    } = props;
+export const CookingSlideComponent = ({
+    // author,
+    index,
+    videoURL,
+    backLabel = '',
+    stepTitle,
+    description,
+    showHelpArrow,
+    onBackClick,
+    activeIndex,
+    additionalText = '',
+    hideButtons = false,
+    loadingText = '',
+    duration = '',
+    onStartTimePress = () => {},
+    isTimerActive = false,
+    readCharIndex = 0,
+    isListening,
+    withVoiceAssistant = true,
+    stepsCount,
+    isPause: initialIsPause = false,
+}) => {
 
     const [showArrow, setShowArrow] = useState(false);
     const [isTextHidden, setIsTextHidden] = useState(false);
-    const [isPause, setPause] = useState(false);
+    const [isPause, setPause] = useState(initialIsPause);
 
     useEffect(() => {
         if (showArrow) {
@@ -192,20 +192,5 @@ CookingSlideComponent.propTypes = {
     withVoiceAssistant: PropTypes.bool,
     stepsCount: PropTypes.number.isRequired,
 }
-CookingSlideComponent.defaultProps = {
-    hideButtons: false,
-    isBackDisabled: false,
-    isPause: false,
-    additionalText: '',
-    author: null,
-    backLabel: '',
-    loadingText: '',
-    duration: '',
-    isTimerActive: false,
-    onStartTimePress: () => {
-    },
-    readCharIndex: 0,
-    withVoiceAssistant: true,
-}
-
 export const CookingSlide = CookingSlideComponent;
+

@@ -7,8 +7,7 @@ import styles from './image-player.styles';
 import { downloadAsync } from '../../../utilities/downloadAsync';
 import { AnimatedLogo } from '../../atomic/logo/animated-logo.component';
 
-const ImagePlayerComponent = (props) => {
-  const {style, src, rounded} = props;
+const ImagePlayerComponent = ({ style = {}, src = '', rounded = false }) => {
   const [isLoading, setLoading] = useState(true);
 
   // main for component
@@ -44,10 +43,5 @@ ImagePlayerComponent.propTypes = {
   rounded: PropTypes.bool,
 };
 
-ImagePlayerComponent.defaultProps = {
-  style: {},
-  src: '',
-  rounded: false,
-};
-
 export const ImagePlayer = ImagePlayerComponent;
+

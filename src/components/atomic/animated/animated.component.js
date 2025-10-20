@@ -56,8 +56,14 @@ const animationsOut = {
   FadeOut,
 };
 
-const AnimatedComponent = (props) => {
-  const {children, delay, duration, name, outName, style} = props;
+const AnimatedComponent = ({
+  children,
+  delay = 0,
+  duration = 500,
+  name = 'FadeIn',
+  outName = 'FadeOut',
+  style = {}
+}) => {
   const Component = animations[name];
 
   if (!Component) return null;
@@ -88,14 +94,6 @@ AnimatedComponent.propTypes = {
   delay: PropTypes.number,
   duration: PropTypes.number,
   style: PropTypes.object,
-};
-
-AnimatedComponent.defaultProps = {
-  name: 'FadeIn',
-  outName: 'FadeOut',
-  delay: 0,
-  duration: 500,
-  style: {},
 };
 
 AnimatedComponent.NativeView = AnimatedLib.View;

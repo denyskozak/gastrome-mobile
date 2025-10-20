@@ -55,7 +55,7 @@ const renderRating = (rating) => {
     ));
 };
 
-const CommentsSectionComponent = ({comments, translations}) => {
+const CommentsSectionComponent = ({comments = [], translations}) => {
     const {title, placeholder, submit, empty, you, justNow} = translations;
     const [commentText, setCommentText] = useState('');
     const [localComments, setLocalComments] = useState(comments);
@@ -161,8 +161,5 @@ CommentsSectionComponent.propTypes = {
     }).isRequired,
 };
 
-CommentsSectionComponent.defaultProps = {
-    comments: [],
-};
-
 export const CommentsSection = CommentsSectionComponent;
+

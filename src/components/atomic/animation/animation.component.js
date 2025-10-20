@@ -29,8 +29,7 @@ const looties = {
   cookOnFire: cookOnFireJSON,
 }
 
-const AnimationComponent = React.forwardRef((props, ref) => {
-  const { name, height, width, style, autoPlay } = props;
+const AnimationComponent = React.forwardRef(({ name, height, width, style = {}, autoPlay = true }, ref) => {
 
   return (
     <View style={[style, { height, width }]}>
@@ -50,11 +49,6 @@ AnimationComponent.propTypes = {
   height: PropTypes.number.isRequired,
   style: PropTypes.object,
   autoPlay: PropTypes.bool,
-}
-
-AnimationComponent.defaultProps = {
-  style: {},
-  autoPlay: true,
 }
 
 export const  Animation = AnimationComponent;

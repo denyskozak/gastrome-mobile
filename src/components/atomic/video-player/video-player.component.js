@@ -10,8 +10,16 @@ import styles from './video-player.styles';
 import { AnimatedLogo } from '../logo/animated-logo.component';
 import { Liner } from './liner/liner.component';
 
-const VideoPlayerComponent = (props) => {
-  const {style, uri, rate, shouldPlay, onLoaded, resizeMode, progressLineBottomPosition, loadingText} = props;
+const VideoPlayerComponent = ({
+  style = {},
+  uri = '',
+  rate = 1,
+  shouldPlay = false,
+  onLoaded,
+  resizeMode = 'cover',
+  progressLineBottomPosition = 0,
+  loadingText = ''
+}) => {
 
   const [localUri, setLocalUri] = useState('');
   const [status, setStatus] = useState({});
@@ -70,14 +78,5 @@ VideoPlayerComponent.propTypes = {
   progressLineBottomPosition: PropTypes.number
 };
 
-VideoPlayerComponent.defaultProps = {
-  style: {},
-  uri: '',
-  rate: 1,
-  shouldPlay: false,
-  loadingText: '',
-  resizeMode: 'cover',
-  progressLineBottomPosition: 0,
-};
-
 export const VideoPlayer = VideoPlayerComponent;
+

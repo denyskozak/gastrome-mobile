@@ -8,15 +8,14 @@ import SectionedMultiSelect from 'react-native-sectioned-multi-select';
 import autoStyles, { AutocompleteColors } from './autocomplete.styles';
 import { useTranslator } from '../../../hooks/useTranslator';
 
-const AutocompleteComponent = (props) => {
-  const {
-    items,
-    onChange,
-    onConfirm,
-    selectToggleIconComponent,
-    selectText,
-    styles,
-  } = props;
+const AutocompleteComponent = ({
+  items,
+  onChange,
+  onConfirm,
+  selectToggleIconComponent,
+  selectText,
+  styles = {},
+}) => {
 
   const [t] = useTranslator('components.autocomplete');
   const [list, setList] = useState([]);
@@ -65,8 +64,5 @@ AutocompleteComponent.typeProps = {
   styles: PropsType.object,
 };
 
-AutocompleteComponent.defaultProps = {
-  styles: {},
-};
-
 export const Autocomplete = AutocompleteComponent;
+

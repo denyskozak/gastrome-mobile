@@ -7,8 +7,13 @@ import { Animated } from '../animated/animated.component';
 import styles from './tooltip.styles';
 import { Colors } from '../../../styles/colors';
 
-const TooltipComponent = (props) => {
-  const {isVisible, children, text, placement, delay} = props;
+const TooltipComponent = ({
+  isVisible,
+  children,
+  text,
+  placement,
+  delay = 0
+}) => {
 
   const positionStyle = useMemo(() => {
     switch (placement) {
@@ -50,10 +55,6 @@ TooltipComponent.propTypes = {
   children: PropTypes.node.isRequired,
   delay: PropTypes.number,
   placement: PropTypes.oneOf(['top', 'bottom', 'middle']).isRequired,
-};
-
-TooltipComponent.defaultProps = {
-  delay: 0,
 };
 
 export const Tooltip = TooltipComponent;

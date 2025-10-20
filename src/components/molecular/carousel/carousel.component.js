@@ -15,8 +15,7 @@ import { Colors } from '../../../styles/colors';
 import PropTypes from 'prop-types';
 import {Spaces} from "../../../styles/spaces";
 
-const CarouselComponent = React.forwardRef((props, ref) => {
-  const { items, renderItem, activeIndex, onChangeActiveIndex } = props;
+const CarouselComponent = React.forwardRef(({ items, renderItem, activeIndex, onChangeActiveIndex }, ref) => {
   const tabBarHeight = useBottomTabBarHeight();
 
   const PAGE_WIDTH =  getPercentWidth(100);
@@ -103,7 +102,5 @@ CarouselComponent.propTypes  = {
   onChangeActiveIndex: PropTypes.func.isRequired,
 }
 
-CarouselComponent.defaultProps = {
-}
-
 export const Carousel = CarouselComponent;
+
