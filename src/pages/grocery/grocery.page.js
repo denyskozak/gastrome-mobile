@@ -26,6 +26,7 @@ import { HelpButton } from '../../components/molecular/help-button/help-button';
 import { recipesPageRoute } from '../../navigation/navigation.routes';
 import { recipesRoute } from '../recipes/navigation/recipes.routes';
 import {useSubscriptions} from "../../contexts/subscriptions.context";
+import * as Haptics from "expo-haptics";
 
 const intoVideo = require('./grocery-instruction-video.mp4');
 
@@ -202,6 +203,7 @@ const GroceryPageComponent = (props) => {
           }
 
           setSelected(newSet);
+          Haptics.impactAsync();
         }}
         type="outlined"
         selected={selected.has(lowerCaseTitle)}

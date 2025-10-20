@@ -27,8 +27,9 @@ export const useNavigationStyles = () => {
       () => ({
         ...DefaultTheme,
         colors: {
-          ...DefaultTheme.colors,
+          // ...DefaultTheme.colors,
           background: theme.colors.backgroundColor,
+          card: theme.colors.backgroundColor,
         },
       }),
       [theme]

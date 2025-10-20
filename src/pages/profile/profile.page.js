@@ -73,7 +73,7 @@ const SettingsPageComponent = (props) => {
                             <Button
                                 key={option.id}
                                 type="outlined"
-                                size="m"
+                                size="l"
                                 title={option.label}
                                 selected={option.id === themeId}
                                 onPress={() => setTheme(option.id)}

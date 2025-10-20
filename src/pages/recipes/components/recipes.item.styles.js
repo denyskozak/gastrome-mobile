@@ -9,12 +9,10 @@ import { getDevice } from '../../../utilities/getCurrentDevice';
 const styles = StyleSheet.create({
   container: {
     marginTop: Spaces.medium,
-    backgroundColor: Colors.backgroundColor,
     alignItems: 'center',
     width: '100%',
   },
   content: {
-    backgroundColor: Colors.backgroundColor,
     marginTop: Spaces.small,
     alignItems: 'center',
   },
