@@ -10,8 +10,14 @@ import styles from './input.styles';
 import { Animated } from '../animated/animated.component';
 import { FadeOut } from 'react-native-reanimated';
 
-const InputComponent = (props) => {
-  const {onChange, onSubmitEditing, placeholder, style, editable, value} = props;
+const InputComponent = ({
+  onChange,
+  onSubmitEditing = () => {},
+  placeholder = '',
+  style = {},
+  editable = true,
+  value = '',
+}) => {
   const [text, setText] = useState(value);
 
   useEffect(() => {
@@ -58,11 +64,6 @@ InputComponent.propTypes = {
   value: PropsType.string,
   placeholder: PropsType.string,
   style: PropsType.object,
-};
-
-InputComponent.defaultProps = {
-  type: 'clear', placeholder: '', value: '', style: {}, onSubmitEditing: () => {
-  }, editable: true,
 };
 
 export const Input = InputComponent;

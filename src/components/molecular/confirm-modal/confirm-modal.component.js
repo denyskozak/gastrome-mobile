@@ -9,18 +9,17 @@ import { Modal } from '../../atomic/modal/modal.component';
 import { Spaces } from '../../../styles/spaces';
 import styles from './confirm-modal.styles';
 
-const ConfirmModalComponent = (props) => {
-  const {
-    title,
-    text,
-    isOpen,
-    onClose,
-    onConfirm,
-    buttonTitle,
-    icon,
-    isConfirmDisabled,
-    preContentComponent
-  } = props;
+const ConfirmModalComponent = ({
+  title = 'Are you sure?',
+  text = '',
+  isOpen,
+  onClose,
+  onConfirm,
+  buttonTitle = 'Ok',
+  icon = '',
+  isConfirmDisabled = false,
+  preContentComponent = null
+}) => {
 
   return (
     <Modal isVisible={isOpen} onChangeVisible={onClose}>
@@ -64,15 +63,6 @@ ConfirmModalComponent.propTypes = {
   icon: PropTypes.string,
   isConfirmDisabled: PropTypes.bool,
   preContentComponent: PropTypes.node,
-};
-
-ConfirmModalComponent.defaultProps = {
-  preContentComponent: null,
-  isConfirmDisabled: false,
-  title: 'Are you sure?',
-  icon: '',
-  text: '',
-  buttonTitle: 'Ok',
 };
 
 export const ConfirmModal = ConfirmModalComponent;

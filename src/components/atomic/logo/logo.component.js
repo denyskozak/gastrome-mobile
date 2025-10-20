@@ -7,8 +7,7 @@ const logoWhite = require('./white.png');
 
 export const LogoSizes = ['small', 'medium', 'large'];
 
-const LogoComponent = (props) => {
-  const { size, color } = props;
+const LogoComponent = ({ size = 'medium', color = 'black' }) => {
   const style = styles[`${size}`];
   if (!style) return null;
 
@@ -22,9 +21,5 @@ LogoComponent.propTypes = {
   color: PropTypes.oneOf(['white', 'black']),
 }
 
-LogoComponent.defaultProps = {
-  size: 'medium',
-  color: 'black'
-}
-
 export const Logo = LogoComponent;
+

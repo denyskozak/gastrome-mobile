@@ -15,8 +15,14 @@ import {View} from "react-native";
 
 import styles from "./zoom-in-out-animation.styles";
 
-const ZoomInOutComponent = (props) => {
-    const {delay, children, enabled, repeatDelay, width, height} = props;
+const ZoomInOutComponent = ({
+    delay,
+    children,
+    enabled = false,
+    repeatDelay = 1000,
+    width,
+    height
+}) => {
 
 
     const scale = useSharedValue(1); // Initial scale value
@@ -70,11 +76,4 @@ ZoomInOutComponent.propTypes = {
     width: PropTypes.number.isRequired,
     height: PropTypes.number.isRequired,
 }
-
-
-ZoomInOutComponent.defaultProps = {
-    enabled: false,
-    repeatDelay: 1000,
-}
-
 export const ZoomInOut = ZoomInOutComponent;

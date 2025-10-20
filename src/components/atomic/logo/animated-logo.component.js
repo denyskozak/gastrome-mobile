@@ -12,8 +12,13 @@ import {
     withRepeat, withSequence,
 } from 'react-native-reanimated';
 
-const AnimatedLogoComponent = (props) => {
-    const { delay, duration, size, color, isInfinity } = props;
+const AnimatedLogoComponent = ({
+    delay = 700,
+    duration = 1500,
+    size = 'small',
+    color = 'black',
+    isInfinity = false
+}) => {
 
     const animationDelay = 700 + delay;
     const scale = useSharedValue(1); // Scale starts at 1 (original size)
@@ -92,12 +97,5 @@ AnimatedLogoComponent.propTypes = {
     size: PropTypes.oneOf(LogoSizes),
 };
 
-AnimatedLogoComponent.defaultProps = {
-    delay: 700,
-    duration: 1500,
-    size: 'small',
-    color: 'black',
-    isInfinity: false,
-};
-
 export const AnimatedLogo = AnimatedLogoComponent;
+

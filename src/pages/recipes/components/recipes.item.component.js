@@ -13,22 +13,21 @@ import {cutText} from '../../../utilities/cutText';
 
 import styles from './recipes.item.styles';
 
-const RecipeItemComponent = (props) => {
-    const {
-        id,
-        time,
-        image,
-        title,
-        level,
-        subTitle,
-        onPress,
-        ingredients,
-        selectedIngredients,
-        filters,
-        isFavorited,
-        hideImage,
-        enableHint = false,
-    } = props;
+const RecipeItemComponent = ({
+    id,
+    time,
+    image,
+    title,
+    level,
+    subTitle,
+    onPress,
+    ingredients,
+    selectedIngredients = [],
+    filters = [],
+    isFavorited = false,
+    hideImage = false,
+    enableHint = false,
+}) => {
 
     const [t] = useTranslator('pages.recipes');
     const [tCommon] = useTranslator('common');
@@ -141,15 +140,6 @@ RecipeItemComponent.propTypes = {
     isSubscriber: PropTypes.bool,
     enableHint: PropTypes.bool,
     hideImage: PropTypes.bool
-};
-
-RecipeItemComponent.defaultProps = {
-    filters: [],
-    selectedIngredients: [],
-    isFavorited: false,
-    isSubscriber: false,
-    enableHint: false,
-    hideImage: false,
 };
 
 export const RecipeItem = React.memo(RecipeItemComponent);
