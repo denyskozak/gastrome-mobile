@@ -1,0 +1,131 @@
+import {StyleSheet} from "react-native";
+
+export const getStyles = (tabBarHeight) => StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#000',
+    },
+    videoContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    poster: {
+        ...StyleSheet.absoluteFillObject,
+        width: '100%',
+        height: '100%',
+    },
+    bufferingOverlay: {
+        ...StyleSheet.absoluteFillObject,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(0,0,0,0.2)',
+    },
+    errorOverlay: {
+        ...StyleSheet.absoluteFillObject,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(0,0,0,0.4)',
+        paddingHorizontal: 24,
+    },
+    errorText: {
+        color: '#fff',
+        fontSize: 18,
+        fontWeight: '600',
+        textAlign: 'center',
+    },
+    overlay: {
+        position: 'absolute',
+        left: 16,
+        right: 0,
+        bottom: tabBarHeight * 0.5,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'flex-end',
+    },
+    metaContainer: {
+        flex: 1,
+        marginRight: 16,
+    },
+    authorRow: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginBottom: 12,
+    },
+    avatar: {
+        width: 48,
+        height: 48,
+        borderRadius: 24,
+        marginRight: 12,
+    },
+    metaText: {
+        flexShrink: 1,
+    },
+    authorName: {
+        color: '#fff',
+        fontSize: 16,
+        fontWeight: '600',
+        marginBottom: 2,
+    },
+    title: {
+        color: '#fff',
+        fontSize: 20,
+        fontWeight: '700',
+    },
+    description: {
+        color: '#fff',
+        fontSize: 15,
+        marginBottom: 6,
+    },
+    tags: {
+        color: '#d1d1d1',
+        fontSize: 13,
+    },
+    actionsContainer: {
+        width: 84,
+        alignItems: 'center',
+        paddingBottom: 12,
+    },
+    actionButton: {
+        alignItems: 'center',
+        marginBottom: 18,
+    },
+    actionLabel: {
+        color: '#fff',
+        marginTop: 4,
+        fontSize: 12,
+    },
+    progressContainer: {
+        position: 'absolute',
+        left: 0,
+        right: 0,
+        bottom: tabBarHeight,
+        height: 4,
+        backgroundColor: 'rgba(255,255,255,0.2)',
+    },
+    progressBar: {
+        height: '100%',
+        backgroundColor: '#ff4d6d',
+    },
+    heart: {
+        position: 'absolute',
+        left: '50%',
+        top: '50%',
+        marginLeft: -36,
+        marginTop: -36,
+    },
+    feedbackContainer: {
+        position: 'absolute',
+        top: '20%',
+        alignSelf: 'center',
+        paddingHorizontal: 16,
+        paddingVertical: 8,
+        borderRadius: 16,
+        backgroundColor: 'rgba(0,0,0,0.6)',
+    },
+    feedbackText: {
+        color: '#fff',
+        fontSize: 14,
+        fontWeight: '600',
+    },
+});

@@ -20,6 +20,9 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Icon from '@expo/vector-icons/Ionicons';
 import type { AVPlaybackStatus } from 'expo-av';
 import type { VideoItem } from '../../types/video';
+import {useBottomTabBarHeight} from "@react-navigation/bottom-tabs";
+import {getStyle} from "react-native-svg/lib/typescript/xml";
+import {getStyles} from "./VideoCard.styles";
 
 let ExpoVideo: any = null;
 let ExpoResizeMode: any = null;
@@ -98,6 +101,8 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
   const [showHeart, setShowHeart] = useState(false);
   const feedbackOpacity = useRef(createAnimatedValue(0)).current;
   const heartScale = useRef(createAnimatedValue(0)).current;
+  const tabBarHeight = useBottomTabBarHeight();
+  const styles = getStyles(tabBarHeight);
 
   const shouldPlay = isActive && !isManuallyPaused && !hasError;
 
@@ -501,7 +506,7 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
               <Text style={styles.title}>{item.title}</Text>
             </View>
           </View>
-          {item.description ? <Text style={styles.description}>{item.description}</Text> : null}
+          {item.description ? <Text style={styles.description}>{item?.description?.slice(0, 64)}{item?.description.length > 16 ? '...' : ''}</Text> : null}
           {item.tags?.length ? (
             <Text style={styles.tags}>{item.tags.join(' ')}</Text>
           ) : null}
@@ -551,133 +556,3 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
 };
 
 export const VideoCard = memo(VideoCardComponent);
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#000',
-  },
-  videoContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  poster: {
-    ...StyleSheet.absoluteFillObject,
-    width: '100%',
-    height: '100%',
-  },
-  bufferingOverlay: {
-    ...StyleSheet.absoluteFillObject,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(0,0,0,0.2)',
-  },
-  errorOverlay: {
-    ...StyleSheet.absoluteFillObject,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(0,0,0,0.4)',
-    paddingHorizontal: 24,
-  },
-  errorText: {
-    color: '#fff',
-    fontSize: 18,
-    fontWeight: '600',
-    textAlign: 'center',
-  },
-  overlay: {
-    position: 'absolute',
-    left: 16,
-    right: 16,
-    bottom: 0,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'flex-end',
-  },
-  metaContainer: {
-    flex: 1,
-    marginRight: 16,
-  },
-  authorRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 12,
-  },
-  avatar: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
-    marginRight: 12,
-  },
-  metaText: {
-    flexShrink: 1,
-  },
-  authorName: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: '600',
-    marginBottom: 2,
-  },
-  title: {
-    color: '#fff',
-    fontSize: 20,
-    fontWeight: '700',
-  },
-  description: {
-    color: '#fff',
-    fontSize: 15,
-    marginBottom: 6,
-  },
-  tags: {
-    color: '#d1d1d1',
-    fontSize: 13,
-  },
-  actionsContainer: {
-    width: 84,
-    alignItems: 'center',
-    paddingBottom: 12,
-  },
-  actionButton: {
-    alignItems: 'center',
-    marginBottom: 18,
-  },
-  actionLabel: {
-    color: '#fff',
-    marginTop: 4,
-    fontSize: 12,
-  },
-  progressContainer: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    bottom: 0,
-    height: 4,
-    backgroundColor: 'rgba(255,255,255,0.2)',
-  },
-  progressBar: {
-    height: '100%',
-    backgroundColor: '#ff4d6d',
-  },
-  heart: {
-    position: 'absolute',
-    left: '50%',
-    top: '50%',
-    marginLeft: -36,
-    marginTop: -36,
-  },
-  feedbackContainer: {
-    position: 'absolute',
-    top: '20%',
-    alignSelf: 'center',
-    paddingHorizontal: 16,
-    paddingVertical: 8,
-    borderRadius: 16,
-    backgroundColor: 'rgba(0,0,0,0.6)',
-  },
-  feedbackText: {
-    color: '#fff',
-    fontSize: 14,
-    fontWeight: '600',
-  },
-});
