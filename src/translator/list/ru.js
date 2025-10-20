@@ -170,6 +170,12 @@ export const translates = {
             "fats": "Жиры",
             "calories": "Калории",
             "chooseMeasure": "Единицы ⚖️",
+            "commentsTitle": "Комментарии сообщества",
+            "commentsPlaceholder": "Поделитесь впечатлениями о рецепте...",
+            "commentsSubmit": "Отправить",
+            "commentsEmpty": "Пока нет комментариев. Будьте первым!",
+            "commentsYou": "Вы",
+            "commentsJustNow": "только что",
         },
         cooking: {
             "singleVideo": "(Одно видео для всех шагов)",

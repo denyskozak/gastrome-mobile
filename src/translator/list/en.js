@@ -181,6 +181,12 @@ export const translates = {
             fats: 'Fats',
             calories: 'Calories',
             chooseMeasure: 'Measures ⚖️',
+            commentsTitle: 'Community comments',
+            commentsPlaceholder: 'Share your experience with this recipe...',
+            commentsSubmit: 'Send',
+            commentsEmpty: 'No comments yet. Be the first to share your thoughts!',
+            commentsYou: 'You',
+            commentsJustNow: 'just now',
         },
         cooking: {
             singleVideo: '(Single video for all steps)',

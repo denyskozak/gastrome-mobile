@@ -149,6 +149,12 @@ export const translates = {
       addToCart: 'Stiskněte pro přidání všech ingrediencí do nákupního seznamu',
       viewed: 'Zobrazeno',
       chooseMeasure: 'Měřit ⚖️',
+      commentsTitle: 'Komentáře komunity',
+      commentsPlaceholder: 'Podělte se o své zkušenosti s receptem...',
+      commentsSubmit: 'Odeslat',
+      commentsEmpty: 'Zatím žádné komentáře. Buďte první!',
+      commentsYou: 'Vy',
+      commentsJustNow: 'právě teď',
     },
     cooking: {
       singleVideo: '(Jedno video pro všechny kroky)',

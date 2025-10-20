@@ -169,7 +169,13 @@ export const translates = {
             "carbs": "Вуглеводи",
             "fats": "Жири",
             "calories": "Калорії",
-            "chooseMeasure": "Одиниці ⚖️"
+            "chooseMeasure": "Одиниці ⚖️",
+            "commentsTitle": "Коментарі спільноти",
+            "commentsPlaceholder": "Поділіться враженнями про рецепт...",
+            "commentsSubmit": "Надіслати",
+            "commentsEmpty": "Поки що немає коментарів. Будьте першим!",
+            "commentsYou": "Ви",
+            "commentsJustNow": "щойно"
         },
         cooking: {
             "singleVideo": "(Одне відео для всіх кроків)",
