@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { useNavigation } from '@react-navigation/native';
+import { useIsFocused, useNavigation } from '@react-navigation/native';
 import * as Haptics from 'expo-haptics';
 import { isAvailableAsync, requestReview } from 'expo-store-review';
 import {
@@ -59,9 +59,7 @@ type RegistryEntry = {
   handle: VideoPlayerHandle;
 };
 
-const BACKGROUND_MUSIC_SOURCE: BackgroundMusicSource = {
-  uri: 'https://cdn.pixabay.com/download/audio/2021/10/30/audio_2139cc5a7efa7a4182a26c6fefaf3b59.mp3?filename=lofi-study-112191.mp3',
-};
+const BACKGROUND_MUSIC_SOURCE: BackgroundMusicSource = require('../../../assets/background-track.mp3');
 
 export const HomeScreen: React.FC = () => {
   const iterationRef = useRef(0);
@@ -81,14 +79,19 @@ export const HomeScreen: React.FC = () => {
     BACKGROUND_MUSIC_SOURCE,
     { volume: 0.5 },
   );
+  const isFocused = useIsFocused();
 
   useEffect(() => {
-    if (isBackgroundMusicEnabled) {
+    if (isBackgroundMusicEnabled && isFocused) {
       void startBackgroundMusic();
     } else {
       void stopBackgroundMusic();
     }
-  }, [isBackgroundMusicEnabled, startBackgroundMusic, stopBackgroundMusic]);
+  }, [isBackgroundMusicEnabled, isFocused, startBackgroundMusic, stopBackgroundMusic]);
+
+  useEffect(() => () => {
+    void stopBackgroundMusic();
+  }, [stopBackgroundMusic]);
 
   useEffect(() => {
     getCookingStepUrlRef.current = getCookingStepURL;
