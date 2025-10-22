@@ -59,7 +59,7 @@ ButtonComponent.propTypes = {
   textStyle: StyleType,
   disabled: PropsType.bool,
   onPress: PropsType.func,
-  size: PropsType.oneOf(['s', 'm', 'l', 'xl']),
+  size: PropsType.oneOf(['s', 'm', 'l', 'xl', 'xxl']),
   selected: PropsType.bool,
 };
 

@@ -524,7 +524,7 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
           <View style={styles.metaButtonWrapper}>
             <Button
               type="contained"
-              size="l"
+              size="xxl"
               title={tHome('openRecipeButton')}
               onPress={() => onPressMeta?.(item)}
               style={styles.metaButton}

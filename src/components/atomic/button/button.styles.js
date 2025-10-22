@@ -39,6 +39,12 @@ export const useButtonStyles = createThemedStyles((theme) => StyleSheet.create({
     height: Spaces.xxlarge,
     width: Spaces.xxxlarge * 3,
   },
+  containerXXL: {
+    paddingLeft: Spaces.small,
+    paddingRight: Spaces.small,
+    height: Spaces.xxlarge,
+    width: Spaces.xxxlarge * 4,
+  },
 
   outlined: {
     backgroundColor: 'rgba(52, 52, 52, 0)',

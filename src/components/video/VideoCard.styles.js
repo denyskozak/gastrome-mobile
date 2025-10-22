@@ -126,6 +126,8 @@ export const getStyles = (tabBarHeight) => StyleSheet.create({
     progressBar: {
         height: '100%',
         backgroundColor: '#ff4d6d',
+        borderBottomLeftRadius: '50%',
+        borderBottomRightRadius: '50%'
     },
     heart: {
         position: 'absolute',
