@@ -61,9 +61,20 @@ export const useBackgroundMusic = (
         if (!status.isLooping) {
           await sound.setIsLoopingAsync(true);
         }
+        const shouldRandomizeStart = !status.isPlaying;
+        if (
+          shouldRandomizeStart &&
+          typeof status.durationMillis === 'number' &&
+          status.durationMillis > 0
+        ) {
+          const randomPosition = Math.floor(Math.random() * status.durationMillis);
+          await sound.setPositionAsync(randomPosition);
+        }
         if (!status.isPlaying) {
           await sound.playAsync();
         }
+      } else {
+        await sound.playAsync();
       }
       setIsPlaying(true);
     } catch (error) {
