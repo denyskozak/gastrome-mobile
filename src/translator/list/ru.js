@@ -42,6 +42,10 @@ export const translates = {
     pages: {
         home: {
             openRecipeButton: "Перейти к рецепту",
+            defaultRecipeTitle: "Рецепт",
+            defaultAuthorName: "Gastro & Me",
+            shareMessage: "Хочу поделиться рецептом {title}, ингредиенты: \\n\\n{ingredients}",
+            shareError: "Не удалось поделиться",
         },
         "authors": {
             "emptyList": "На платформе не найдено авторов :(",
