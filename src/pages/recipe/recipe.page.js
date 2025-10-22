@@ -30,8 +30,6 @@ import {AuthorPreview} from "../../components/molecular/author-preview/author-pr
 import {ZoomInOut} from "../../components/molecular/zoom-in-out-animation/zoom-in-out-animation";
 import {logEvent} from "../../utilities/google-analitics";
 import {isAvailableAsync, requestReview} from "expo-store-review";
-import {CommentsSection} from "./components/comments.section/comments.section.component";
-import {useRecipeComments} from "../../hooks/useRecipeComments";
 
 const RecipePageComponent = (props) => {
     const {
@@ -42,7 +40,6 @@ const RecipePageComponent = (props) => {
     const [tCommon] = useTranslator('common');
     const [recipes] = useRecipes();
     const recipe = useMemo(() => recipes.find(item => item.id === id), [id, recipes]);
-    const comments = useRecipeComments(id);
     const {
         title,
         image,
@@ -99,22 +96,6 @@ const RecipePageComponent = (props) => {
     const debounceChangeCookingLinkState = useMemo(() => _.debounce(function (value) {
         setVisibleCookingLink(typeof value === 'number' && value > 150);
     }, 50), [setVisibleCookingLink]);
-
-    const commentsTranslations = useMemo(() => ({
-        title: t('commentsTitle'),
-        placeholder: t('commentsPlaceholder'),
-        submit: t('commentsSubmit'),
-        empty: t('commentsEmpty'),
-        you: t('commentsYou'),
-        justNow: t('commentsJustNow'),
-    }), [t]);
-
-    const commentsFooter = useMemo(() => (
-        <CommentsSection
-            comments={comments}
-            translations={commentsTranslations}
-        />
-    ), [comments, commentsTranslations]);
 
     const prepareIngredient = item => ({
         ...item, key: item.title, quantity: item.quantity * (servingsCount / servings),
@@ -356,7 +337,6 @@ const RecipePageComponent = (props) => {
                     {image && <Image style={styles.stepImage} source={{uri: image}}/>}
                 </View>);
             }}
-            ListFooterComponent={commentsFooter}
         />
         {/* Voice assistant or video link */}
         {visibleCookingLink && (
