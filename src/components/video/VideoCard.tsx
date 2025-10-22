@@ -96,6 +96,7 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
   const doubleTapRef = useRef<number>(0);
   const singleTapTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const preparedRef = useRef(false);
+  const pendingPlayRef = useRef(false);
   const [isMuted, setIsMuted] = useState(true);
   const [isBuffering, setIsBuffering] = useState(true);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -190,6 +191,50 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
     });
   }, [heartScale]);
 
+  const isRecoverablePlaybackError = useCallback((error: unknown) => {
+    if (!error) {
+      return false;
+    }
+
+    if (typeof error === 'string') {
+      return /load( is)? in progress/i.test(error) || /not ready/i.test(error);
+    }
+
+    if (error instanceof Error) {
+      return /load( is)? in progress/i.test(error.message) || /not ready/i.test(error.message);
+    }
+
+    if (typeof error === 'object') {
+      const maybeError = error as { code?: string; message?: string };
+      const { code, message } = maybeError;
+      if (typeof code === 'string' && (/LOAD_IN_PROGRESS/i.test(code) || /NOTREADY/i.test(code))) {
+        return true;
+      }
+      if (typeof message === 'string') {
+        return /load( is)? in progress/i.test(message) || /not ready/i.test(message);
+      }
+    }
+
+    return false;
+  }, []);
+
+  const attemptPlayAfterLoad = useCallback(async () => {
+    if (!videoRef.current || !isExpoAvAvailable || !videoRef.current.playAsync) {
+      return;
+    }
+
+    try {
+      pendingPlayRef.current = false;
+      await videoRef.current.playAsync();
+    } catch (error) {
+      if (isRecoverablePlaybackError(error)) {
+        pendingPlayRef.current = true;
+      } else {
+        setHasError(true);
+      }
+    }
+  }, [isRecoverablePlaybackError]);
+
   const handlePlaybackStatus = useCallback((status: AVPlaybackStatus) => {
     if (!status.isLoaded) {
       if (status.error) {
@@ -208,7 +253,11 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
     if (status.didJustFinish) {
       setProgress(1);
     }
-  }, []);
+
+    if (pendingPlayRef.current && shouldPlay && !status.isPlaying) {
+      attemptPlayAfterLoad();
+    }
+  }, [attemptPlayAfterLoad, shouldPlay]);
 
   const handleProgress = useCallback((event: { currentTime: number; playableDuration: number; seekableDuration: number; }) => {
     if (event.seekableDuration) {
@@ -281,21 +330,28 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
       try {
         const status = await videoRef.current.getStatusAsync?.();
         if (!status?.isLoaded) {
+          pendingPlayRef.current = true;
           await videoRef.current.loadAsync?.(
             { uri: item.source },
             { shouldPlay: true, isMuted },
             false,
           );
+          pendingPlayRef.current = false;
         } else {
+          pendingPlayRef.current = false;
           await videoRef.current.playAsync();
         }
       } catch (error) {
-        setHasError(true);
+        if (isRecoverablePlaybackError(error)) {
+          pendingPlayRef.current = true;
+        } else {
+          setHasError(true);
+        }
       }
     } else if (videoRef.current?.seek) {
       videoRef.current.seek(0);
     }
-  }, [item.source, isMuted]);
+  }, [isRecoverablePlaybackError, item.source, isMuted]);
 
   const pause = useCallback(async () => {
     if (!videoRef.current) return;
@@ -335,6 +391,7 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
     }
     setProgress(0);
     setIsLoaded(false);
+    pendingPlayRef.current = false;
   }, []);
 
   const prepare = useCallback(async () => {
@@ -394,7 +451,7 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
         seekToStart();
       }
     }
-  }, [isActive, pause, play, seekToStart, shouldPlay]);
+  }, [isActive, isLoaded, pause, play, seekToStart, shouldPlay]);
 
   useEffect(() => {
     if (!isActive && isManuallyPaused) {
