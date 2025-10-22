@@ -471,6 +471,44 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
     unload();
   }, [unload]);
 
+  const handleLoadStart = useCallback(() => {
+    setIsBuffering(true);
+    setHasError(false);
+  }, []);
+
+  const handleLoad = useCallback(() => {
+    setIsBuffering(false);
+    setIsLoaded(true);
+    preparedRef.current = true;
+
+    if (pendingPlayRef.current && shouldPlay) {
+      attemptPlayAfterLoad();
+    }
+  }, [attemptPlayAfterLoad, shouldPlay]);
+
+  const handleVideoError = useCallback(
+    (error: unknown) => {
+      const resolvedError =
+        typeof error === 'object' && error !== null
+          ? 'nativeEvent' in (error as Record<string, unknown>)
+            ? (error as { nativeEvent: unknown }).nativeEvent
+            : 'error' in (error as Record<string, unknown>)
+              ? (error as { error: unknown }).error
+              : error
+          : error;
+
+      if (isRecoverablePlaybackError(resolvedError)) {
+        pendingPlayRef.current = true;
+        setIsBuffering(true);
+        return;
+      }
+
+      setHasError(true);
+      setIsBuffering(false);
+    },
+    [isRecoverablePlaybackError],
+  );
+
   const renderVideo = () => {
     if (isExpoAvAvailable && ExpoVideo) {
       return (
@@ -479,22 +517,11 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
           style={StyleSheet.absoluteFill}
           source={{ uri: item.source }}
           resizeMode={ExpoResizeMode?.CONTAIN ?? 'contain'}
-          shouldPlay={shouldPlay}
           isLooping
           isMuted={isMuted}
-          onLoadStart={() => {
-            setIsBuffering(true);
-            setHasError(false);
-          }}
-          onLoad={() => {
-            setIsBuffering(false);
-            setIsLoaded(true);
-            preparedRef.current = true;
-          }}
-          onError={() => {
-            setHasError(true);
-            setIsBuffering(false);
-          }}
+          onLoadStart={handleLoadStart}
+          onLoad={handleLoad}
+          onError={handleVideoError}
           onPlaybackStatusUpdate={handlePlaybackStatus}
           useNativeControls={false}
           posterSource={item.poster ? { uri: item.poster } : undefined}
@@ -513,18 +540,9 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
           repeat
           muted={isMuted}
           paused={!shouldPlay}
-          onLoadStart={() => {
-            setIsBuffering(true);
-            setHasError(false);
-          }}
-          onLoad={() => {
-            setIsBuffering(false);
-            setIsLoaded(true);
-          }}
-          onError={() => {
-            setHasError(true);
-            setIsBuffering(false);
-          }}
+          onLoadStart={handleLoadStart}
+          onLoad={handleLoad}
+          onError={handleVideoError}
           onBuffer={({ isBuffering: buffering }: { isBuffering: boolean }) => setIsBuffering(buffering)}
           onProgress={handleProgress}
           onEnd={() => setProgress(1)}
