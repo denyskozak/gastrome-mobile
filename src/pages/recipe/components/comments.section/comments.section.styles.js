@@ -24,7 +24,6 @@ export default StyleSheet.create({
         padding: Spaces.medium,
         flexDirection: 'row',
         alignItems: 'flex-start',
-        backgroundColor: Colors.white,
         gap: Spaces.small,
     },
     formAvatar: {
@@ -87,7 +86,7 @@ export default StyleSheet.create({
         borderWidth: 1,
         borderColor: Colors.grey,
         padding: Spaces.medium,
-        backgroundColor: Colors.white,
+        // backgroundColor: Colors.white,
     },
     commentHeader: {
         flexDirection: 'row',

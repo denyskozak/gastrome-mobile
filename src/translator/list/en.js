@@ -45,7 +45,7 @@ export const translates = {
     },
     pages: {
         home: {
-            openRecipeButton: 'View recipe',
+            openRecipeButton: 'Open Recipe Steps',
             defaultRecipeTitle: 'Recipe',
             defaultAuthorName: 'Gastro & Me',
             shareMessage: 'I want to share the {title} recipe, ingredients: \n\n{ingredients}',
