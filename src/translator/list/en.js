@@ -46,6 +46,10 @@ export const translates = {
     pages: {
         home: {
             openRecipeButton: 'View recipe',
+            defaultRecipeTitle: 'Recipe',
+            defaultAuthorName: 'Gastro & Me',
+            shareMessage: 'I want to share the {title} recipe, ingredients: \n\n{ingredients}',
+            shareError: 'Unable to share',
         },
         authors: {
             emptyList: 'No authors found on platform :(',

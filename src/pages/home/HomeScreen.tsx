@@ -67,6 +67,7 @@ export const HomeScreen: React.FC = () => {
   const navigation = useNavigation<any>();
   const [settings] = useSettings();
   const [tCommon] = useTranslator('common');
+  const [tHome] = useTranslator('pages.home');
 
   const measure = settings?.measure ?? 'g';
 
@@ -105,9 +106,9 @@ export const HomeScreen: React.FC = () => {
           recipeId: recipe.id,
           source,
           poster,
-          title: recipe.title ?? 'Recipe',
+          title: recipe.title ?? tHome('defaultRecipeTitle') ?? 'Recipe',
           author: {
-            name: recipe.author?.name ?? 'Gastro & Me',
+            name: recipe.author?.name ?? tHome('defaultAuthorName') ?? 'Gastro & Me',
             avatar: authorAvatar,
           },
           description: recipe.description,
@@ -115,7 +116,7 @@ export const HomeScreen: React.FC = () => {
         } satisfies VideoItem;
       })
       .filter((item): item is VideoItem => Boolean(item));
-  }, [recipes]);
+  }, [recipes, tHome]);
   const [videos, setVideos] = useState<VideoItem[]>([]);
   const registryRef = useRef<Map<string, RegistryEntry>>(new Map());
   const { activeIndex, onViewableItemsChanged, viewabilityConfig } = useActiveItem();
@@ -167,15 +168,20 @@ export const HomeScreen: React.FC = () => {
               .map((ingredient: any) => renderIngredient(ingredient, measure, tCommon))
               .join(', \n')
           : '';
+        const shareTitle = recipe.title ?? tHome('defaultRecipeTitle') ?? 'Recipe';
         await handleSocialShare(
-          `I like to share ${recipe.title ?? 'Recipe'} recipe, ingredients: \n\n${ingredientsList}`,
+          tHome('shareMessage', {
+            title: shareTitle,
+            ingredients: ingredientsList,
+          }) ??
+            `I like to share ${shareTitle} recipe, ingredients: \n\n${ingredientsList}`,
         );
         isAvailableAsync().then(() => requestReview());
       } catch (error: any) {
-        alert(error?.message ?? 'Unable to share');
+        alert(error?.message ?? tHome('shareError') ?? 'Unable to share');
       }
     },
-    [measure, recipeMap, tCommon],
+    [measure, recipeMap, tCommon, tHome],
   );
 
   const handleOpenRecipe = useCallback(
