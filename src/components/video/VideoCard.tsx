@@ -9,6 +9,7 @@ import React, {
 import {
   ActivityIndicator,
   Animated,
+  Easing,
   Image,
   Pressable,
   StyleSheet,
@@ -106,10 +107,37 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
   const [showHeart, setShowHeart] = useState(false);
   const feedbackOpacity = useRef(createAnimatedValue(0)).current;
   const heartScale = useRef(createAnimatedValue(0)).current;
+  const metaButtonScale = useRef(createAnimatedValue(1)).current;
   const tabBarHeight = useBottomTabBarHeight();
   const styles = getStyles(tabBarHeight);
 
   const shouldPlay = isActive && !isManuallyPaused && !hasError;
+
+  useEffect(() => {
+    const animation = Animated.loop(
+      Animated.sequence([
+        Animated.timing(metaButtonScale, {
+          toValue: 1.05,
+          duration: 300,
+          easing: Easing.inOut(Easing.ease),
+          useNativeDriver: true,
+        }),
+        Animated.timing(metaButtonScale, {
+          toValue: 1,
+          duration: 300,
+          easing: Easing.inOut(Easing.ease),
+          useNativeDriver: true,
+        }),
+        Animated.delay(2400),
+      ]),
+    );
+
+    animation.start();
+
+    return () => {
+      animation.stop();
+    };
+  }, [metaButtonScale]);
 
   const stopSingleTapTimeout = useCallback(() => {
     if (singleTapTimeoutRef.current) {
@@ -521,7 +549,12 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
               {item?.description.length > 16 ? '...' : ''}
             </Text>
           ) : null}
-          <View style={styles.metaButtonWrapper}>
+          <Animated.View
+            style={[
+              styles.metaButtonWrapper,
+              { transform: [{ scale: metaButtonScale }] },
+            ]}
+          >
             <Button
               type="contained"
               size="xxl"
@@ -530,7 +563,7 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
               style={styles.metaButton}
               textStyle={styles.metaButtonText}
             />
-          </View>
+          </Animated.View>
           {item.tags?.length ? (
             <Text style={styles.tags}>{item.tags.join(' ')}</Text>
           ) : null}
