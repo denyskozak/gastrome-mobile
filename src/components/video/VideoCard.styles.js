@@ -110,6 +110,14 @@ export const getStyles = (tabBarHeight) => StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    musicOffSlash: {
+        position: 'absolute',
+        width: 3,
+        height: 36,
+        backgroundColor: '#ffffff',
+        borderRadius: 2,
+        transform: [{ rotate: '45deg' }],
+    },
     actionLabel: {
         color: '#fff',
         marginTop: 4,
