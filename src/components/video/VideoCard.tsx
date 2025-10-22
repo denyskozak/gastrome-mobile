@@ -659,7 +659,7 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
           >
             <View style={styles.actionIcon}>
               <Icon name="musical-notes" size={28} color="#ffffff" />
-              {isMusicEnabled ? <View style={styles.musicOffSlash} /> : null}
+              {!isMusicEnabled ? <View style={styles.musicOffSlash} /> : null}
             </View>
             <Text style={styles.actionLabel}>Музыка</Text>
           </TouchableOpacity>
