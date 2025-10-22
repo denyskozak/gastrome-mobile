@@ -68,7 +68,8 @@ export type VideoCardProps = {
   isActive: boolean;
   onToggleMute?: (index: number, muted: boolean) => void;
   onLike?: (item: VideoItem) => void;
-  onComment?: (item: VideoItem) => void;
+  onToggleMusic?: () => void;
+  isMusicEnabled?: boolean;
   onShare?: (item: VideoItem) => void | Promise<void>;
   onPressMeta?: (item: VideoItem) => void;
   onRegister?: (index: number, handle: VideoPlayerHandle | null) => void;
@@ -85,7 +86,8 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
   isActive,
   onToggleMute,
   onLike,
-  onComment,
+  onToggleMusic,
+  isMusicEnabled,
   onShare,
   onPressMeta,
   onRegister,
@@ -648,15 +650,18 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
             <Text style={styles.actionLabel}>Лайк</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => onComment?.(item)}
+            onPress={onToggleMusic}
             style={styles.actionButton}
-            accessibilityLabel="Открыть комментарии"
+            accessibilityLabel={
+              isMusicEnabled ? 'Остановить фоновую музыку' : 'Включить фоновую музыку'
+            }
             accessible
           >
             <View style={styles.actionIcon}>
-              <Icon name="chatbubble-ellipses-outline" size={28} color="#ffffff" />
+              <Icon name="musical-notes" size={28} color="#ffffff" />
+              {isMusicEnabled ? <View style={styles.musicOffSlash} /> : null}
             </View>
-            <Text style={styles.actionLabel}>Коммент.</Text>
+            <Text style={styles.actionLabel}>Музыка</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => onShare?.(item)}

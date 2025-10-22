@@ -22,6 +22,8 @@ import { handleSocialShare } from '../../utilities/socialShare';
 import { renderIngredient } from '../recipe/recipe.renders';
 import { useSettings } from '../../contexts/settings.context';
 import { useTranslator } from '../../hooks/useTranslator';
+import { useBackgroundMusic } from '../../hooks/useBackgroundMusic';
+import type { BackgroundMusicSource } from '../../hooks/useBackgroundMusic';
 
 const { height: SCREEN_HEIGHT } = Dimensions.get('window');
 const MAX_BUFFER_DISTANCE = 2;
@@ -57,6 +59,10 @@ type RegistryEntry = {
   handle: VideoPlayerHandle;
 };
 
+const BACKGROUND_MUSIC_SOURCE: BackgroundMusicSource = {
+  uri: 'https://cdn.pixabay.com/download/audio/2021/10/30/audio_2139cc5a7efa7a4182a26c6fefaf3b59.mp3?filename=lofi-study-112191.mp3',
+};
+
 export const HomeScreen: React.FC = () => {
   const iterationRef = useRef(0);
   const loadingMoreRef = useRef(false);
@@ -70,6 +76,19 @@ export const HomeScreen: React.FC = () => {
   const [tHome] = useTranslator('pages.home');
 
   const measure = settings?.measure ?? 'g';
+  const [isBackgroundMusicEnabled, setIsBackgroundMusicEnabled] = useState(true);
+  const { start: startBackgroundMusic, stop: stopBackgroundMusic } = useBackgroundMusic(
+    BACKGROUND_MUSIC_SOURCE,
+    { volume: 0.5 },
+  );
+
+  useEffect(() => {
+    if (isBackgroundMusicEnabled) {
+      void startBackgroundMusic();
+    } else {
+      void stopBackgroundMusic();
+    }
+  }, [isBackgroundMusicEnabled, startBackgroundMusic, stopBackgroundMusic]);
 
   useEffect(() => {
     getCookingStepUrlRef.current = getCookingStepURL;
@@ -146,8 +165,8 @@ export const HomeScreen: React.FC = () => {
     console.log('like', video.id);
   }, []);
 
-  const handleComment = useCallback((video: VideoItem) => {
-    console.log('comment', video.id);
+  const handleToggleBackgroundMusic = useCallback(() => {
+    setIsBackgroundMusicEnabled((prev) => !prev);
   }, []);
 
   const handleShare = useCallback(
@@ -330,22 +349,24 @@ export const HomeScreen: React.FC = () => {
           isActive={activeIndex === index}
           onToggleMute={handleToggleMute}
           onLike={handleLike}
-          onComment={handleComment}
+          onToggleMusic={handleToggleBackgroundMusic}
+          isMusicEnabled={isBackgroundMusicEnabled}
           onShare={handleShare}
           onPressMeta={handleOpenRecipe}
           onRegister={registerHandle}
         />
       </View>
     ),
-    [
-      activeIndex,
-      handleComment,
-      handleLike,
-      handleOpenRecipe,
-      handleShare,
-      handleToggleMute,
-      registerHandle,
-    ],
+      [
+        activeIndex,
+        handleLike,
+        handleOpenRecipe,
+        handleShare,
+        handleToggleMute,
+        handleToggleBackgroundMusic,
+        registerHandle,
+        isBackgroundMusicEnabled,
+      ],
   );
 
   const refreshControl = useMemo(
