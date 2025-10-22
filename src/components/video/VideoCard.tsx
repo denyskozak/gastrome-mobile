@@ -596,18 +596,18 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
           onPress={() => onPressMeta?.(item)}
         >
           <View style={styles.authorRow}>
-            <Image source={{ uri: item.author.avatar }} style={styles.avatar} />
+            {/*<Image source={{ uri: item.author.avatar }} style={styles.avatar} />*/}
             <View style={styles.metaText}>
               <Text style={styles.authorName}>{item.author.name}</Text>
               <Text style={styles.title}>{item.title}</Text>
             </View>
           </View>
-          {item.description ? (
-            <Text style={styles.description}>
-              {item?.description?.slice(0, 64)}
-              {item?.description.length > 16 ? '...' : ''}
-            </Text>
-          ) : null}
+          {/*{item.description ? (*/}
+          {/*  <Text style={styles.description}>*/}
+          {/*    {item?.description?.slice(0, 64)}*/}
+          {/*    {item?.description.length > 16 ? '...' : ''}*/}
+          {/*  </Text>*/}
+          {/*) : null}*/}
           <Animated.View
             style={[
               styles.metaButtonWrapper,

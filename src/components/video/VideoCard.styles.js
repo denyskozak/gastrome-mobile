@@ -1,4 +1,8 @@
 import {StyleSheet} from "react-native";
+import {getTextStyles} from "../../styles/common.styles";
+import {Colors} from "../../styles/colors";
+import {Spaces} from "../../styles/spaces";
+import {themes} from "../../styles/themes";
 
 export const getStyles = (tabBarHeight) => StyleSheet.create({
     container: {
@@ -84,11 +88,14 @@ export const getStyles = (tabBarHeight) => StyleSheet.create({
     },
     metaButton: {
         alignSelf: 'flex-start',
+        borderWidth:1,
+        borderColor: Colors.black
     },
-    metaButtonText: {
-        fontSize: 14,
+    metaButtonText: getTextStyles({
+        fontSize: 20,
+        color: Colors.black,
         fontWeight: '600',
-    },
+    }),
     tags: {
         color: '#d1d1d1',
         fontSize: 13,
@@ -96,11 +103,11 @@ export const getStyles = (tabBarHeight) => StyleSheet.create({
     actionsContainer: {
         width: 84,
         alignItems: 'center',
-        paddingBottom: 12,
+        marginBottom: Spaces.medium
     },
     actionButton: {
         alignItems: 'center',
-        marginBottom: 18,
+        marginTop: 18,
     },
     actionIcon: {
         width: 48,
