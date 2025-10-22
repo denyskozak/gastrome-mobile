@@ -77,6 +77,18 @@ export const getStyles = (tabBarHeight) => StyleSheet.create({
         fontSize: 15,
         marginBottom: 6,
     },
+    metaButtonWrapper: {
+        marginTop: 12,
+        marginBottom: 8,
+        alignSelf: 'flex-start',
+    },
+    metaButton: {
+        alignSelf: 'flex-start',
+    },
+    metaButtonText: {
+        fontSize: 14,
+        fontWeight: '600',
+    },
     tags: {
         color: '#d1d1d1',
         fontSize: 13,

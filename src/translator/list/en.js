@@ -44,6 +44,9 @@ export const translates = {
         "sheet": "sheets",
     },
     pages: {
+        home: {
+            openRecipeButton: 'View recipe',
+        },
         authors: {
             emptyList: 'No authors found on platform :(',
             becomeChef: "Become new Chef",

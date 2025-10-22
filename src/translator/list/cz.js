@@ -24,6 +24,9 @@ export const translates = {
     seconds: 'sekundy',
   },
   pages: {
+    home: {
+      openRecipeButton: 'Přejít na recept',
+    },
     authors: {
       emptyList: 'Na platformě nebyli nalezeni žádní autoři :(',
       becomeChef: "Stát se novým Kuchařem",

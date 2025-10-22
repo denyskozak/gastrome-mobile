@@ -40,6 +40,9 @@ export const translates = {
         "sheet": "листы",
     },
     pages: {
+        home: {
+            openRecipeButton: "Перейти к рецепту",
+        },
         "authors": {
             "emptyList": "На платформе не найдено авторов :(",
             "becomeChef": "Станьте новым шеф-поваром"
