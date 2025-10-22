@@ -23,6 +23,8 @@ import type { VideoItem } from '../../types/video';
 import {useBottomTabBarHeight} from "@react-navigation/bottom-tabs";
 import {getStyle} from "react-native-svg/lib/typescript/xml";
 import {getStyles} from "./VideoCard.styles";
+import { Button } from '../atomic/button/button.component';
+import { useTranslator } from '../../hooks/useTranslator';
 
 let ExpoVideo: any = null;
 let ExpoResizeMode: any = null;
@@ -87,6 +89,7 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
   onPressMeta,
   onRegister,
 }) => {
+  const [tHome] = useTranslator('pages.home');
   const insets = useSafeAreaInsets();
   const videoRef = useRef<any>(null);
   const doubleTapRef = useRef<number>(0);
@@ -512,7 +515,22 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
               <Text style={styles.title}>{item.title}</Text>
             </View>
           </View>
-          {item.description ? <Text style={styles.description}>{item?.description?.slice(0, 64)}{item?.description.length > 16 ? '...' : ''}</Text> : null}
+          {item.description ? (
+            <Text style={styles.description}>
+              {item?.description?.slice(0, 64)}
+              {item?.description.length > 16 ? '...' : ''}
+            </Text>
+          ) : null}
+          <View style={styles.metaButtonWrapper}>
+            <Button
+              type="contained"
+              size="l"
+              title={tHome('openRecipeButton')}
+              onPress={() => onPressMeta?.(item)}
+              style={styles.metaButton}
+              textStyle={styles.metaButtonText}
+            />
+          </View>
           {item.tags?.length ? (
             <Text style={styles.tags}>{item.tags.join(' ')}</Text>
           ) : null}
