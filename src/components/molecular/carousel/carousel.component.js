@@ -31,13 +31,13 @@ const CarouselComponent = React.forwardRef(({ items, renderItem, activeIndex, on
       const translateY = interpolate(
         value,
         [-1, 0, 1],
-        [-PAGE_HEIGHT, 0, 0],
+        [-PAGE_HEIGHT, 0, PAGE_HEIGHT],
       );
 
       const translateX = interpolate(
         value,
         [-1, 0, 1],
-        [-PAGE_WIDTH, 0, 0],
+        [-PAGE_WIDTH, 0, PAGE_WIDTH],
       );
 
       const zIndex = interpolate(value, [-1, 0, 1], [300, 0, -300]);
