@@ -380,7 +380,7 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
           pendingPlayRef.current = true;
           await videoRef.current?.loadAsync?.(
             { uri: item.source },
-            { shouldPlay: true, isMuted },
+            { shouldPlay: true, isMuted, isLooping: true },
             false,
           );
           pendingPlayRef.current = false;
@@ -416,7 +416,11 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
     if (!videoRef.current) return;
     if (isExpoAvAvailable && videoRef.current.setStatusAsync) {
       try {
-        await videoRef.current.setStatusAsync({ positionMillis: 0, shouldPlay: false });
+        await videoRef.current.setStatusAsync({
+          positionMillis: 0,
+          shouldPlay: false,
+          isLooping: true,
+        });
       } catch (error) {
         // ignore
       }
@@ -453,7 +457,7 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
         if (!status?.isLoaded) {
           await videoRef.current.loadAsync?.(
             { uri: item.source },
-            { shouldPlay: false, isMuted: true },
+            { shouldPlay: false, isMuted: true, isLooping: true },
             false,
           );
         }
