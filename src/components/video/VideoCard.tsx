@@ -226,11 +226,19 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
     }
 
     if (typeof error === 'string') {
-      return /load( is)? in progress/i.test(error) || /not ready/i.test(error);
+      return (
+        /load( is)? in progress/i.test(error) ||
+        /not ready/i.test(error) ||
+        /invalid view returned from registry/i.test(error)
+      );
     }
 
     if (error instanceof Error) {
-      return /load( is)? in progress/i.test(error.message) || /not ready/i.test(error.message);
+      return (
+        /load( is)? in progress/i.test(error.message) ||
+        /not ready/i.test(error.message) ||
+        /invalid view returned from registry/i.test(error.message)
+      );
     }
 
     if (typeof error === 'object') {
@@ -240,7 +248,11 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
         return true;
       }
       if (typeof message === 'string') {
-        return /load( is)? in progress/i.test(message) || /not ready/i.test(message);
+        return (
+          /load( is)? in progress/i.test(message) ||
+          /not ready/i.test(message) ||
+          /invalid view returned from registry/i.test(message)
+        );
       }
     }
 
