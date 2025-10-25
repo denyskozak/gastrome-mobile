@@ -1,9 +1,12 @@
 import React from 'react';
 import PropsType from 'prop-types';
-import { Text, View, TouchableOpacity } from 'react-native';
+import { Animated, Text, TouchableOpacity } from 'react-native';
 
 import { StyleType } from '../../../types/style.types';
 import { useButtonStyles } from './button.styles';
+
+const AnimatedTouchableOpacity = Animated.createAnimatedComponent(TouchableOpacity);
+const AnimatedText = Animated.createAnimatedComponent(Text);
 
 const ButtonComponent = ({
   onPress = () => {},
@@ -22,19 +25,25 @@ const ButtonComponent = ({
   const styles = useButtonStyles();
 
   return (
-    <TouchableOpacity activeOpacity={0.8} onPress={onPress} disabled={disabled} style={[
-      // { backgroundColor: animate ? backgroundColorAnimation : Colors.primary },
-      styles.container,
-      styles[`container${upperCaseSize}`] ? styles[`container${upperCaseSize}`] : null,
-      type === 'outlined' ? styles.outlined : null,
-      type === 'contained' ? styles.contained : null,
-      type === 'fulled' ? styles.fulled : null,
-      type === 'wide' ? styles.wide : null,
-      selected ? styles.selected : null,
-      disabled ? styles.disabledContainer : null,
-      style,
-    ]}>
-        <Text style={[
+    <AnimatedTouchableOpacity
+      activeOpacity={0.8}
+      onPress={onPress}
+      disabled={disabled}
+      style={[
+        // { backgroundColor: animate ? backgroundColorAnimation : Colors.primary },
+        styles.container,
+        styles[`container${upperCaseSize}`] ? styles[`container${upperCaseSize}`] : null,
+        type === 'outlined' ? styles.outlined : null,
+        type === 'contained' ? styles.contained : null,
+        type === 'fulled' ? styles.fulled : null,
+        type === 'wide' ? styles.wide : null,
+        selected ? styles.selected : null,
+        disabled ? styles.disabledContainer : null,
+        style,
+      ]}
+    >
+      <AnimatedText
+        style={[
           styles.text,
           highlight ? styles.highlight : null,
           type === 'outlined' ? styles.textOutlined : null,
@@ -44,10 +53,11 @@ const ButtonComponent = ({
           disabled ? styles.textDisabled : null,
           selected ? styles.textSelected : null,
           textStyle,
-        ]}>
-          {children || title}
-        </Text>
-    </TouchableOpacity>
+        ]}
+      >
+        {children || title}
+      </AnimatedText>
+    </AnimatedTouchableOpacity>
   );
 };
 
