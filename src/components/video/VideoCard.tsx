@@ -25,6 +25,7 @@ import {useBottomTabBarHeight} from "@react-navigation/bottom-tabs";
 import {getStyle} from "react-native-svg/lib/typescript/xml";
 import {getStyles} from "./VideoCard.styles";
 import { Button } from '../atomic/button/button.component';
+import { Colors } from '../../styles/colors';
 import { useTranslator } from '../../hooks/useTranslator';
 
 let ExpoVideo: any = null;
@@ -111,6 +112,7 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
   const feedbackOpacity = useRef(createAnimatedValue(0)).current;
   const heartScale = useRef(createAnimatedValue(0)).current;
   const metaButtonScale = useRef(createAnimatedValue(1)).current;
+  const metaButtonColor = useRef(createAnimatedValue(0)).current;
   const tabBarHeight = useBottomTabBarHeight();
   const styles = getStyles(tabBarHeight);
 
@@ -141,6 +143,31 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
       animation.stop();
     };
   }, [metaButtonScale]);
+
+  useEffect(() => {
+    const animation = Animated.loop(
+      Animated.sequence([
+        Animated.timing(metaButtonColor, {
+          toValue: 1,
+          duration: 2000,
+          easing: Easing.linear,
+          useNativeDriver: false,
+        }),
+        Animated.timing(metaButtonColor, {
+          toValue: 0,
+          duration: 2000,
+          easing: Easing.linear,
+          useNativeDriver: false,
+        }),
+      ]),
+    );
+
+    animation.start();
+
+    return () => {
+      animation.stop();
+    };
+  }, [metaButtonColor]);
 
   const stopSingleTapTimeout = useCallback(() => {
     if (singleTapTimeoutRef.current) {
@@ -570,6 +597,26 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
     [heartScale],
   );
 
+  const metaButtonAnimatedStyle = useMemo(
+    () => ({
+      backgroundColor: metaButtonColor.interpolate({
+        inputRange: [0, 1],
+        outputRange: [Colors.primary, Colors.black],
+      }),
+    }),
+    [metaButtonColor],
+  );
+
+  const metaButtonTextAnimatedStyle = useMemo(
+    () => ({
+      color: metaButtonColor.interpolate({
+        inputRange: [0, 1],
+        outputRange: [Colors.black, Colors.white],
+      }),
+    }),
+    [metaButtonColor],
+  );
+
   return (
     <View style={styles.container}>
       <View style={styles.videoContainer}>
@@ -637,8 +684,8 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
               size="xxl"
               title={tHome('openRecipeButton')}
               onPress={() => onPressMeta?.(item)}
-              style={styles.metaButton}
-              textStyle={styles.metaButtonText}
+              style={[styles.metaButton, metaButtonAnimatedStyle]}
+              textStyle={[styles.metaButtonText, metaButtonTextAnimatedStyle]}
             />
           </Animated.View>
           {item.tags?.length ? (
