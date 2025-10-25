@@ -1,7 +1,6 @@
 import React, {useEffect, useMemo, useRef, useState} from 'react';
 import {FlatList, Pressable, Image, Text, View, SafeAreaView} from 'react-native';
 import Icon from '@expo/vector-icons/Ionicons';
-import _ from 'lodash';
 import * as Haptics from "expo-haptics";
 
 import {Animated} from '../../components/atomic/animated/animated.component';
@@ -68,7 +67,7 @@ const RecipePageComponent = (props) => {
     const [favorites, setLike] = useFavorites();
     const [settings, setSetting] = useSettings();
     const [existsInCart, setExistsInCart] = useState(false);
-    const [visibleCookingLink, setVisibleCookingLink] = useState(false);
+    const visibleCookingLink = true;
     const [isMeasureModalOpen, setIsMeasureModalOpen] = useState(false);
     const [servingsCount, setServingsCount] = useState(servings);
     const [openCommonModal] = useCommonModal();
@@ -92,10 +91,6 @@ const RecipePageComponent = (props) => {
     const recipeCountry = useMemo(() => {
         return filters.find(item => CountryList.includes(item));
     }, [filters]);
-
-    const debounceChangeCookingLinkState = useMemo(() => _.debounce(function (value) {
-        setVisibleCookingLink(typeof value === 'number' && value > 150);
-    }, 50), [setVisibleCookingLink]);
 
     const prepareIngredient = item => ({
         ...item, key: item.title, quantity: item.quantity * (servingsCount / servings),
@@ -132,11 +127,6 @@ const RecipePageComponent = (props) => {
     const handleLikePress = () => {
         Haptics.selectionAsync();
         setLike(id);
-    };
-
-    const handleScroll = (event) => {
-        const y = event?.nativeEvent?.contentOffset?.y;
-        debounceChangeCookingLinkState(y);
     };
 
     const multiplyByServings = (value = 0) => {
@@ -314,7 +304,6 @@ const RecipePageComponent = (props) => {
                     />
                 </View>
             </>}
-            onScroll={handleScroll}
             data={steps}
             // @TODO replace on id when API is ready */
             keyExtractor={(item, index) => `${String(item.description).slice(0, 5)}-${index}`}
