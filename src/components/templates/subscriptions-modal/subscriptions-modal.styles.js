@@ -10,6 +10,10 @@ const styles = StyleSheet.create({
   },
   background: {
     flex: 1,
+  },
+  overlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.6)',
     paddingHorizontal: Spaces.large,
     paddingVertical: Spaces.xxlarge,
   },

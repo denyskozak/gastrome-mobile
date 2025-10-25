@@ -31,6 +31,8 @@ import {useLogger} from "../../hooks/useLogger";
 import {StoryProgressBar} from "../../components/atomic/story-bar/story-bar";
 import * as Haptics from "expo-haptics";
 import {logEvent} from "../../utilities/google-analitics";
+import {useSubscriptions} from "../../contexts/subscriptions.context";
+import {SubscriptionsModal} from "../../components/templates/subscriptions-modal/subscriptions-modal";
 
 const alarmSong = require('./alarm.mp3');
 const soundObject = new Audio.Sound();
@@ -66,6 +68,8 @@ export const CookingPage = (props) => {
     const [voiceTooltipText, setVoiceTooltipText] = useState('');
     const voiceAnimationRef = useRef(null);
     const [lastCommandDevMode, setLastCommandDevMove] = useState('');
+    const [isSubscriptionModalOpen, setSubscriptionModalOpen] = useState(false);
+    const [isSubscriber] = useSubscriptions();
 
     const parseDuration = useCallback((value) => {
         const translates = {
@@ -278,6 +282,15 @@ export const CookingPage = (props) => {
         }
     };
 
+    const handleVoiceAssistantPress = async () => {
+        if (!isSubscriber) {
+            setSubscriptionModalOpen(true);
+            return;
+        }
+
+        await handleStartCookingPress();
+    };
+
     const handleTimerDone = async () => {
         const status = await soundObject.getStatusAsync();
         await Audio.setAudioModeAsync({
@@ -329,7 +342,7 @@ export const CookingPage = (props) => {
                     animationRef={voiceAnimationRef}
                     isListening={isListening && !timerVoiceActivated}
                     startText={t('startVoice')}
-                    onButtonPress={handleStartCookingPress}
+                    onButtonPress={handleVoiceAssistantPress}
                 />
             )}
             <Carousel
@@ -436,6 +449,11 @@ export const CookingPage = (props) => {
                         handleStartCookingPress().then().catch();
                     }
                 }}
+                />
+
+            <SubscriptionsModal
+                isOpen={isSubscriptionModalOpen}
+                onChangeVisible={setSubscriptionModalOpen}
             />
         </SafeAreaView>
     )
