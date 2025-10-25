@@ -16,6 +16,7 @@ import {contactURL, privacyURL, termsURL} from "../../constants/links";
 import {SubscriptionButton} from "../../components/templates/subscription-button/subscription-button";
 import {useSubscriptions} from "../../contexts/subscriptions.context";
 import {AnimatedLogo} from "../../components/atomic/logo/animated-logo.component";
+import {SubscriptionsModal} from "../../components/templates/subscriptions-modal/subscriptions-modal";
 import { useTheme } from '../../hooks/useTheme';
 
 const languagesList = [
@@ -39,6 +40,7 @@ const SettingsPageComponent = (props) => {
     const [isMeasureModalOpen, setIsMeasureModalOpen] = useState(false);
     const [clicksForDevMode, setClicksForDevMode] = useState(0);
     const [isSubscriber] = useSubscriptions();
+    const [isSubscriptionsModalOpen, setSubscriptionsModalOpen] = useState(false);
 
     const handleClickForDevMode = () => {
         if (clicksForDevMode === 4) setSetting('isDevMode', !settings['isDevMode']);
@@ -76,7 +78,14 @@ const SettingsPageComponent = (props) => {
                                 size="l"
                                 title={option.label}
                                 selected={option.id === themeId}
-                                onPress={() => setTheme(option.id)}
+                                onPress={() => {
+                                    if (!isSubscriber) {
+                                        setSubscriptionsModalOpen(true);
+                                        return;
+                                    }
+
+                                    setTheme(option.id);
+                                }}
                             />
                         ))}
                     </View>
@@ -158,6 +167,11 @@ const SettingsPageComponent = (props) => {
                         setIsMeasureModalOpen(false);
                     }}
                     onChangeVisible={setIsMeasureModalOpen}
+                />
+
+                <SubscriptionsModal
+                    isOpen={isSubscriptionsModalOpen}
+                    onChangeVisible={setSubscriptionsModalOpen}
                 />
 
             </SafeAreaView>

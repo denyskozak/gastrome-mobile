@@ -75,7 +75,7 @@ const SubscriptionsModalComponent = (props) => {
     <NativeModal
       isVisible={isOpen}
       style={styles.modal}
-      backdropColor={Colors.backdropColor}
+      backdropColor={Colors.black}
       backdropOpacity={0.8}
       animationInTiming={400}
       animationOutTiming={400}
@@ -88,7 +88,8 @@ const SubscriptionsModalComponent = (props) => {
         style={styles.background}
         resizeMode="cover"
       >
-        <SafeAreaView style={styles.safeArea}>
+        <View style={styles.overlay}>
+          <SafeAreaView style={styles.safeArea}>
           <ScrollView
             bounces={false}
             contentContainerStyle={styles.scrollContent}
@@ -152,7 +153,8 @@ const SubscriptionsModalComponent = (props) => {
               <Icon name="close-outline" size={Spaces.large} color={Colors.white} />
             </Button>
           </View>
-        </SafeAreaView>
+          </SafeAreaView>
+        </View>
       </ImageBackground>
     </NativeModal>
   );

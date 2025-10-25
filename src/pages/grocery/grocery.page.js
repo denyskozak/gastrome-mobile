@@ -20,6 +20,7 @@ import { useSearchByIngredients } from '../../contexts/searchByIngredients.conte
 import { sortIngredients } from './grocery.utilities';
 import { Animated } from '../../components/atomic/animated/animated.component';
 import { IntroVideoModal } from '../../components/organismic/intro-video-modal/intro-video-modal';
+import { SubscriptionsModal } from '../../components/templates/subscriptions-modal/subscriptions-modal';
 
 import styles from './grocery.styles';
 import { HelpButton } from '../../components/molecular/help-button/help-button';
@@ -37,6 +38,7 @@ const GroceryPageComponent = (props) => {
 
   const [t,, language] = useTranslator('pages.grocery');
   const [isSubscriber] = useSubscriptions();
+  const [isSubscriptionsModalOpen, setSubscriptionsModalOpen] = useState(false);
 
   // Voice select
   const [isListening, setListening] = useState(false);
@@ -190,6 +192,17 @@ const GroceryPageComponent = (props) => {
     }
   };
 
+  const handleVoiceButtonPress = async () => {
+    if (!isSubscriber) {
+      setSubscriptionsModalOpen(true);
+      return;
+    }
+
+    setSearchText('');
+    await runListening();
+    setVoiceTooltipText(t('tellUs'));
+  };
+
   const renderItem = ({item: {title}, index}) => {
     const lowerCaseTitle = String(title).toLocaleLowerCase();
     return (
@@ -285,13 +298,7 @@ const GroceryPageComponent = (props) => {
           lootieName="voice"
           autoPlay={false}
           startText={t('startVoice')}
-          onButtonPress={() => {
-            (async () => {
-              setSearchText('');
-              await runListening();
-              setVoiceTooltipText(t('tellUs'));
-            })();
-          }}
+          onButtonPress={handleVoiceButtonPress}
       />
       {/* OnBoarding modal */}
       <IntroVideoModal isOpen={isHelpModalOpen} onChangeVisible={setHelpModalOpen} title={t('howItWorks')}
@@ -316,6 +323,10 @@ const GroceryPageComponent = (props) => {
             setPermissionModalVisible(false);
           }
         }
+      />
+      <SubscriptionsModal
+        isOpen={isSubscriptionsModalOpen}
+        onChangeVisible={setSubscriptionsModalOpen}
       />
     </SafeAreaView>
   );
