@@ -308,7 +308,11 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
     setIsMuted((prev) => {
       const next = !prev;
       onToggleMute?.(index, next);
-      showFeedbackMessage(next ? 'Звук выключен' : 'Звук включен');
+      showFeedbackMessage(
+        next
+          ? tHome('soundMuted') ?? 'Sound muted'
+          : tHome('soundUnmuted') ?? 'Sound on',
+      );
       return next;
     });
   }, [index, onToggleMute, showFeedbackMessage]);
@@ -348,7 +352,7 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
       if (!next && !isActive) {
         return prev;
       }
-      showFeedbackMessage(next ? 'Пауза' : 'Воспроизведение');
+      showFeedbackMessage(next ? tHome('paused') ?? 'Paused' : tHome('playing') ?? 'Playing');
       return next;
     });
   }, [isActive, showFeedbackMessage]);
@@ -490,9 +494,9 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
 
   useEffect(() => {
     if (hasError) {
-      showFeedbackMessage('Видео недоступно');
+      showFeedbackMessage(tHome('videoUnavailable') ?? 'Video unavailable');
     }
-  }, [hasError, showFeedbackMessage]);
+  }, [hasError, showFeedbackMessage, tHome]);
 
   useEffect(() => () => {
     unload();
@@ -631,7 +635,9 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
         ) : null}
         {hasError ? (
           <View style={styles.errorOverlay}>
-            <Text style={styles.errorText}>Видео недоступно</Text>
+            <Text style={styles.errorText}>
+              {tHome('videoUnavailable') ?? 'Video unavailable'}
+            </Text>
           </View>
         ) : null}
         {showHeart ? (
@@ -702,7 +708,7 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
               }
             }}
             style={styles.actionButton}
-            accessibilityLabel="Поставить лайк"
+            accessibilityLabel={tHome('likeAccessibilityLabel') ?? 'Like video'}
             accessible
           >
             <View style={styles.actionIcon}>
@@ -712,13 +718,15 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
                 color={liked ? '#ff4d6d' : '#ffffff'}
               />
             </View>
-            <Text style={styles.actionLabel}>Лайк</Text>
+            <Text style={styles.actionLabel}>{tHome('likeActionLabel') ?? 'Like'}</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={onToggleMusic}
             style={styles.actionButton}
             accessibilityLabel={
-              isMusicEnabled ? 'Остановить фоновую музыку' : 'Включить фоновую музыку'
+              isMusicEnabled
+                ? tHome('stopBackgroundMusic') ?? 'Stop background music'
+                : tHome('startBackgroundMusic') ?? 'Play background music'
             }
             accessible
           >
@@ -726,18 +734,18 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
               <Icon name="musical-notes" size={28} color="#ffffff" />
               {!isMusicEnabled ? <View style={styles.musicOffSlash} /> : null}
             </View>
-            <Text style={styles.actionLabel}>Музыка</Text>
+            <Text style={styles.actionLabel}>{tHome('musicActionLabel') ?? 'Music'}</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => onShare?.(item)}
             style={styles.actionButton}
-            accessibilityLabel="Поделиться видео"
+            accessibilityLabel={tHome('shareAccessibilityLabel') ?? 'Share video'}
             accessible
           >
             <View style={styles.actionIcon}>
               <Icon name="share-social-outline" size={28} color="#ffffff" />
             </View>
-            <Text style={styles.actionLabel}>Поделиться</Text>
+            <Text style={styles.actionLabel}>{tHome('shareActionLabel') ?? 'Share'}</Text>
           </TouchableOpacity>
         </View>
       </View>
