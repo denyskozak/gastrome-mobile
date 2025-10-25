@@ -77,7 +77,7 @@ export const HomeScreen: React.FC = () => {
   const [isBackgroundMusicEnabled, setIsBackgroundMusicEnabled] = useState(true);
   const { start: startBackgroundMusic, stop: stopBackgroundMusic } = useBackgroundMusic(
     BACKGROUND_MUSIC_SOURCE,
-    { volume: 0.5 },
+    { volume: 0.05 },
   );
   const isFocused = useIsFocused();
 

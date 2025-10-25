@@ -16,7 +16,7 @@ type BackgroundMusicControls = {
 
 export const useBackgroundMusic = (
   source: BackgroundMusicSource,
-  { volume = 0.6, staysActiveInBackground = true }: UseBackgroundMusicOptions = {},
+  { volume = 0.4, staysActiveInBackground = true }: UseBackgroundMusicOptions = {},
 ): BackgroundMusicControls => {
   const soundRef = useRef<Audio.Sound | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);

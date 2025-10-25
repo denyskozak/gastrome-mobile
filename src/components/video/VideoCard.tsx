@@ -149,12 +149,14 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
       Animated.sequence([
         Animated.timing(metaButtonColor, {
           toValue: 1,
+          delay: 2000,
           duration: 2000,
           easing: Easing.linear,
           useNativeDriver: false,
         }),
         Animated.timing(metaButtonColor, {
           toValue: 0,
+          delay: 2000,
           duration: 2000,
           easing: Easing.linear,
           useNativeDriver: false,
@@ -373,10 +375,10 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
     if (!videoRef.current) return;
     if (isExpoAvAvailable && videoRef.current.playAsync) {
       try {
-        const status = await videoRef.current.getStatusAsync?.();
+        const status = await videoRef.current?.getStatusAsync?.();
         if (!status?.isLoaded) {
           pendingPlayRef.current = true;
-          await videoRef.current.loadAsync?.(
+          await videoRef.current?.loadAsync?.(
             { uri: item.source },
             { shouldPlay: true, isMuted },
             false,
@@ -384,9 +386,10 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
           pendingPlayRef.current = false;
         } else {
           pendingPlayRef.current = false;
-          await videoRef.current.playAsync();
+          await videoRef.current?.playAsync();
         }
       } catch (error) {
+        console.log("error: ", error)
         if (isRecoverablePlaybackError(error)) {
           pendingPlayRef.current = true;
         } else {
@@ -691,12 +694,12 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
           {/*    {item?.description.length > 16 ? '...' : ''}*/}
           {/*  </Text>*/}
           {/*) : null}*/}
-          <Animated.View
-            style={[
-              styles.metaButtonWrapper,
-              { transform: [{ scale: metaButtonScale }] },
-            ]}
-          >
+          {/*<Animated.View*/}
+          {/*  style={[*/}
+          {/*    styles.metaButtonWrapper,*/}
+          {/*    { transform: [{ scale: metaButtonScale }] },*/}
+          {/*  ]}*/}
+          {/*>*/}
             <Button
               type="contained"
               size="xxl"
@@ -705,7 +708,7 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
               style={[styles.metaButton, metaButtonAnimatedStyle]}
               textStyle={[styles.metaButtonText, metaButtonTextAnimatedStyle]}
             />
-          </Animated.View>
+          {/*</Animated.View>*/}
           {item.tags?.length ? (
             <Text style={styles.tags}>{item.tags.join(' ')}</Text>
           ) : null}
