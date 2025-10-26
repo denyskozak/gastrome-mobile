@@ -21,9 +21,9 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Icon from '@expo/vector-icons/Ionicons';
 import type { AVPlaybackStatus } from 'expo-av';
 import type { VideoItem } from '../../types/video';
-import {useBottomTabBarHeight} from "@react-navigation/bottom-tabs";
-import {getStyle} from "react-native-svg/lib/typescript/xml";
-import {getStyles} from "./VideoCard.styles";
+import LinearGradient from 'react-native-linear-gradient';
+import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
+import { getStyles } from './VideoCard.styles';
 import { Button } from '../atomic/button/button.component';
 import { Colors } from '../../styles/colors';
 import { useTranslator } from '../../hooks/useTranslator';
@@ -679,7 +679,19 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
         ) : null}
       </View>
 
-      <View style={[styles.overlay, { paddingBottom: insets.bottom + 24 }]}> 
+      <View
+        style={[
+          styles.overlay,
+          { paddingBottom: insets.bottom + 24 + tabBarHeight * 0.5 },
+        ]}
+      >
+        <LinearGradient
+          pointerEvents="none"
+          colors={['rgba(0,0,0,0.85)', 'rgba(0,0,0,0)']}
+          start={{ x: 0.5, y: 1 }}
+          end={{ x: 0.5, y: 0 }}
+          style={styles.overlayGradient}
+        />
         <TouchableOpacity
           activeOpacity={0.8}
           style={styles.metaContainer}

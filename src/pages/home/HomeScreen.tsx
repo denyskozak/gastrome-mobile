@@ -75,11 +75,16 @@ export const HomeScreen: React.FC = () => {
 
   const measure = settings?.measure ?? 'g';
   const [isBackgroundMusicEnabled, setIsBackgroundMusicEnabled] = useState(true);
-  const { start: startBackgroundMusic, stop: stopBackgroundMusic } = useBackgroundMusic(
+  const {
+    start: startBackgroundMusic,
+    stop: stopBackgroundMusic,
+    seekToRandomPosition: randomizeBackgroundMusicPosition,
+  } = useBackgroundMusic(
     BACKGROUND_MUSIC_SOURCE,
     { volume: 0.05 },
   );
   const isFocused = useIsFocused();
+  const previousActiveIndexRef = useRef<number | null>(null);
 
   useEffect(() => {
     if (isBackgroundMusicEnabled && isFocused) {
@@ -88,6 +93,23 @@ export const HomeScreen: React.FC = () => {
       void stopBackgroundMusic();
     }
   }, [isBackgroundMusicEnabled, isFocused, startBackgroundMusic, stopBackgroundMusic]);
+
+  useEffect(() => {
+    if (!isBackgroundMusicEnabled || !videos.length) {
+      return;
+    }
+
+    const previousIndex = previousActiveIndexRef.current;
+    if (previousIndex === null) {
+      previousActiveIndexRef.current = activeIndex;
+      return;
+    }
+
+    if (previousIndex !== activeIndex) {
+      previousActiveIndexRef.current = activeIndex;
+      void randomizeBackgroundMusicPosition();
+    }
+  }, [activeIndex, isBackgroundMusicEnabled, randomizeBackgroundMusicPosition, videos.length]);
 
   useEffect(() => () => {
     void stopBackgroundMusic();
@@ -296,6 +318,12 @@ export const HomeScreen: React.FC = () => {
   useEffect(() => () => {
     registryRef.current.clear();
   }, []);
+
+  useEffect(() => {
+    if (!videos.length) {
+      previousActiveIndexRef.current = null;
+    }
+  }, [videos.length]);
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);

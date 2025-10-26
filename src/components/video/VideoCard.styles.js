@@ -40,12 +40,20 @@ export const getStyles = (tabBarHeight) => StyleSheet.create({
     },
     overlay: {
         position: 'absolute',
-        left: 16,
+        left: 0,
         right: 0,
-        bottom: tabBarHeight * 0.5,
+        bottom: 0,
+        paddingHorizontal: 16,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'flex-end',
+    },
+    overlayGradient: {
+        position: 'absolute',
+        left: 0,
+        right: 0,
+        bottom: 0,
+        height: 320,
     },
     metaContainer: {
         flex: 1,
