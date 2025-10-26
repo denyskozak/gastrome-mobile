@@ -11,6 +11,7 @@ export type UseBackgroundMusicOptions = {
 type BackgroundMusicControls = {
   start: () => Promise<void>;
   stop: () => Promise<void>;
+  seekToRandomPosition: () => Promise<void>;
   isPlaying: boolean;
 };
 
@@ -100,6 +101,34 @@ export const useBackgroundMusic = (
     }
   }, []);
 
+  const seekToRandomPosition = useCallback(async () => {
+    try {
+      const sound = await ensureSound();
+      const status = (await sound.getStatusAsync()) as
+        | AVPlaybackStatusSuccess
+        | undefined;
+
+      if (!status?.isLoaded || typeof status.durationMillis !== 'number') {
+        return;
+      }
+
+      const { durationMillis } = status;
+      if (!durationMillis || durationMillis <= 0) {
+        return;
+      }
+
+      const randomPosition = Math.floor(Math.random() * durationMillis);
+      await sound.setPositionAsync(randomPosition);
+
+      if (!status.isPlaying) {
+        await sound.playAsync();
+        setIsPlaying(true);
+      }
+    } catch (error) {
+      console.warn('useBackgroundMusic: failed to seek to random position', error);
+    }
+  }, [ensureSound]);
+
   useEffect(() => {
     return () => {
       if (soundRef.current) {
@@ -114,6 +143,7 @@ export const useBackgroundMusic = (
   return {
     start,
     stop,
+    seekToRandomPosition,
     isPlaying,
   };
 };
