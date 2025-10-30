@@ -61,6 +61,7 @@ const styles = StyleSheet.create({
   },
   buttonText: getTextStyles({
     color: Colors.white,
+    textAlign: 'center',
   }),
   logoWrapper: {
     marginTop: Spaces.large,
