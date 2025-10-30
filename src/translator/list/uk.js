@@ -58,6 +58,9 @@ export const translates = {
             "musicActionLabel": "Музика",
             "shareAccessibilityLabel": "Поділитися відео",
             "shareActionLabel": "Поділитися",
+            "feedAll": "Усі",
+            "feedFavorites": "Улюблені",
+            "favoritesEmptyFeed": "У вас немає вподобаних відео",
         },
         "authors": {
             "emptyList": "На платформі не знайдено авторів :(",

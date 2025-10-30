@@ -10,6 +10,8 @@ import {
   StyleSheet,
   View,
   Image,
+  Text,
+  TouchableOpacity,
 } from 'react-native';
 import { VideoCard, VideoPlayerHandle } from '../../components/video/VideoCard';
 import type { VideoItem } from '../../types/video';
@@ -24,6 +26,8 @@ import { useSettings } from '../../contexts/settings.context';
 import { useTranslator } from '../../hooks/useTranslator';
 import { useBackgroundMusic } from '../../hooks/useBackgroundMusic';
 import type { BackgroundMusicSource } from '../../hooks/useBackgroundMusic';
+import { useFavorites } from '../../contexts/favorites.context';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const { height: SCREEN_HEIGHT } = Dimensions.get('window');
 const MAX_BUFFER_DISTANCE = 2;
@@ -61,7 +65,10 @@ type RegistryEntry = {
 
 const BACKGROUND_MUSIC_SOURCE: BackgroundMusicSource = require('../../../assets/background-track.mp3');
 
+type FeedFilter = 'all' | 'favorites';
+
 export const HomeScreen: React.FC = () => {
+  const insets = useSafeAreaInsets();
   const iterationRef = useRef(0);
   const loadingMoreRef = useRef(false);
   const [refreshing, setRefreshing] = useState(false);
@@ -72,11 +79,11 @@ export const HomeScreen: React.FC = () => {
   const [settings] = useSettings();
   const [tCommon] = useTranslator('common');
   const [tHome] = useTranslator('pages.home');
-  const [videos, setVideos] = useState<VideoItem[]>([]);
+  const [allVideos, setAllVideos] = useState<VideoItem[]>([]);
   const registryRef = useRef<Map<string, RegistryEntry>>(new Map());
-  const { activeIndex, onViewableItemsChanged, viewabilityConfig } = useActiveItem();
-  const videosLength = videos.length;
-
+  const { activeIndex, onViewableItemsChanged, viewabilityConfig, setActiveIndex } = useActiveItem();
+  const allVideosLength = allVideos.length;
+  
   const measure = settings?.measure ?? 'g';
   const [isBackgroundMusicEnabled, setIsBackgroundMusicEnabled] = useState(true);
   const {
@@ -88,32 +95,25 @@ export const HomeScreen: React.FC = () => {
     { volume: 0.05 },
   );
   const isFocused = useIsFocused();
-  const previousActiveIndexRef = useRef<number | null>(null);
+  const [favoriteIds, toggleFavorite] = useFavorites();
+  const [feedFilter, setFeedFilter] = useState<FeedFilter>('all');
 
   useEffect(() => {
     if (isBackgroundMusicEnabled && isFocused) {
-      void startBackgroundMusic();
+      void (async () => {
+        await randomizeBackgroundMusicPosition();
+        await startBackgroundMusic();
+      })();
     } else {
       void stopBackgroundMusic();
     }
-  }, [isBackgroundMusicEnabled, isFocused, startBackgroundMusic, stopBackgroundMusic]);
-
-  useEffect(() => {
-    if (!isBackgroundMusicEnabled || !videos.length) {
-      return;
-    }
-
-    const previousIndex = previousActiveIndexRef.current;
-    if (previousIndex === null) {
-      previousActiveIndexRef.current = activeIndex;
-      return;
-    }
-
-    if (previousIndex !== activeIndex) {
-      previousActiveIndexRef.current = activeIndex;
-      void randomizeBackgroundMusicPosition();
-    }
-  }, [activeIndex, isBackgroundMusicEnabled, randomizeBackgroundMusicPosition, videos.length]);
+  }, [
+    isBackgroundMusicEnabled,
+    isFocused,
+    randomizeBackgroundMusicPosition,
+    startBackgroundMusic,
+    stopBackgroundMusic,
+  ]);
 
   useEffect(() => () => {
     void stopBackgroundMusic();
@@ -166,11 +166,29 @@ export const HomeScreen: React.FC = () => {
       .filter((item): item is VideoItem => Boolean(item));
   }, [recipes, tHome]);
 
+  const favoriteVideos = useMemo(() => {
+    if (!favoriteIds.length) {
+      return [];
+    }
+
+    const favoriteIdSet = new Set(favoriteIds);
+    return baseVideos.filter((video) =>
+      video.recipeId ? favoriteIdSet.has(video.recipeId) : false,
+    );
+  }, [baseVideos, favoriteIds]);
+
+  const displayedVideos = useMemo(
+    () => (feedFilter === 'all' ? allVideos : favoriteVideos),
+    [allVideos, favoriteVideos, feedFilter],
+  );
+
+  const displayedVideosLength = displayedVideos.length;
+
   useEffect(() => {
     if (!baseVideos.length) {
-      if (videosLength) {
+      if (allVideosLength) {
         registryRef.current.clear();
-        setVideos([]);
+        setAllVideos([]);
       }
       iterationRef.current = 0;
       return;
@@ -178,17 +196,34 @@ export const HomeScreen: React.FC = () => {
     const suffix = `initial-${Date.now()}`;
     const prepared = baseVideos.map((video, index) => withUniqueId(video, suffix, index));
     registryRef.current.clear();
-    setVideos(prepared);
+    setAllVideos(prepared);
+    setActiveIndex(0);
     iterationRef.current = 0;
-  }, [baseVideos, videosLength]);
+  }, [allVideosLength, baseVideos, setActiveIndex]);
 
-  const handleToggleMute = useCallback((videoIndex: number, muted: boolean) => {
-    console.log('toggle-mute', videoIndex, muted);
-  }, []);
+  const handleToggleMute = useCallback(
+    (_videoIndex: number, muted: boolean) => {
+      setIsBackgroundMusicEnabled((prev) => {
+        const next = !muted;
+        return prev === next ? prev : next;
+      });
+    },
+    [setIsBackgroundMusicEnabled],
+  );
 
-  const handleLike = useCallback((video: VideoItem) => {
-    console.log('like', video.id);
-  }, []);
+  const handleLike = useCallback(
+    (video: VideoItem, liked: boolean) => {
+      if (!video.recipeId) {
+        return;
+      }
+
+      const isAlreadyFavorite = favoriteIds.includes(video.recipeId);
+      if (liked !== isAlreadyFavorite) {
+        toggleFavorite(video.recipeId);
+      }
+    },
+    [favoriteIds, toggleFavorite],
+  );
 
   const handleToggleBackgroundMusic = useCallback(() => {
     setIsBackgroundMusicEnabled((prev) => !prev);
@@ -252,7 +287,8 @@ export const HomeScreen: React.FC = () => {
 
   const registerHandle = useCallback(
     (index: number, handle: VideoPlayerHandle | null) => {
-      const item = videos[index];
+      const currentVideos = displayedVideos;
+      const item = currentVideos[index];
       if (!item) return;
       const registry = registryRef.current;
       if (!handle) {
@@ -266,18 +302,19 @@ export const HomeScreen: React.FC = () => {
         handle.prepare?.();
       }
     },
-    [activeIndex, videos],
+    [activeIndex, displayedVideos],
   );
 
   const syncPlayers = useCallback(() => {
     const registry = registryRef.current;
-    const nextActive = videos[activeIndex];
+    const currentVideos = displayedVideos;
+    const nextActive = currentVideos[activeIndex];
 
     registry.forEach((entry, id) => {
-      const { index, handle } = entry;
-      if (videos[index]?.id !== id) {
+      const { handle } = entry;
+      if (currentVideos[entry.index]?.id !== id) {
         // Item index has shifted; try to realign
-        const nextIndex = videos.findIndex((video) => video.id === id);
+        const nextIndex = currentVideos.findIndex((video) => video.id === id);
         if (nextIndex === -1) {
           registry.delete(id);
           return;
@@ -300,7 +337,7 @@ export const HomeScreen: React.FC = () => {
 
     const neighbours = [activeIndex - 1, activeIndex + 1];
     neighbours.forEach((neighbourIndex) => {
-      const neighbourItem = videos[neighbourIndex];
+      const neighbourItem = currentVideos[neighbourIndex];
       if (!neighbourItem) return;
       const neighbourEntry = registry.get(neighbourItem.id);
       neighbourEntry?.handle.prepare?.();
@@ -309,7 +346,7 @@ export const HomeScreen: React.FC = () => {
       const activeEntry = registry.get(nextActive.id);
       activeEntry?.handle.prepare?.();
     }
-  }, [activeIndex, videos]);
+  }, [activeIndex, displayedVideos]);
 
   useEffect(() => {
     syncPlayers();
@@ -319,12 +356,6 @@ export const HomeScreen: React.FC = () => {
     registryRef.current.clear();
   }, []);
 
-  useEffect(() => {
-    if (!videos.length) {
-      previousActiveIndexRef.current = null;
-    }
-  }, [videos.length]);
-
   const onRefresh = useCallback(() => {
     setRefreshing(true);
     registryRef.current.clear();
@@ -333,13 +364,14 @@ export const HomeScreen: React.FC = () => {
       const shuffled = shuffleVideos(baseVideos).map((video, index) =>
         withUniqueId(video, suffix, index),
       );
-      setVideos(shuffled);
+      setAllVideos(shuffled);
+      setActiveIndex(0);
       iterationRef.current = 0;
     }
     setTimeout(() => {
       setRefreshing(false);
     }, 400);
-  }, [baseVideos]);
+  }, [baseVideos, setActiveIndex]);
 
   const loadMoreVideos = useCallback(() => {
     if (!baseVideos.length || loadingMoreRef.current) {
@@ -349,7 +381,7 @@ export const HomeScreen: React.FC = () => {
     loadingMoreRef.current = true;
     iterationRef.current += 1;
     const suffix = `more-${iterationRef.current}-${Date.now()}`;
-    setVideos((prev) => [
+    setAllVideos((prev) => [
       ...prev,
       ...baseVideos.map((video, index) => withUniqueId(video, suffix, index)),
     ]);
@@ -359,40 +391,67 @@ export const HomeScreen: React.FC = () => {
     if (loadingMoreRef.current) {
       loadingMoreRef.current = false;
     }
-  }, [videos]);
+  }, [allVideos]);
 
   useEffect(() => {
-    if (!videos.length || !baseVideos.length) {
+    registryRef.current.clear();
+    setActiveIndex(0);
+  }, [feedFilter, setActiveIndex]);
+
+  useEffect(() => {
+    if (!displayedVideosLength) {
+      if (activeIndex !== 0) {
+        setActiveIndex(0);
+      }
       return;
     }
 
-    if (videos.length - activeIndex <= 2) {
+    if (activeIndex >= displayedVideosLength) {
+      setActiveIndex(displayedVideosLength - 1);
+    }
+  }, [activeIndex, displayedVideosLength, setActiveIndex]);
+
+  useEffect(() => {
+    if (feedFilter !== 'all') {
+      return;
+    }
+
+    if (!allVideos.length || !baseVideos.length) {
+      return;
+    }
+
+    if (allVideos.length - activeIndex <= 2) {
       loadMoreVideos();
     }
-  }, [activeIndex, baseVideos.length, loadMoreVideos, videos.length]);
+  }, [activeIndex, allVideos.length, baseVideos.length, feedFilter, loadMoreVideos]);
 
   const renderItem = useCallback(
-    ({ item, index }: { item: VideoItem; index: number }) => (
-      <View style={styles.itemContainer}>
-        <VideoCard
-          item={item}
-          index={index}
-          isActive={activeIndex === index}
-          onToggleMute={handleToggleMute}
-          onLike={handleLike}
-          onToggleMusic={handleToggleBackgroundMusic}
-          isMusicEnabled={isBackgroundMusicEnabled}
-          onShare={handleShare}
-          onPressMeta={handleOpenRecipe}
-          onRegister={registerHandle}
-        />
-      </View>
-    ),
-      [
-        activeIndex,
-        handleLike,
-        handleOpenRecipe,
-        handleShare,
+    ({ item, index }: { item: VideoItem; index: number }) => {
+      const isFavorite = item.recipeId ? favoriteIds.includes(item.recipeId) : false;
+      return (
+        <View style={styles.itemContainer}>
+          <VideoCard
+            item={item}
+            index={index}
+            isActive={activeIndex === index}
+            onToggleMute={handleToggleMute}
+            onLike={handleLike}
+            onToggleMusic={handleToggleBackgroundMusic}
+            isMusicEnabled={isBackgroundMusicEnabled}
+            onShare={handleShare}
+            onPressMeta={handleOpenRecipe}
+            onRegister={registerHandle}
+            isFavorite={isFavorite}
+          />
+        </View>
+      );
+    },
+    [
+      activeIndex,
+      favoriteIds,
+      handleLike,
+      handleOpenRecipe,
+      handleShare,
         handleToggleMute,
         handleToggleBackgroundMusic,
         registerHandle,
@@ -412,11 +471,44 @@ export const HomeScreen: React.FC = () => {
     [onRefresh, refreshing],
   );
 
+  const listExtraData = useMemo(
+    () => ({ favoriteIds, isBackgroundMusicEnabled, feedFilter }),
+    [favoriteIds, feedFilter, isBackgroundMusicEnabled],
+  );
+
+  const feedOptions = useMemo(
+    () => [
+      { key: 'all' as FeedFilter, label: tHome('feedAll') ?? 'All' },
+      { key: 'favorites' as FeedFilter, label: tHome('feedFavorites') ?? 'Favorites' },
+    ],
+    [tHome],
+  );
+
   return (
     <View style={styles.container}>
       <StatusBar barStyle="light-content" translucent backgroundColor="transparent" />
+      <View style={[styles.feedToggleContainer, { top: insets.top + 12 }]}>
+        {feedOptions.map((option) => {
+          const isActive = feedFilter === option.key;
+          return (
+            <TouchableOpacity
+              key={option.key}
+              style={[styles.feedToggleButton, isActive ? styles.feedToggleButtonActive : null]}
+              activeOpacity={0.8}
+              onPress={() => setFeedFilter(option.key)}
+            >
+              <Text
+                style={[styles.feedToggleText, isActive ? styles.feedToggleTextActive : null]}
+              >
+                {option.label}
+              </Text>
+            </TouchableOpacity>
+          );
+        })}
+      </View>
       <FlatList
-        data={videos}
+        data={displayedVideos}
+        extraData={listExtraData}
         keyExtractor={keyExtractor}
         renderItem={renderItem}
         pagingEnabled
@@ -432,9 +524,17 @@ export const HomeScreen: React.FC = () => {
         maxToRenderPerBatch={3}
         removeClippedSubviews
         refreshControl={refreshControl}
-        onEndReached={loadMoreVideos}
+        onEndReached={feedFilter === 'all' ? loadMoreVideos : undefined}
         onEndReachedThreshold={0.6}
+        key={feedFilter}
       />
+      {feedFilter === 'favorites' && !displayedVideosLength ? (
+        <View style={styles.emptyFavoritesContainer}>
+          <Text style={styles.emptyFavoritesText}>
+            {tHome('favoritesEmptyFeed') ?? 'You do not have favorite videos yet'}
+          </Text>
+        </View>
+      ) : null}
     </View>
   );
 };
@@ -446,5 +546,43 @@ const styles = StyleSheet.create({
   },
   itemContainer: {
     height: SCREEN_HEIGHT,
+  },
+  feedToggleContainer: {
+    position: 'absolute',
+    alignSelf: 'center',
+    flexDirection: 'row',
+    backgroundColor: 'rgba(0,0,0,0.4)',
+    borderRadius: 20,
+    padding: 4,
+    zIndex: 10,
+  },
+  feedToggleButton: {
+    paddingVertical: 6,
+    paddingHorizontal: 16,
+    borderRadius: 16,
+  },
+  feedToggleButtonActive: {
+    backgroundColor: '#ffffff',
+  },
+  feedToggleText: {
+    color: '#ffffff',
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  feedToggleTextActive: {
+    color: '#000000',
+  },
+  emptyFavoritesContainer: {
+    position: 'absolute',
+    top: '45%',
+    left: 0,
+    right: 0,
+    alignItems: 'center',
+    paddingHorizontal: 24,
+  },
+  emptyFavoritesText: {
+    color: '#ffffff',
+    fontSize: 16,
+    textAlign: 'center',
   },
 });
