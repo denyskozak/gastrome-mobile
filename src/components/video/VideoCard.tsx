@@ -98,6 +98,8 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
   const videoRef = useRef<any>(null);
   const doubleTapRef = useRef<number>(0);
   const singleTapTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const longPressPauseRef = useRef(false);
+  const ignoreNextPressRef = useRef(false);
   const preparedRef = useRef(false);
   const pendingPlayRef = useRef(false);
   const [isMuted, setIsMuted] = useState(true);
@@ -309,6 +311,12 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
   }, [animateHeart, item, onLike]);
 
   const handlePress = useCallback(() => {
+    if (ignoreNextPressRef.current) {
+      ignoreNextPressRef.current = false;
+      doubleTapRef.current = 0;
+      stopSingleTapTimeout();
+      return;
+    }
     const now = Date.now();
     if (doubleTapRef.current && now - doubleTapRef.current < DOUBLE_TAP_DELAY) {
       doubleTapRef.current = 0;
@@ -323,15 +331,34 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
   }, [handleDoubleTap, handleSingleTap, stopSingleTapTimeout]);
 
   const handleLongPress = useCallback(() => {
+    ignoreNextPressRef.current = true;
+    longPressPauseRef.current = true;
+    stopSingleTapTimeout();
+    doubleTapRef.current = 0;
     setIsManuallyPaused((prev) => {
-      const next = !prev;
-      if (!next && !isActive) {
+      if (prev || !isActive) {
         return prev;
       }
-      showFeedbackMessage(next ? tHome('paused') ?? 'Paused' : tHome('playing') ?? 'Playing');
-      return next;
+      showFeedbackMessage(tHome('paused') ?? 'Paused');
+      return true;
     });
-  }, [isActive, showFeedbackMessage]);
+  }, [isActive, showFeedbackMessage, stopSingleTapTimeout, tHome]);
+
+  const handlePressOut = useCallback(() => {
+    if (!longPressPauseRef.current) {
+      return;
+    }
+    longPressPauseRef.current = false;
+    setIsManuallyPaused((prev) => {
+      if (!prev) {
+        return prev;
+      }
+      if (isActive && !hasError) {
+        showFeedbackMessage(tHome('playing') ?? 'Playing');
+      }
+      return false;
+    });
+  }, [hasError, isActive, showFeedbackMessage, tHome]);
 
   const play = useCallback(async () => {
     if (!videoRef.current) return;
@@ -589,7 +616,7 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
           <Image source={{ uri: item.poster }} style={styles.poster} resizeMode="cover" />
         ) : null}
         {renderVideo()}
-        {isBuffering ? (
+        {isBuffering && !isLoaded ? (
           <View style={styles.bufferingOverlay}>
             <ActivityIndicator color="#fff" size="large" />
           </View>
@@ -611,6 +638,7 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
           onPress={handlePress}
           onLongPress={handleLongPress}
           delayLongPress={250}
+          onPressOut={handlePressOut}
         >
           <View style={StyleSheet.absoluteFill} />
         </Pressable>
