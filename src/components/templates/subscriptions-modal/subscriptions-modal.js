@@ -29,6 +29,26 @@ const SubscriptionsModalComponent = (props) => {
     [subscriptions],
   );
 
+  const monthlyPackage = useMemo(() => {
+    if (!options.length) {
+      return null;
+    }
+
+    const monthlyType = Purchases?.PACKAGE_TYPE?.MONTHLY;
+
+    const monthlyOption = options.find((item) => {
+      if (monthlyType) {
+        return item.packageType === monthlyType;
+      }
+
+      const identifier = item?.product?.identifier?.toLowerCase?.();
+
+      return identifier ? identifier.includes('month') : false;
+    });
+
+    return monthlyOption || options[0];
+  }, [options]);
+
   const handleOptionClick = (item) => {
     setIsLoading(true);
 
@@ -110,21 +130,24 @@ const SubscriptionsModalComponent = (props) => {
                 <View style={styles.buttons}>
                   {!isError && !isSuccess && (
                     <>
-                      {options.map((item) => (
+                      {monthlyPackage && (
                         <Button
-                          key={item.product.identifier}
+                          key={monthlyPackage.product.identifier}
                           type="outlined"
                           size="xl"
                           style={styles.button}
                           textStyle={styles.buttonText}
                           onPress={() => {
                             Haptics.impactAsync('light');
-                            handleOptionClick(item);
+                            handleOptionClick(monthlyPackage);
                           }}
                         >
-                          {item.product.priceString} / {item.product.identifier}
+                          {[
+                            '3 дня бесплатно',
+                            `а потом ${monthlyPackage.product.priceString} в месяц`,
+                          ].join('\n')}
                         </Button>
-                      ))}
+                      )}
                       <Button
                         type="outlined"
                         size="xl"
