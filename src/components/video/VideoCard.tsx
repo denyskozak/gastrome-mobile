@@ -9,7 +9,6 @@ import React, {
 import {
   ActivityIndicator,
   Animated,
-  Easing,
   Image,
   Pressable,
   StyleSheet,
@@ -25,7 +24,6 @@ import LinearGradient from 'react-native-linear-gradient';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 import { getStyles } from './VideoCard.styles';
 import { Button } from '../atomic/button/button.component';
-import { Colors } from '../../styles/colors';
 import { useTranslator } from '../../hooks/useTranslator';
 
 let ExpoVideo: any = null;
@@ -68,12 +66,13 @@ export type VideoCardProps = {
   index: number;
   isActive: boolean;
   onToggleMute?: (index: number, muted: boolean) => void;
-  onLike?: (item: VideoItem) => void;
+  onLike?: (item: VideoItem, liked: boolean) => void;
   onToggleMusic?: () => void;
   isMusicEnabled?: boolean;
   onShare?: (item: VideoItem) => void | Promise<void>;
   onPressMeta?: (item: VideoItem) => void;
   onRegister?: (index: number, handle: VideoPlayerHandle | null) => void;
+  isFavorite?: boolean;
 };
 
 const HEART_ANIMATION_DURATION = 450;
@@ -92,6 +91,7 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
   onShare,
   onPressMeta,
   onRegister,
+  isFavorite,
 }) => {
   const [tHome] = useTranslator('pages.home');
   const insets = useSafeAreaInsets();
@@ -106,70 +106,19 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
   const [hasError, setHasError] = useState(false);
   const [progress, setProgress] = useState(0);
   const [isManuallyPaused, setIsManuallyPaused] = useState(false);
-  const [liked, setLiked] = useState(false);
+  const [liked, setLiked] = useState(Boolean(isFavorite));
   const [feedback, setFeedback] = useState<string | null>(null);
   const [showHeart, setShowHeart] = useState(false);
   const feedbackOpacity = useRef(createAnimatedValue(0)).current;
   const heartScale = useRef(createAnimatedValue(0)).current;
-  const metaButtonScale = useRef(createAnimatedValue(1)).current;
-  const metaButtonColor = useRef(createAnimatedValue(0)).current;
   const tabBarHeight = useBottomTabBarHeight();
   const styles = getStyles(tabBarHeight);
 
+  useEffect(() => {
+    setLiked(Boolean(isFavorite));
+  }, [isFavorite, item.id]);
+
   const shouldPlay = isActive && !isManuallyPaused && !hasError;
-
-  useEffect(() => {
-    const animation = Animated.loop(
-      Animated.sequence([
-        Animated.timing(metaButtonScale, {
-          toValue: 1.05,
-          duration: 300,
-          easing: Easing.inOut(Easing.ease),
-          useNativeDriver: true,
-        }),
-        Animated.timing(metaButtonScale, {
-          toValue: 1,
-          duration: 300,
-          easing: Easing.inOut(Easing.ease),
-          useNativeDriver: true,
-        }),
-        Animated.delay(2400),
-      ]),
-    );
-
-    animation.start();
-
-    return () => {
-      animation.stop();
-    };
-  }, [metaButtonScale]);
-
-  useEffect(() => {
-    const animation = Animated.loop(
-      Animated.sequence([
-        Animated.timing(metaButtonColor, {
-          toValue: 1,
-          delay: 2000,
-          duration: 2000,
-          easing: Easing.linear,
-          useNativeDriver: false,
-        }),
-        Animated.timing(metaButtonColor, {
-          toValue: 0,
-          delay: 2000,
-          duration: 2000,
-          easing: Easing.linear,
-          useNativeDriver: false,
-        }),
-      ]),
-    );
-
-    animation.start();
-
-    return () => {
-      animation.stop();
-    };
-  }, [metaButtonColor]);
 
   const stopSingleTapTimeout = useCallback(() => {
     if (singleTapTimeoutRef.current) {
@@ -331,20 +280,33 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
     });
   }, [index, onToggleMute, showFeedbackMessage]);
 
-  const handleLike = useCallback(() => {
-    setLiked(true);
-    onLike?.(item);
-    animateHeart();
-  }, [animateHeart, item, onLike]);
-
   const handleDoubleTap = useCallback(() => {
     stopSingleTapTimeout();
-    handleLike();
-  }, [handleLike, stopSingleTapTimeout]);
+    setLiked((prev) => {
+      if (prev) {
+        animateHeart();
+        return prev;
+      }
+      animateHeart();
+      onLike?.(item, true);
+      return true;
+    });
+  }, [animateHeart, item, onLike, stopSingleTapTimeout]);
 
   const handleSingleTap = useCallback(() => {
     toggleMute();
   }, [toggleMute]);
+
+  const toggleLike = useCallback(() => {
+    setLiked((prev) => {
+      const next = !prev;
+      if (next) {
+        animateHeart();
+      }
+      onLike?.(item, next);
+      return next;
+    });
+  }, [animateHeart, item, onLike]);
 
   const handlePress = useCallback(() => {
     const now = Date.now();
@@ -620,26 +582,6 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
     [heartScale],
   );
 
-  const metaButtonAnimatedStyle = useMemo(
-    () => ({
-      backgroundColor: metaButtonColor.interpolate({
-        inputRange: [0, 1],
-        outputRange: [Colors.primary, Colors.black],
-      }),
-    }),
-    [metaButtonColor],
-  );
-
-  const metaButtonTextAnimatedStyle = useMemo(
-    () => ({
-      color: metaButtonColor.interpolate({
-        inputRange: [0, 1],
-        outputRange: [Colors.black, Colors.white],
-      }),
-    }),
-    [metaButtonColor],
-  );
-
   return (
     <View style={styles.container}>
       <View style={styles.videoContainer}>
@@ -710,38 +652,23 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
           {/*    {item?.description.length > 16 ? '...' : ''}*/}
           {/*  </Text>*/}
           {/*) : null}*/}
-          {/*<Animated.View*/}
-          {/*  style={[*/}
-          {/*    styles.metaButtonWrapper,*/}
-          {/*    { transform: [{ scale: metaButtonScale }] },*/}
-          {/*  ]}*/}
-          {/*>*/}
             <Button
               type="contained"
               size="xxl"
               title={tHome('openRecipeButton')}
               onPress={() => onPressMeta?.(item)}
-              style={[styles.metaButton, metaButtonAnimatedStyle]}
-              textStyle={[styles.metaButtonText, metaButtonTextAnimatedStyle]}
+              style={styles.metaButton}
+              textStyle={styles.metaButtonText}
             />
-          {/*</Animated.View>*/}
-          {item.tags?.length ? (
-            <Text style={styles.tags}>{item.tags.join(' ')}</Text>
-          ) : null}
         </TouchableOpacity>
 
-        <View style={styles.actionsContainer}>
-          <TouchableOpacity
-            onPress={() => {
-              setLiked((prev) => !prev);
-              if (!liked) {
-                handleLike();
-              }
-            }}
-            style={styles.actionButton}
-            accessibilityLabel={tHome('likeAccessibilityLabel') ?? 'Like video'}
-            accessible
-          >
+          <View style={styles.actionsContainer}>
+            <TouchableOpacity
+              onPress={toggleLike}
+              style={styles.actionButton}
+              accessibilityLabel={tHome('likeAccessibilityLabel') ?? 'Like video'}
+              accessible
+            >
             <View style={styles.actionIcon}>
               <Icon
                 name={liked ? 'heart' : 'heart-outline'}

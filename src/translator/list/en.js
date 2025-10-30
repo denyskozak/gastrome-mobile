@@ -62,6 +62,9 @@ export const translates = {
             musicActionLabel: 'Music',
             shareAccessibilityLabel: 'Share video',
             shareActionLabel: 'Share',
+            feedAll: 'All',
+            feedFavorites: 'Favorites',
+            favoritesEmptyFeed: "You don't have favorite videos yet",
         },
         authors: {
             emptyList: 'No authors found on platform :(',
