@@ -72,6 +72,10 @@ export const HomeScreen: React.FC = () => {
   const [settings] = useSettings();
   const [tCommon] = useTranslator('common');
   const [tHome] = useTranslator('pages.home');
+  const [videos, setVideos] = useState<VideoItem[]>([]);
+  const registryRef = useRef<Map<string, RegistryEntry>>(new Map());
+  const { activeIndex, onViewableItemsChanged, viewabilityConfig } = useActiveItem();
+  const videosLength = videos.length;
 
   const measure = settings?.measure ?? 'g';
   const [isBackgroundMusicEnabled, setIsBackgroundMusicEnabled] = useState(true);
@@ -161,10 +165,6 @@ export const HomeScreen: React.FC = () => {
       })
       .filter((item): item is VideoItem => Boolean(item));
   }, [recipes, tHome]);
-  const [videos, setVideos] = useState<VideoItem[]>([]);
-  const registryRef = useRef<Map<string, RegistryEntry>>(new Map());
-  const { activeIndex, onViewableItemsChanged, viewabilityConfig } = useActiveItem();
-  const videosLength = videos.length;
 
   useEffect(() => {
     if (!baseVideos.length) {
