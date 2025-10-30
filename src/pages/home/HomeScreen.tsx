@@ -32,6 +32,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 const { height: SCREEN_HEIGHT } = Dimensions.get('window');
 const MAX_BUFFER_DISTANCE = 2;
 const INITIAL_RENDER = 3;
+const INITIAL_LOOP_COUNT = 3;
 
 const createUniqueId = (video: VideoItem, suffix: string, index: number) => `${video.id}-${suffix}-${index}`;
 
@@ -39,6 +40,30 @@ const withUniqueId = (video: VideoItem, suffix: string, index: number): VideoIte
   ...video,
   id: createUniqueId(video, suffix, index),
 });
+
+const buildLoopedVideos = (videos: VideoItem[], suffix: string, loopCount: number) => {
+  const result: VideoItem[] = [];
+  for (let loopIndex = 0; loopIndex < loopCount; loopIndex += 1) {
+    const loopSuffix = `${suffix}-${loopIndex}`;
+    result.push(...videos.map((video, index) => withUniqueId(video, loopSuffix, index)));
+  }
+  return result;
+};
+
+const runOnNextFrame = (callback: () => void) => {
+  const raf =
+    typeof globalThis !== 'undefined' && typeof (globalThis as any).requestAnimationFrame === 'function'
+      ? (globalThis as any).requestAnimationFrame
+      : null;
+
+  if (raf) {
+    raf(() => {
+      callback();
+    });
+  } else {
+    setTimeout(callback, 0);
+  }
+};
 
 const resolveAssetUri = (asset: ImageSourcePropType | null | undefined) => {
   if (!asset) return undefined;
@@ -69,8 +94,8 @@ type FeedFilter = 'all' | 'favorites';
 
 export const HomeScreen: React.FC = () => {
   const insets = useSafeAreaInsets();
-  const iterationRef = useRef(0);
-  const loadingMoreRef = useRef(false);
+  const listRef = useRef<FlatList<VideoItem>>(null);
+  const shouldResetToMiddleRef = useRef(false);
   const [refreshing, setRefreshing] = useState(false);
   const [recipes] = useRecipes(true);
   const { getCookingStepURL } = useAWS();
@@ -190,15 +215,18 @@ export const HomeScreen: React.FC = () => {
         registryRef.current.clear();
         setAllVideos([]);
       }
-      iterationRef.current = 0;
+      shouldResetToMiddleRef.current = false;
+      setActiveIndex(0);
       return;
     }
-    const suffix = `initial-${Date.now()}`;
-    const prepared = baseVideos.map((video, index) => withUniqueId(video, suffix, index));
+
+    const suffixBase = `initial-${Date.now()}`;
+    const prepared = buildLoopedVideos(baseVideos, suffixBase, INITIAL_LOOP_COUNT);
+
     registryRef.current.clear();
     setAllVideos(prepared);
     setActiveIndex(0);
-    iterationRef.current = 0;
+    shouldResetToMiddleRef.current = true;
   }, [allVideosLength, baseVideos, setActiveIndex]);
 
   const handleToggleMute = useCallback(
@@ -361,41 +389,23 @@ export const HomeScreen: React.FC = () => {
     registryRef.current.clear();
     if (baseVideos.length) {
       const suffix = `refresh-${Date.now()}`;
-      const shuffled = shuffleVideos(baseVideos).map((video, index) =>
-        withUniqueId(video, suffix, index),
-      );
-      setAllVideos(shuffled);
+      const shuffled = shuffleVideos(baseVideos);
+      const looped = buildLoopedVideos(shuffled, suffix, INITIAL_LOOP_COUNT);
+      setAllVideos(looped);
       setActiveIndex(0);
-      iterationRef.current = 0;
+      shouldResetToMiddleRef.current = true;
     }
     setTimeout(() => {
       setRefreshing(false);
     }, 400);
   }, [baseVideos, setActiveIndex]);
 
-  const loadMoreVideos = useCallback(() => {
-    if (!baseVideos.length || loadingMoreRef.current) {
-      return;
-    }
-
-    loadingMoreRef.current = true;
-    iterationRef.current += 1;
-    const suffix = `more-${iterationRef.current}-${Date.now()}`;
-    setAllVideos((prev) => [
-      ...prev,
-      ...baseVideos.map((video, index) => withUniqueId(video, suffix, index)),
-    ]);
-  }, [baseVideos]);
-
-  useEffect(() => {
-    if (loadingMoreRef.current) {
-      loadingMoreRef.current = false;
-    }
-  }, [allVideos]);
-
   useEffect(() => {
     registryRef.current.clear();
     setActiveIndex(0);
+    if (feedFilter === 'all') {
+      shouldResetToMiddleRef.current = true;
+    }
   }, [feedFilter, setActiveIndex]);
 
   useEffect(() => {
@@ -416,14 +426,62 @@ export const HomeScreen: React.FC = () => {
       return;
     }
 
-    if (!allVideos.length || !baseVideos.length) {
+    if (!shouldResetToMiddleRef.current) {
       return;
     }
 
-    if (allVideos.length - activeIndex <= 2) {
-      loadMoreVideos();
+    if (!baseVideos.length || !allVideosLength) {
+      return;
     }
-  }, [activeIndex, allVideos.length, baseVideos.length, feedFilter, loadMoreVideos]);
+
+    shouldResetToMiddleRef.current = false;
+    const targetIndex = baseVideos.length;
+
+    runOnNextFrame(() => {
+      try {
+        listRef.current?.scrollToIndex({ index: targetIndex, animated: false });
+      } catch {
+        listRef.current?.scrollToOffset({ offset: SCREEN_HEIGHT * targetIndex, animated: false });
+      }
+      setActiveIndex(targetIndex);
+    });
+  }, [allVideosLength, baseVideos.length, feedFilter, setActiveIndex]);
+
+  useEffect(() => {
+    if (feedFilter !== 'all') {
+      return;
+    }
+
+    const loopSize = baseVideos.length;
+    if (!loopSize || !allVideosLength) {
+      return;
+    }
+
+    const minIndex = loopSize;
+    const maxIndex = allVideosLength - loopSize - 1;
+
+    if (activeIndex < minIndex) {
+      const nextIndex = activeIndex + loopSize;
+      setActiveIndex(nextIndex);
+      runOnNextFrame(() => {
+        try {
+          listRef.current?.scrollToIndex({ index: nextIndex, animated: false });
+        } catch {
+          listRef.current?.scrollToOffset({ offset: SCREEN_HEIGHT * nextIndex, animated: false });
+        }
+      });
+    } else if (activeIndex > maxIndex) {
+      const nextIndex = activeIndex - loopSize;
+      setActiveIndex(nextIndex);
+      runOnNextFrame(() => {
+        try {
+          listRef.current?.scrollToIndex({ index: nextIndex, animated: false });
+        } catch {
+          listRef.current?.scrollToOffset({ offset: SCREEN_HEIGHT * nextIndex, animated: false });
+        }
+      });
+    }
+  }, [activeIndex, allVideosLength, baseVideos.length, feedFilter, setActiveIndex]);
 
   const renderItem = useCallback(
     ({ item, index }: { item: VideoItem; index: number }) => {
@@ -452,11 +510,11 @@ export const HomeScreen: React.FC = () => {
       handleLike,
       handleOpenRecipe,
       handleShare,
-        handleToggleMute,
-        handleToggleBackgroundMusic,
-        registerHandle,
-        isBackgroundMusicEnabled,
-      ],
+      handleToggleMute,
+      handleToggleBackgroundMusic,
+      registerHandle,
+      isBackgroundMusicEnabled,
+    ],
   );
 
   const refreshControl = useMemo(
@@ -507,6 +565,7 @@ export const HomeScreen: React.FC = () => {
         })}
       </View>
       <FlatList
+        ref={listRef}
         data={displayedVideos}
         extraData={listExtraData}
         keyExtractor={keyExtractor}
@@ -522,10 +581,8 @@ export const HomeScreen: React.FC = () => {
         initialNumToRender={INITIAL_RENDER}
         windowSize={5}
         maxToRenderPerBatch={3}
-        removeClippedSubviews
+        removeClippedSubviews={false}
         refreshControl={refreshControl}
-        onEndReached={feedFilter === 'all' ? loadMoreVideos : undefined}
-        onEndReachedThreshold={0.6}
         key={feedFilter}
       />
       {feedFilter === 'favorites' && !displayedVideosLength ? (
