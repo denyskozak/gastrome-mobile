@@ -270,45 +270,37 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
   }, []);
 
   const toggleMute = useCallback(() => {
-    setIsMuted((prev) => {
-      const next = !prev;
-      onToggleMute?.(index, next);
-      showFeedbackMessage(
-        next
-          ? tHome('soundMuted') ?? 'Sound muted'
-          : tHome('soundUnmuted') ?? 'Sound on',
-      );
-      return next;
-    });
-  }, [index, onToggleMute, showFeedbackMessage]);
+    const nextMuted = !isMuted;
+    setIsMuted(nextMuted);
+    onToggleMute?.(index, nextMuted);
+    showFeedbackMessage(
+      nextMuted
+        ? tHome('soundMuted') ?? 'Sound muted'
+        : tHome('soundUnmuted') ?? 'Sound on',
+    );
+  }, [index, isMuted, onToggleMute, showFeedbackMessage, tHome]);
 
   const handleDoubleTap = useCallback(() => {
     stopSingleTapTimeout();
-    setLiked((prev) => {
-      if (prev) {
-        animateHeart();
-        return prev;
-      }
-      animateHeart();
+    animateHeart();
+    if (!liked) {
+      setLiked(true);
       onLike?.(item, true);
-      return true;
-    });
-  }, [animateHeart, item, onLike, stopSingleTapTimeout]);
+    }
+  }, [animateHeart, item, liked, onLike, stopSingleTapTimeout]);
 
   const handleSingleTap = useCallback(() => {
     toggleMute();
   }, [toggleMute]);
 
   const toggleLike = useCallback(() => {
-    setLiked((prev) => {
-      const next = !prev;
-      if (next) {
-        animateHeart();
-      }
-      onLike?.(item, next);
-      return next;
-    });
-  }, [animateHeart, item, onLike]);
+    const nextLiked = !liked;
+    setLiked(nextLiked);
+    if (nextLiked) {
+      animateHeart();
+    }
+    onLike?.(item, nextLiked);
+  }, [animateHeart, item, liked, onLike]);
 
   const handlePress = useCallback(() => {
     if (ignoreNextPressRef.current) {
