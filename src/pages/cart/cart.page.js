@@ -10,6 +10,7 @@ import { useMenuCart } from '../../contexts/cart.context';
 
 import { Spaces } from '../../styles/spaces';
 import { Button } from '../../components/atomic/button/button.component';
+import { Checkbox } from '../../components/atoms/checkbox';
 import { Colors } from '../../styles/colors';
 import { Input } from '../../components/atomic/input/input.component';
 import { useCommonModal } from '../../contexts/commonModal/commonModal.context';
@@ -126,28 +127,33 @@ const CartPageComponent = (props) => {
     setAddIngredientValue('');
   };
 
+  const toggleSelection = (index) => {
+    if (selected.includes(index)) {
+      setSelected(_.without(selected, index));
+    } else {
+      setSelected([...selected, index]);
+    }
+  };
+
   const renderItem = ({item, index}) => (
     <View
       key={item.title + index}
       style={styles.itemWrapper}
     >
-      <Button
-        onPress={() => selected.includes(index) ? setSelected(_.without(selected, index)) : setSelected([...selected, index])}
+      <Checkbox
+        label={item.title}
+        checked={selected.includes(index)}
+        onPress={() => toggleSelection(index)}
         style={styles.item}
-        type="outlined"
-        selected={selected.includes(index)}
-      >
-        {/*Title*/}
-        {selected.includes(index) && (<><Icon name="checkmark-outline" size={Spaces.medium}/>{' '}</>)}
-        {item.title}
-        {' '}
-        {/*Quantities*/}
-        {item.quantities.length > 0 && (<Text style={styles.subText}>
-          ({item.quantities.map((item) => mapRenderCartQuantity(item, measure, tCommon)).join(', ')})
-        </Text>)}
-        {/*Comment*/}
-        {item.comment && <Text style={styles.subText}>{item.comment}</Text>}
-      </Button>
+        description={item.quantities.length > 0 ? (
+          <Text style={styles.subText}>
+            ({item.quantities.map((item) => mapRenderCartQuantity(item, measure, tCommon)).join(', ')})
+          </Text>
+        ) : undefined}
+        helper={item.comment ? (
+          <Text style={styles.subText}>{item.comment}</Text>
+        ) : undefined}
+      />
     </View>
   );
 
