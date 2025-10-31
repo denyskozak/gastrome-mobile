@@ -45,12 +45,11 @@ const styles = StyleSheet.create({
   },
   itemWrapper: {
     width: '100%',
+    marginBottom: Spaces.small,
   },
   item: {
-    borderWidth: Spaces.xxsmall,
-    borderRadius: BorderRadius.small,
-    minHeight: Spaces.mxxlarge,
     width: '100%',
+    paddingVertical: Spaces.small,
   },
   subText: getTextStyles({
     fontSize: 14,
