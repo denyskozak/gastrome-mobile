@@ -23,6 +23,8 @@ import {handleSocialShare} from '../../utilities/socialShare';
 import {AttentionAnimation} from '../../components/molecular/attansion-animation/attansion-animation.component';
 import {downloadAsync} from '../../utilities/downloadAsync';
 import {useAWS} from '../../hooks/useAWS';
+import { useSubscriptions } from '../../contexts/subscriptions.context';
+import { SubscriptionsModal } from '../../components/templates/subscriptions-modal/subscriptions-modal';
 
 import styles from './recipe.styles';
 import {useRecipes} from "../../hooks/useRecipes";
@@ -72,6 +74,8 @@ const RecipePageComponent = (props) => {
     const [isMeasureModalOpen, setIsMeasureModalOpen] = useState(false);
     const [servingsCount, setServingsCount] = useState(servings);
     const [openCommonModal] = useCommonModal();
+    const [isSubscriber] = useSubscriptions();
+    const [isSubscriptionsOpened, setSubscriptionsOpened] = useState(false);
 
     const stepRefs = {};
     const {measure} = settings;
@@ -103,6 +107,10 @@ const RecipePageComponent = (props) => {
 
     const handleAddToCart = () => {
         Haptics.selectionAsync();
+        if (!isSubscriber) {
+            setSubscriptionsOpened(true);
+            return;
+        }
         if (!existsInCart) {
             addCartItems(recipe.ingredients.map(prepareIngredient));
             setExistsInCart(true);
@@ -358,6 +366,11 @@ const RecipePageComponent = (props) => {
                 </AttentionAnimation>
             </Animated>
         )}
+
+        <SubscriptionsModal
+            isOpen={isSubscriptionsOpened}
+            onChangeVisible={setSubscriptionsOpened}
+        />
 
         <MeasureModal
             isVisible={isMeasureModalOpen}
