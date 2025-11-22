@@ -40,9 +40,11 @@ type RegistryEntry = {
 export const HomeScreen: React.FC = () => {
   const iterationRef = useRef(0);
   const [refreshing, setRefreshing] = useState(false);
-  const [videos, setVideos] = useState<VideoItem[]>(() =>
-    mockVideos.map((video, index) => withUniqueId(video, 'initial', index)),
-  );
+  const [videos, setVideos] = useState<VideoItem[]>(() => {
+    const shuffled = shuffleVideos(mockVideos);
+    const suffix = `initial-${Date.now()}`;
+    return shuffled.map((video, index) => withUniqueId(video, suffix, index));
+  });
   const registryRef = useRef<Map<string, RegistryEntry>>(new Map());
   const { activeIndex, onViewableItemsChanged, viewabilityConfig } = useActiveItem();
 

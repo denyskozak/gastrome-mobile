@@ -29,6 +29,8 @@ import { handleSocialShare } from '../../utilities/socialShare';
 import { recipesPageRoute } from '../../navigation/navigation.routes';
 import { recipesRoute } from '../recipes/navigation/recipes.routes';
 import * as Haptics from "expo-haptics";
+import { useSubscriptions } from '../../contexts/subscriptions.context';
+import { SubscriptionsModal } from '../../components/templates/subscriptions-modal/subscriptions-modal';
 
 const intoVideo = require('./cart-instruction-video.mp4');
 
@@ -41,11 +43,13 @@ const CartPageComponent = (props) => {
   const [tCommon] = useTranslator('common');
 
   const [cart, addCartItems, setCart] = useMenuCart();
+  const [isSubscriber] = useSubscriptions();
   const [selected, setSelected] = useState([]);
   const [addIngredientValue, setAddIngredientValue] = useState('');
   const [hasIngredientAdded, setHasIngredientAdded] = useState(false);
   const [isRefreshConfirmModalOpen, setRefreshConfirmModalOpen] = useState(false);
   const [isHelpModalOpen, setHelpModalOpen] = useState(false);
+  const [isSubscriptionsOpened, setSubscriptionsOpened] = useState(false);
 
   const [settings] = useSettings();
   const { measure } = settings;
@@ -111,6 +115,10 @@ const CartPageComponent = (props) => {
 
   const addItemToList = () => {
     Haptics.impactAsync('light');
+    if (!isSubscriber) {
+      setSubscriptionsOpened(true);
+      return;
+    }
     const foundDuplicate = items.find(item => item.title === addIngredientValue);
     if (!foundDuplicate) {
       addCartItems([{title: addIngredientValue}]);
@@ -256,6 +264,11 @@ const CartPageComponent = (props) => {
     {/*Intro video modal*/}
     <IntroVideoModal isOpen={isHelpModalOpen} onChangeVisible={setHelpModalOpen} title={t('howItWorks')} source={intoVideo} />
     <HelpButton onPress={() => { setHelpModalOpen(true) }} />
+
+    <SubscriptionsModal
+      isOpen={isSubscriptionsOpened}
+      onChangeVisible={setSubscriptionsOpened}
+    />
 
     {/*Done modal*/}
     <ConfirmModal
