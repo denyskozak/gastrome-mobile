@@ -4,6 +4,7 @@ import SwipeablePanel from 'react-native-sheets-bottom';
 import Icon from '@expo/vector-icons/Ionicons';
 import { FlashList } from "@shopify/flash-list";
 import * as Haptics from "expo-haptics";
+import AsyncStorage from '@react-native-community/async-storage';
 
 import {RecipeItem} from './components/recipes.item.component';
 import {useTranslator} from '../../hooks/useTranslator';
@@ -28,6 +29,8 @@ import {useSettings} from "../../contexts/settings.context";
 
 
 let isFirstRun = true;
+const RECIPES_VIEWED_LIMIT_KEY = 'RECIPES_VIEWED_LIMIT_KEY';
+const DAILY_RECIPES_LIMIT = 3;
 const RecipesPageComponent = (props) => {
     const {
         navigation,
@@ -215,6 +218,39 @@ const RecipesPageComponent = (props) => {
         ? searchedItems
         : listData;
 
+    const checkRecipeLimit = useCallback(async () => {
+        if (isSubscriber) {
+            return true;
+        }
+
+        const today = new Date().toISOString().split('T')[0];
+        const storedLimit = await AsyncStorage.getItem(RECIPES_VIEWED_LIMIT_KEY);
+        let viewedData = storedLimit ? JSON.parse(storedLimit) : {date: today, count: 0};
+
+        if (viewedData.date !== today) {
+            viewedData = {date: today, count: 0};
+        }
+
+        if (viewedData.count >= DAILY_RECIPES_LIMIT) {
+            return false;
+        }
+
+        viewedData.count += 1;
+        await AsyncStorage.setItem(RECIPES_VIEWED_LIMIT_KEY, JSON.stringify(viewedData));
+        return true;
+    }, [isSubscriber]);
+
+    const handleOpenRecipe = useCallback(async (id) => {
+        const canOpenRecipe = await checkRecipeLimit();
+        if (!canOpenRecipe) {
+            setSubscriptionsOpened(true);
+            return;
+        }
+
+        navigation.navigate(recipeRoute, {id});
+        Haptics.selectionAsync();
+    }, [checkRecipeLimit, navigation]);
+
     // indexes: 0 - label, 1 - icon name, 2 - onPress
     const actions = [
         [t('filters'), 'filter-outline', () => setFilterOpened(true)],
@@ -307,10 +343,7 @@ const RecipesPageComponent = (props) => {
                     return (
                         <RecipeItem
                             // enableHint
-                            onPress={id => {
-                                navigation.navigate(recipeRoute, {id});
-                                Haptics.selectionAsync();
-                            }}
+                            onPress={handleOpenRecipe}
                             isFavorited={favorites.includes(item.id)}
                             selectedIngredients={listSearchByIngredients}
                             {...item}
