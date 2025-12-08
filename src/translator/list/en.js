@@ -247,6 +247,7 @@ export const translates = {
             benefitsOne: 'Support Us 🥰',
             benefitsTwo: 'Community chat 📚',
             benefitsThree: 'Cooking Streams 🧝',
+            benefitsFour: 'Access to all recipes 🍽️',
             error: 'Sorry, subscription purchase error, try again or contact to us on settings page',
             restore: 'Restore',
             success: 'Thank you for subscribing! Your support fuels our app\'s growth 🚀',

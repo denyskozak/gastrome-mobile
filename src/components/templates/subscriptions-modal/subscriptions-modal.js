@@ -99,6 +99,7 @@ const SubscriptionsModalComponent = (props) => {
                 <Text style={[styles.benefitsText, styles.firstBenefitText]}>{t('benefitsOne')}</Text>
                 <Text style={styles.benefitsText}>{t('benefitsTwo')}</Text>
                 <Text style={styles.benefitsText}>{t('benefitsThree')}</Text>
+                <Text style={styles.benefitsText}>{t('benefitsFour')}</Text>
               </View>
               {isLoading && (
                 <View style={styles.logoWrapper}>
