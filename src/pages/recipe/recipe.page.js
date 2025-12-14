@@ -1,8 +1,9 @@
-import React, {useEffect, useMemo, useRef, useState} from 'react';
+import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {FlatList, Pressable, Image, Text, View, SafeAreaView} from 'react-native';
 import Icon from '@expo/vector-icons/Ionicons';
 import _ from 'lodash';
 import * as Haptics from "expo-haptics";
+import Toast from 'react-native-toast-message';
 
 import {Animated} from '../../components/atomic/animated/animated.component';
 import {useTranslator} from '../../hooks/useTranslator';
@@ -32,6 +33,7 @@ import {AuthorPreview} from "../../components/molecular/author-preview/author-pr
 import {ZoomInOut} from "../../components/molecular/zoom-in-out-animation/zoom-in-out-animation";
 import {logEvent} from "../../utilities/google-analitics";
 import {isAvailableAsync, requestReview} from "expo-store-review";
+import {useFreeRecipesQuota} from "../../hooks/useFreeRecipesQuota";
 
 const RecipePageComponent = (props) => {
     const {
@@ -76,6 +78,7 @@ const RecipePageComponent = (props) => {
     const [openCommonModal] = useCommonModal();
     const [isSubscriber] = useSubscriptions();
     const [isSubscriptionsOpened, setSubscriptionsOpened] = useState(false);
+    const {consumeFreeRecipe, limit: dailyFreeRecipesLimit, isLoading: isFreeQuotaLoading} = useFreeRecipesQuota();
 
     const stepRefs = {};
     const {measure} = settings;
@@ -92,6 +95,27 @@ const RecipePageComponent = (props) => {
     useEffect(() => {
         flatListRef.current?.scrollToOffset({offset: 0, animated: true});
     }, [id]);
+
+    const showFreeQuotaToast = useCallback(async () => {
+        try {
+            const remainingAfterView = await consumeFreeRecipe();
+
+            Toast.show({
+                type: 'info',
+                text1: t('freeRecipesToastTitle', {remaining: remainingAfterView, limit: dailyFreeRecipesLimit}),
+                text2: t('freeRecipesToastCta'),
+                position: 'top',
+            });
+        } catch (error) {
+            console.log('Failed to show free recipe toast', error);
+        }
+    }, [consumeFreeRecipe, dailyFreeRecipesLimit, t]);
+
+    useEffect(() => {
+        if (isSubscriber || isFreeQuotaLoading || !recipe?.free) return;
+
+        showFreeQuotaToast();
+    }, [id, isSubscriber, isFreeQuotaLoading, recipe?.free, showFreeQuotaToast]);
 
     const recipeCountry = useMemo(() => {
         return filters.find(item => CountryList.includes(item));

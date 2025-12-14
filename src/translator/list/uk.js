@@ -169,7 +169,9 @@ export const translates = {
             "carbs": "Вуглеводи",
             "fats": "Жири",
             "calories": "Калорії",
-            "chooseMeasure": "Одиниці ⚖️"
+            "chooseMeasure": "Одиниці ⚖️",
+            "freeRecipesToastTitle": "У вас залишилось {remaining} з {limit} рецептів на сьогодні",
+            "freeRecipesToastCta": "Щоб дивитися всі рецепти, вступайте до спільноти або купіть квиток"
         },
         cooking: {
             "singleVideo": "(Одне відео для всіх кроків)",
