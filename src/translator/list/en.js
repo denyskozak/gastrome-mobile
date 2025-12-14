@@ -181,6 +181,8 @@ export const translates = {
             fats: 'Fats',
             calories: 'Calories',
             chooseMeasure: 'Measures ⚖️',
+            freeRecipesToastTitle: 'You have {remaining} of {limit} recipes left to view today',
+            freeRecipesToastCta: 'Join the community or buy a ticket to unlock every recipe',
         },
         cooking: {
             singleVideo: '(Single video for all steps)',

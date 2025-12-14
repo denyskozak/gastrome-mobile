@@ -170,6 +170,8 @@ export const translates = {
             "fats": "Жиры",
             "calories": "Калории",
             "chooseMeasure": "Единицы ⚖️",
+            "freeRecipesToastTitle": "У вас осталось {remaining} из {limit} рецептов на сегодня",
+            "freeRecipesToastCta": "Чтобы смотреть все рецепты, вступайте в сообщество или купите билет",
         },
         cooking: {
             "singleVideo": "(Одно видео для всех шагов)",

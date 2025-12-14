@@ -15,6 +15,7 @@ import {IS_FIRST_LAUNCH_EVER_STORE_KEY, SETTINGS_ASYNC_STORE_KEY} from "./consta
 import {Navigation} from "./navigation/navigation.js";
 import {OnBoard, useIsOnBoarding} from "./components/molecular/on-boarding/on-boarding.component";
 import { useTheme } from './hooks/useTheme';
+import Toast from 'react-native-toast-message';
 
 SplashScreen.preventAutoHideAsync().then().catch(() => console.log('error-splash-prevent-auto-hide'));
 const AppInner = ({
@@ -38,6 +39,7 @@ const AppInner = ({
       {fontsLoaded && !isVisibleCustomSplashScreen && !isOnBoarding
         ? (<Layout><Navigation /></Layout>)
         : null}
+      <Toast />
     </View>
   );
 };
