@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
 import {getSpeechProfiles, preferableProfileByLanguages} from "./utilities/speechProfiles.js";
 import {useSettings} from "./contexts/settings.context.js";
 import {SETTINGS_ASYNC_STORE_KEY} from "./constants/asyncStoreKeys";
-import AsyncStorage from "@react-native-community/async-storage";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import {defaultLanguage} from "./translator/translates";
 
 let isFirstRun = true;

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { View } from 'react-native';
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { isFirstLaunch } from '../../../utilities/isFirstLaunch';
 
 import { Tooltip } from '../../atomic/tooltip/tooltip.component';

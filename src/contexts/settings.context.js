@@ -1,6 +1,6 @@
 import React, {useState, useContext, createContext, useCallback, useEffect} from 'react';
 import PropsType from 'prop-types';
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {defaultLanguage} from "../translator/translates";
 import {SETTINGS_ASYNC_STORE_KEY} from "../constants/asyncStoreKeys";
 

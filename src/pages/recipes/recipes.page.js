@@ -4,7 +4,7 @@ import SwipeablePanel from 'react-native-sheets-bottom';
 import Icon from '@expo/vector-icons/Ionicons';
 import { FlashList } from "@shopify/flash-list";
 import * as Haptics from "expo-haptics";
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import {RecipeItem} from './components/recipes.item.component';
 import {useTranslator} from '../../hooks/useTranslator';

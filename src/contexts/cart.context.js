@@ -1,6 +1,6 @@
 import React, { useState, useContext, createContext, useEffect } from 'react';
 import PropsType from 'prop-types';
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { CART_KEY } from '../constants/asyncStoreKeys';
 

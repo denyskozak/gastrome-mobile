@@ -2,7 +2,7 @@ import React, {useEffect, useMemo, useState} from 'react';
 import {View} from 'react-native';
 import { useFonts } from 'expo-font'
 import * as SplashScreen from 'expo-splash-screen';
-import AsyncStorage from "@react-native-community/async-storage";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { fonts } from './styles/fonts';
 
