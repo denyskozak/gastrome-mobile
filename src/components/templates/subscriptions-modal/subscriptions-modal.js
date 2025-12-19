@@ -88,6 +88,7 @@ const SubscriptionsModalComponent = (props) => {
         style={styles.background}
         resizeMode="cover"
       >
+        <View style={styles.overlay}>
         <SafeAreaView style={styles.safeArea}>
           <ScrollView
             bounces={false}
@@ -113,7 +114,7 @@ const SubscriptionsModalComponent = (props) => {
                       {options.map((item) => (
                         <Button
                           key={item.product.identifier}
-                          type="outlined"
+                          type="fulled"
                           size="xl"
                           style={styles.button}
                           textStyle={styles.buttonText}
@@ -126,7 +127,7 @@ const SubscriptionsModalComponent = (props) => {
                         </Button>
                       ))}
                       <Button
-                        type="outlined"
+                        type="fulled"
                         size="xl"
                         style={styles.button}
                         textStyle={styles.buttonText}
@@ -154,6 +155,7 @@ const SubscriptionsModalComponent = (props) => {
             </Button>
           </View>
         </SafeAreaView>
+        </View>
       </ImageBackground>
     </NativeModal>
   );

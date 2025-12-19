@@ -20,6 +20,11 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Icon from '@expo/vector-icons/Ionicons';
 import type { AVPlaybackStatus } from 'expo-av';
 import type { VideoItem } from '../../types/video';
+import LinearGradient from 'react-native-linear-gradient';
+import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
+import { getStyles } from './VideoCard.styles';
+import { Button } from '../atomic/button/button.component';
+import { useTranslator } from '../../hooks/useTranslator';
 
 let ExpoVideo: any = null;
 let ExpoResizeMode: any = null;
@@ -61,10 +66,13 @@ export type VideoCardProps = {
   index: number;
   isActive: boolean;
   onToggleMute?: (index: number, muted: boolean) => void;
-  onLike?: (item: VideoItem) => void;
-  onComment?: (item: VideoItem) => void;
-  onShare?: (item: VideoItem) => void;
+  onLike?: (item: VideoItem, liked: boolean) => void;
+  onToggleMusic?: () => void;
+  isMusicEnabled?: boolean;
+  onShare?: (item: VideoItem) => void | Promise<void>;
+  onPressMeta?: (item: VideoItem) => void;
   onRegister?: (index: number, handle: VideoPlayerHandle | null) => void;
+  isFavorite?: boolean;
 };
 
 const HEART_ANIMATION_DURATION = 450;
@@ -73,31 +81,44 @@ const DOUBLE_TAP_DELAY = 250;
 const createAnimatedValue = (initial: number) => new Animated.Value(initial);
 
 const VideoCardComponent: React.FC<VideoCardProps> = ({
-  item,
-  index,
-  isActive,
-  onToggleMute,
-  onLike,
-  onComment,
-  onShare,
-  onRegister,
-}) => {
+                                                        item,
+                                                        index,
+                                                        isActive,
+                                                        onToggleMute,
+                                                        onLike,
+                                                        onToggleMusic,
+                                                        isMusicEnabled,
+                                                        onShare,
+                                                        onPressMeta,
+                                                        onRegister,
+                                                        isFavorite,
+                                                      }) => {
+  const [tHome] = useTranslator('pages.home');
   const insets = useSafeAreaInsets();
   const videoRef = useRef<any>(null);
   const doubleTapRef = useRef<number>(0);
   const singleTapTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const longPressPauseRef = useRef(false);
+  const ignoreNextPressRef = useRef(false);
   const preparedRef = useRef(false);
+  const pendingPlayRef = useRef(false);
   const [isMuted, setIsMuted] = useState(true);
   const [isBuffering, setIsBuffering] = useState(true);
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [progress, setProgress] = useState(0);
   const [isManuallyPaused, setIsManuallyPaused] = useState(false);
-  const [liked, setLiked] = useState(false);
+  const [liked, setLiked] = useState(Boolean(isFavorite));
   const [feedback, setFeedback] = useState<string | null>(null);
   const [showHeart, setShowHeart] = useState(false);
   const feedbackOpacity = useRef(createAnimatedValue(0)).current;
   const heartScale = useRef(createAnimatedValue(0)).current;
+  const tabBarHeight = useBottomTabBarHeight();
+  const styles = getStyles(tabBarHeight);
+
+  useEffect(() => {
+    setLiked(Boolean(isFavorite));
+  }, [isFavorite, item.id]);
 
   const shouldPlay = isActive && !isManuallyPaused && !hasError;
 
@@ -152,6 +173,62 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
     });
   }, [heartScale]);
 
+  const isRecoverablePlaybackError = useCallback((error: unknown) => {
+    if (!error) {
+      return false;
+    }
+
+    if (typeof error === 'string') {
+      return (
+          /load( is)? in progress/i.test(error) ||
+          /not ready/i.test(error) ||
+          /invalid view returned from registry/i.test(error)
+      );
+    }
+
+    if (error instanceof Error) {
+      return (
+          /load( is)? in progress/i.test(error.message) ||
+          /not ready/i.test(error.message) ||
+          /invalid view returned from registry/i.test(error.message)
+      );
+    }
+
+    if (typeof error === 'object') {
+      const maybeError = error as { code?: string; message?: string };
+      const { code, message } = maybeError;
+      if (typeof code === 'string' && (/LOAD_IN_PROGRESS/i.test(code) || /NOTREADY/i.test(code))) {
+        return true;
+      }
+      if (typeof message === 'string') {
+        return (
+            /load( is)? in progress/i.test(message) ||
+            /not ready/i.test(message) ||
+            /invalid view returned from registry/i.test(message)
+        );
+      }
+    }
+
+    return false;
+  }, []);
+
+  const attemptPlayAfterLoad = useCallback(async () => {
+    if (!videoRef.current || !isExpoAvAvailable || !videoRef.current.playAsync) {
+      return;
+    }
+
+    try {
+      pendingPlayRef.current = false;
+      await videoRef.current.playAsync();
+    } catch (error) {
+      if (isRecoverablePlaybackError(error)) {
+        pendingPlayRef.current = true;
+      } else {
+        setHasError(true);
+      }
+    }
+  }, [isRecoverablePlaybackError]);
+
   const handlePlaybackStatus = useCallback((status: AVPlaybackStatus) => {
     if (!status.isLoaded) {
       if (status.error) {
@@ -170,7 +247,11 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
     if (status.didJustFinish) {
       setProgress(1);
     }
-  }, []);
+
+    if (pendingPlayRef.current && shouldPlay && !status.isPlaying) {
+      attemptPlayAfterLoad();
+    }
+  }, [attemptPlayAfterLoad, shouldPlay]);
 
   const handleProgress = useCallback((event: { currentTime: number; playableDuration: number; seekableDuration: number; }) => {
     if (event.seekableDuration) {
@@ -189,30 +270,45 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
   }, []);
 
   const toggleMute = useCallback(() => {
-    setIsMuted((prev) => {
-      const next = !prev;
-      onToggleMute?.(index, next);
-      showFeedbackMessage(next ? 'Звук выключен' : 'Звук включен');
-      return next;
-    });
-  }, [index, onToggleMute, showFeedbackMessage]);
-
-  const handleLike = useCallback(() => {
-    setLiked(true);
-    onLike?.(item);
-    animateHeart();
-  }, [animateHeart, item, onLike]);
+    const nextMuted = !isMuted;
+    setIsMuted(nextMuted);
+    onToggleMute?.(index, nextMuted);
+    showFeedbackMessage(
+        nextMuted
+            ? tHome('soundMuted') ?? 'Sound muted'
+            : tHome('soundUnmuted') ?? 'Sound on',
+    );
+  }, [index, isMuted, onToggleMute, showFeedbackMessage, tHome]);
 
   const handleDoubleTap = useCallback(() => {
     stopSingleTapTimeout();
-    handleLike();
-  }, [handleLike, stopSingleTapTimeout]);
+    animateHeart();
+    if (!liked) {
+      setLiked(true);
+      onLike?.(item, true);
+    }
+  }, [animateHeart, item, liked, onLike, stopSingleTapTimeout]);
 
   const handleSingleTap = useCallback(() => {
     toggleMute();
   }, [toggleMute]);
 
+  const toggleLike = useCallback(() => {
+    const nextLiked = !liked;
+    setLiked(nextLiked);
+    if (nextLiked) {
+      animateHeart();
+    }
+    onLike?.(item, nextLiked);
+  }, [animateHeart, item, liked, onLike]);
+
   const handlePress = useCallback(() => {
+    if (ignoreNextPressRef.current) {
+      ignoreNextPressRef.current = false;
+      doubleTapRef.current = 0;
+      stopSingleTapTimeout();
+      return;
+    }
     const now = Date.now();
     if (doubleTapRef.current && now - doubleTapRef.current < DOUBLE_TAP_DELAY) {
       doubleTapRef.current = 0;
@@ -227,37 +323,64 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
   }, [handleDoubleTap, handleSingleTap, stopSingleTapTimeout]);
 
   const handleLongPress = useCallback(() => {
+    ignoreNextPressRef.current = true;
+    longPressPauseRef.current = true;
+    stopSingleTapTimeout();
+    doubleTapRef.current = 0;
     setIsManuallyPaused((prev) => {
-      const next = !prev;
-      if (!next && !isActive) {
+      if (prev || !isActive) {
         return prev;
       }
-      showFeedbackMessage(next ? 'Пауза' : 'Воспроизведение');
-      return next;
+      showFeedbackMessage(tHome('paused') ?? 'Paused');
+      return true;
     });
-  }, [isActive, showFeedbackMessage]);
+  }, [isActive, showFeedbackMessage, stopSingleTapTimeout, tHome]);
+
+  const handlePressOut = useCallback(() => {
+    if (!longPressPauseRef.current) {
+      return;
+    }
+    longPressPauseRef.current = false;
+    setIsManuallyPaused((prev) => {
+      if (!prev) {
+        return prev;
+      }
+      if (isActive && !hasError) {
+        showFeedbackMessage(tHome('playing') ?? 'Playing');
+      }
+      return false;
+    });
+  }, [hasError, isActive, showFeedbackMessage, tHome]);
 
   const play = useCallback(async () => {
     if (!videoRef.current) return;
     if (isExpoAvAvailable && videoRef.current.playAsync) {
       try {
-        const status = await videoRef.current.getStatusAsync?.();
+        const status = await videoRef.current?.getStatusAsync?.();
         if (!status?.isLoaded) {
-          await videoRef.current.loadAsync?.(
-            { uri: item.source },
-            { shouldPlay: true, isMuted },
-            false,
+          pendingPlayRef.current = true;
+          await videoRef.current?.loadAsync?.(
+              { uri: item.source },
+              { shouldPlay: true, isMuted, isLooping: true },
+              false,
           );
+          pendingPlayRef.current = false;
         } else {
-          await videoRef.current.playAsync();
+          pendingPlayRef.current = false;
+          await videoRef.current?.playAsync();
         }
       } catch (error) {
-        setHasError(true);
+        console.log("error: ", error)
+        if (isRecoverablePlaybackError(error)) {
+          pendingPlayRef.current = true;
+        } else {
+          setHasError(true);
+        }
       }
     } else if (videoRef.current?.seek) {
       videoRef.current.seek(0);
     }
-  }, [item.source, isMuted]);
+  }, [isRecoverablePlaybackError, item.source, isMuted]);
 
   const pause = useCallback(async () => {
     if (!videoRef.current) return;
@@ -274,7 +397,11 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
     if (!videoRef.current) return;
     if (isExpoAvAvailable && videoRef.current.setStatusAsync) {
       try {
-        await videoRef.current.setStatusAsync({ positionMillis: 0, shouldPlay: false });
+        await videoRef.current.setStatusAsync({
+          positionMillis: 0,
+          shouldPlay: false,
+          isLooping: true,
+        });
       } catch (error) {
         // ignore
       }
@@ -297,6 +424,7 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
     }
     setProgress(0);
     setIsLoaded(false);
+    pendingPlayRef.current = false;
   }, []);
 
   const prepare = useCallback(async () => {
@@ -309,9 +437,9 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
         const status = await videoRef.current.getStatusAsync();
         if (!status?.isLoaded) {
           await videoRef.current.loadAsync?.(
-            { uri: item.source },
-            { shouldPlay: false, isMuted: true },
-            false,
+              { uri: item.source },
+              { shouldPlay: false, isMuted: true, isLooping: true },
+              false,
           );
         }
         preparedRef.current = true;
@@ -356,7 +484,7 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
         seekToStart();
       }
     }
-  }, [isActive, pause, play, seekToStart, shouldPlay]);
+  }, [isActive, isLoaded, pause, play, seekToStart, shouldPlay]);
 
   useEffect(() => {
     if (!isActive && isManuallyPaused) {
@@ -366,72 +494,90 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
 
   useEffect(() => {
     if (hasError) {
-      showFeedbackMessage('Видео недоступно');
+      showFeedbackMessage(tHome('videoUnavailable') ?? 'Video unavailable');
     }
-  }, [hasError, showFeedbackMessage]);
+  }, [hasError, showFeedbackMessage, tHome]);
 
   useEffect(() => () => {
     unload();
   }, [unload]);
 
+  const handleLoadStart = useCallback(() => {
+    setIsBuffering(true);
+    setHasError(false);
+  }, []);
+
+  const handleLoad = useCallback(() => {
+    setIsBuffering(false);
+    setIsLoaded(true);
+    preparedRef.current = true;
+
+    if (pendingPlayRef.current && shouldPlay) {
+      attemptPlayAfterLoad();
+    }
+  }, [attemptPlayAfterLoad, shouldPlay]);
+
+  const handleVideoError = useCallback(
+      (error: unknown) => {
+        const resolvedError =
+            typeof error === 'object' && error !== null
+                ? 'nativeEvent' in (error as Record<string, unknown>)
+                    ? (error as { nativeEvent: unknown }).nativeEvent
+                    : 'error' in (error as Record<string, unknown>)
+                        ? (error as { error: unknown }).error
+                        : error
+                : error;
+
+        if (isRecoverablePlaybackError(resolvedError)) {
+          pendingPlayRef.current = true;
+          setIsBuffering(true);
+          return;
+        }
+
+        setHasError(true);
+        setIsBuffering(false);
+      },
+      [isRecoverablePlaybackError],
+  );
+
   const renderVideo = () => {
     if (isExpoAvAvailable && ExpoVideo) {
       return (
-        <ExpoVideo
-          ref={videoRef}
-          style={StyleSheet.absoluteFill}
-          source={{ uri: item.source }}
-          resizeMode={ExpoResizeMode?.COVER ?? 'cover'}
-          shouldPlay={shouldPlay}
-          isLooping
-          isMuted={isMuted}
-          onLoadStart={() => {
-            setIsBuffering(true);
-            setHasError(false);
-          }}
-          onLoad={() => {
-            setIsBuffering(false);
-            setIsLoaded(true);
-            preparedRef.current = true;
-          }}
-          onError={() => {
-            setHasError(true);
-            setIsBuffering(false);
-          }}
-          onPlaybackStatusUpdate={handlePlaybackStatus}
-          useNativeControls={false}
-          posterSource={item.poster ? { uri: item.poster } : undefined}
-          posterStyle={styles.poster}
-        />
+          <ExpoVideo
+              ref={videoRef}
+              style={StyleSheet.absoluteFill}
+              source={{ uri: item.source }}
+              resizeMode={ExpoResizeMode?.CONTAIN ?? 'contain'}
+              isLooping
+              isMuted={isMuted}
+              onLoadStart={handleLoadStart}
+              onLoad={handleLoad}
+              onError={handleVideoError}
+              onPlaybackStatusUpdate={handlePlaybackStatus}
+              useNativeControls={false}
+              posterSource={item.poster ? { uri: item.poster } : undefined}
+              posterStyle={styles.poster}
+          />
       );
     }
 
     if (RNVideo) {
       return (
-        <RNVideo
-          ref={videoRef}
-          source={{ uri: item.source }}
-          style={StyleSheet.absoluteFill}
-          resizeMode="cover"
-          repeat
-          muted={isMuted}
-          paused={!shouldPlay}
-          onLoadStart={() => {
-            setIsBuffering(true);
-            setHasError(false);
-          }}
-          onLoad={() => {
-            setIsBuffering(false);
-            setIsLoaded(true);
-          }}
-          onError={() => {
-            setHasError(true);
-            setIsBuffering(false);
-          }}
-          onBuffer={({ isBuffering: buffering }: { isBuffering: boolean }) => setIsBuffering(buffering)}
-          onProgress={handleProgress}
-          onEnd={() => setProgress(1)}
-        />
+          <RNVideo
+              ref={videoRef}
+              source={{ uri: item.source }}
+              style={StyleSheet.absoluteFill}
+              resizeMode="cover"
+              repeat
+              muted={isMuted}
+              paused={!shouldPlay}
+              onLoadStart={handleLoadStart}
+              onLoad={handleLoad}
+              onError={handleVideoError}
+              onBuffer={({ isBuffering: buffering }: { isBuffering: boolean }) => setIsBuffering(buffering)}
+              onProgress={handleProgress}
+              onEnd={() => setProgress(1)}
+          />
       );
     }
 
@@ -439,245 +585,154 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
   };
 
   const heartStyle = useMemo(
-    () => [
-      styles.heart,
-      {
-        transform: [
-          {
-            scale: heartScale.interpolate({
-              inputRange: [0, 1],
-              outputRange: [0, 1],
-            }),
-          },
-        ],
-      },
-    ],
-    [heartScale],
+      () => [
+        styles.heart,
+        {
+          transform: [
+            {
+              scale: heartScale.interpolate({
+                inputRange: [0, 1],
+                outputRange: [0, 1],
+              }),
+            },
+          ],
+        },
+      ],
+      [heartScale],
   );
 
   return (
-    <View style={styles.container}>
-      <View style={styles.videoContainer}>
-        {item.poster && !isLoaded ? (
-          <Image source={{ uri: item.poster }} style={styles.poster} resizeMode="cover" />
-        ) : null}
-        {renderVideo()}
-        {isBuffering ? (
-          <View style={styles.bufferingOverlay}>
-            <ActivityIndicator color="#fff" size="large" />
-          </View>
-        ) : null}
-        {hasError ? (
-          <View style={styles.errorOverlay}>
-            <Text style={styles.errorText}>Видео недоступно</Text>
-          </View>
-        ) : null}
-        {showHeart ? (
-          <Animated.View pointerEvents="none" style={heartStyle}>
-            <Icon name="heart" size={72} color="#ff4d6d" />
-          </Animated.View>
-        ) : null}
-        <Pressable
-          style={StyleSheet.absoluteFill}
-          onPress={handlePress}
-          onLongPress={handleLongPress}
-          delayLongPress={250}
-        >
-          <View style={StyleSheet.absoluteFill} />
-        </Pressable>
-        {feedback ? (
-          <Animated.View style={[styles.feedbackContainer, { opacity: feedbackOpacity }]}> 
-            <Text style={styles.feedbackText}>{feedback}</Text>
-          </Animated.View>
-        ) : null}
-      </View>
-
-      <View style={[styles.overlay, { paddingBottom: insets.bottom + 24 }]}> 
-        <View style={styles.metaContainer}>
-          <View style={styles.authorRow}>
-            <Image source={{ uri: item.author.avatar }} style={styles.avatar} />
-            <View style={styles.metaText}>
-              <Text style={styles.authorName}>{item.author.name}</Text>
-              <Text style={styles.title}>{item.title}</Text>
-            </View>
-          </View>
-          {item.description ? <Text style={styles.description}>{item.description}</Text> : null}
-          {item.tags?.length ? (
-            <Text style={styles.tags}>{item.tags.join(' ')}</Text>
+      <View style={styles.container}>
+        <View style={styles.videoContainer}>
+          {item.poster && !isLoaded ? (
+              <Image source={{ uri: item.poster }} style={styles.poster} resizeMode="cover" />
+          ) : null}
+          {renderVideo()}
+          {isBuffering && !isLoaded ? (
+              <View style={styles.bufferingOverlay}>
+                <ActivityIndicator color="#fff" size="large" />
+              </View>
+          ) : null}
+          {hasError ? (
+              <View style={styles.errorOverlay}>
+                <Text style={styles.errorText}>
+                  {tHome('videoUnavailable') ?? 'Video unavailable'}
+                </Text>
+              </View>
+          ) : null}
+          {showHeart ? (
+              <Animated.View pointerEvents="none" style={heartStyle}>
+                <Icon name="heart" size={72} color="#ff4d6d" />
+              </Animated.View>
+          ) : null}
+          <Pressable
+              style={StyleSheet.absoluteFill}
+              onPress={handlePress}
+              onLongPress={handleLongPress}
+              delayLongPress={250}
+              onPressOut={handlePressOut}
+          >
+            <View style={StyleSheet.absoluteFill} />
+          </Pressable>
+          {feedback ? (
+              <Animated.View style={[styles.feedbackContainer, { opacity: feedbackOpacity }]}>
+                <Text style={styles.feedbackText}>{feedback}</Text>
+              </Animated.View>
           ) : null}
         </View>
 
-        <View style={styles.actionsContainer}>
+        <View
+            style={[
+              styles.overlay,
+              { paddingBottom: insets.bottom + 24 + tabBarHeight * 0.5 },
+            ]}
+        >
+          <LinearGradient
+              pointerEvents="none"
+              colors={['rgba(0,0,0,0.85)', 'rgba(0,0,0,0)']}
+              start={{ x: 0.5, y: 1 }}
+              end={{ x: 0.5, y: 0 }}
+              style={styles.overlayGradient}
+          />
           <TouchableOpacity
-            onPress={() => {
-              setLiked((prev) => !prev);
-              if (!liked) {
-                handleLike();
-              }
-            }}
-            style={styles.actionButton}
-            accessibilityLabel="Поставить лайк"
-            accessible
+              activeOpacity={0.8}
+              style={styles.metaContainer}
+              onPress={() => onPressMeta?.(item)}
           >
-            <Icon name={liked ? 'heart' : 'heart-outline'} size={28} color={liked ? '#ff4d6d' : '#ffffff'} />
-            <Text style={styles.actionLabel}>Лайк</Text>
+            <View style={styles.authorRow}>
+              {/*<Image source={{ uri: item.author.avatar }} style={styles.avatar} />*/}
+              <View style={styles.metaText}>
+                <Text style={styles.authorName}>{item.author.name}</Text>
+                <Text style={styles.title}>{item.title}</Text>
+              </View>
+            </View>
+            {/*{item.description ? (*/}
+            {/*  <Text style={styles.description}>*/}
+            {/*    {item?.description?.slice(0, 64)}*/}
+            {/*    {item?.description.length > 16 ? '...' : ''}*/}
+            {/*  </Text>*/}
+            {/*) : null}*/}
+            <Button
+                type="contained"
+                size="xxl"
+                title={tHome('openRecipeButton')}
+                onPress={() => onPressMeta?.(item)}
+                style={styles.metaButton}
+                textStyle={styles.metaButtonText}
+            />
           </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => onComment?.(item)}
-            style={styles.actionButton}
-            accessibilityLabel="Открыть комментарии"
-            accessible
-          >
-            <Icon name="chatbubble-ellipses-outline" size={28} color="#ffffff" />
-            <Text style={styles.actionLabel}>Коммент.</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => onShare?.(item)}
-            style={styles.actionButton}
-            accessibilityLabel="Поделиться видео"
-            accessible
-          >
-            <Icon name="share-social-outline" size={28} color="#ffffff" />
-            <Text style={styles.actionLabel}>Поделиться</Text>
-          </TouchableOpacity>
+
+          <View style={styles.actionsContainer}>
+            <TouchableOpacity
+                onPress={toggleLike}
+                style={styles.actionButton}
+                accessibilityLabel={tHome('likeAccessibilityLabel') ?? 'Like video'}
+                accessible
+            >
+              <View style={styles.actionIcon}>
+                <Icon
+                    name={liked ? 'heart' : 'heart-outline'}
+                    size={28}
+                    color={liked ? '#ff4d6d' : '#ffffff'}
+                />
+              </View>
+              <Text style={styles.actionLabel}>{tHome('likeActionLabel') ?? 'Like'}</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+                onPress={onToggleMusic}
+                style={styles.actionButton}
+                accessibilityLabel={
+                  isMusicEnabled
+                      ? tHome('stopBackgroundMusic') ?? 'Stop background music'
+                      : tHome('startBackgroundMusic') ?? 'Play background music'
+                }
+                accessible
+            >
+              <View style={styles.actionIcon}>
+                <Icon name="musical-notes" size={28} color="#ffffff" />
+                {!isMusicEnabled ? <View style={styles.musicOffSlash} /> : null}
+              </View>
+              <Text style={styles.actionLabel}>{tHome('musicActionLabel') ?? 'Music'}</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+                onPress={() => onShare?.(item)}
+                style={styles.actionButton}
+                accessibilityLabel={tHome('shareAccessibilityLabel') ?? 'Share video'}
+                accessible
+            >
+              <View style={styles.actionIcon}>
+                <Icon name="share-social-outline" size={28} color="#ffffff" />
+              </View>
+              <Text style={styles.actionLabel}>{tHome('shareActionLabel') ?? 'Share'}</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+
+        <View style={styles.progressContainer}>
+          <View style={[styles.progressBar, { width: `${Math.min(progress * 100, 100)}%` }]} />
         </View>
       </View>
-
-      <View style={styles.progressContainer}>
-        <View style={[styles.progressBar, { width: `${Math.min(progress * 100, 100)}%` }]} />
-      </View>
-    </View>
   );
 };
 
 export const VideoCard = memo(VideoCardComponent);
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#000',
-  },
-  videoContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  poster: {
-    ...StyleSheet.absoluteFillObject,
-    width: '100%',
-    height: '100%',
-  },
-  bufferingOverlay: {
-    ...StyleSheet.absoluteFillObject,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(0,0,0,0.2)',
-  },
-  errorOverlay: {
-    ...StyleSheet.absoluteFillObject,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(0,0,0,0.4)',
-    paddingHorizontal: 24,
-  },
-  errorText: {
-    color: '#fff',
-    fontSize: 18,
-    fontWeight: '600',
-    textAlign: 'center',
-  },
-  overlay: {
-    position: 'absolute',
-    left: 16,
-    right: 16,
-    bottom: 0,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'flex-end',
-  },
-  metaContainer: {
-    flex: 1,
-    marginRight: 16,
-  },
-  authorRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 12,
-  },
-  avatar: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
-    marginRight: 12,
-  },
-  metaText: {
-    flexShrink: 1,
-  },
-  authorName: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: '600',
-    marginBottom: 2,
-  },
-  title: {
-    color: '#fff',
-    fontSize: 20,
-    fontWeight: '700',
-  },
-  description: {
-    color: '#fff',
-    fontSize: 15,
-    marginBottom: 6,
-  },
-  tags: {
-    color: '#d1d1d1',
-    fontSize: 13,
-  },
-  actionsContainer: {
-    width: 84,
-    alignItems: 'center',
-    paddingBottom: 12,
-  },
-  actionButton: {
-    alignItems: 'center',
-    marginBottom: 18,
-  },
-  actionLabel: {
-    color: '#fff',
-    marginTop: 4,
-    fontSize: 12,
-  },
-  progressContainer: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    bottom: 0,
-    height: 4,
-    backgroundColor: 'rgba(255,255,255,0.2)',
-  },
-  progressBar: {
-    height: '100%',
-    backgroundColor: '#ff4d6d',
-  },
-  heart: {
-    position: 'absolute',
-    left: '50%',
-    top: '50%',
-    marginLeft: -36,
-    marginTop: -36,
-  },
-  feedbackContainer: {
-    position: 'absolute',
-    top: '20%',
-    alignSelf: 'center',
-    paddingHorizontal: 16,
-    paddingVertical: 8,
-    borderRadius: 16,
-    backgroundColor: 'rgba(0,0,0,0.6)',
-  },
-  feedbackText: {
-    color: '#fff',
-    fontSize: 14,
-    fontWeight: '600',
-  },
-});

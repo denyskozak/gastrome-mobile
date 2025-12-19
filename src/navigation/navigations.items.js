@@ -30,7 +30,7 @@ export const getNavigationTabs = (t, isDarkModeMenu, theme) => {
   const renderIcon = (title, delay = 1000, attention = false) => createRenderIcon(
     title,
     theme.colors.white,
-    Spaces.xlarge,
+    30,
     isDarkModeMenu,
     delay,
       attention,

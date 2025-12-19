@@ -7,10 +7,17 @@ import { fontEnum } from '../../../styles/fonts';
 const styles = StyleSheet.create({
   modal: {
     margin: 0,
+    flex: 1,
   },
   background: {
     flex: 1,
     paddingHorizontal: Spaces.large,
+    paddingVertical: Spaces.xxlarge,
+  },
+  overlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.78)',
+    // paddingHorizontal: Spaces.large,
     paddingVertical: Spaces.xxlarge,
   },
   safeArea: {
@@ -26,17 +33,16 @@ const styles = StyleSheet.create({
     width: '100%',
     maxWidth: 360,
     alignItems: 'center',
+    display: 'flex',
   },
   title: getTextStyles({
     fontSize: 32,
     fontFamily: fontEnum.PoppinsSemiBold,
     textAlign: 'center',
-    color: Colors.white,
   }),
   benefitsText: getTextStyles({
     fontSize: 20,
     textAlign: 'center',
-    color: Colors.white,
     marginTop: Spaces.small,
   }),
   firstBenefitText: {
@@ -45,11 +51,16 @@ const styles = StyleSheet.create({
   benefits: {
     marginTop: Spaces.medium,
     alignSelf: 'stretch',
+    justifyContent: 'center',
+    display: 'flex',
+    alignItems: 'center',
+    width: '100%'
   },
   buttons: {
     marginTop: Spaces.large,
     alignSelf: 'stretch',
     alignItems: 'center',
+    gap: 8,
   },
   button: {
     alignSelf: 'stretch',

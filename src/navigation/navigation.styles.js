@@ -3,6 +3,9 @@ import { StyleSheet } from 'react-native';
 import { getTextStyles } from '../styles/common.styles';
 import { Spaces } from '../styles/spaces';
 import { useTheme } from '../hooks/useTheme';
+import {
+  DefaultTheme,
+} from '@react-navigation/native';
 
 export const useNavigationStyles = () => {
   const { theme } = useTheme();
@@ -23,8 +26,10 @@ export const useNavigationStyles = () => {
   }), [theme]);
 
   const sceneContainerTheme = useMemo(() => ({
+    ...DefaultTheme,
     colors: {
       background: theme.colors.backgroundColor,
+      card: theme.colors.backgroundColor,
     },
   }), [theme]);
 

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Onboarding from 'react-native-onboarding-swiper';
 import styles from './on-boarding.styles';
-import { isFirstLaunch } from '../../../utilities/isFirstLaunch';
 import { Colors } from '../../../styles/colors';
 import { Animation } from '../../atomic/animation/animation.component';
 import { HAS_BEEN_ONBOARDED_KEY } from '../../../constants/asyncStoreKeys';
@@ -13,12 +12,12 @@ import {useTranslator} from "../../../hooks/useTranslator";
 export const useIsOnBoarding = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  useEffect(() => {
-    (async () => {
-      const isFirst = await isFirstLaunch(HAS_BEEN_ONBOARDED_KEY);
-      setIsOpen(isFirst);
-    })();
-  }, [])
+  // useEffect(() => {
+  //   (async () => {
+  //     const isFirst = await isFirstLaunch(HAS_BEEN_ONBOARDED_KEY);
+  //     setIsOpen(isFirst);
+  //   })();
+  // }, [])
 
   return [isOpen, setIsOpen];
 }

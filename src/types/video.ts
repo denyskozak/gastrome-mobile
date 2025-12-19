@@ -5,6 +5,7 @@ export type VideoAuthor = {
 
 export type VideoItem = {
   id: string;
+  recipeId?: string;
   source: string;
   poster?: string;
   title: string;
