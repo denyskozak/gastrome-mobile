@@ -171,7 +171,10 @@ export const translates = {
             "calories": "Калорії",
             "chooseMeasure": "Одиниці ⚖️",
             "freeRecipesToastTitle": "У вас залишилось {remaining} з {limit} рецептів на сьогодні",
-            "freeRecipesToastCta": "Щоб дивитися всі рецепти, вступайте до спільноти або купіть квиток"
+            "freeRecipesToastCta": "Щоб дивитися всі рецепти, вступайте до спільноти або купіть квиток",
+            "freeRecipesBannerTitle": "Безкоштовних рецептів залишилось {remaining} з {limit}",
+            "freeRecipesBannerSubtitle": "Отримайте доступ до всіх рецептів без обмежень",
+            "freeRecipesBannerCta": "Відкрити доступ"
         },
         cooking: {
             "singleVideo": "(Одне відео для всіх кроків)",
