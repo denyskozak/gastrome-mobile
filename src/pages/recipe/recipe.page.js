@@ -78,7 +78,12 @@ const RecipePageComponent = (props) => {
     const [openCommonModal] = useCommonModal();
     const [isSubscriber] = useSubscriptions();
     const [isSubscriptionsOpened, setSubscriptionsOpened] = useState(false);
-    const {consumeFreeRecipe, limit: dailyFreeRecipesLimit, isLoading: isFreeQuotaLoading} = useFreeRecipesQuota();
+    const {
+        consumeFreeRecipe,
+        limit: dailyFreeRecipesLimit,
+        isLoading: isFreeQuotaLoading,
+        remaining: freeRecipesRemaining,
+    } = useFreeRecipesQuota();
 
     const stepRefs = {};
     const {measure} = settings;
@@ -116,6 +121,11 @@ const RecipePageComponent = (props) => {
 
         showFreeQuotaToast();
     }, [id, isSubscriber, isFreeQuotaLoading, recipe?.free, showFreeQuotaToast]);
+
+    const shouldShowFreeQuotaBanner = useMemo(
+        () => !isSubscriber && !isFreeQuotaLoading && recipe?.free,
+        [isFreeQuotaLoading, isSubscriber, recipe?.free],
+    );
 
     const recipeCountry = useMemo(() => {
         return filters.find(item => CountryList.includes(item));
@@ -198,6 +208,36 @@ const RecipePageComponent = (props) => {
                     <Text style={styles.title}>{title}</Text>
                     {recipeCountry && <View style={styles.flag}><CountryFlag name={recipeCountry}/></View>}
                 </View>
+
+                {shouldShowFreeQuotaBanner && (
+                    <View style={styles.freeQuotaBanner}>
+                        <View style={styles.freeQuotaBannerContent}>
+                            <View style={styles.freeQuotaBannerIcon}>
+                                <Icon name="gift-outline" size={20} color={Colors.black} />
+                            </View>
+                            <View style={styles.freeQuotaBannerText}>
+                                <Text style={styles.freeQuotaBannerTitle}>
+                                    {t('freeRecipesBannerTitle', {
+                                        remaining: freeRecipesRemaining,
+                                        limit: dailyFreeRecipesLimit,
+                                    })}
+                                </Text>
+                                <Text style={styles.freeQuotaBannerSubtitle}>
+                                    {t('freeRecipesBannerSubtitle')}
+                                </Text>
+                            </View>
+                        </View>
+                        <Button
+                            size="l"
+                            type="contained"
+                            style={styles.freeQuotaBannerButton}
+                            textStyle={styles.freeQuotaBannerButtonText}
+                            onPress={() => setSubscriptionsOpened(true)}
+                        >
+                            {t('freeRecipesBannerCta')}
+                        </Button>
+                    </View>
+                )}
 
                 <Pressable onPress={() => {
                     Haptics.selectionAsync();

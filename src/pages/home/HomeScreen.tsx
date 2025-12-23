@@ -191,6 +191,11 @@ export const HomeScreen: React.FC = () => {
         .filter((item): item is VideoItem => Boolean(item));
   }, [recipes, tHome]);
 
+  const shuffledBaseVideos = useMemo(
+      () => shuffleVideos(baseVideos),
+      [baseVideos],
+  );
+
   const favoriteVideos = useMemo(() => {
     if (!favoriteIds.length) {
       return [];
@@ -210,7 +215,7 @@ export const HomeScreen: React.FC = () => {
   const displayedVideosLength = displayedVideos.length;
 
   useEffect(() => {
-    if (!baseVideos.length) {
+    if (!shuffledBaseVideos.length) {
       if (allVideosLength) {
         registryRef.current.clear();
         setAllVideos([]);
@@ -221,13 +226,13 @@ export const HomeScreen: React.FC = () => {
     }
 
     const suffixBase = `initial-${Date.now()}`;
-    const prepared = buildLoopedVideos(baseVideos, suffixBase, INITIAL_LOOP_COUNT);
+    const prepared = buildLoopedVideos(shuffledBaseVideos, suffixBase, INITIAL_LOOP_COUNT);
 
     registryRef.current.clear();
     setAllVideos(prepared);
     setActiveIndex(0);
     shouldResetToMiddleRef.current = true;
-  }, [allVideosLength, baseVideos, setActiveIndex]);
+  }, [allVideosLength, setActiveIndex, shuffledBaseVideos]);
 
   const handleToggleMute = useCallback(
       (_videoIndex: number, muted: boolean) => {
@@ -430,12 +435,12 @@ export const HomeScreen: React.FC = () => {
       return;
     }
 
-    if (!baseVideos.length || !allVideosLength) {
+    if (!shuffledBaseVideos.length || !allVideosLength) {
       return;
     }
 
     shouldResetToMiddleRef.current = false;
-    const targetIndex = baseVideos.length;
+    const targetIndex = shuffledBaseVideos.length;
 
     runOnNextFrame(() => {
       try {
@@ -445,14 +450,14 @@ export const HomeScreen: React.FC = () => {
       }
       setActiveIndex(targetIndex);
     });
-  }, [allVideosLength, baseVideos.length, feedFilter, setActiveIndex]);
+  }, [allVideosLength, feedFilter, setActiveIndex, shuffledBaseVideos.length]);
 
   useEffect(() => {
     if (feedFilter !== 'all') {
       return;
     }
 
-    const loopSize = baseVideos.length;
+    const loopSize = shuffledBaseVideos.length;
     if (!loopSize || !allVideosLength) {
       return;
     }
@@ -481,7 +486,7 @@ export const HomeScreen: React.FC = () => {
         }
       });
     }
-  }, [activeIndex, allVideosLength, baseVideos.length, feedFilter, setActiveIndex]);
+  }, [activeIndex, allVideosLength, feedFilter, setActiveIndex, shuffledBaseVideos.length]);
 
   const renderItem = useCallback(
       ({ item, index }: { item: VideoItem; index: number }) => {

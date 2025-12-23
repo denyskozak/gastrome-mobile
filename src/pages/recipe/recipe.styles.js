@@ -63,6 +63,51 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: Spaces.small,
   },
+  freeQuotaBanner: {
+    marginTop: Spaces.medium,
+    marginHorizontal: Spaces.medium,
+    padding: Spaces.medium,
+    backgroundColor: 'rgba(255, 184, 0, 0.12)',
+    borderColor: Colors.primary,
+    borderWidth: 1,
+    borderRadius: BorderRadius.medium,
+  },
+  freeQuotaBannerContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spaces.small,
+  },
+  freeQuotaBannerIcon: {
+    width: Spaces.xxxlarge,
+    height: Spaces.xxxlarge,
+    borderRadius: BorderRadius.small,
+    backgroundColor: Colors.primary,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  freeQuotaBannerText: {
+    flex: 1,
+  },
+  freeQuotaBannerTitle: getTextStyles({
+    fontSize: 16,
+    fontFamily: fontEnum.PoppinsBold,
+    color: Colors.black,
+  }),
+  freeQuotaBannerSubtitle: getTextStyles({
+    fontSize: 14,
+    color: Colors.black,
+    marginTop: Spaces.xsmall,
+  }),
+  freeQuotaBannerButton: {
+    marginTop: Spaces.small,
+    backgroundColor: Colors.white,
+    borderWidth: 1,
+    borderColor: Colors.primary,
+  },
+  freeQuotaBannerButtonText: getTextStyles({
+    color: Colors.black,
+    fontFamily: fontEnum.PoppinsSemiBold,
+  }),
 
   imageContainer: {
     alignItems: "center",

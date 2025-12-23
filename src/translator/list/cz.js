@@ -149,6 +149,11 @@ export const translates = {
       addToCart: 'Stiskněte pro přidání všech ingrediencí do nákupního seznamu',
       viewed: 'Zobrazeno',
       chooseMeasure: 'Měřit ⚖️',
+      freeRecipesToastTitle: 'Zůstalo vám {remaining} z {limit} bezplatných receptů na dnes',
+      freeRecipesToastCta: 'Připojte se ke komunitě nebo si pořiďte vstupenku pro neomezený přístup',
+      freeRecipesBannerTitle: 'Bezplatné recepty dnes: {remaining} z {limit}',
+      freeRecipesBannerSubtitle: 'Odemkněte celou knihovnu bez denních limitů',
+      freeRecipesBannerCta: 'Odemknout přístup',
     },
     cooking: {
       singleVideo: '(Jedno video pro všechny kroky)',

@@ -11,13 +11,11 @@ const styles = StyleSheet.create({
   },
   background: {
     flex: 1,
-    paddingHorizontal: Spaces.large,
-    paddingVertical: Spaces.xxlarge,
   },
   overlay: {
     flex: 1,
     backgroundColor: 'rgba(0, 0, 0, 0.78)',
-    // paddingHorizontal: Spaces.large,
+    paddingHorizontal: Spaces.large,
     paddingVertical: Spaces.xxlarge,
   },
   safeArea: {
