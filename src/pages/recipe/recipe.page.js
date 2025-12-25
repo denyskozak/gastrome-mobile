@@ -108,7 +108,7 @@ const RecipePageComponent = (props) => {
             checkRecipeLimit().then(result => {
                 if (!result) setSubscriptionsOpened(true);
             });
-        }, 3 * 1000);
+        }, 2 * 1000);
 
         return () => clearTimeout(timeoutId)
     }, [id]);
