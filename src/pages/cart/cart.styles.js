@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row-reverse',
     padding: Spaces.medium,
     height: Spaces.xxxlarge,
-    backgroundColor: Colors.backgroundColor,
+    // backgroundColor: Colors.backgroundColor,
     alignItems: 'center',
     borderTopWidth: 1,
     borderTopColor: Colors.primary,
