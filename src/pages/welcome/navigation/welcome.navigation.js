@@ -16,9 +16,7 @@ export const getStack = (t) => ([
   [voiceSettingsRecipeRoute, VoicePage, { title: t('voice') }],
 ]);
 
-const RecipesNavigationComponent = (props) => {
-  const {} = props;
-
+const RecipesNavigationComponent = () => {
   const [t] = useTranslator('navigation');
   const tabs = getStack(t);
 
@@ -29,7 +27,5 @@ const RecipesNavigationComponent = (props) => {
       />
   );
 };
-
-RecipesNavigationComponent.propTypes = {};
 
 export const WelcomeNavigation = RecipesNavigationComponent;

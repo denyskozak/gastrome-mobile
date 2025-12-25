@@ -1,5 +1,4 @@
 import React, { useState, useContext, createContext, useEffect } from 'react';
-import PropsType from 'prop-types';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { FAVORITES_RECIPE_ID_KEY } from '../constants/asyncStoreKeys';
 
@@ -59,10 +58,6 @@ const FavoritesComponent = (props) => {
       {children}
     </FavoritesContext.Provider>
   );
-};
-
-FavoritesComponent.propTypes = {
-  children: PropsType.object.isRequired,
 };
 
 export const FavoritesContextWrapper = FavoritesComponent;

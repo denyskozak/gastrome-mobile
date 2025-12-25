@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Text, View } from 'react-native';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
 import { Spaces } from '../../../styles/spaces';
@@ -7,8 +6,11 @@ import { Colors } from '../../../styles/colors';
 import styles from './circle-timer.styles';
 import { secondsToMinutesTimer } from '../../../utilities/timeParsers';
 
-const CircleTimerComponent = (props) => {
-  const { size, duration, onComplete } = props;
+const CircleTimerComponent = ({
+  size = 100,
+  duration,
+  onComplete,
+}) => {
 
   return (
     <View style={styles.container}>
@@ -26,15 +28,5 @@ const CircleTimerComponent = (props) => {
       </CountdownCircleTimer>
     </View>
   );
-}
-
-CircleTimerComponent.propTypes = {
-  size: PropTypes.number,
-  duration: PropTypes.number.isRequired,
-  onComplete: PropTypes.func.isRequired
-}
-
-CircleTimerComponent.defaultProps = {
-  size: 100
 }
 export const CircleTimer = CircleTimerComponent;

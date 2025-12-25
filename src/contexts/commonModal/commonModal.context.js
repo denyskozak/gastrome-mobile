@@ -1,5 +1,4 @@
 import React, { useState, useContext, createContext, useEffect, useCallback } from 'react';
-import PropsType from 'prop-types';
 import { Text, View } from 'react-native';
 import Icon from '@expo/vector-icons/Ionicons';
 import { Spaces } from '../../styles/spaces';
@@ -110,10 +109,6 @@ const CommonModalComponent = (props) => {
       </Modal>
     </CommonModalContext.Provider>
   );
-};
-
-CommonModalComponent.propTypes = {
-  children: PropsType.object.isRequired,
 };
 
 export const CommonModalContextWrapper = CommonModalComponent;

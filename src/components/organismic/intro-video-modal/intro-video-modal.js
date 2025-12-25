@@ -3,7 +3,6 @@ import {Text} from 'react-native';
 import Icon from '@expo/vector-icons/Ionicons';
 import {Video} from 'expo-av';
 
-import PropTypes from 'prop-types';
 import {Modal} from '../../atomic/modal/modal.component';
 import {Button} from '../../atomic/button/button.component';
 
@@ -37,12 +36,6 @@ const IntroVideoModalComponent = (props) => {
             </Button>
         </Modal>
     );
-}
-
-IntroVideoModalComponent.propTypes = {
-    isOpen: PropTypes.bool.isRequired,
-    onChangeVisible: PropTypes.func.isRequired,
-    source: PropTypes.number.isRequired,
 }
 
 export const IntroVideoModal = IntroVideoModalComponent;

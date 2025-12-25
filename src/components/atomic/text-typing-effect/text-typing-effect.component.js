@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Text, View } from 'react-native';
-import PropTypes from 'prop-types';
 
 export class TypingText extends Component
 {
@@ -36,22 +35,23 @@ export class TypingText extends Component
 
   typingAnimation = () =>
   {
+    const { text = "Default Typing Animated Text.", typingAnimationDuration = 50 } = this.props;
     clearTimeout( this.typing_timer );
 
     this.typing_timer  = -1;
 
-    if( this.index < this.props.text.length )
+    if( this.index < text.length )
     {
       if( this.refs.animatedText )
       {
-        this.setState({ text: this.state.text + this.props.text.charAt( this.index ) }, () =>
+        this.setState({ text: this.state.text + text.charAt( this.index ) }, () =>
         {
           this.index++;
 
           this.typing_timer = setTimeout(() =>
           {
             this.typingAnimation();
-          }, this.props.typingAnimationDuration);
+          }, typingAnimationDuration);
         });
       }
     }
@@ -59,44 +59,28 @@ export class TypingText extends Component
 
   blinkingCursorAnimation = () =>
   {
+    const { color = "rgb( 77, 192, 103 )", blinkingCursorAnimationDuration = 190 } = this.props;
     this.blinking_cursor_timer = setInterval(() =>
     {
       if( this.refs.animatedText )
       {
         if( this.state.blinking_cursor_color == 'transparent' )
-          this.setState({ blinking_cursor_color: this.props.color });
+          this.setState({ blinking_cursor_color: color });
         else
           this.setState({ blinking_cursor_color: 'transparent' });
       }
-    }, this.props.blinkingCursorAnimationDuration);
+    }, blinkingCursorAnimationDuration);
   }
 
   render()
   {
+    const { color = "rgb( 77, 192, 103 )", textSize = 30 } = this.props;
     return(
       <View>
-        <Text ref = "animatedText" style = {{ color: this.props.color, fontSize: this.props.textSize, textAlign: 'center' }}>{ this.state.text }
+        <Text ref = "animatedText" style = {{ color, fontSize: textSize, textAlign: 'center' }}>{ this.state.text }
           <Text style = {{ color: this.state.blinking_cursor_color }}>|</Text>
         </Text>
       </View>
     );
   }
 }
-
-TypingText.propTypes =
-  {
-    text: PropTypes.string,
-    color: PropTypes.string,
-    textSize: PropTypes.number,
-    typingAnimationDuration: PropTypes.number,
-    blinkingCursorAnimationDuration: PropTypes.number
-  }
-
-TypingText.defaultProps =
-  {
-    text: "Default Typing Animated Text.",
-    color: "rgb( 77, 192, 103 )",
-    textSize: 30,
-    typingAnimationDuration: 50,
-    blinkingCursorAnimationDuration: 190
-  }

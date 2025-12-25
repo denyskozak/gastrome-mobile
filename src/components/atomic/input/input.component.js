@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import PropsType from 'prop-types';
 import { Pressable, SafeAreaView, TextInput } from 'react-native';
 import Icon from '@expo/vector-icons/Ionicons';
 
@@ -10,8 +9,15 @@ import styles from './input.styles';
 import { Animated } from '../animated/animated.component';
 import { FadeOut } from 'react-native-reanimated';
 
-const InputComponent = (props) => {
-  const {onChange, onSubmitEditing, placeholder, style, editable, value} = props;
+const InputComponent = ({
+  onChange,
+  onSubmitEditing = () => {
+  },
+  placeholder = '',
+  style = {},
+  editable = true,
+  value = '',
+}) => {
   const [text, setText] = useState(value);
 
   useEffect(() => {
@@ -48,21 +54,6 @@ const InputComponent = (props) => {
       {/*  keyboardType="numeric"*/}
       {/*/>*/}
     </SafeAreaView>);
-};
-
-InputComponent.propTypes = {
-  type: PropsType.oneOf(['clear', 'outlined', 'contained']),
-  onChange: PropsType.func.isRequired,
-  onSubmitEditing: PropsType.func,
-  disabled: PropsType.bool,
-  value: PropsType.string,
-  placeholder: PropsType.string,
-  style: PropsType.object,
-};
-
-InputComponent.defaultProps = {
-  type: 'clear', placeholder: '', value: '', style: {}, onSubmitEditing: () => {
-  }, editable: true,
 };
 
 export const Input = InputComponent;

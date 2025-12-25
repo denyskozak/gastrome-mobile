@@ -1,6 +1,5 @@
 import React, { useRef, useEffect } from 'react';
 import { Animated } from 'react-native';
-import PropsType from 'prop-types';
 
 // @todo Use later or remove
 
@@ -33,10 +32,6 @@ const FadeInComponent = (props) => {
       {children}
     </Animated.View>
   );
-};
-
-FadeInComponent.propTypes = {
-  children: PropsType.object.isRequired,
 };
 
 export const FadeIn = FadeInComponent;

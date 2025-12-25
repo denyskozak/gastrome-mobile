@@ -1,6 +1,5 @@
 import * as React from "react";
 import Icon from '@expo/vector-icons/Ionicons';
-import PropTypes from 'prop-types';
 import {View, Text, Pressable} from "react-native";
 import {useEffect, useMemo, useState} from 'react';
 import {StyleSheet} from 'react-native';
@@ -19,28 +18,28 @@ import {StoryProgressBar} from "../../../components/atomic/story-bar/story-bar";
 import * as Haptics from "expo-haptics";
 import {getDevice} from "../../../utilities/getCurrentDevice";
 
-export const CookingSlideComponent = (props) => {
-    const {
-        // author,
-        index,
-        videoURL,
-        backLabel,
-        stepTitle,
-        description,
-        showHelpArrow,
-        onBackClick,
-        activeIndex,
-        additionalText,
-        hideButtons,
-        loadingText,
-        duration,
-        onStartTimePress,
-        isTimerActive,
-        readCharIndex,
-        isListening,
-        withVoiceAssistant,
-        stepsCount,
-    } = props;
+export const CookingSlideComponent = ({
+    // author,
+    index,
+    videoURL,
+    backLabel = '',
+    stepTitle,
+    description,
+    showHelpArrow,
+    onBackClick,
+    activeIndex,
+    additionalText = '',
+    hideButtons = false,
+    loadingText = '',
+    duration = '',
+    onStartTimePress = () => {
+    },
+    isTimerActive = false,
+    readCharIndex = 0,
+    isListening,
+    withVoiceAssistant = true,
+    stepsCount,
+}) => {
 
     const [showArrow, setShowArrow] = useState(false);
     const [isTextHidden, setIsTextHidden] = useState(false);
@@ -169,43 +168,5 @@ export const CookingSlideComponent = (props) => {
         </View>
     );
 };
-
-CookingSlideComponent.propTypes = {
-    onBackClick: PropTypes.func.isRequired,
-    index: PropTypes.number.isRequired,
-    showHelpArrow: PropTypes.bool,
-    isListening: PropTypes.bool.isRequired,
-    videoURL: PropTypes.string.isRequired,
-    stepTitle: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    activeIndex: PropTypes.number.isRequired,
-    // author: PropTypes.string,
-    backLabel: PropTypes.string,
-    hideButtons: PropTypes.bool,
-    isPause: PropTypes.bool,
-    additionalText: PropTypes.string,
-    loadingText: PropTypes.string,
-    duration: PropTypes.string,
-    onStartTimePress: PropTypes.func,
-    isTimerActive: PropTypes.bool,
-    readCharIndex: PropTypes.number,
-    withVoiceAssistant: PropTypes.bool,
-    stepsCount: PropTypes.number.isRequired,
-}
-CookingSlideComponent.defaultProps = {
-    hideButtons: false,
-    isBackDisabled: false,
-    isPause: false,
-    additionalText: '',
-    author: null,
-    backLabel: '',
-    loadingText: '',
-    duration: '',
-    isTimerActive: false,
-    onStartTimePress: () => {
-    },
-    readCharIndex: 0,
-    withVoiceAssistant: true,
-}
 
 export const CookingSlide = CookingSlideComponent;

@@ -3,7 +3,6 @@ import {useLayoutEffect} from 'react';
 import {useSpeechProfile} from './hooks/useSpeechProfile.js';
 import * as Speech from 'expo-speech';
 import {useTranslator} from "./hooks/useTranslator";
-import PropTypes from "prop-types";
 import {getSpeechProfiles, preferableProfileByLanguages} from "./utilities/speechProfiles.js";
 import {useSettings} from "./contexts/settings.context.js";
 import {SETTINGS_ASYNC_STORE_KEY} from "./constants/asyncStoreKeys";
@@ -40,9 +39,5 @@ const LayoutComponent = ({children}) => {
 
     return children;
 };
-
-LayoutComponent.propTypes = {
-    children: PropTypes.node.isRequired,
-}
 
 export const Layout = LayoutComponent;

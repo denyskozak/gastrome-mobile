@@ -1,5 +1,4 @@
 import React, {useMemo} from 'react';
-import PropTypes from 'prop-types';
 import Icon from '@expo/vector-icons/Ionicons';
 import {Pressable, Text, View, TouchableHighlight, Image} from 'react-native';
 
@@ -13,22 +12,22 @@ import {cutText} from '../../../utilities/cutText';
 
 import styles from './recipes.item.styles';
 
-const RecipeItemComponent = (props) => {
-    const {
-        id,
-        time,
-        image,
-        title,
-        level,
-        subTitle,
-        onPress,
-        ingredients,
-        selectedIngredients,
-        filters,
-        isFavorited,
-        hideImage,
-        enableHint = false,
-    } = props;
+const RecipeItemComponent = ({
+    id,
+    time,
+    image,
+    title,
+    level,
+    subTitle,
+    onPress,
+    ingredients,
+    selectedIngredients = [],
+    filters = [],
+    isFavorited = false,
+    isSubscriber = false,
+    hideImage = false,
+    enableHint = false,
+}) => {
 
     const [t] = useTranslator('pages.recipes');
     const [tCommon] = useTranslator('common');
@@ -132,24 +131,6 @@ const RecipeItemComponent = (props) => {
             {/*/>*/}
         </View>
     </Pressable>);
-};
-
-RecipeItemComponent.propTypes = {
-    filters: PropTypes.arrayOf(PropTypes.string),
-    selectedIngredients: PropTypes.arrayOf(PropTypes.string),
-    isFavorited: PropTypes.bool,
-    isSubscriber: PropTypes.bool,
-    enableHint: PropTypes.bool,
-    hideImage: PropTypes.bool
-};
-
-RecipeItemComponent.defaultProps = {
-    filters: [],
-    selectedIngredients: [],
-    isFavorited: false,
-    isSubscriber: false,
-    enableHint: false,
-    hideImage: false,
 };
 
 export const RecipeItem = React.memo(RecipeItemComponent);

@@ -238,6 +238,4 @@ const WelcomePageComponent = (props) => {
     );
 };
 
-WelcomePageComponent.propTypes = {};
-
 export const WelcomePage = WelcomePageComponent;

@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import { Pressable, View, Text } from 'react-native';
-import PropTypes from 'prop-types';
 import Icon from '@expo/vector-icons/Ionicons';
 
 import styles from './voice.button.styles';
@@ -17,8 +16,18 @@ import {FirstLaunchTooltip} from "../../../../components/molecular/first-launch-
 import {VOICE_ASSISTANT_TIP} from "../../../../constants/asyncStoreKeys";
 import * as Haptics from "expo-haptics";
 
-const VoiceButtonComponent = (props) => {
-  const {isListening, onButtonPress, isUpper, lootieName, autoPlay, startText, hideButtonWhenSpeaking, animationRef, voiceTooltipText} = props;
+const VoiceButtonComponent = ({
+  isListening = false,
+  onButtonPress = () => {
+  },
+  isUpper = false,
+  lootieName = 'cookOnFire',
+  autoPlay = true,
+  startText,
+  hideButtonWhenSpeaking = true,
+  animationRef,
+  voiceTooltipText = '',
+}) => {
   const [t] = useTranslator('components.voiceButton');
 
   return (
@@ -59,29 +68,5 @@ const VoiceButtonComponent = (props) => {
     </>
   )
 }
-
-VoiceButtonComponent.propTypes = {
-  onButtonPress: PropTypes.func,
-  isListening: PropTypes.bool,
-  startText: PropTypes.string.isRequired,
-  hideButtonWhenSpeaking: PropTypes.bool,
-  /** @return {import('lottie-react-native').AnimatedLottieView} The converted level **/
-  animationRef: PropTypes.object,
-  voiceTooltipText: PropTypes.string,
-  isUpper: PropTypes.bool,
-  autoPlay: PropTypes.bool,
-  lootieName: PropTypes.oneOf(['cookOnFire', 'voice']),
-};
-
-VoiceButtonComponent.defaultProps = {
-  onButtonPress: () => {
-  },
-  isUpper: false,
-  hideButtonWhenSpeaking: true,
-  autoPlay: true,
-  isListening: false,
-  voiceTooltipText: '',
-  lootieName: 'cookOnFire',
-};
 
 export const VoiceButton = VoiceButtonComponent;

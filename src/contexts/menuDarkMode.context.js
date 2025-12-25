@@ -1,5 +1,4 @@
 import React, { useState, useContext, createContext  } from 'react';
-import PropsType from 'prop-types';
 
 export const MenuDarkModeContext = createContext(false);
 
@@ -33,10 +32,6 @@ const MenuDarkModeComponent = (props) => {
       {children}
     </MenuDarkModeContext.Provider>
   );
-};
-
-MenuDarkModeComponent.propTypes = {
-  children: PropsType.object.isRequired,
 };
 
 export const MenuDarkModeContextWrapper = MenuDarkModeComponent;

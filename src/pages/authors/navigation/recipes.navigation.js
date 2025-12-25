@@ -30,9 +30,7 @@ export const getStack = (t) => ([
   ],
 ]);
 
-const AuthorsNavigationComponent = (props) => {
-  const {} = props;
-
+const AuthorsNavigationComponent = () => {
   const [t] = useTranslator('navigation');
   const tabs = getStack(t);
 
@@ -46,7 +44,5 @@ const AuthorsNavigationComponent = (props) => {
 
   );
 };
-
-AuthorsNavigationComponent.propTypes = {};
 
 export const AuthorsNavigation = AuthorsNavigationComponent;

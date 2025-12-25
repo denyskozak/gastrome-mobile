@@ -10,13 +10,18 @@ import {
 } from 'react-native-reanimated';
 import {useEffect} from 'react';
 import {Animated} from '../../atomic/animated/animated.component';
-import PropTypes from 'prop-types';
 import {View} from "react-native";
 
 import styles from "./zoom-in-out-animation.styles";
 
-const ZoomInOutComponent = (props) => {
-    const {delay, children, enabled, repeatDelay, width, height} = props;
+const ZoomInOutComponent = ({
+    delay,
+    children,
+    enabled = false,
+    repeatDelay = 1000,
+    width,
+    height,
+}) => {
 
 
     const scale = useSharedValue(1); // Initial scale value
@@ -61,20 +66,5 @@ const ZoomInOutComponent = (props) => {
 
     )
 };
-
-ZoomInOutComponent.propTypes = {
-    children: PropTypes.element.isRequired,
-    delay: PropTypes.number,
-    enabled: PropTypes.bool,
-    repeatDelay: PropTypes.number,
-    width: PropTypes.number.isRequired,
-    height: PropTypes.number.isRequired,
-}
-
-
-ZoomInOutComponent.defaultProps = {
-    enabled: false,
-    repeatDelay: 1000,
-}
 
 export const ZoomInOut = ZoomInOutComponent;

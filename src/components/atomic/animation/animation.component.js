@@ -1,7 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
 import Lottie from 'lottie-react-native';
-import PropTypes from 'prop-types';
 
 import voiceJSON from './list/voice.json';
 import happyAutumnShoppingJSON from './list/happy-autumn-shopping.json';
