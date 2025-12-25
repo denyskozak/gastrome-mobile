@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { TouchableHighlight, View, Text, Pressable, Image } from 'react-native';
-import PropTypes from 'prop-types';
 
 import { Button } from '../../../components/atomic/button/button.component';
 import { useTranslator } from '../../../hooks/useTranslator';
@@ -110,9 +109,5 @@ const RecipesGeneratorComponent = (props) => {
     </View>
   );
 }
-
-RecipesGeneratorComponent.propTypes = {
-  onRecipePress: PropTypes.func.isRequired,
-};
 
 export const RecipesGenerator = RecipesGeneratorComponent;

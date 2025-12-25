@@ -6,7 +6,6 @@ import { Modal } from '../../atomic/modal/modal.component';
 
 import styles from './volume-modal.styles';
 import { useTranslator } from '../../../hooks/useTranslator';
-import PropTypes from 'prop-types';
 import {Colors} from "../../../styles/colors";
 
 const VolumeModalComponent = ({ isVisible, onChangeVisible, onTryAgainPress, onPress }) => {
@@ -36,9 +35,4 @@ const VolumeModalComponent = ({ isVisible, onChangeVisible, onTryAgainPress, onP
   )
 }
 
-VolumeModalComponent.propTypes = {
-  isVisible: PropTypes.bool.isRequired,
-  onChangeVisible: PropTypes.func.isRequired,
-  onTryAgainPress: PropTypes.func.isRequired,
-}
 export const VolumeModal = VolumeModalComponent;

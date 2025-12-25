@@ -1,7 +1,6 @@
 import React from 'react';
 import { Dimensions, Text, View } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
-import PropTypes from 'prop-types';
 
 // It's left for now
 function SliderComponent(props) {
@@ -40,10 +39,5 @@ function SliderComponent(props) {
     </View>
   );
 }
-
-SliderComponent.propTypes = {
-  width: PropTypes.number.isRequired,
-  renderItem: PropTypes.func.isRequired,
-};
 
 export const Slider = SliderComponent;

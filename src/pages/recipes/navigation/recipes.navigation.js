@@ -50,9 +50,7 @@ export const getStack = (t) => ([
   ],
 ]);
 
-const RecipesNavigationComponent = (props) => {
-  const {} = props;
-
+const RecipesNavigationComponent = () => {
   const [t] = useTranslator('navigation');
   const tabs = getStack(t);
 
@@ -66,7 +64,5 @@ const RecipesNavigationComponent = (props) => {
 
   );
 };
-
-RecipesNavigationComponent.propTypes = {};
 
 export const RecipesNavigation = RecipesNavigationComponent;

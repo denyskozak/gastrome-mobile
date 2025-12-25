@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { headerStyles } from '../../../navigation/navigation.styles';
@@ -29,10 +28,6 @@ const StackNavigatorComponent = (props) => {
       {tabs.map(renderTab)}
     </Stack.Navigator>
   );
-};
-
-StackNavigatorComponent.propTypes = {
-  initialRouteName: PropTypes.string.isRequired,
 };
 
 export const StackNavigator = StackNavigatorComponent;

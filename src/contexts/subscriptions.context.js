@@ -1,5 +1,4 @@
 import React, { useContext, createContext } from 'react';
-import PropsType from 'prop-types';
 import { usePaymentSubscriptions } from '../hooks/usePaymentSubscriptions';
 
 export const SubscriptionsContext = createContext(null);
@@ -50,10 +49,6 @@ const SubscriptionsComponent = (props) => {
       {children}
     </SubscriptionsContext.Provider>
   );
-};
-
-SubscriptionsComponent.propTypes = {
-  children: PropsType.object.isRequired,
 };
 
 export const SubscriptionsContextWrapper = SubscriptionsComponent;

@@ -1,5 +1,4 @@
 import React, { useState, useContext, createContext, useEffect } from 'react';
-import PropsType from 'prop-types';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { CART_KEY } from '../constants/asyncStoreKeys';
@@ -59,10 +58,6 @@ const MenuCartComponent = (props) => {
       {children}
     </MenuCartContext.Provider>
   );
-};
-
-MenuCartComponent.propTypes = {
-  children: PropsType.object.isRequired,
 };
 
 export const MenuCartContextWrapper = MenuCartComponent;

@@ -1,5 +1,4 @@
 import React, { useState, useContext, createContext  } from 'react';
-import PropsType from 'prop-types';
 
 export const SearchByIngredientsContext = createContext({
   list: [],
@@ -37,10 +36,6 @@ const SearchByIngredientsComponent = (props) => {
       {children}
     </SearchByIngredientsContext.Provider>
   );
-};
-
-SearchByIngredientsComponent.propTypes = {
-  children: PropsType.object.isRequired,
 };
 
 export const SearchByIngredientsContextWrapper = SearchByIngredientsComponent;

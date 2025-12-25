@@ -25,7 +25,6 @@ import AnimatedLib, {
   PinwheelIn,
   Easing,
 } from 'react-native-reanimated';
-import PropTypes from 'prop-types';
 
 const animations = {
   FadeIn,

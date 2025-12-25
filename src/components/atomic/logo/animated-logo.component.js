@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import PropTypes from 'prop-types';
 import { Animated } from '../animated/animated.component';
 import { Logo, LogoSizes } from './logo.component';
 import {
@@ -12,8 +11,13 @@ import {
     withRepeat, withSequence,
 } from 'react-native-reanimated';
 
-const AnimatedLogoComponent = (props) => {
-    const { delay, duration, size, color, isInfinity } = props;
+const AnimatedLogoComponent = ({
+    delay = 700,
+    duration = 1500,
+    size = 'small',
+    color = 'black',
+    isInfinity = false,
+}) => {
 
     const animationDelay = 700 + delay;
     const scale = useSharedValue(1); // Scale starts at 1 (original size)
@@ -82,22 +86,6 @@ const AnimatedLogoComponent = (props) => {
             </Animated.NativeView>
         </Animated>
     );
-};
-
-AnimatedLogoComponent.propTypes = {
-    delay: PropTypes.number,
-    isInfinity: PropTypes.bool,
-    color: PropTypes.oneOf(['white', 'black']),
-    duration: PropTypes.number,
-    size: PropTypes.oneOf(LogoSizes),
-};
-
-AnimatedLogoComponent.defaultProps = {
-    delay: 700,
-    duration: 1500,
-    size: 'small',
-    color: 'black',
-    isInfinity: false,
 };
 
 export const AnimatedLogo = AnimatedLogoComponent;

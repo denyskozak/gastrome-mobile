@@ -7,7 +7,6 @@ import { useNavigationStyles } from './navigation.styles';
 import { useTranslator } from '../hooks/useTranslator';
 import { useMenuDarkMode } from '../contexts/menuDarkMode.context';
 import {recipesPageRoute, welcomePageRoute} from "./navigation.routes";
-import PropTypes from "prop-types";
 import { useTheme } from '../hooks/useTheme';
 
 const Tab = createBottomTabNavigator();

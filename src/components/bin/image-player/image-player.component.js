@@ -1,5 +1,4 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
 import { View, Image } from 'react-native';
 
 import { useEffect, useState } from 'react';
@@ -7,8 +6,11 @@ import styles from './image-player.styles';
 import { downloadAsync } from '../../../utilities/downloadAsync';
 import { AnimatedLogo } from '../../atomic/logo/animated-logo.component';
 
-const ImagePlayerComponent = (props) => {
-  const {style, src, rounded} = props;
+const ImagePlayerComponent = ({
+  style = {},
+  src = '',
+  rounded = false,
+}) => {
   const [isLoading, setLoading] = useState(true);
 
   // main for component
@@ -36,18 +38,6 @@ const ImagePlayerComponent = (props) => {
       />}
     </View>
   )
-};
-
-ImagePlayerComponent.propTypes = {
-  style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
-  src: PropTypes.string,
-  rounded: PropTypes.bool,
-};
-
-ImagePlayerComponent.defaultProps = {
-  style: {},
-  src: '',
-  rounded: false,
 };
 
 export const ImagePlayer = ImagePlayerComponent;

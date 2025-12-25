@@ -15,9 +15,7 @@ export const getStack = (t) => ([
   [supplementRoute, SupplementPage, { title: t('supplement') }],
 ]);
 
-const HealthNavigationComponent = (props) => {
-  const {} = props;
-
+const HealthNavigationComponent = () => {
   const [t] = useTranslator('navigation');
   const tabs = getStack(t);
 
@@ -31,7 +29,5 @@ const HealthNavigationComponent = (props) => {
 
   );
 };
-
-HealthNavigationComponent.propTypes = {};
 
 export const HealthNavigation = HealthNavigationComponent;

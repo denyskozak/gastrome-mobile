@@ -10,7 +10,6 @@ import {
 } from 'react-native-reanimated';
 import {useEffect} from 'react';
 import {Animated} from '../../atomic/animated/animated.component';
-import PropTypes from 'prop-types';
 
 
 const AttentionAnimationComponent = (props) => {

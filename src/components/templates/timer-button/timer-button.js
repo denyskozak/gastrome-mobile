@@ -1,5 +1,4 @@
 import React, { useCallback } from 'react';
-import PropTypes from 'prop-types';
 
 import { Button } from '../../atomic/button/button.component';
 import { useTranslator } from '../../../hooks/useTranslator';
@@ -22,9 +21,5 @@ const TimerButtonComponent = (props) => {
     />
   );
 }
-
-TimerButtonComponent.propTypes = {
-  onPress: PropTypes.func.isRequired
-};
 
 export const TimerButton = TimerButtonComponent;

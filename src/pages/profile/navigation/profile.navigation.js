@@ -23,9 +23,7 @@ export const getStack = (t) => ([
   [devModeRoute, DevMode, { title: 'Dev Mode' }],
 ]);
 
-const ProfileNavigationComponent = (props) => {
-  const {} = props;
-
+const ProfileNavigationComponent = () => {
   const [t] = useTranslator('navigation');
   const tabs = getStack(t);
 
@@ -39,7 +37,5 @@ const ProfileNavigationComponent = (props) => {
 
   );
 };
-
-ProfileNavigationComponent.propTypes = {};
 
 export const ProfileNavigation = ProfileNavigationComponent;

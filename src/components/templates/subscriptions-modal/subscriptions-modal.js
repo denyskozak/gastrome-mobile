@@ -3,7 +3,6 @@ import NativeModal from 'react-native-modal';
 import { ImageBackground, SafeAreaView, ScrollView, Text, View } from 'react-native';
 import Icon from '@expo/vector-icons/Ionicons';
 
-import PropTypes from 'prop-types';
 import { Button } from '../../atomic/button/button.component';
 
 import styles from './subscriptions-modal.styles';
@@ -159,11 +158,6 @@ const SubscriptionsModalComponent = (props) => {
       </ImageBackground>
     </NativeModal>
   );
-};
-
-SubscriptionsModalComponent.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
-  onChangeVisible: PropTypes.func.isRequired,
 };
 
 export const SubscriptionsModal = SubscriptionsModalComponent;

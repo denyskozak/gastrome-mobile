@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import PropsType from 'prop-types';
 import { Text, View } from 'react-native';
 
 import Icon from '@expo/vector-icons/Ionicons';
@@ -8,15 +7,14 @@ import SectionedMultiSelect from 'react-native-sectioned-multi-select';
 import autoStyles, { AutocompleteColors } from './autocomplete.styles';
 import { useTranslator } from '../../../hooks/useTranslator';
 
-const AutocompleteComponent = (props) => {
-  const {
-    items,
-    onChange,
-    onConfirm,
-    selectToggleIconComponent,
-    selectText,
-    styles,
-  } = props;
+const AutocompleteComponent = ({
+  items,
+  onChange,
+  onConfirm,
+  selectToggleIconComponent,
+  selectText,
+  styles = {},
+}) => {
 
   const [t] = useTranslator('components.autocomplete');
   const [list, setList] = useState([]);
@@ -57,16 +55,6 @@ const AutocompleteComponent = (props) => {
       uniqueKey="id"
     />
   );
-};
-
-AutocompleteComponent.typeProps = {
-  onChange: PropsType.func.isRequired,
-  selectText: PropsType.string.isRequired,
-  styles: PropsType.object,
-};
-
-AutocompleteComponent.defaultProps = {
-  styles: {},
 };
 
 export const Autocomplete = AutocompleteComponent;

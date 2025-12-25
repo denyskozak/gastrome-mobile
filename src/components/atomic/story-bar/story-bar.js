@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styles from './story-bar.styles';
 import {View} from "react-native";
 
@@ -19,9 +18,4 @@ export const StoryProgressBar = ({ steps, activeIndex }) => {
             ))}
         </View>
     );
-};
-
-StoryProgressBar.propTypes = {
-    steps: PropTypes.number.isRequired, // Total number of steps
-    activeIndex: PropTypes.number.isRequired, // Current active step index
 };
