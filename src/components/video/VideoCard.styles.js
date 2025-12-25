@@ -109,7 +109,7 @@ export const getStyles = (tabBarHeight) => StyleSheet.create({
         fontSize: 13,
     },
     actionsContainer: {
-        width: 84,
+        width: Spaces.xxlarge,
         alignItems: 'center',
         marginBottom: Spaces.medium
     },

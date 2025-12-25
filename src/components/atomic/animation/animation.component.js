@@ -30,7 +30,7 @@ const looties = {
 }
 
 const AnimationComponent = React.forwardRef((props, ref) => {
-  const { name, height, width, style, autoPlay } = props;
+  const { name, height, width, style = {}, autoPlay = true} = props;
 
   return (
     <View style={[style, { height, width }]}>
@@ -44,17 +44,5 @@ const AnimationComponent = React.forwardRef((props, ref) => {
   );
 })
 
-AnimationComponent.propTypes = {
-  name: PropTypes.oneOf(Object.keys(looties)).isRequired,
-  width: PropTypes.number.isRequired,
-  height: PropTypes.number.isRequired,
-  style: PropTypes.object,
-  autoPlay: PropTypes.bool,
-}
-
-AnimationComponent.defaultProps = {
-  style: {},
-  autoPlay: true,
-}
 
 export const  Animation = AnimationComponent;

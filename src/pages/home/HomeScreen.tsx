@@ -28,6 +28,7 @@ import { useBackgroundMusic } from '../../hooks/useBackgroundMusic';
 import type { BackgroundMusicSource } from '../../hooks/useBackgroundMusic';
 import { useFavorites } from '../../contexts/favorites.context';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import {Spaces} from "../../styles/spaces";
 
 const { height: SCREEN_HEIGHT } = Dimensions.get('window');
 const MAX_BUFFER_DISTANCE = 2;
@@ -550,7 +551,7 @@ export const HomeScreen: React.FC = () => {
   return (
       <View style={styles.container}>
         <StatusBar barStyle="light-content" translucent backgroundColor="transparent" />
-        <View style={[styles.feedToggleContainer, { top: insets.top + 12 }]}>
+        <View style={[styles.feedToggleContainer, { top: insets.top + Spaces.xxlarge }]}>
           {feedOptions.map((option) => {
             const isActive = feedFilter === option.key;
             return (

@@ -10,7 +10,7 @@ import { CookingPage } from '../../cooking/cooking.page';
 import { VoicePage } from '../../profile/voiceSettings/voiceSettings.page';
 
 export const getStack = (t) => ([
-  [welcomeRoute, HomeScreen, { title: t('welcome'), headerShown: false,}],
+  [welcomeRoute, HomeScreen, { title: t('home'), headerShown: false,}],
   [cookingRoute, CookingPage, { title: '', headerShown: false }],
   [recipeRoute, RecipePage, { title: t('recipe'), headerShown: true }],
   [voiceSettingsRecipeRoute, VoicePage, { title: t('voice') }],

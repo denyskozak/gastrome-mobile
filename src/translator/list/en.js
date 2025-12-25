@@ -2,7 +2,7 @@ import {Colors} from "../../styles/colors";
 
 export const translates = {
     navigation: {
-        home: 'Welcome',
+        home: 'Home',
         grocery: 'Search by ingredients',
         recipes: 'Recipes',
         recipe: 'Recipe',
@@ -45,7 +45,7 @@ export const translates = {
     },
     pages: {
         home: {
-            openRecipeButton: 'Open Recipe Steps',
+            openRecipeButton: 'Open Recipe Steps 🧑🏽‍🍳',
             defaultRecipeTitle: 'Recipe',
             defaultAuthorName: 'Gastro & Me',
             shareMessage: 'I want to share the {title} recipe, ingredients: \n\n{ingredients}',
@@ -193,7 +193,7 @@ export const translates = {
             author: 'Chef: {name}',
             cartOnBoard: 'Add all ingredients to shopping cart',
             servings: 'Servings: {count} people',
-            watchVideo: 'Open video steps',
+            watchVideo: 'Play video ▶️',
             voiceSelect: 'Choose voice',
             ingredients: 'Ingredients',
             addToCart: 'Press to add all ingredients to shopping list ',
@@ -231,7 +231,7 @@ export const translates = {
             listenText: 'Listening step',
             "next": "next",
             "repeat": "repeat",
-            "timer": "timer",
+            "timer": "timer ⏲️",
             "done": "done",
             back: 'Back',
             backCommand: 'back',
@@ -276,10 +276,10 @@ export const translates = {
         },
         subscriptionsModal: {
             free: 'Keep free',
-            benefits: 'One coffee for price you is huge support for us:',
-            benefitsOne: 'Support Us 🥰',
-            benefitsTwo: 'Community chat 📚',
-            benefitsThree: 'Cooking Streams 🧝',
+            benefits: 'You have 3 free recipes per day, subscribe to unlock:',
+            benefitsOne: 'Unlimited video-recipes 📚',
+            benefitsTwo: 'Voice Assistant 🧝',
+            benefitsThree: 'Theming and more 🥰',
             error: 'Sorry, subscription purchase error, try again or contact to us on settings page',
             restore: 'Restore',
             success: 'Thank you for subscribing! Your support fuels our app\'s growth 🚀',

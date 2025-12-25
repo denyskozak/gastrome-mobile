@@ -32,6 +32,7 @@ const styles = StyleSheet.create({
     maxWidth: 360,
     alignItems: 'center',
     display: 'flex',
+    justifyContent: 'center'
   },
   title: getTextStyles({
     fontSize: 32,
@@ -56,16 +57,18 @@ const styles = StyleSheet.create({
   },
   buttons: {
     marginTop: Spaces.large,
-    alignSelf: 'stretch',
-    alignItems: 'center',
-    gap: 8,
+    // alignSelf: 'stretch',
+    // alignItems: 'center',
+    // justifyContent: 'center',
+    // display: 'flex',
+    gap: 16,
   },
   button: {
     alignSelf: 'stretch',
     borderColor: Colors.white,
   },
   buttonText: getTextStyles({
-    color: Colors.white,
+    color: Colors.black,
   }),
   logoWrapper: {
     marginTop: Spaces.large,

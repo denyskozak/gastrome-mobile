@@ -12,7 +12,6 @@ import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 import { ArrowDirection } from '../../atomic/carousel-arrow/carousel-arrow.component';
 import { getPercentHeight, getPercentWidth } from '../../../styles/common.styles';
 import { Colors } from '../../../styles/colors';
-import PropTypes from 'prop-types';
 import {Spaces} from "../../../styles/spaces";
 
 const CarouselComponent = React.forwardRef((props, ref) => {
@@ -90,20 +89,11 @@ const CarouselComponent = React.forwardRef((props, ref) => {
         data={items}
         onSnapToItem={onChangeActiveIndex}
         renderItem={item => renderItem({...item, activeIndex })}
-        customAnimation={animationStyle}
+        // customAnimation={animationStyle}
       />
     </View>
   );
 });
 
-CarouselComponent.propTypes  = {
-  items: PropTypes.array.isRequired,
-  renderItem: PropTypes.func.isRequired,
-  activeIndex: PropTypes.number.isRequired,
-  onChangeActiveIndex: PropTypes.func.isRequired,
-}
-
-CarouselComponent.defaultProps = {
-}
 
 export const Carousel = CarouselComponent;

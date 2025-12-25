@@ -4,7 +4,6 @@ import SwipeablePanel from 'react-native-sheets-bottom';
 import Icon from '@expo/vector-icons/Ionicons';
 import { FlashList } from "@shopify/flash-list";
 import * as Haptics from "expo-haptics";
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import {RecipeItem} from './components/recipes.item.component';
 import {useTranslator} from '../../hooks/useTranslator';
@@ -16,7 +15,6 @@ import {useSearchByIngredients} from '../../contexts/searchByIngredients.context
 import {filterRecipesByIngredientsList} from './recipes.utilities';
 import {recipeRoute, recipesGroceryRoute} from './navigation/recipes.routes';
 import {useFavorites} from '../../contexts/favorites.context';
-import {getDevice} from '../../utilities/getCurrentDevice';
 import {SubscriptionsModal} from '../../components/templates/subscriptions-modal/subscriptions-modal';
 
 import styles from './recipes.styles';
@@ -26,11 +24,9 @@ import {SubscriptionButton} from "../../components/templates/subscription-button
 import {filterIcons} from "../../constants/filters";
 import {renderFilterIcon} from "../../utilities/renders";
 import {useSettings} from "../../contexts/settings.context";
+import {useRecipeLimit} from "../../hooks/useRecipeLimit";
 
 
-let isFirstRun = true;
-const RECIPES_VIEWED_LIMIT_KEY = 'RECIPES_VIEWED_LIMIT_KEY';
-const DAILY_RECIPES_LIMIT = 3;
 const RecipesPageComponent = (props) => {
     const {
         navigation,
@@ -42,7 +38,6 @@ const RecipesPageComponent = (props) => {
     const [isSubscriber] = useSubscriptions();
     const [{filterNames}, setSetting] = useSettings();
     const setFilterNames = name => setSetting('filterNames', name);
-
     const [recipes] = useRecipes(true);
 
     // Add like to filers of item
@@ -93,10 +88,6 @@ const RecipesPageComponent = (props) => {
     useEffect(() => {
         setSearchedItems(applySearch(searchText, listData));
     }, [searchText, listData])
-
-    useEffect(() => {
-        isFirstRun = false;
-    }, []);
 
     // Filter by selected ingredients on Grocery page
     useEffect(() => {
@@ -218,38 +209,10 @@ const RecipesPageComponent = (props) => {
         ? searchedItems
         : listData;
 
-    const checkRecipeLimit = useCallback(async () => {
-        if (isSubscriber) {
-            return true;
-        }
-
-        const today = new Date().toISOString().split('T')[0];
-        const storedLimit = await AsyncStorage.getItem(RECIPES_VIEWED_LIMIT_KEY);
-        let viewedData = storedLimit ? JSON.parse(storedLimit) : {date: today, count: 0};
-
-        if (viewedData.date !== today) {
-            viewedData = {date: today, count: 0};
-        }
-
-        if (viewedData.count >= DAILY_RECIPES_LIMIT) {
-            return false;
-        }
-
-        viewedData.count += 1;
-        await AsyncStorage.setItem(RECIPES_VIEWED_LIMIT_KEY, JSON.stringify(viewedData));
-        return true;
-    }, [isSubscriber]);
-
     const handleOpenRecipe = useCallback(async (id) => {
-        const canOpenRecipe = await checkRecipeLimit();
-        if (!canOpenRecipe) {
-            setSubscriptionsOpened(true);
-            return;
-        }
-
         navigation.navigate(recipeRoute, {id});
         Haptics.selectionAsync();
-    }, [checkRecipeLimit, navigation]);
+    }, [navigation]);
 
     // indexes: 0 - label, 1 - icon name, 2 - onPress
     const actions = [

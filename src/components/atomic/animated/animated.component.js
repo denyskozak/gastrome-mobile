@@ -57,9 +57,10 @@ const animationsOut = {
 };
 
 const AnimatedComponent = (props) => {
-  const {children, delay, duration, name, outName, style} = props;
+  const {children, delay = 0, duration = 500, name = 'FadeIn', outName = 'FadeOut', style = {}} = props;
   const Component = animations[name];
 
+  console.log("Component: ", Component)
   if (!Component) return null;
 
   const entering = Component
@@ -79,23 +80,6 @@ const AnimatedComponent = (props) => {
       {children}
     </AnimatedLib.View>
   );
-};
-
-AnimatedComponent.propTypes = {
-  children: PropTypes.node.isRequired,
-  name: PropTypes.oneOf(Object.keys(animations)),
-  outName: PropTypes.oneOf([...Object.keys(animationsOut), '']),
-  delay: PropTypes.number,
-  duration: PropTypes.number,
-  style: PropTypes.object,
-};
-
-AnimatedComponent.defaultProps = {
-  name: 'FadeIn',
-  outName: 'FadeOut',
-  delay: 0,
-  duration: 500,
-  style: {},
 };
 
 AnimatedComponent.NativeView = AnimatedLib.View;

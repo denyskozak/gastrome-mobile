@@ -333,6 +333,7 @@ export const CookingPage = (props) => {
                 />
             )}
             <Carousel
+
                 ref={carouselRef}
                 items={steps}
                 renderItem={renderItem}

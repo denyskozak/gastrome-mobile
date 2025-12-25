@@ -12,8 +12,9 @@ import {useEffect} from 'react';
 import {Animated} from '../../atomic/animated/animated.component';
 import PropTypes from 'prop-types';
 
+
 const AttentionAnimationComponent = (props) => {
-    const {enabled, delay, duration, style, property = 'scale', start, end, children} = props;
+    const {enabled = true, delay = 0, duration = 1000, property = 'scale', start = 1, end = 1.1, children} = props;
     const linear = useSharedValue(start);
 
     const animatedScaling = useAnimatedStyle(() => {
@@ -59,28 +60,5 @@ const AttentionAnimationComponent = (props) => {
         </Animated.NativeView>
     )
 };
-
-AttentionAnimationComponent.propTypes = {
-    children: PropTypes.element.isRequired,
-    delay: PropTypes.number,
-    start: PropTypes.number,
-    end: PropTypes.number,
-    scale: PropTypes.number,
-    duration: PropTypes.number,
-    enabled: PropTypes.bool,
-    style: PropTypes.object,
-    property: PropTypes.oneOf(['translateX', 'translateY', 'scale', 'opacity']),
-}
-
-
-AttentionAnimationComponent.defaultProps = {
-    delay: 0,
-    start: 1,
-    end: 1.1,
-    duration: 1000,
-    property: 'scale',
-    enabled: true,
-    style: {},
-}
 
 export const AttentionAnimation = AttentionAnimationComponent;

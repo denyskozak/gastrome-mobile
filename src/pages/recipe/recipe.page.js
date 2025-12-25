@@ -16,7 +16,7 @@ import {CountryList} from '../../components/atomic/country-flag/country-flag.lis
 import {CountryFlag} from '../../components/atomic/country-flag/country-flag.component';
 import {authorRoute, cookingRoute} from '../recipes/navigation/recipes.routes';
 import {Colors} from '../../styles/colors';
-import {cartPageRoute} from '../../navigation/navigation.routes';
+import {cartPageRoute, welcomePageRoute} from '../../navigation/navigation.routes';
 import {useFavorites} from '../../contexts/favorites.context';
 import {useSettings} from '../../contexts/settings.context';
 import {MeasureModal} from '../../components/templates/measure-modal/measure-modal.component';
@@ -34,6 +34,8 @@ import {ZoomInOut} from "../../components/molecular/zoom-in-out-animation/zoom-i
 import {logEvent} from "../../utilities/google-analitics";
 import {isAvailableAsync, requestReview} from "expo-store-review";
 import {useFreeRecipesQuota} from "../../hooks/useFreeRecipesQuota";
+import {useRecipeLimit} from "../../hooks/useRecipeLimit";
+import {welcomeRoute} from "../welcome/navigation/welcome.routes";
 
 const RecipePageComponent = (props) => {
     const {
@@ -67,12 +69,12 @@ const RecipePageComponent = (props) => {
     } = recipe;
 
     const {getCookingStepURL} = useAWS();
+    const { checkRecipeLimit } = useRecipeLimit()
 
     const [, addCartItems] = useMenuCart();
     const [favorites, setLike] = useFavorites();
     const [settings, setSetting] = useSettings();
     const [existsInCart, setExistsInCart] = useState(false);
-    const [visibleCookingLink, setVisibleCookingLink] = useState(false);
     const [isMeasureModalOpen, setIsMeasureModalOpen] = useState(false);
     const [servingsCount, setServingsCount] = useState(servings);
     const [openCommonModal] = useCommonModal();
@@ -93,12 +95,22 @@ const RecipePageComponent = (props) => {
     useEffect(() => {
         logEvent('recipe_page', {title, id});
         downloadAsync(getCookingStepURL(id, 1))
-            .then(() => setIsPreloadVideo(true))
+            .then(() => {
+                setIsPreloadVideo(true)
+            })
             .catch(() => console.log('Error first step video preload: '));
     }, []);
 
     useEffect(() => {
         flatListRef.current?.scrollToOffset({offset: 0, animated: true});
+
+        const timeoutId = setTimeout(() => {
+            checkRecipeLimit().then(result => {
+                if (!result) setSubscriptionsOpened(true);
+            });
+        }, 3 * 1000);
+
+        return () => clearTimeout(timeoutId)
     }, [id]);
 
     const showFreeQuotaToast = useCallback(async () => {
@@ -131,9 +143,6 @@ const RecipePageComponent = (props) => {
         return filters.find(item => CountryList.includes(item));
     }, [filters]);
 
-    const debounceChangeCookingLinkState = useMemo(() => _.debounce(function (value) {
-        setVisibleCookingLink(typeof value === 'number' && value > 150);
-    }, 50), [setVisibleCookingLink]);
 
     const prepareIngredient = item => ({
         ...item, key: item.title, quantity: item.quantity * (servingsCount / servings),
@@ -176,11 +185,6 @@ const RecipePageComponent = (props) => {
         setLike(id);
     };
 
-    const handleScroll = (event) => {
-        const y = event?.nativeEvent?.contentOffset?.y;
-        debounceChangeCookingLinkState(y);
-    };
-
     const multiplyByServings = (value = 0) => {
         return value * (servingsCount / servings);
     };
@@ -209,41 +213,42 @@ const RecipePageComponent = (props) => {
                     {recipeCountry && <View style={styles.flag}><CountryFlag name={recipeCountry}/></View>}
                 </View>
 
-                {shouldShowFreeQuotaBanner && (
-                    <View style={styles.freeQuotaBanner}>
-                        <View style={styles.freeQuotaBannerContent}>
-                            <View style={styles.freeQuotaBannerIcon}>
-                                <Icon name="gift-outline" size={20} color={Colors.black} />
-                            </View>
-                            <View style={styles.freeQuotaBannerText}>
-                                <Text style={styles.freeQuotaBannerTitle}>
-                                    {t('freeRecipesBannerTitle', {
-                                        remaining: freeRecipesRemaining,
-                                        limit: dailyFreeRecipesLimit,
-                                    })}
-                                </Text>
-                                <Text style={styles.freeQuotaBannerSubtitle}>
-                                    {t('freeRecipesBannerSubtitle')}
-                                </Text>
-                            </View>
-                        </View>
-                        <Button
-                            size="l"
-                            type="contained"
-                            style={styles.freeQuotaBannerButton}
-                            textStyle={styles.freeQuotaBannerButtonText}
-                            onPress={() => setSubscriptionsOpened(true)}
-                        >
-                            {t('freeRecipesBannerCta')}
-                        </Button>
-                    </View>
-                )}
+                {/*{shouldShowFreeQuotaBanner && (*/}
+                {/*    <View style={styles.freeQuotaBanner}>*/}
+                {/*        <View style={styles.freeQuotaBannerContent}>*/}
+                {/*            <View style={styles.freeQuotaBannerIcon}>*/}
+                {/*                <Icon name="gift-outline" size={20} color={Colors.black} />*/}
+                {/*            </View>*/}
+                {/*            <View style={styles.freeQuotaBannerText}>*/}
+                {/*                <Text style={styles.freeQuotaBannerTitle}>*/}
+                {/*                    {t('freeRecipesBannerTitle', {*/}
+                {/*                        remaining: freeRecipesRemaining,*/}
+                {/*                        limit: dailyFreeRecipesLimit,*/}
+                {/*                    })}*/}
+                {/*                </Text>*/}
+                {/*                <Text style={styles.freeQuotaBannerSubtitle}>*/}
+                {/*                    {t('freeRecipesBannerSubtitle')}*/}
+                {/*                </Text>*/}
+                {/*            </View>*/}
+                {/*        </View>*/}
+                {/*        <Button*/}
+                {/*            size="l"*/}
+                {/*            type="contained"*/}
+                {/*            style={styles.freeQuotaBannerButton}*/}
+                {/*            textStyle={styles.freeQuotaBannerButtonText}*/}
+                {/*            onPress={() => setSubscriptionsOpened(true)}*/}
+                {/*        >*/}
+                {/*            {t('freeRecipesBannerCta')}*/}
+                {/*        </Button>*/}
+                {/*    </View>*/}
+                {/*)}*/}
 
                 <Pressable onPress={() => {
                     Haptics.selectionAsync();
-                    navigation.push(cookingRoute, {id});
+                    if (!isSubscriber) return;
+                    navigation.navigate(cookingRoute, {id});
                 }}>
-                    <Animated delay={250} duration={750} style={styles.imageContainer}>
+                    <View style={styles.imageContainer}>
                         <ZoomInOut enabled width={styles.image.width} height={styles.image.height}>
                             <Image source={image} style={styles.image}/>
                         </ZoomInOut>
@@ -255,7 +260,7 @@ const RecipePageComponent = (props) => {
                                 </AttentionAnimation>
                             </Animated>
                         )}
-                    </Animated>
+                    </View>
                 </Pressable>
 
                 {/* Ingredients and description */}
@@ -386,7 +391,6 @@ const RecipePageComponent = (props) => {
                     />
                 </View>
             </>}
-            onScroll={handleScroll}
             data={steps}
             // @TODO replace on id when API is ready */
             keyExtractor={(item, index) => `${String(item.description).slice(0, 5)}-${index}`}
@@ -411,20 +415,19 @@ const RecipePageComponent = (props) => {
             }}
         />
         {/* Voice assistant or video link */}
-        {visibleCookingLink && (
+        {isPreloadVideo && (
             <Animated>
                 <AttentionAnimation delay={1500}>
                     <Button
                         type="wide"
                         onPress={() => {
                             Haptics.selectionAsync();
-                            navigation.push(cookingRoute, {id});
+                            if (!isSubscriber) return;
+                            navigation.navigate(cookingRoute, {id});
                         }}
                         style={styles.button}
                         textStyle={styles.buttonText}
                     >
-                        <Icon name="play-outline" size={24} color={Colors.black}/>
-                        {' '}
                         {t('watchVideo')}
                     </Button>
                 </AttentionAnimation>
@@ -433,7 +436,12 @@ const RecipePageComponent = (props) => {
 
         <SubscriptionsModal
             isOpen={isSubscriptionsOpened}
-            onChangeVisible={setSubscriptionsOpened}
+            onChangeVisible={value => {
+                if (!value) {
+                  navigation.goBack();
+                }
+                setSubscriptionsOpened(value);
+            }}
         />
 
         <MeasureModal
