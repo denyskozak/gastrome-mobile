@@ -207,6 +207,7 @@ export const translates = {
       benefitsTwo: 'Speciální prostředí 🥰',
       benefitsThree: 'Soukromé streamy 🧝 (soon)',
       benefitsFour: 'Přístup ke všem receptům 🍽️',
+      nextFreeRecipesIn: 'Další bezplatné recepty za {time}',
       error: 'Omlouváme se, došlo k chybě při nákupu předplatného, zkuste to znovu nebo nás kontaktujte na stránce nastavení',
       restore: 'Obnovit',
       success: 'Děkujeme za předplatné! Vaše podpora pohání růst naší aplikace 🚀',
