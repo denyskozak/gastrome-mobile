@@ -169,11 +169,9 @@ const styles = StyleSheet.create({
   },
   textSizeLabel: getTextStyles({
     fontSize: 12,
-    color: Colors.gray,
   }),
   textSizeLabelLarge: getTextStyles({
     fontSize: 18,
-    color: Colors.gray,
   }),
   textSizeSlider: {
     flex: 1,

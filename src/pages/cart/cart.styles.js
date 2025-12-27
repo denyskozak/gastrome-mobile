@@ -52,6 +52,10 @@ const styles = StyleSheet.create({
     minHeight: Spaces.mxxlarge,
     width: '100%',
   },
+  selectedItem: {
+    backgroundColor: Colors.red,
+    borderColor: Colors.red,
+  },
   subText: getTextStyles({
     fontSize: 14,
     color: Colors.primary,

@@ -22,8 +22,6 @@ const styles = StyleSheet.create({
     padding: Spaces.small,
     color: Colors.primary,
     textAlign: 'center',
-    borderWidth: 1,
-    borderColor: Colors.primary,
     borderRadius: BorderRadius.medium,
   })
 });

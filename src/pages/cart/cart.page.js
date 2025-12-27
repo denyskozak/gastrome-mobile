@@ -133,7 +133,7 @@ const CartPageComponent = (props) => {
     >
       <Button
         onPress={() => selected.includes(index) ? setSelected(_.without(selected, index)) : setSelected([...selected, index])}
-        style={styles.item}
+        style={selected.includes(index) ? [styles.item, styles.selectedItem] : styles.item}
         type="outlined"
         selected={selected.includes(index)}
       >

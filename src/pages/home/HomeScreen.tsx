@@ -29,6 +29,8 @@ import type { BackgroundMusicSource } from '../../hooks/useBackgroundMusic';
 import { useFavorites } from '../../contexts/favorites.context';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import {Spaces} from "../../styles/spaces";
+import {Animated} from "../../components/atomic/animated/animated.component";
+import {Animation} from "../../components/atomic/animation/animation.component";
 
 const { height: SCREEN_HEIGHT } = Dimensions.get('window');
 const MAX_BUFFER_DISTANCE = 2;
@@ -109,6 +111,7 @@ export const HomeScreen: React.FC = () => {
   const registryRef = useRef<Map<string, RegistryEntry>>(new Map());
   const { activeIndex, onViewableItemsChanged, viewabilityConfig, setActiveIndex } = useActiveItem();
   const allVideosLength = allVideos.length;
+  const [showArrow, setShowArrow] = useState(true);
 
   const measure = settings?.measure ?? 'g';
   const [isBackgroundMusicEnabled, setIsBackgroundMusicEnabled] = useState(true);
@@ -406,6 +409,13 @@ export const HomeScreen: React.FC = () => {
     }, 400);
   }, [baseVideos, setActiveIndex]);
 
+
+  useEffect(() => {
+    if (showArrow) {
+      setTimeout(() => setShowArrow(false), 10000);
+    }
+  }, [showArrow]);
+
   useEffect(() => {
     registryRef.current.clear();
     setActiveIndex(0);
@@ -598,6 +608,11 @@ export const HomeScreen: React.FC = () => {
               </Text>
             </View>
         ) : null}
+        {showArrow  && (
+            <Animated style={styles.helpArrow} delay={500}>
+              <Animation name="swipeDown" height={Spaces.xxxlarge * 4} width={Spaces.xxxlarge * 4}/>
+            </Animated>
+        )}
       </View>
   );
 };
@@ -647,5 +662,12 @@ const styles = StyleSheet.create({
     color: '#ffffff',
     fontSize: 16,
     textAlign: 'center',
+  },
+  helpArrow: {
+    position: 'absolute',
+    opacity: 1,
+    alignSelf: 'center',
+    bottom: '20%',
+    zIndex: 2,
   },
 });

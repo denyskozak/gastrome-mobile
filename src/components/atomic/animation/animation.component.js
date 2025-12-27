@@ -13,6 +13,7 @@ import clickJSON from './list/click.json';
 import voiceOnJSON from './list/voice-on.json';
 import voiceOffJSON from './list/voice-off.json';
 import cookOnFireJSON from './list/cooking-on-fire.json';
+import swipeDownJSON from './list/swipe-down.json';
 
 const looties = {
   cooking: cookingJSON,
@@ -26,6 +27,7 @@ const looties = {
   voiceOff: voiceOffJSON,
   voiceOn: voiceOnJSON,
   cookOnFire: cookOnFireJSON,
+  swipeDown: swipeDownJSON,
 }
 
 const AnimationComponent = React.forwardRef((props, ref) => {
@@ -36,6 +38,7 @@ const AnimationComponent = React.forwardRef((props, ref) => {
       <Lottie
         autoPlay={autoPlay}
         loop
+        style={{ width, height }}
         ref={ref}
         source={looties[name]}
       />
