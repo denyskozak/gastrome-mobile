@@ -31,6 +31,8 @@ import {useLogger} from "../../hooks/useLogger";
 import {StoryProgressBar} from "../../components/atomic/story-bar/story-bar";
 import * as Haptics from "expo-haptics";
 import {logEvent} from "../../utilities/google-analitics";
+import {useSubscriptions} from "../../contexts/subscriptions.context";
+import {SubscriptionsModal} from "../../components/templates/subscriptions-modal/subscriptions-modal";
 
 const alarmSong = require('./alarm.mp3');
 const soundObject = new Audio.Sound();
@@ -52,8 +54,9 @@ export const CookingPage = (props) => {
     const [t, , language] = useTranslator('pages.cooking');
     const [tCommon] = useTranslator('common');
     const [recipes] = useRecipes();
-    const [settings, setSetting] = useSettings();
+    const [settings] = useSettings();
     const [logError] = useLogger();
+    const [isSubscriber] = useSubscriptions();
     const [targetStep, setTargetStep] = useState(null);
     const [helpModalVisible, setHelpModalVisible] = useState(false);
     const [permissionModalVisible, setPermissionModalVisible] = useState(false);
@@ -66,6 +69,8 @@ export const CookingPage = (props) => {
     const [voiceTooltipText, setVoiceTooltipText] = useState('');
     const voiceAnimationRef = useRef(null);
     const [lastCommandDevMode, setLastCommandDevMove] = useState('');
+    const [isSubscriptionsOpened, setSubscriptionsOpened] = useState(false);
+    const [stepTextSize, setStepTextSize] = useState(18);
 
     const parseDuration = useCallback((value) => {
         const translates = {
@@ -253,6 +258,10 @@ export const CookingPage = (props) => {
     }, [activeIndex]);
 
     const handleStartCookingPress = async () => {
+        if (!isSubscriber) {
+            setSubscriptionsOpened(true);
+            return;
+        }
         setIsTimeActive(false);
         await handleTimerSongStop();
         const {status} = await Audio.requestPermissionsAsync();
@@ -313,6 +322,8 @@ export const CookingPage = (props) => {
             isListening={isListening && !timerVoiceActivated}
             onBackClick={() => navigation.goBack()}
             withVoiceAssistant={withVoiceAssistant}
+            textSize={stepTextSize}
+            onTextSizeChange={setStepTextSize}
 
             additionalText={recipe.isSingleVideo ? t('singleVideo') : ''}
             backLabel={t('back')}
@@ -437,6 +448,10 @@ export const CookingPage = (props) => {
                         handleStartCookingPress().then().catch();
                     }
                 }}
+            />
+            <SubscriptionsModal
+                isOpen={isSubscriptionsOpened}
+                onChangeVisible={setSubscriptionsOpened}
             />
         </SafeAreaView>
     )

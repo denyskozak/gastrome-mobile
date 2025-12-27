@@ -1,9 +1,8 @@
-import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
+import React, {useEffect, useMemo, useRef, useState} from 'react';
 import {FlatList, Pressable, Image, Text, View, SafeAreaView} from 'react-native';
+import Slider from '@react-native-community/slider';
 import Icon from '@expo/vector-icons/Ionicons';
-import _ from 'lodash';
 import * as Haptics from "expo-haptics";
-import Toast from 'react-native-toast-message';
 
 import {Animated} from '../../components/atomic/animated/animated.component';
 import {useTranslator} from '../../hooks/useTranslator';
@@ -24,8 +23,6 @@ import {handleSocialShare} from '../../utilities/socialShare';
 import {AttentionAnimation} from '../../components/molecular/attansion-animation/attansion-animation.component';
 import {downloadAsync} from '../../utilities/downloadAsync';
 import {useAWS} from '../../hooks/useAWS';
-import { useSubscriptions } from '../../contexts/subscriptions.context';
-import { SubscriptionsModal } from '../../components/templates/subscriptions-modal/subscriptions-modal';
 
 import styles from './recipe.styles';
 import {useRecipes} from "../../hooks/useRecipes";
@@ -33,9 +30,6 @@ import {AuthorPreview} from "../../components/molecular/author-preview/author-pr
 import {ZoomInOut} from "../../components/molecular/zoom-in-out-animation/zoom-in-out-animation";
 import {logEvent} from "../../utilities/google-analitics";
 import {isAvailableAsync, requestReview} from "expo-store-review";
-import {useFreeRecipesQuota} from "../../hooks/useFreeRecipesQuota";
-import {useRecipeLimit} from "../../hooks/useRecipeLimit";
-import {welcomeRoute} from "../welcome/navigation/welcome.routes";
 
 const RecipePageComponent = (props) => {
     const {
@@ -69,7 +63,6 @@ const RecipePageComponent = (props) => {
     } = recipe;
 
     const {getCookingStepURL} = useAWS();
-    const { checkRecipeLimit } = useRecipeLimit()
 
     const [, addCartItems] = useMenuCart();
     const [favorites, setLike] = useFavorites();
@@ -78,14 +71,7 @@ const RecipePageComponent = (props) => {
     const [isMeasureModalOpen, setIsMeasureModalOpen] = useState(false);
     const [servingsCount, setServingsCount] = useState(servings);
     const [openCommonModal] = useCommonModal();
-    const [isSubscriber] = useSubscriptions();
-    const [isSubscriptionsOpened, setSubscriptionsOpened] = useState(false);
-    const {
-        consumeFreeRecipe,
-        limit: dailyFreeRecipesLimit,
-        isLoading: isFreeQuotaLoading,
-        remaining: freeRecipesRemaining,
-    } = useFreeRecipesQuota();
+    const [textSize, setTextSize] = useState(16);
 
     const stepRefs = {};
     const {measure} = settings;
@@ -103,41 +89,7 @@ const RecipePageComponent = (props) => {
 
     useEffect(() => {
         flatListRef.current?.scrollToOffset({offset: 0, animated: true});
-
-        const timeoutId = setTimeout(() => {
-            checkRecipeLimit(id).then(result => {
-                if (!result) setSubscriptionsOpened(true);
-            });
-        }, 2 * 1000);
-
-        return () => clearTimeout(timeoutId)
     }, [id]);
-
-    const showFreeQuotaToast = useCallback(async () => {
-        try {
-            const remainingAfterView = await consumeFreeRecipe(id);
-
-            Toast.show({
-                type: 'info',
-                text1: t('freeRecipesToastTitle', {remaining: remainingAfterView, limit: dailyFreeRecipesLimit}),
-                text2: t('freeRecipesToastCta'),
-                position: 'top',
-            });
-        } catch (error) {
-            console.log('Failed to show free recipe toast', error);
-        }
-    }, [consumeFreeRecipe, dailyFreeRecipesLimit, t]);
-
-    useEffect(() => {
-        if (isSubscriber || isFreeQuotaLoading || !recipe?.free) return;
-
-        showFreeQuotaToast();
-    }, [id, isSubscriber, isFreeQuotaLoading, recipe?.free, showFreeQuotaToast]);
-
-    const shouldShowFreeQuotaBanner = useMemo(
-        () => !isSubscriber && !isFreeQuotaLoading && recipe?.free,
-        [isFreeQuotaLoading, isSubscriber, recipe?.free],
-    );
 
     const recipeCountry = useMemo(() => {
         return filters.find(item => CountryList.includes(item));
@@ -150,10 +102,6 @@ const RecipePageComponent = (props) => {
 
     const handleAddToCart = () => {
         Haptics.selectionAsync();
-        if (!isSubscriber) {
-            setSubscriptionsOpened(true);
-            return;
-        }
         if (!existsInCart) {
             addCartItems(recipe.ingredients.map(prepareIngredient));
             setExistsInCart(true);
@@ -245,7 +193,6 @@ const RecipePageComponent = (props) => {
 
                 <Pressable onPress={() => {
                     Haptics.selectionAsync();
-                    if (!isSubscriber) return;
                     navigation.navigate(cookingRoute, {id});
                 }}>
                     <View style={styles.imageContainer}>
@@ -319,9 +266,25 @@ const RecipePageComponent = (props) => {
                             <Text style={styles.PFCText}>{t('fats')}: {renderPFC(fats)}</Text> : null}
                     </View>
 
-                    {description && <Text style={styles.description}>{description}</Text>}
-                    {tip && <Text style={styles.tip}>{tip}</Text>}
-                    {instagram && <Text style={styles.author}>{instagram
+                    <View style={styles.textSizeControl}>
+                        <Text style={styles.textSizeLabel}>A</Text>
+                        <Slider
+                            style={styles.textSizeSlider}
+                            minimumValue={14}
+                            maximumValue={22}
+                            step={1}
+                            value={textSize}
+                            onValueChange={setTextSize}
+                            minimumTrackTintColor={Colors.primary}
+                            maximumTrackTintColor={Colors.gray}
+                            thumbTintColor={Colors.primary}
+                        />
+                        <Text style={styles.textSizeLabelLarge}>A</Text>
+                    </View>
+
+                    {description && <Text style={[styles.description, {fontSize: textSize}]}>{description}</Text>}
+                    {tip && <Text style={[styles.tip, {fontSize: textSize}]}>{tip}</Text>}
+                    {instagram && <Text style={[styles.author, {fontSize: textSize}]}>{instagram
                         ? t('madeBy', {name: instagram})
                         : null}</Text>}
                     {/*Servings manager*/}
@@ -422,7 +385,6 @@ const RecipePageComponent = (props) => {
                         type="wide"
                         onPress={() => {
                             Haptics.selectionAsync();
-                            if (!isSubscriber) return;
                             navigation.navigate(cookingRoute, {id});
                         }}
                         style={styles.button}
@@ -433,16 +395,6 @@ const RecipePageComponent = (props) => {
                 </AttentionAnimation>
             </Animated>
         )}
-
-        <SubscriptionsModal
-            isOpen={isSubscriptionsOpened}
-            onChangeVisible={value => {
-                if (!value) {
-                  navigation.goBack();
-                }
-                setSubscriptionsOpened(value);
-            }}
-        />
 
         <MeasureModal
             isVisible={isMeasureModalOpen}

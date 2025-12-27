@@ -161,6 +161,23 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginTop: Spaces.medium
   },
+  textSizeControl: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spaces.small,
+    marginTop: Spaces.medium,
+  },
+  textSizeLabel: getTextStyles({
+    fontSize: 12,
+    color: Colors.gray,
+  }),
+  textSizeLabelLarge: getTextStyles({
+    fontSize: 18,
+    color: Colors.gray,
+  }),
+  textSizeSlider: {
+    flex: 1,
+  },
   description: getTextStyles({
     fontSize: 16,
     marginTop: Spaces.medium,

@@ -276,10 +276,10 @@ export const translates = {
         },
         subscriptionsModal: {
             free: 'Keep free',
-            benefits: 'You have 5 free recipes per day, subscribe to unlock:',
-            benefitsOne: 'Unlimited video-recipes 📚',
+            benefits: 'Try 1 month free',
+            benefitsOne: 'Color themes in settings 🎨',
             benefitsTwo: 'Voice Assistant 🧝',
-            benefitsThree: 'Theming and more 🥰',
+            benefitsThree: 'Recipe comments 💬',
             nextFreeRecipesIn: 'Next free recipes in {time}',
             error: 'Sorry, subscription purchase error, try again or contact to us on settings page',
             restore: 'Restore',

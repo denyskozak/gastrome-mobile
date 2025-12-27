@@ -73,6 +73,23 @@ const styles = StyleSheet.create({
     textContainerActive: {
         backgroundColor: Colors.backgroundColor
     },
+    textSizeControl: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: Spaces.small,
+        marginTop: Spaces.small,
+    },
+    textSizeLabel: getTextStyles({
+        fontSize: 12,
+        color: Colors.white,
+    }),
+    textSizeLabelLarge: getTextStyles({
+        fontSize: 18,
+        color: Colors.white,
+    }),
+    textSizeSlider: {
+        flex: 1,
+    },
     textBackIcon: {
         zIndex: 2,
         position: 'absolute',
