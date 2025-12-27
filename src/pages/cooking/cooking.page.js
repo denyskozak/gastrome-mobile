@@ -33,11 +33,14 @@ import * as Haptics from "expo-haptics";
 import {logEvent} from "../../utilities/google-analitics";
 import {useSubscriptions} from "../../contexts/subscriptions.context";
 import {SubscriptionsModal} from "../../components/templates/subscriptions-modal/subscriptions-modal";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import {DAILY_VOICE_ASSISTANT_KEY} from "../../constants/asyncStoreKeys";
 
 const alarmSong = require('./alarm.mp3');
 const soundObject = new Audio.Sound();
 
 let isFirstAssistantRun = true;
+const getTodayDate = () => new Date().toISOString().slice(0, 10);
 
 export const CookingPage = (props) => {
     const {
@@ -259,8 +262,24 @@ export const CookingPage = (props) => {
 
     const handleStartCookingPress = async () => {
         if (!isSubscriber) {
-            setSubscriptionsOpened(true);
-            return;
+            try {
+                const storedUsage = await AsyncStorage.getItem(DAILY_VOICE_ASSISTANT_KEY);
+                const parsedUsage = storedUsage ? JSON.parse(storedUsage) : null;
+                const today = getTodayDate();
+                const hasFreeUse = parsedUsage?.date === today && parsedUsage?.used;
+
+                if (hasFreeUse) {
+                    setSubscriptionsOpened(true);
+                    return;
+                }
+
+                await AsyncStorage.setItem(
+                    DAILY_VOICE_ASSISTANT_KEY,
+                    JSON.stringify({date: today, used: true}),
+                );
+            } catch (error) {
+                console.log('Failed to track daily voice assistant usage', error);
+            }
         }
         setIsTimeActive(false);
         await handleTimerSongStop();
