@@ -72,6 +72,7 @@ const RecipePageComponent = (props) => {
     const [servingsCount, setServingsCount] = useState(servings);
     const [openCommonModal] = useCommonModal();
     const [textSize, setTextSize] = useState(16);
+    const stepTitleFontSize = textSize + 4;
 
     const stepRefs = {};
     const {measure} = settings;
@@ -364,14 +365,18 @@ const RecipePageComponent = (props) => {
                     const layout = event.nativeEvent.layout;
                     stepRefs[index] = layout.y;
                 }}>
-                    <Text style={styles.stepTitle}>
+                    <Text style={[styles.stepTitle, {fontSize: stepTitleFontSize}]}>
                         &nbsp;
-                        <Text style={styles.stepName}>
+                        <Text style={[styles.stepName, {fontSize: stepTitleFontSize}]}>
                             {t('step', {number: index + 1})}
                         </Text>
                         {title ? `. ${title}` : ''}
                     </Text>
-                    {description && <Text style={styles.stepDescription}>{description}</Text>}
+                    {description && (
+                        <Text style={[styles.stepDescription, {fontSize: textSize}]}>
+                            {description}
+                        </Text>
+                    )}
 
                     {image && <Image style={styles.stepImage} source={{uri: image}}/>}
                 </View>);
