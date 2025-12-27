@@ -55,6 +55,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: '100%'
   },
+  timerText: getTextStyles({
+    marginTop: Spaces.medium,
+    fontSize: 18,
+    textAlign: 'center',
+    color: Colors.white,
+  }),
   buttons: {
     marginTop: Spaces.large,
     // alignSelf: 'stretch',

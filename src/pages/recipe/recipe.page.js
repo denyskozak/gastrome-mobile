@@ -105,7 +105,7 @@ const RecipePageComponent = (props) => {
         flatListRef.current?.scrollToOffset({offset: 0, animated: true});
 
         const timeoutId = setTimeout(() => {
-            checkRecipeLimit().then(result => {
+            checkRecipeLimit(id).then(result => {
                 if (!result) setSubscriptionsOpened(true);
             });
         }, 2 * 1000);
@@ -115,7 +115,7 @@ const RecipePageComponent = (props) => {
 
     const showFreeQuotaToast = useCallback(async () => {
         try {
-            const remainingAfterView = await consumeFreeRecipe();
+            const remainingAfterView = await consumeFreeRecipe(id);
 
             Toast.show({
                 type: 'info',

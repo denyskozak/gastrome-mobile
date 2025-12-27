@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import NativeModal from 'react-native-modal';
 import { ImageBackground, SafeAreaView, ScrollView, Text, View } from 'react-native';
 import Icon from '@expo/vector-icons/Ionicons';
@@ -20,6 +20,7 @@ const SubscriptionsModalComponent = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [isError, setIsError] = useState(false);
+  const [timeLeft, setTimeLeft] = useState('');
 
   const [t] = useTranslator('components.subscriptionsModal');
   const [, , subscriptions, setCurrentSubscription] = useSubscriptions();
@@ -27,6 +28,30 @@ const SubscriptionsModalComponent = (props) => {
     () => (subscriptions ? subscriptions.availablePackages : []),
     [subscriptions],
   );
+
+  useEffect(() => {
+    if (!isOpen) {
+      return undefined;
+    }
+
+    const updateTimer = () => {
+      const now = new Date();
+      const nextReset = new Date();
+      nextReset.setHours(24, 0, 0, 0);
+      const diff = Math.max(nextReset - now, 0);
+      const hours = Math.floor(diff / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+      const formatted = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+
+      setTimeLeft(formatted);
+    };
+
+    updateTimer();
+    const intervalId = setInterval(updateTimer, 1000);
+
+    return () => clearInterval(intervalId);
+  }, [isOpen]);
 
   const handleOptionClick = (item) => {
     setIsLoading(true);
@@ -101,6 +126,11 @@ const SubscriptionsModalComponent = (props) => {
                 <Text style={styles.benefitsText}>{t('benefitsThree')}</Text>
                 {/*<Text style={styles.benefitsText}>{t('benefitsFour')}</Text>*/}
               </View>
+              {timeLeft ? (
+                <Text style={styles.timerText}>
+                  {t('nextFreeRecipesIn', { time: timeLeft })}
+                </Text>
+              ) : null}
               {isLoading && (
                 <View style={styles.logoWrapper}>
                   <AnimatedLogo size="medium" color="white" isInfinity />
