@@ -1,6 +1,7 @@
 import * as React from "react";
 import Icon from '@expo/vector-icons/Ionicons';
 import {View, Text, Pressable} from "react-native";
+import Slider from '@react-native-community/slider';
 import {useEffect, useMemo, useState} from 'react';
 import {StyleSheet} from 'react-native';
 
@@ -39,6 +40,8 @@ export const CookingSlideComponent = ({
     isListening,
     withVoiceAssistant = true,
     stepsCount,
+    textSize,
+    onTextSizeChange,
 }) => {
 
     const [showArrow, setShowArrow] = useState(false);
@@ -134,25 +137,40 @@ export const CookingSlideComponent = ({
                         <Icon name={isTextHidden ? 'eye-outline' : 'eye-off-outline'} color={Colors.white}
                               size={Spaces.large}/>
                     </Pressable>
-                    <Text style={styles.step}>
+                    <Text style={[styles.step, {fontSize: textSize}]}>
                         {stepTitle}
                     </Text>
                     {!isTextHidden && description && (
-                        <Text style={styles.text}>
+                        <Text style={[styles.text, {fontSize: textSize}]}>
                             {readCharIndex === 0
                                 ? description
                                 : <>
                                     <Text
-                                        style={styles.readText}>{description.slice(0, readCharIndex)}</Text>
+                                        style={[styles.readText, {fontSize: textSize}]}>{description.slice(0, readCharIndex)}</Text>
                                     {description.slice(readCharIndex, description.length)}
                                 </>}
                         </Text>
                     )}
                     {!isTextHidden && additionalText && (
-                        <Text style={styles.text}>
+                        <Text style={[styles.text, {fontSize: textSize}]}>
                             {additionalText}
                         </Text>
                     )}
+                    <View style={styles.textSizeControl}>
+                        <Text style={styles.textSizeLabel}>A</Text>
+                        <Slider
+                            style={styles.textSizeSlider}
+                            minimumValue={14}
+                            maximumValue={24}
+                            step={1}
+                            value={textSize}
+                            onValueChange={onTextSizeChange}
+                            minimumTrackTintColor={Colors.white}
+                            maximumTrackTintColor={Colors.gray}
+                            thumbTintColor={Colors.white}
+                        />
+                        <Text style={styles.textSizeLabelLarge}>A</Text>
+                    </View>
                 </Animated>
                 {/*{author && (*/}
                 {/*    <View style={styles.authorContainer}>*/}

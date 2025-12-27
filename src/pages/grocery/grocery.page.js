@@ -25,7 +25,6 @@ import styles from './grocery.styles';
 import { HelpButton } from '../../components/molecular/help-button/help-button';
 import { recipesPageRoute } from '../../navigation/navigation.routes';
 import { recipesRoute } from '../recipes/navigation/recipes.routes';
-import {useSubscriptions} from "../../contexts/subscriptions.context";
 
 const intoVideo = require('./grocery-instruction-video.mp4');
 
@@ -35,7 +34,6 @@ const GroceryPageComponent = (props) => {
   } = props;
 
   const [t,, language] = useTranslator('pages.grocery');
-  const [isSubscriber] = useSubscriptions();
 
   // Voice select
   const [isListening, setListening] = useState(false);
@@ -58,10 +56,10 @@ const GroceryPageComponent = (props) => {
 
   const setAddedIngredient = useCallback((name) => setVoiceTooltipText(t('addedIngredient', {name})), [])
   const ingredients = useMemo(() =>
-      getIngredientsMock(!isSubscriber, language)
+      getIngredientsMock(false, language)
         .sort(sortIngredients)
         .map(({title}) => title.toLocaleLowerCase()),
-    [!isSubscriber, language]
+    [language]
   );
 
   const ingredientNamesSet = useMemo(() => (
@@ -73,12 +71,12 @@ const GroceryPageComponent = (props) => {
 
   // For render
   const items = useMemo(() =>
-      getIngredientsMock(!isSubscriber, language)
+      getIngredientsMock(false, language)
         .map((item) => {
           item.selected = selected.has(item.title);
           return {...item};
         }).sort(sortIngredients),
-    [selected, !isSubscriber, language]);
+    [selected, language]);
 
   const searchedItems = useMemo(() => searchedIndexes.map(index => items[index]), [searchedIndexes, items])
 
@@ -169,7 +167,7 @@ const GroceryPageComponent = (props) => {
 
   useEffect(() => {
     setSelected(new Set());
-  }, [isSubscriber, language]);
+  }, [language]);
 
   const runListening = async () => {
     if (isListening) {

@@ -24,7 +24,6 @@ import {SubscriptionButton} from "../../components/templates/subscription-button
 import {filterIcons} from "../../constants/filters";
 import {renderFilterIcon} from "../../utilities/renders";
 import {useSettings} from "../../contexts/settings.context";
-import {useRecipeLimit} from "../../hooks/useRecipeLimit";
 
 
 const RecipesPageComponent = (props) => {
