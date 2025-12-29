@@ -25,6 +25,7 @@ import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 import { getStyles } from './VideoCard.styles';
 import { Button } from '../atomic/button/button.component';
 import { useTranslator } from '../../hooks/useTranslator';
+import { Liner } from '../atomic/video-player/liner/liner.component';
 
 let ExpoVideo: any = null;
 let ExpoResizeMode: any = null;
@@ -65,7 +66,6 @@ export type VideoCardProps = {
   item: VideoItem;
   index: number;
   isActive: boolean;
-  onToggleMute?: (index: number, muted: boolean) => void;
   onLike?: (item: VideoItem, liked: boolean) => void;
   onToggleMusic?: () => void;
   isMusicEnabled?: boolean;
@@ -84,7 +84,6 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
                                                         item,
                                                         index,
                                                         isActive,
-                                                        onToggleMute,
                                                         onLike,
                                                         onToggleMusic,
                                                         isMusicEnabled,
@@ -106,7 +105,8 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
   const [isBuffering, setIsBuffering] = useState(true);
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);
-  const [progress, setProgress] = useState(0);
+  const [playbackPosition, setPlaybackPosition] = useState(0);
+  const [playbackDuration, setPlaybackDuration] = useState(0);
   const [isManuallyPaused, setIsManuallyPaused] = useState(false);
   const [liked, setLiked] = useState(Boolean(isFavorite));
   const [feedback, setFeedback] = useState<string | null>(null);
@@ -240,12 +240,14 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
     setIsLoaded(true);
     preparedRef.current = true;
 
-    if (status.durationMillis) {
-      const currentProgress = status.positionMillis / status.durationMillis;
-      setProgress(currentProgress);
+    if (typeof status.durationMillis === 'number') {
+      setPlaybackDuration(status.durationMillis);
     }
-    if (status.didJustFinish) {
-      setProgress(1);
+    if (typeof status.positionMillis === 'number') {
+      setPlaybackPosition(status.positionMillis);
+    }
+    if (status.didJustFinish && typeof status.durationMillis === 'number') {
+      setPlaybackPosition(status.durationMillis);
     }
 
     if (pendingPlayRef.current && shouldPlay && !status.isPlaying) {
@@ -255,7 +257,8 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
 
   const handleProgress = useCallback((event: { currentTime: number; playableDuration: number; seekableDuration: number; }) => {
     if (event.seekableDuration) {
-      setProgress(Math.min(event.currentTime / event.seekableDuration, 1));
+      setPlaybackDuration(event.seekableDuration * 1000);
+      setPlaybackPosition(event.currentTime * 1000);
     }
   }, []);
 
@@ -269,17 +272,6 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
     }
   }, []);
 
-  const toggleMute = useCallback(() => {
-    const nextMuted = !isMuted;
-    setIsMuted(nextMuted);
-    onToggleMute?.(index, nextMuted);
-    showFeedbackMessage(
-        nextMuted
-            ? tHome('soundMuted') ?? 'Sound muted'
-            : tHome('soundUnmuted') ?? 'Sound on',
-    );
-  }, [index, isMuted, onToggleMute, showFeedbackMessage, tHome]);
-
   const handleDoubleTap = useCallback(() => {
     stopSingleTapTimeout();
     animateHeart();
@@ -290,8 +282,18 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
   }, [animateHeart, item, liked, onLike, stopSingleTapTimeout]);
 
   const handleSingleTap = useCallback(() => {
-    toggleMute();
-  }, [toggleMute]);
+    setIsManuallyPaused((prev) => {
+      const next = !prev;
+      if (isActive && !hasError) {
+        showFeedbackMessage(
+            next
+                ? tHome('paused') ?? 'Paused'
+                : tHome('playing') ?? 'Playing',
+        );
+      }
+      return next;
+    });
+  }, [hasError, isActive, showFeedbackMessage, tHome]);
 
   const toggleLike = useCallback(() => {
     const nextLiked = !liked;
@@ -422,8 +424,9 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
     } else if (videoRef.current.seek) {
       videoRef.current.seek(0);
     }
-    setProgress(0);
     setIsLoaded(false);
+    setPlaybackPosition(0);
+    setPlaybackDuration(0);
     pendingPlayRef.current = false;
   }, []);
 
@@ -576,7 +579,7 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
               onError={handleVideoError}
               onBuffer={({ isBuffering: buffering }: { isBuffering: boolean }) => setIsBuffering(buffering)}
               onProgress={handleProgress}
-              onEnd={() => setProgress(1)}
+              onEnd={() => setPlaybackPosition(playbackDuration)}
           />
       );
     }
@@ -729,7 +732,13 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
         </View>
 
         <View style={styles.progressContainer}>
-          <View style={[styles.progressBar, { width: `${Math.min(progress * 100, 100)}%` }]} />
+          {playbackDuration > 0 ? (
+              <Liner
+                  style={styles.progressLine}
+                  positionMillis={playbackPosition}
+                  durationMillis={playbackDuration}
+              />
+          ) : null}
         </View>
       </View>
   );
