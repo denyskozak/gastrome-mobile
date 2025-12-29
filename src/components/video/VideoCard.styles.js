@@ -2,7 +2,6 @@ import {StyleSheet} from "react-native";
 import {getTextStyles} from "../../styles/common.styles";
 import {Colors} from "../../styles/colors";
 import {Spaces} from "../../styles/spaces";
-import {themes} from "../../styles/themes";
 
 export const getStyles = (tabBarHeight) => StyleSheet.create({
     container: {
@@ -143,14 +142,13 @@ export const getStyles = (tabBarHeight) => StyleSheet.create({
         left: 0,
         right: 0,
         bottom: tabBarHeight,
-        height: 4,
+        height: Spaces.xsmall + Spaces.xxsmall,
         backgroundColor: 'rgba(255,255,255,0.2)',
     },
-    progressBar: {
-        height: '100%',
-        backgroundColor: '#ff4d6d',
-        borderBottomLeftRadius: '50%',
-        borderBottomRightRadius: '50%'
+    progressLine: {
+        position: 'absolute',
+        left: 0,
+        bottom: 0,
     },
     heart: {
         position: 'absolute',

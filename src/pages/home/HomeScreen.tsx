@@ -238,16 +238,6 @@ export const HomeScreen: React.FC = () => {
     shouldResetToMiddleRef.current = true;
   }, [allVideosLength, setActiveIndex, shuffledBaseVideos]);
 
-  const handleToggleMute = useCallback(
-      (_videoIndex: number, muted: boolean) => {
-        setIsBackgroundMusicEnabled((prev) => {
-          const next = !muted;
-          return prev === next ? prev : next;
-        });
-      },
-      [setIsBackgroundMusicEnabled],
-  );
-
   const handleLike = useCallback(
       (video: VideoItem, liked: boolean) => {
         if (!video.recipeId) {
@@ -508,7 +498,6 @@ export const HomeScreen: React.FC = () => {
                   item={item}
                   index={index}
                   isActive={activeIndex === index}
-                  onToggleMute={handleToggleMute}
                   onLike={handleLike}
                   onToggleMusic={handleToggleBackgroundMusic}
                   isMusicEnabled={isBackgroundMusicEnabled}
@@ -526,7 +515,6 @@ export const HomeScreen: React.FC = () => {
         handleLike,
         handleOpenRecipe,
         handleShare,
-        handleToggleMute,
         handleToggleBackgroundMusic,
         registerHandle,
         isBackgroundMusicEnabled,
