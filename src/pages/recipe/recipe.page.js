@@ -13,7 +13,7 @@ import {useCommonModal} from '../../contexts/commonModal/commonModal.context';
 import {renderIngredient, renderQuantity} from './recipe.renders';
 import {CountryList} from '../../components/atomic/country-flag/country-flag.list';
 import {CountryFlag} from '../../components/atomic/country-flag/country-flag.component';
-import {authorRoute, cookingRoute} from '../recipes/navigation/recipes.routes';
+import {cookingRoute} from '../recipes/navigation/recipes.routes';
 import {Colors} from '../../styles/colors';
 import {cartPageRoute, welcomePageRoute} from '../../navigation/navigation.routes';
 import {useFavorites} from '../../contexts/favorites.context';
@@ -26,7 +26,6 @@ import {useAWS} from '../../hooks/useAWS';
 
 import styles from './recipe.styles';
 import {useRecipes} from "../../hooks/useRecipes";
-import {AuthorPreview} from "../../components/molecular/author-preview/author-preview";
 import {ZoomInOut} from "../../components/molecular/zoom-in-out-animation/zoom-in-out-animation";
 import {logEvent} from "../../utilities/google-analitics";
 import {isAvailableAsync, requestReview} from "expo-store-review";
@@ -54,7 +53,6 @@ const RecipePageComponent = (props) => {
         level,
         servings,
         iconColor = 'black',
-        author,
         proteins,
         fats,
         carbohydrates,
@@ -330,12 +328,6 @@ const RecipePageComponent = (props) => {
                         keyExtractor={({id, title}) => id + title}
                         ListHeaderComponent={<Text style={styles.ingredientLabel}>{t('ingredients')}:</Text>}
                         ListFooterComponent={<View style={styles.ingredientHeader}>
-                            {author && author.image && <Pressable onPress={() => {
-                                Haptics.selectionAsync();
-                                navigation.navigate(authorRoute, {id: author.id});
-                            }}>
-                                <AuthorPreview name={author.name} imageSource={author.image}/>
-                            </Pressable>}
                             {/*TODO Its dubplicate of "Add to cart" function, Return if needed*/}
                             {/*{!existsInCart && (<Text style={styles.addToCardText}>*/}
                             {/*  {t('addToCart')}*/}
