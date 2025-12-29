@@ -9,7 +9,6 @@ import React, {
 import {
   ActivityIndicator,
   Animated,
-  Easing,
   Image,
   Pressable,
   StyleSheet,
@@ -107,11 +106,11 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
   const [isBuffering, setIsBuffering] = useState(true);
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);
+  const [progress, setProgress] = useState(0);
   const [isManuallyPaused, setIsManuallyPaused] = useState(false);
   const [liked, setLiked] = useState(Boolean(isFavorite));
   const [feedback, setFeedback] = useState<string | null>(null);
   const [showHeart, setShowHeart] = useState(false);
-  const progressAnim = useRef(createAnimatedValue(0)).current;
   const feedbackOpacity = useRef(createAnimatedValue(0)).current;
   const heartScale = useRef(createAnimatedValue(0)).current;
   const tabBarHeight = useBottomTabBarHeight();
@@ -243,37 +242,22 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
 
     if (status.durationMillis) {
       const currentProgress = status.positionMillis / status.durationMillis;
-      Animated.timing(progressAnim, {
-        toValue: Math.min(currentProgress, 1),
-        duration: 220,
-        easing: Easing.out(Easing.cubic),
-        useNativeDriver: false,
-      }).start();
+      setProgress(currentProgress);
     }
     if (status.didJustFinish) {
-      Animated.timing(progressAnim, {
-        toValue: 1,
-        duration: 220,
-        easing: Easing.out(Easing.cubic),
-        useNativeDriver: false,
-      }).start();
+      setProgress(1);
     }
 
     if (pendingPlayRef.current && shouldPlay && !status.isPlaying) {
       attemptPlayAfterLoad();
     }
-  }, [attemptPlayAfterLoad, progressAnim, shouldPlay]);
+  }, [attemptPlayAfterLoad, shouldPlay]);
 
   const handleProgress = useCallback((event: { currentTime: number; playableDuration: number; seekableDuration: number; }) => {
     if (event.seekableDuration) {
-      Animated.timing(progressAnim, {
-        toValue: Math.min(event.currentTime / event.seekableDuration, 1),
-        duration: 220,
-        easing: Easing.out(Easing.cubic),
-        useNativeDriver: false,
-      }).start();
+      setProgress(Math.min(event.currentTime / event.seekableDuration, 1));
     }
-  }, [progressAnim]);
+  }, []);
 
   const ensureMuted = useCallback(async (muted: boolean) => {
     if (isExpoAvAvailable && videoRef.current?.setIsMutedAsync) {
@@ -438,10 +422,10 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
     } else if (videoRef.current.seek) {
       videoRef.current.seek(0);
     }
-    progressAnim.setValue(0);
+    setProgress(0);
     setIsLoaded(false);
     pendingPlayRef.current = false;
-  }, [progressAnim]);
+  }, []);
 
   const prepare = useCallback(async () => {
     if (!videoRef.current) return;
@@ -592,14 +576,7 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
               onError={handleVideoError}
               onBuffer={({ isBuffering: buffering }: { isBuffering: boolean }) => setIsBuffering(buffering)}
               onProgress={handleProgress}
-              onEnd={() => {
-                Animated.timing(progressAnim, {
-                  toValue: 1,
-                  duration: 220,
-                  easing: Easing.out(Easing.cubic),
-                  useNativeDriver: false,
-                }).start();
-              }}
+              onEnd={() => setProgress(1)}
           />
       );
     }
@@ -622,14 +599,6 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
         },
       ],
       [heartScale],
-  );
-  const progressWidth = useMemo(
-      () =>
-          progressAnim.interpolate({
-            inputRange: [0, 1],
-            outputRange: ['0%', '100%'],
-          }),
-      [progressAnim],
   );
 
   return (
@@ -760,7 +729,7 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
         </View>
 
         <View style={styles.progressContainer}>
-          <Animated.View style={[styles.progressBar, { width: progressWidth }]} />
+          <View style={[styles.progressBar, { width: `${Math.min(progress * 100, 100)}%` }]} />
         </View>
       </View>
   );
