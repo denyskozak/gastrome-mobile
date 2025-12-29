@@ -25,6 +25,7 @@ const styles = StyleSheet.create({
   }),
   benefits: {
     height: getPercentHeight(30),
+    padding: Spaces.medium,
   },
   image: {
     height: Spaces.xxxlarge * 4,
