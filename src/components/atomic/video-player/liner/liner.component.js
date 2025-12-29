@@ -1,16 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import styles from './liner.styles';
 import {
-  cancelAnimation,
-  Easing, FadeIn,
+  Easing,
   useAnimatedStyle,
   useSharedValue,
-  withDelay,
-  withRepeat,
   withTiming
 } from 'react-native-reanimated';
 import { Animated } from '../../animated/animated.component';
-import { Dimensions } from 'react-native';
 import { getPercentWidth } from '../../../../styles/common.styles';
 import {getDevice} from "../../../../utilities/getCurrentDevice";
 
@@ -24,16 +20,16 @@ const LinerComponent = ({
 
   useEffect(() => {
     if (positionMillis !== undefined && durationMillis !== undefined) {
-      progress.value = withTiming((positionMillis / durationMillis) * getPercentWidth( getDevice() === 'iPad' ? 80 : 100), {
-        duration: 700,
-        easing: Easing.linear,
+      progress.value = withTiming(positionMillis / durationMillis, {
+        duration: 250,
+        easing: Easing.out(Easing.cubic),
       });
     }
   }, [durationMillis, positionMillis]);
 
   const progressBarStyle = useAnimatedStyle(() => {
     return {
-      width: progress.value,
+      width: progress.value * getPercentWidth(getDevice() === 'iPad' ? 80 : 100),
     };
   });
 
