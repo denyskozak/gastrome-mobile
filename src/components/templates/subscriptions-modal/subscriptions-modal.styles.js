@@ -14,7 +14,7 @@ export const useStyles = (theme) => StyleSheet.create({
   },
   overlay: {
     flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.78)',
+    backgroundColor: 'rgba(0, 0, 0, 0.72)',
     paddingHorizontal: Spaces.large,
     paddingVertical: Spaces.xxlarge,
   },

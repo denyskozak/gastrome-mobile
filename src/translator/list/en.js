@@ -274,10 +274,10 @@ export const translates = {
         },
         subscriptionsModal: {
             free: 'Keep free',
-            benefits: 'Try 1 month free',
-            benefitsOne: 'Color themes in settings 🎨',
+            benefits: 'Try free month',
+            benefitsOne: 'Color Themes 🎨',
             benefitsTwo: 'Voice Assistant 🧝',
-            benefitsThree: 'Recipe comments 💬',
+            benefitsThree: 'Ingredient Knowledge 🌿',
             nextFreeRecipesIn: 'Next free recipes in {time}',
             error: 'Sorry, subscription purchase error, try again or contact to us on settings page',
             restore: 'Restore',

@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Image, Pressable, SafeAreaView, View} from 'react-native';
 import {useTranslator} from '../../hooks/useTranslator';
 import * as Linking from "expo-linking";
@@ -19,6 +19,8 @@ import styles from './health.styles';
 import {AttentionAnimation} from "../../components/molecular/attansion-animation/attansion-animation.component";
 import * as Haptics from "expo-haptics";
 import {supplementRoute} from "./navigation/health.routes";
+import {useSubscriptions} from "../../contexts/subscriptions.context";
+import {SubscriptionsModal} from "../../components/templates/subscriptions-modal/subscriptions-modal";
 
 const HealthPageComponent = (props) => {
     const {
@@ -26,6 +28,8 @@ const HealthPageComponent = (props) => {
     } = props;
 
     const [t] = useTranslator('pages.health');
+    const [isSubscriptionsOpened, setSubscriptionsOpened] = useState(false);
+    const [isSubscriber] = useSubscriptions();
 
     return (
         <SafeAreaView style={styles.container}>
@@ -39,12 +43,20 @@ const HealthPageComponent = (props) => {
                 renderItem={({item, index}) => (
                     <Pressable  style={styles.item} key={item.name} onPress={() => {
                         Haptics.selectionAsync();
+                        if (!isSubscriber) {
+                            setSubscriptionsOpened(true);
+                            return;
+                        }
                         navigation.navigate(supplementRoute, {id: item.id});
                     }}>
                         <Image source={item.img} style={styles.image}/>
                         <Text  style={styles.text}>{item.name}</Text>
                     </Pressable>
                 )}
+            />
+            <SubscriptionsModal
+                isOpen={isSubscriptionsOpened}
+                onChangeVisible={setSubscriptionsOpened}
             />
         </SafeAreaView>
     );
