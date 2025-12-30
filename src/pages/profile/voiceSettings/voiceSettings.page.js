@@ -5,9 +5,10 @@ import {useTranslator} from '../../../hooks/useTranslator';
 import {Button} from '../../../components/atomic/button/button.component';
 
 import {Animated} from '../../../components/atomic/animated/animated.component';
-import styles from './voiceSettings.styles';
+import { useStyles } from './voiceSettings.styles';
 import {useSettings} from "../../../contexts/settings.context.js";
 import {useActivateSoundIOS} from "../../../hooks/useActiveSoundIOS";
+import { useTheme } from '../../../hooks/useTheme';
 
 const VoicePageComponent = (props) => {
     const {navigation} = props;
@@ -18,6 +19,8 @@ const VoicePageComponent = (props) => {
         t, , language
     ] = useTranslator('pages.profile');
     const [settings, setSetting] = useSettings();
+    const { theme } = useTheme();
+    const styles = useStyles(theme);
 
 
     const handleSelectVoice = identifier => {

@@ -14,7 +14,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import Icon from '@expo/vector-icons/Ionicons';
 import { Spaces } from '../../../styles/spaces';
-import { Colors } from '../../../styles/colors';
+import { useTheme } from '../../../hooks/useTheme';
 
 export const ArrowDirection = {
   IS_VERTICAL: 0,
@@ -24,6 +24,7 @@ export const ArrowDirection = {
 export const Arrow = ({directionAnim}) => {
   const translateAnim = useSharedValue(0);
   const scaleAnim = useSharedValue(0);
+  const { theme } = useTheme();
 
   const arrowStyle = useAnimatedStyle(() => {
     return {
@@ -88,7 +89,7 @@ export const Arrow = ({directionAnim}) => {
     [],
   );
 
-  const IconComponent = <Icon name='arrow-up' color={Colors.primary} size={Spaces.xxlarge}/>;
+  const IconComponent = <Icon name='arrow-up' color={theme.colors.primary} size={Spaces.xxlarge}/>;
 
   return (
     <TouchableWithoutFeedback

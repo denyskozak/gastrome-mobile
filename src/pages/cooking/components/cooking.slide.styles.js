@@ -2,7 +2,6 @@ import {containerMarginTop, getPercentHeight, getPercentWidth, getTextStyles} fr
 
 import {StyleSheet} from 'react-native';
 import {Spaces} from '../../../styles/spaces';
-import {Colors} from '../../../styles/colors';
 import {BorderRadius} from '../../../styles/borderRadiuses';
 import {fontEnum} from '../../../styles/fonts';
 import {getDevice} from '../../../utilities/getCurrentDevice';
@@ -45,11 +44,11 @@ export const useStyles = (theme) => StyleSheet.create({
         bottom: '50%',
     },
     backButton: {
-        backgroundColor: Colors.white,
+        backgroundColor: theme.colors.white,
     },
     backButtonText: getTextStyles({
         fontSize: 18,
-        color: Colors.black,
+        color: theme.colors.black,
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'row',
@@ -67,7 +66,7 @@ export const useStyles = (theme) => StyleSheet.create({
         borderWidth: 1,
         borderRadius: BorderRadius.small,
         padding: Spaces.small,
-        borderColor: Colors.white,
+        borderColor: theme.colors.white,
         backgroundColor: theme.colors.backgroundColorLowOpacity
     },
     textContainerActive: {
@@ -81,11 +80,11 @@ export const useStyles = (theme) => StyleSheet.create({
     },
     textSizeLabel: getTextStyles({
         fontSize: 12,
-        color: Colors.white,
+        color: theme.colors.white,
     }),
     textSizeLabelLarge: getTextStyles({
         fontSize: 18,
-        color: Colors.white,
+        color: theme.colors.white,
     }),
     textSizeSlider: {
         flex: 1,
@@ -120,19 +119,19 @@ export const useStyles = (theme) => StyleSheet.create({
     },
     step: getTextStyles({
         fontSize: 18,
-        color: Colors.white,
+        color: theme.colors.white,
         textAlign: 'center',
         // maxHeight: Spaces.xxxlarge + Spaces.xxlarge,
     }),
     text: getTextStyles({
         marginTop: Spaces.small,
         fontSize: 18,
-        color: Colors.white,
+        color: theme.colors.white,
         textAlign: 'center',
         // maxHeight: Spaces.xxxlarge + Spaces.xxlarge,
     }),
     readText: getTextStyles({
         fontSize: 18,
-        color: Colors.red,
+        color: theme.colors.red,
     }),
 });

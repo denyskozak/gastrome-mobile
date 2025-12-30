@@ -1,12 +1,11 @@
 
 import { StyleSheet } from 'react-native';
-import { Colors } from '../../../styles/colors';
 import { Spaces } from '../../../styles/spaces';
 import { getTextStyles } from '../../../styles/common.styles';
 
-const styles = StyleSheet.create({
+export const useStyles = (theme) => StyleSheet.create({
   button: {
-    backgroundColor: Colors.backgroundColorLowOpacity,
+    backgroundColor: theme.colors.backgroundColorLowOpacity,
     paddingLeft: Spaces.small,
     paddingRight: Spaces.small,
     height: Spaces.xxlarge,
@@ -15,5 +14,3 @@ const styles = StyleSheet.create({
     fontSize: 18
   })
 });
-
-export default styles;

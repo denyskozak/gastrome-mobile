@@ -5,19 +5,21 @@ import { Button } from '../../../components/atomic/button/button.component';
 import { useTranslator } from '../../../hooks/useTranslator';
 import { cutText } from '../../../utilities/cutText';
 
-import styles from './recipes-generator.styles';
+import { useStyles } from './recipes-generator.styles';
 import { AttentionAnimation } from '../../../components/molecular/attansion-animation/attansion-animation.component';
 import { delayForPromise } from '../../../utilities/promiseDelay';
 import { Animated } from '../../../components/atomic/animated/animated.component';
 import Icon from '@expo/vector-icons/Ionicons';
-import { Colors } from '../../../styles/colors';
 import { Spaces } from '../../../styles/spaces';
 import {useRecipes} from "../../../hooks/useRecipes";
 import * as Haptics from "expo-haptics";
+import { useTheme } from '../../../hooks/useTheme';
 
 const RecipesGeneratorComponent = (props) => {
   const {onRecipePress} = props;
   const [t] = useTranslator('components.recipesGenerator');
+  const { theme } = useTheme();
+  const styles = useStyles(theme);
 
   const [randomRecipe, setRandomRecipe] = useState(null);
 
@@ -61,7 +63,7 @@ const RecipesGeneratorComponent = (props) => {
                       />
                         <View style={styles.imageIcon}>
                           <Icon name={'play-circle-outline'}
-                                color={Colors[randomRecipe ? randomRecipe.iconColor : 'black']}
+                                color={theme.colors[randomRecipe ? randomRecipe.iconColor : 'black']}
                                 size={Spaces.xxlarge + Spaces.small}/>
                         </View>
                     </View>

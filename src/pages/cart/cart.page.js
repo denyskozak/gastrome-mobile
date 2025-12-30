@@ -10,7 +10,6 @@ import { useMenuCart } from '../../contexts/cart.context';
 
 import { Spaces } from '../../styles/spaces';
 import { Button } from '../../components/atomic/button/button.component';
-import { Colors } from '../../styles/colors';
 import { Input } from '../../components/atomic/input/input.component';
 import { useCommonModal } from '../../contexts/commonModal/commonModal.context';
 import { mapRenderCartQuantity } from '../recipe/recipe.renders';
@@ -22,13 +21,15 @@ import {
 import { ConfirmModal } from '../../components/molecular/confirm-modal/confirm-modal.component';
 import { IntroVideoModal } from '../../components/organismic/intro-video-modal/intro-video-modal';
 
-import styles from './cart.styles';
 import { HelpButton } from '../../components/molecular/help-button/help-button';
 import { useSettings } from '../../contexts/settings.context';
 import { handleSocialShare } from '../../utilities/socialShare';
 import { recipesPageRoute } from '../../navigation/navigation.routes';
 import { recipesRoute } from '../recipes/navigation/recipes.routes';
 import * as Haptics from "expo-haptics";
+import { useTheme } from '../../hooks/useTheme';
+
+import { useStyles } from './cart.styles';
 
 const intoVideo = require('./cart-instruction-video.mp4');
 
@@ -49,6 +50,8 @@ const CartPageComponent = (props) => {
 
   const [settings] = useSettings();
   const { measure } = settings;
+  const { theme } = useTheme();
+  const styles = useStyles(theme);
 
   const [openCommonModal] = useCommonModal();
 
@@ -169,7 +172,7 @@ const CartPageComponent = (props) => {
             disabled={addIngredientValue === ''}
             onPress={addItemToList}
           >
-            <Icon name={!hasIngredientAdded ? 'add-outline' : 'checkmark-done-outline'} size={24} color={Colors.white}/>
+            <Icon name={!hasIngredientAdded ? 'add-outline' : 'checkmark-done-outline'} size={24} color={theme.colors.white}/>
           </Button>
         </View>
       </View>
@@ -211,7 +214,7 @@ const CartPageComponent = (props) => {
           }}
         >
           <Text style={styles.finishButtonText}>
-            <Icon name="checkmark-done-outline" size={24} color={Colors.second}/>
+            <Icon name="checkmark-done-outline" size={24} color={theme.colors.second}/>
             {' '}
             {t('finish')}
           </Text>
@@ -227,7 +230,7 @@ const CartPageComponent = (props) => {
           style={styles.actionButton}
           onPress={handleShare}
         >
-          <Icon name="share-outline" size={24} color={Colors.white}/>
+          <Icon name="share-outline" size={24} color={theme.colors.white}/>
         </Button>)}
         <Button
           type="outlined"
@@ -237,7 +240,7 @@ const CartPageComponent = (props) => {
             setRefreshConfirmModalOpen(true);
           }}
         >
-          <Icon name="refresh-outline" size={24} color={Colors.white}/>
+          <Icon name="refresh-outline" size={24} color={theme.colors.white}/>
         </Button>
         {isDeleteButtonDisplays && (<Button
           type="outlined"
@@ -248,7 +251,7 @@ const CartPageComponent = (props) => {
             setSelected([]);
           }}
         >
-          <Icon name="trash-outline" size={24} color={Colors.white}/>
+          <Icon name="trash-outline" size={24} color={theme.colors.white}/>
         </Button>)}
       </View>
     }

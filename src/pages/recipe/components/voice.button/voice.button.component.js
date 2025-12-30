@@ -2,13 +2,13 @@ import React, {useEffect, useState} from 'react';
 import { Pressable, View, Text } from 'react-native';
 import Icon from '@expo/vector-icons/Ionicons';
 
-import styles from './voice.button.styles';
+import { useStyles } from './voice.button.styles';
 import { Animation } from '../../../../components/atomic/animation/animation.component';
 import { Animated } from '../../../../components/atomic/animated/animated.component';
 import { useTranslator } from '../../../../hooks/useTranslator';
 import { Tooltip } from '../../../../components/atomic/tooltip/tooltip.component';
 import { Button } from '../../../../components/atomic/button/button.component';
-import { Colors } from '../../../../styles/colors';
+import { useTheme } from '../../../../hooks/useTheme';
 import {AttentionAnimation} from "../../../../components/molecular/attansion-animation/attansion-animation.component";
 import microJSON from "../../../../components/atomic/animation/list/micro-voice.json";
 import {Spaces} from "../../../../styles/spaces";
@@ -29,6 +29,8 @@ const VoiceButtonComponent = ({
   voiceTooltipText = '',
 }) => {
   const [t] = useTranslator('components.voiceButton');
+  const { theme } = useTheme();
+  const styles = useStyles(theme);
 
   return (
     <>

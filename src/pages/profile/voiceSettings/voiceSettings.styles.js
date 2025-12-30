@@ -2,9 +2,7 @@ import { StyleSheet } from 'react-native';
 import { containerMarginTop, getPercentWidth, getTextStyles } from '../../../styles/common.styles';
 import { Spaces } from '../../../styles/spaces';
 import { BorderRadius } from '../../../styles/borderRadiuses';
-import { Colors } from '../../../styles/colors';
-
-const styles = StyleSheet.create({
+export const useStyles = (theme) => StyleSheet.create({
   container: {
     marginTop: containerMarginTop,
     alignItems: "center",
@@ -38,12 +36,10 @@ const styles = StyleSheet.create({
   },
   confirmButton: {
     width: getPercentWidth(50),
-    shadowColor: Colors.primary,
+    shadowColor: theme.colors.primary,
     shadowOpacity: 0.8,
     shadowRadius: 10,
     shadowOffset: { height: 1}
   },
-  confirmText: getTextStyles({ color: Colors.white }),
+  confirmText: getTextStyles({ color: theme.colors.white }),
 });
-
-export default styles;

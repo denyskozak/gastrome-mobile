@@ -7,14 +7,14 @@ import {Text} from 'react-native';
 
 import {getDevice} from "../../utilities/getCurrentDevice";
 import {Button} from "../../components/atomic/button/button.component";
-import {Colors} from "../../styles/colors";
+import { useTheme } from '../../hooks/useTheme';
 
 import {AuthorPreview} from "../../components/molecular/author-preview/author-preview";
 import {useAuthors} from "../../hooks/useAuthors";
 import {contactURL} from "../../constants/links";
 import {authorRoute} from "../recipes/navigation/recipes.routes";
 
-import styles from './authors.styles';
+import { useStyles } from './authors.styles';
 import {AttentionAnimation} from "../../components/molecular/attansion-animation/attansion-animation.component";
 import * as Haptics from "expo-haptics";
 
@@ -32,6 +32,8 @@ const AuthorsPageComponent = (props) => {
     const [authors] = useAuthors();
 
     const [t] = useTranslator('pages.authors');
+    const { theme } = useTheme();
+    const styles = useStyles(theme);
 
     return (
         <SafeAreaView style={styles.container}>
@@ -48,11 +50,11 @@ const AuthorsPageComponent = (props) => {
                             Linking.openURL(contactURL)
                         }}>
                             <Text style={styles.subscriptionsButtonText}>
-                                <Icon name="heart" size={24} color={Colors.red}/>
+                                <Icon name="heart" size={24} color={theme.colors.red}/>
                                 {' '}
                                 {t('becomeChef')}
                                 {' '}
-                                <Icon name="heart" size={24} color={Colors.red}/>
+                                <Icon name="heart" size={24} color={theme.colors.red}/>
                             </Text>
                         </Button>
                     </AttentionAnimation>

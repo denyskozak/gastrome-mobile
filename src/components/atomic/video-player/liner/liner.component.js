@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import styles from './liner.styles';
+import { useStyles } from './liner.styles';
 import {
   cancelAnimation,
   Easing, FadeIn,
@@ -13,12 +13,15 @@ import { Animated } from '../../animated/animated.component';
 import { Dimensions } from 'react-native';
 import { getPercentWidth } from '../../../../styles/common.styles';
 import {getDevice} from "../../../../utilities/getCurrentDevice";
+import { useTheme } from '../../../../hooks/useTheme';
 
 const LinerComponent = ({
   style = {},
   positionMillis,
   durationMillis,
 }) => {
+  const { theme } = useTheme();
+  const styles = useStyles(theme);
 
   const progress = useSharedValue(0);
 

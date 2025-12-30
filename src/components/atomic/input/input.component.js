@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { Pressable, SafeAreaView, TextInput } from 'react-native';
 import Icon from '@expo/vector-icons/Ionicons';
 
-import { Colors } from '../../../styles/colors';
 import { Spaces } from '../../../styles/spaces';
 
-import styles from './input.styles';
+import { useStyles } from './input.styles';
 import { Animated } from '../animated/animated.component';
 import { FadeOut } from 'react-native-reanimated';
+import { useTheme } from '../../../hooks/useTheme';
 
 const InputComponent = ({
   onChange,
@@ -19,6 +19,8 @@ const InputComponent = ({
   value = '',
 }) => {
   const [text, setText] = useState(value);
+  const { theme } = useTheme();
+  const styles = useStyles(theme);
 
   useEffect(() => {
     setText(value);
@@ -34,7 +36,7 @@ const InputComponent = ({
         }}
         onSubmitEditing={onSubmitEditing}
         placeholder={placeholder}
-        placeholderTextColor={Colors.primary}
+        placeholderTextColor={theme.colors.primary}
         value={text}
       />
       {value && <Animated style={styles.resetIcon} outName="FadeOut">
@@ -42,7 +44,7 @@ const InputComponent = ({
           onChange('');
           setText('');
         }}>
-          <Icon name='close-outline' color={Colors.primary} size={Spaces.xlarge}/>
+          <Icon name='close-outline' color={theme.colors.primary} size={Spaces.xlarge}/>
         </Pressable>
       </Animated>}
       {/*TODO check and remove*/}

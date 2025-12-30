@@ -1,11 +1,10 @@
 import { StyleSheet } from 'react-native';
-import { Colors } from '../../../styles/colors';
 import { getPercentWidth, getTextStyles } from '../../../styles/common.styles';
 import { Spaces } from '../../../styles/spaces';
 
-const styles = StyleSheet.create({
+export const useStyles = (theme) => StyleSheet.create({
   container: {
-    backgroundColor: Colors.second,
+    backgroundColor: theme.colors.second,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -33,5 +32,3 @@ const styles = StyleSheet.create({
     width: getPercentWidth(80)
   }),
 });
-
-export default styles;

@@ -11,12 +11,13 @@ import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 
 import { ArrowDirection } from '../../atomic/carousel-arrow/carousel-arrow.component';
 import { getPercentHeight, getPercentWidth } from '../../../styles/common.styles';
-import { Colors } from '../../../styles/colors';
 import {Spaces} from "../../../styles/spaces";
+import { useTheme } from '../../../hooks/useTheme';
 
 const CarouselComponent = React.forwardRef((props, ref) => {
   const { items, renderItem, activeIndex, onChangeActiveIndex } = props;
   const tabBarHeight = useBottomTabBarHeight();
+  const { theme } = useTheme();
 
   const PAGE_WIDTH =  getPercentWidth(100);
   const PAGE_HEIGHT = getPercentHeight(100) - tabBarHeight - Spaces.mxxlarge;
@@ -81,7 +82,7 @@ const CarouselComponent = React.forwardRef((props, ref) => {
           height: PAGE_HEIGHT,
           justifyContent: 'center',
           alignItems: 'center',
-          backgroundColor: Colors.backgroundColor,
+          backgroundColor: theme.colors.backgroundColor,
         }}
         vertical={isVertical}
         width={PAGE_WIDTH}

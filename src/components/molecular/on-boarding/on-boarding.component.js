@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Onboarding from 'react-native-onboarding-swiper';
-import styles from './on-boarding.styles';
-import { Colors } from '../../../styles/colors';
+import { useStyles } from './on-boarding.styles';
 import { Animation } from '../../atomic/animation/animation.component';
 import { HAS_BEEN_ONBOARDED_KEY } from '../../../constants/asyncStoreKeys';
 import { getDevice } from '../../../utilities/getCurrentDevice';
 import {useTranslator} from "../../../hooks/useTranslator";
+import { useTheme } from '../../../hooks/useTheme';
 
 
 export const useIsOnBoarding = () => {
@@ -24,6 +24,8 @@ export const useIsOnBoarding = () => {
 
 export const OnBoard = ({onEnd}) => {
   const [t] = useTranslator('components.onboard')
+  const { theme } = useTheme();
+  const styles = useStyles(theme);
    const close = () => {
     onEnd instanceof Function ? onEnd() : null;
     AsyncStorage.setItem(HAS_BEEN_ONBOARDED_KEY, 'false');
@@ -43,19 +45,19 @@ export const OnBoard = ({onEnd}) => {
   };
   const pages = [
     {
-      backgroundColor: Colors.backgroundColor,
+      backgroundColor: theme.colors.backgroundColor,
       animationName: 'cooking',
       title: t('firstTitle'),
       subtitle: t('firstSubtitle'),
     },
     {
-      backgroundColor: Colors.backgroundColor,
+      backgroundColor: theme.colors.backgroundColor,
       animationName: 'happyAutumnShopping',
       title: t('secondTitle'),
       subtitle: t('secondSubtitle'),
     },
     {
-      backgroundColor: Colors.backgroundColor,
+      backgroundColor: theme.colors.backgroundColor,
       animationName: 'voice',
       title: t('thirdTitle'),
       subtitle: t('thirdSubtitle'),
@@ -76,7 +78,7 @@ export const OnBoard = ({onEnd}) => {
         subTitleStyles={styles.subTitle}
         onSkip={close}
         onDone={close}
-        bottomBarColor={Colors.backgroundColor}
+        bottomBarColor={theme.colors.backgroundColor}
         pages={pages}
       />
   )

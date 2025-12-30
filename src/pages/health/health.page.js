@@ -8,7 +8,6 @@ import { FlashList } from "@shopify/flash-list";
 
 import {getDevice} from "../../utilities/getCurrentDevice";
 import {Button} from "../../components/atomic/button/button.component";
-import {Colors} from "../../styles/colors";
 
 import {AuthorPreview} from "../../components/molecular/author-preview/author-preview";
 import {useAuthors} from "../../hooks/useAuthors";
