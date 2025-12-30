@@ -26,6 +26,7 @@ import { getStyles } from './VideoCard.styles';
 import { Button } from '../atomic/button/button.component';
 import { useTranslator } from '../../hooks/useTranslator';
 import { Liner } from '../atomic/video-player/liner/liner.component';
+import {AVPlaybackStatusError} from "expo-av/src/AV.types";
 
 let ExpoVideo: any = null;
 let ExpoResizeMode: any = null;
@@ -65,6 +66,7 @@ export type VideoPlayerHandle = {
 export type VideoCardProps = {
   item: VideoItem;
   index: number;
+  onVideoLoad?: () => void;
   isActive: boolean;
   onLike?: (item: VideoItem, liked: boolean) => void;
   onToggleMusic?: () => void;
@@ -84,6 +86,7 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
                                                         item,
                                                         index,
                                                         isActive,
+                                                        onVideoLoad,
                                                         onLike,
                                                         onToggleMusic,
                                                         isMusicEnabled,
@@ -231,7 +234,7 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
 
   const handlePlaybackStatus = useCallback((status: AVPlaybackStatus) => {
     if (!status.isLoaded) {
-      if (status.error) {
+      if ((status as AVPlaybackStatusError).error) {
         setHasError(true);
       }
       return;
@@ -513,11 +516,16 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
   const handleLoad = useCallback(() => {
     setIsBuffering(false);
     setIsLoaded(true);
+
     preparedRef.current = true;
 
     if (pendingPlayRef.current && shouldPlay) {
       attemptPlayAfterLoad();
     }
+
+    setTimeout(() => {
+      onVideoLoad?.();
+    });
   }, [attemptPlayAfterLoad, shouldPlay]);
 
   const handleVideoError = useCallback(
@@ -608,6 +616,7 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
       <View style={styles.container}>
         <View style={styles.videoContainer}>
           {item.poster && !isLoaded ? (
+              // @ts-ignore
               <Image source={{ uri: item.poster }} style={styles.poster} resizeMode="cover" />
           ) : null}
           {renderVideo()}

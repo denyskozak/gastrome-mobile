@@ -5,12 +5,12 @@ export type VideoAuthor = {
 
 export type VideoItem = {
   id: string;
-  recipeId?: string;
+  recipeId: string;
   source: string;
-  poster?: string;
+  poster: string;
   title: string;
   author: VideoAuthor;
-  description?: string;
-  tags?: string[];
+  description: string;
+  tags: string[];
   duration?: number;
 };

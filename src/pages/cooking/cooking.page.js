@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
-import {Pressable, SafeAreaView, Text, View} from 'react-native';
+import {Pressable, SafeAreaView, Text} from 'react-native';
 import {Audio} from 'expo-av';
 import * as Speech from 'expo-speech';
 import Voice from '@react-native-voice/voice';
@@ -28,19 +28,13 @@ import styles from './cooking.page.styles';
 import {useRecipes} from "../../hooks/useRecipes";
 import {useSettings} from "../../contexts/settings.context";
 import {useLogger} from "../../hooks/useLogger";
-import {StoryProgressBar} from "../../components/atomic/story-bar/story-bar";
 import * as Haptics from "expo-haptics";
 import {logEvent} from "../../utilities/google-analitics";
 import {useSubscriptions} from "../../contexts/subscriptions.context";
 import {SubscriptionsModal} from "../../components/templates/subscriptions-modal/subscriptions-modal";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import {DAILY_VOICE_ASSISTANT_KEY} from "../../constants/asyncStoreKeys";
 
 const alarmSong = require('./alarm.mp3');
 const soundObject = new Audio.Sound();
-
-let isFirstAssistantRun = true;
-const getTodayDate = () => new Date().toISOString().slice(0, 10);
 
 export const CookingPage = (props) => {
     const {
@@ -49,6 +43,7 @@ export const CookingPage = (props) => {
     } = props;
 
     const [speechProfile] = useSpeechProfile();
+    const isFirstAssistantRunRef = useRef(true);
     useActivateSoundIOS();
 
     const carouselRef = React.useRef();
@@ -262,24 +257,8 @@ export const CookingPage = (props) => {
 
     const handleStartCookingPress = async () => {
         if (!isSubscriber) {
-            try {
-                const storedUsage = await AsyncStorage.getItem(DAILY_VOICE_ASSISTANT_KEY);
-                const parsedUsage = storedUsage ? JSON.parse(storedUsage) : null;
-                const today = getTodayDate();
-                const hasFreeUse = parsedUsage?.date === today && parsedUsage?.used;
-
-                if (hasFreeUse) {
-                    setSubscriptionsOpened(true);
-                    return;
-                }
-
-                await AsyncStorage.setItem(
-                    DAILY_VOICE_ASSISTANT_KEY,
-                    JSON.stringify({date: today, used: true}),
-                );
-            } catch (error) {
-                console.log('Failed to track daily voice assistant usage', error);
-            }
+            setSubscriptionsOpened(true);
+           return;
         }
         setIsTimeActive(false);
         await handleTimerSongStop();
@@ -297,9 +276,9 @@ export const CookingPage = (props) => {
             return;
         }
 
-        if (isFirstAssistantRun) {
+        if (isFirstAssistantRunRef.current) {
             setHelpModalVisible(true);
-            isFirstAssistantRun = false;
+            isFirstAssistantRunRef.current = false;
         } else {
             await delayForPromise(1000);
             await startVoiceUsage();

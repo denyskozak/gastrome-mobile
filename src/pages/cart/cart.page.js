@@ -248,7 +248,7 @@ const CartPageComponent = (props) => {
             setSelected([]);
           }}
         >
-          <Icon name="trash-outline" size={24} color={Colors.black}/>
+          <Icon name="trash-outline" size={24} color={Colors.white}/>
         </Button>)}
       </View>
     }

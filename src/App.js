@@ -16,16 +16,16 @@ import {Navigation} from "./navigation/navigation.js";
 import {OnBoard, useIsOnBoarding} from "./components/molecular/on-boarding/on-boarding.component";
 import { useTheme } from './hooks/useTheme';
 import Toast from 'react-native-toast-message';
+import {useSplashScreen} from "./contexts/splash-screen.context";
 
 SplashScreen.preventAutoHideAsync().then().catch(() => console.log('error-splash-prevent-auto-hide'));
 const AppInner = ({
   fontsLoaded,
-  isVisibleCustomSplashScreen,
   isOnBoarding,
   setIsOnBoarding,
 }) => {
   const { theme } = useTheme();
-
+  const [isVisibleCustomSplashScreen] = useSplashScreen();
   const appBackgroundStyle = useMemo(() => ({
     flex: 1,
     backgroundColor: theme.colors.backgroundColorLowOpacity,
@@ -35,8 +35,8 @@ const AppInner = ({
     <View style={appBackgroundStyle}>
       {!fontsLoaded || isVisibleCustomSplashScreen ? <CustomSplashScreen /> : null}
       {/*TODO Remove onboarding */}
-      {fontsLoaded && !isVisibleCustomSplashScreen && isOnBoarding ? <OnBoard onEnd={() => setIsOnBoarding(false)}/> : null}
-      {fontsLoaded && !isVisibleCustomSplashScreen && !isOnBoarding
+      {fontsLoaded  && isOnBoarding ? <OnBoard onEnd={() => setIsOnBoarding(false)}/> : null}
+      {fontsLoaded && !isOnBoarding
         ? (<Layout><Navigation /></Layout>)
         : null}
       <Toast />
@@ -48,7 +48,7 @@ export const App = () => {
   const [fontsLoaded] = useFonts(fonts);
   // const [appIsReady, setAppIsReady] = useState(false);
   const [isOnBoarding, setIsOnBoarding] = useIsOnBoarding();
-  const [isVisibleCustomSplashScreen, setVisibleCustomSplashScreen] = useState(true);
+  // const [isVisibleCustomSplashScreen, setVisibleCustomSplashScreen] = useState(true);
   const [storedSettings, setStoredSettings] = useState(null);
 
   useEffect(() => { 
@@ -69,7 +69,7 @@ export const App = () => {
           await delayForPromise(500);
           SplashScreen.hideAsync().then().catch(() => console.log('error-splash-hide'));
           await delayForPromise(2000);
-          setVisibleCustomSplashScreen(false);
+          // setVisibleCustomSplashScreen(false);
         })();
       } catch (e) {
         console.log('Splash screen error: ', e);
@@ -82,7 +82,7 @@ export const App = () => {
     <AppContextWrapper defaultSettings={storedSettings}>
       <AppInner
         fontsLoaded={fontsLoaded}
-        isVisibleCustomSplashScreen={isVisibleCustomSplashScreen}
+        // isVisibleCustomSplashScreen={isVisibleCustomSplashScreen}
         isOnBoarding={isOnBoarding}
         setIsOnBoarding={setIsOnBoarding}
       />

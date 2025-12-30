@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     width: '100%',
     top: 0,
     gap: 8,
-    zIndex: 1,
+    zIndex: 10,
   },
   title: getTextStyles({
     fontSize: 32,

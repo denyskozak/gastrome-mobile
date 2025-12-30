@@ -3,6 +3,7 @@ import { getTextStyles } from '../../../styles/common.styles';
 import { Spaces } from '../../../styles/spaces';
 import { Colors } from '../../../styles/colors';
 import { fontEnum } from '../../../styles/fonts';
+import {BorderRadius} from "../../../styles/borderRadiuses";
 
 const styles = StyleSheet.create({
   modal: {

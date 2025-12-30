@@ -14,6 +14,7 @@ import voiceOnJSON from './list/voice-on.json';
 import voiceOffJSON from './list/voice-off.json';
 import cookOnFireJSON from './list/cooking-on-fire.json';
 import swipeDownJSON from './list/swipe-down.json';
+import * as stream from "node:stream";
 
 const looties = {
   cooking: cookingJSON,
@@ -31,12 +32,13 @@ const looties = {
 }
 
 const AnimationComponent = React.forwardRef((props, ref) => {
-  const { name, height, width, style = {}, autoPlay = true} = props;
+  const { name, height, width, style = {}, autoPlay = true, speed = 1} = props;
 
   return (
     <View style={[style, { height, width }]}>
       <Lottie
         autoPlay={autoPlay}
+        speed={speed}
         loop
         style={{ width, height }}
         ref={ref}

@@ -102,7 +102,7 @@ const SubscriptionsModalComponent = (props) => {
               </View>
               {isLoading && (
                 <View style={styles.logoWrapper}>
-                  <AnimatedLogo size="medium" color="white" isInfinity />
+                  <AnimatedLogo size="medium" color="black" isInfinity />
                 </View>
               )}
               {!isLoading && (
