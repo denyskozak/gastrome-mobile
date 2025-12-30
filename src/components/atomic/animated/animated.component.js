@@ -59,7 +59,6 @@ const AnimatedComponent = (props) => {
   const {children, delay = 0, duration = 500, name = 'FadeIn', outName = 'FadeOut', style = {}} = props;
   const Component = animations[name];
 
-  console.log("Component: ", Component)
   if (!Component) return null;
 
   const entering = Component

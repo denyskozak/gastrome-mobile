@@ -496,13 +496,15 @@ export const HomeScreen: React.FC = () => {
                         index={index}
                         onVideoLoad={() => {
                             if (isVisibleCustomSplashScreen) {
-                                setIsVisibleCustomSplashScreen(false);
-                                setTimeout(() => {
-                                    setShowArrow(true)
-                                }, 5000)
-                                setTimeout(() => {
-                                    setShowArrow(false)
-                                }, 9000)
+                               setTimeout(() => {
+                                   setIsVisibleCustomSplashScreen(false);
+                                   setTimeout(() => {
+                                       setShowArrow(true)
+                                   }, 5000)
+                                   setTimeout(() => {
+                                       setShowArrow(false)
+                                   }, 9000)
+                               }, 1000)
                             }
                         }}
                         isActive={activeIndex === index}

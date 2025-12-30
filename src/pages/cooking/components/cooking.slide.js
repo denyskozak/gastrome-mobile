@@ -7,7 +7,6 @@ import {StyleSheet} from 'react-native';
 
 import {Colors} from '../../../styles/colors';
 import {Spaces} from '../../../styles/spaces';
-import styles from './cooking.slide.styles';
 
 import {Animated} from '../../../components/atomic/animated/animated.component';
 import {VideoPlayer} from '../../../components/atomic/video-player/video-player.component';
@@ -18,6 +17,8 @@ import _ from 'lodash';
 import {StoryProgressBar} from "../../../components/atomic/story-bar/story-bar";
 import * as Haptics from "expo-haptics";
 import {getDevice} from "../../../utilities/getCurrentDevice";
+import {useTheme} from "../../../hooks/useTheme";
+import {useStyles} from "./cooking.slide.styles";
 
 export const CookingSlideComponent = ({
     // author,
@@ -47,7 +48,8 @@ export const CookingSlideComponent = ({
     const [showArrow, setShowArrow] = useState(false);
     const [isTextHidden, setIsTextHidden] = useState(false);
     const [isPause, setPause] = useState(false);
-
+    const { theme } = useTheme();
+    const styles = useStyles(theme)
     useEffect(() => {
         if (showArrow) {
             setTimeout(() => setShowArrow(false), 10000);

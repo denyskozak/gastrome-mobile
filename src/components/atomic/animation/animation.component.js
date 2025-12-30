@@ -14,7 +14,6 @@ import voiceOnJSON from './list/voice-on.json';
 import voiceOffJSON from './list/voice-off.json';
 import cookOnFireJSON from './list/cooking-on-fire.json';
 import swipeDownJSON from './list/swipe-down.json';
-import * as stream from "node:stream";
 
 const looties = {
   cooking: cookingJSON,

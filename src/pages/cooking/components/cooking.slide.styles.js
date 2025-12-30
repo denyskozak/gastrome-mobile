@@ -7,7 +7,7 @@ import {BorderRadius} from '../../../styles/borderRadiuses';
 import {fontEnum} from '../../../styles/fonts';
 import {getDevice} from '../../../utilities/getCurrentDevice';
 
-const styles = StyleSheet.create({
+export const useStyles = (theme) => StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
@@ -68,10 +68,10 @@ const styles = StyleSheet.create({
         borderRadius: BorderRadius.small,
         padding: Spaces.small,
         borderColor: Colors.white,
-        backgroundColor: Colors.backgroundColorLowOpacity
+        backgroundColor: theme.colors.backgroundColorLowOpacity
     },
     textContainerActive: {
-        backgroundColor: Colors.backgroundColor
+        backgroundColor: theme.colors.backgroundColor
     },
     textSizeControl: {
         flexDirection: 'row',
@@ -136,5 +136,3 @@ const styles = StyleSheet.create({
         color: Colors.red,
     }),
 });
-
-export default styles;

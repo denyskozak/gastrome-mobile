@@ -79,10 +79,10 @@ const SettingsPageComponent = (props) => {
                                 title={option.label}
                                 selected={option.id === themeId}
                                 onPress={() => {
-                                    if (!isSubscriber) {
-                                        setSubscriptionsOpened(true);
-                                        return;
-                                    }
+                                    // if (!isSubscriber) {
+                                    //     setSubscriptionsOpened(true);
+                                    //     return;
+                                    // }
                                     setTheme(option.id);
                                 }}
                             />

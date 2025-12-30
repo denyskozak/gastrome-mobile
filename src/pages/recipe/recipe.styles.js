@@ -18,14 +18,14 @@ const IPhoneImage = {
   width: getPercentWidth(100),
 };
 
-const styles = StyleSheet.create({
+export const useStyles = (theme) => StyleSheet.create({
   container: {
     flex: 1,
   },
   list: {
   },
   button: {
-    backgroundColor: Colors.primary,
+    backgroundColor: theme.colors.primary,
 
     // flex: 0.1,
   },
@@ -302,5 +302,3 @@ const styles = StyleSheet.create({
     color: Colors.white,
   })
 });
-
-export default styles;

@@ -24,12 +24,13 @@ import {AttentionAnimation} from '../../components/molecular/attansion-animation
 import {downloadAsync} from '../../utilities/downloadAsync';
 import {useAWS} from '../../hooks/useAWS';
 
-import styles from './recipe.styles';
+import { useStyles } from './recipe.styles';
 import {useRecipes} from "../../hooks/useRecipes";
 import {AuthorPreview} from "../../components/molecular/author-preview/author-preview";
 import {ZoomInOut} from "../../components/molecular/zoom-in-out-animation/zoom-in-out-animation";
 import {logEvent} from "../../utilities/google-analitics";
 import {isAvailableAsync, requestReview} from "expo-store-review";
+import {useTheme} from "../../hooks/useTheme";
 
 const RecipePageComponent = (props) => {
     const {
@@ -63,7 +64,8 @@ const RecipePageComponent = (props) => {
     } = recipe;
 
     const {getCookingStepURL} = useAWS();
-
+    const { theme } = useTheme();
+    const styles = useStyles(theme);
     const [, addCartItems] = useMenuCart();
     const [favorites, setLike] = useFavorites();
     const [settings, setSetting] = useSettings();
