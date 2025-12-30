@@ -14,7 +14,6 @@ import {renderIngredient, renderQuantity} from './recipe.renders';
 import {CountryList} from '../../components/atomic/country-flag/country-flag.list';
 import {CountryFlag} from '../../components/atomic/country-flag/country-flag.component';
 import {authorRoute, cookingRoute} from '../recipes/navigation/recipes.routes';
-import {Colors} from '../../styles/colors';
 import {cartPageRoute, welcomePageRoute} from '../../navigation/navigation.routes';
 import {useFavorites} from '../../contexts/favorites.context';
 import {useSettings} from '../../contexts/settings.context';
@@ -205,7 +204,7 @@ const RecipePageComponent = (props) => {
                         {isPreloadVideo && (
                             <Animated style={styles.imageIcon} outName="FadeOut" duration={800}>
                                 <AttentionAnimation delay={200} duration={1200} start={0.5} end={1} property="opacity">
-                                    <Icon name={'play-circle'} color={Colors[iconColor]}
+                                    <Icon name={'play-circle'} color={theme.colors[iconColor]}
                                           size={Spaces.xxlarge * 2}/>
                                 </AttentionAnimation>
                             </Animated>
@@ -278,9 +277,9 @@ const RecipePageComponent = (props) => {
                             step={1}
                             value={textSize}
                             onValueChange={setTextSize}
-                            minimumTrackTintColor={Colors.primary}
-                            maximumTrackTintColor={Colors.gray}
-                            thumbTintColor={Colors.primary}
+                            minimumTrackTintColor={theme.colors.primary}
+                            maximumTrackTintColor={theme.colors.grey}
+                            thumbTintColor={theme.colors.primary}
                         />
                         <Text style={styles.textSizeLabelLarge}>A</Text>
                     </View>
@@ -307,7 +306,7 @@ const RecipePageComponent = (props) => {
                                         }
                                     }}
                                 >
-                                    <Icon name="remove-circle-outline" color={Colors.white} size={20}/>
+                                    <Icon name="remove-circle-outline" color={theme.colors.white} size={20}/>
                                 </Button>
 
                                 <Button
@@ -320,7 +319,7 @@ const RecipePageComponent = (props) => {
                                     }}
                                     size="m"
                                 >
-                                    <Icon name="add-circle-outline" color={Colors.white} size={20}/>
+                                    <Icon name="add-circle-outline" color={theme.colors.white} size={20}/>
                                 </Button>
                             </View>
                         </View>

@@ -1,13 +1,12 @@
 import { StyleSheet } from 'react-native';
-import { Colors } from '../../../styles/colors';
 import { getTextStyles } from '../../../styles/common.styles';
 import { Spaces } from '../../../styles/spaces';
 import { BorderRadius } from '../../../styles/borderRadiuses';
 
-const styles = StyleSheet.create({
+export const useStyles = (theme) => StyleSheet.create({
   container: {
     borderBottomWidth: 1,
-    borderColor: Colors.primary,
+    borderColor: theme.colors.primary,
     height: Spaces.xlarge,
   },
   text: getTextStyles({
@@ -20,7 +19,7 @@ const styles = StyleSheet.create({
   outlined: {
     backgroundColor: 'rgba(52, 52, 52, 0)',
     borderWidth: 1,
-    borderColor: Colors.black,
+    borderColor: theme.colors.black,
     borderRadius: BorderRadius.small
   },
   resetIcon: {
@@ -37,5 +36,3 @@ const styles = StyleSheet.create({
   //   justifyContent: 'center',
   // },
 });
-
-export default styles;

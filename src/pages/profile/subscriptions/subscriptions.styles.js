@@ -1,9 +1,7 @@
 import { StyleSheet } from 'react-native';
 import { getTextStyles } from '../../../styles/common.styles';
 import { Spaces } from '../../../styles/spaces';
-import { Colors } from '../../../styles/colors';
-
-const styles = StyleSheet.create({
+export const useStyles = (theme) => StyleSheet.create({
   subscriptions: {
     marginTop: Spaces.large,
     gap: Spaces.large,
@@ -21,8 +19,6 @@ const styles = StyleSheet.create({
     width: Spaces.xxxlarge  * 4,
   },
   settingButton: {
-    borderColor: Colors.primary,
+    borderColor: theme.colors.primary,
   },
 });
-
-export default styles;

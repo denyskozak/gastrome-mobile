@@ -31,8 +31,8 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {Spaces} from "../../styles/spaces";
 import {Animated} from "../../components/atomic/animated/animated.component";
 import {Animation} from "../../components/atomic/animation/animation.component";
-import {Colors} from "../../styles/colors";
 import {useSplashScreen} from "../../contexts/splash-screen.context";
+import { useTheme } from '../../hooks/useTheme';
 
 const {height: SCREEN_HEIGHT} = Dimensions.get('window');
 const MAX_BUFFER_DISTANCE = 2;
@@ -115,6 +115,8 @@ export const HomeScreen: React.FC = () => {
     const allVideosLength = allVideos.length;
     const [showArrow, setShowArrow] = useState(false);
     const [isVisibleCustomSplashScreen,setIsVisibleCustomSplashScreen] = useSplashScreen();
+    const { theme } = useTheme();
+    const styles = useStyles(theme);
 
     const measure = settings?.measure ?? 'g';
     const [isBackgroundMusicEnabled, setIsBackgroundMusicEnabled] = useState(true);
@@ -622,7 +624,7 @@ export const HomeScreen: React.FC = () => {
     );
 };
 
-const styles = StyleSheet.create({
+const useStyles = (theme: { colors: Record<string, string> }) => StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#000',
@@ -671,7 +673,7 @@ const styles = StyleSheet.create({
     helpBackdrop: {
         width: '100%',
         height: '100%',
-        backgroundColor: Colors.backgroundColor,
+        backgroundColor: theme.colors.backgroundColor,
         opacity: 0.7
     },
     emptyFavoritesText: {

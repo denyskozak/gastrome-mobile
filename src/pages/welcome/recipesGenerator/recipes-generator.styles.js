@@ -1,11 +1,10 @@
 import { StyleSheet } from 'react-native';
-import { Colors } from '../../../styles/colors';
 import { getTextStyles } from '../../../styles/common.styles';
 import { fontEnum } from '../../../styles/fonts';
 import { Spaces } from '../../../styles/spaces';
 import { BorderRadius } from '../../../styles/borderRadiuses';
 
-const styles = StyleSheet.create({
+export const useStyles = (theme) => StyleSheet.create({
   container: {
     justifyContent: 'center',
     alignItems: 'center',
@@ -68,8 +67,6 @@ const styles = StyleSheet.create({
   getNewButton: {},
   getNewText: {
     fontSize: 20,
-    color: Colors.black
+    color: theme.colors.black
   },
 });
-
-export default styles;

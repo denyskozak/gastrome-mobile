@@ -1,6 +1,5 @@
 import { StyleSheet } from 'react-native';
 import { getTextStyles } from '../../../styles/common.styles';
-import { Colors } from '../../../styles/colors';
 
 const text = getTextStyles({
   fontSize: 24,
@@ -8,12 +7,12 @@ const text = getTextStyles({
   textDecorationLine: 'none',
 });
 
-const styles = StyleSheet.create({
+export const useStyles = (theme) => StyleSheet.create({
   selectText: {
     ...text,
     textAlign: 'center',
     borderWidth: 2,
-    borderColor: Colors.black,
+    borderColor: theme.colors.black,
     borderRadius: 30,
     padding: 12,
   },
@@ -23,11 +22,9 @@ const styles = StyleSheet.create({
   text: text,
 });
 
-export const AutocompleteColors = {
-  primary: Colors.black,
-  success: Colors.black,
-  subItemBackground: Colors.backgroundColor,
-  itemBackground: Colors.backgroundColor,
-};
-
-export default styles;
+export const getAutocompleteColors = (theme) => ({
+  primary: theme.colors.black,
+  success: theme.colors.black,
+  subItemBackground: theme.colors.backgroundColor,
+  itemBackground: theme.colors.backgroundColor,
+});

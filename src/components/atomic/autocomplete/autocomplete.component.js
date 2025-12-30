@@ -4,8 +4,9 @@ import { Text, View } from 'react-native';
 import Icon from '@expo/vector-icons/Ionicons';
 import SectionedMultiSelect from 'react-native-sectioned-multi-select';
 
-import autoStyles, { AutocompleteColors } from './autocomplete.styles';
+import { getAutocompleteColors, useStyles } from './autocomplete.styles';
 import { useTranslator } from '../../../hooks/useTranslator';
+import { useTheme } from '../../../hooks/useTheme';
 
 const AutocompleteComponent = ({
   items,
@@ -18,6 +19,9 @@ const AutocompleteComponent = ({
 
   const [t] = useTranslator('components.autocomplete');
   const [list, setList] = useState([]);
+  const { theme } = useTheme();
+  const autoStyles = useStyles(theme);
+  const autocompleteColors = getAutocompleteColors(theme);
 
   const handleChangeList = (newList) => {
     setList(newList);
@@ -37,7 +41,7 @@ const AutocompleteComponent = ({
       searchPlaceholderText={t('name')}
       confirmText={t('applyText')}
       displayKey="title"
-      colors={AutocompleteColors}
+      colors={autocompleteColors}
       IconRenderer={Icon}
       items={items}
       modalWithTouchable

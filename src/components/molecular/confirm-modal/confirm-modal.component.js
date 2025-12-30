@@ -6,7 +6,8 @@ import { Text } from 'react-native';
 import { Button } from '../../atomic/button/button.component';
 import { Modal } from '../../atomic/modal/modal.component';
 import { Spaces } from '../../../styles/spaces';
-import styles from './confirm-modal.styles';
+import { useStyles } from './confirm-modal.styles';
+import { useTheme } from '../../../hooks/useTheme';
 
 const ConfirmModalComponent = ({
   title = 'Are you sure?',
@@ -19,6 +20,8 @@ const ConfirmModalComponent = ({
   isConfirmDisabled = false,
   preContentComponent = null,
 }) => {
+  const { theme } = useTheme();
+  const styles = useStyles(theme);
 
   return (
     <Modal isVisible={isOpen} onChangeVisible={onClose}>

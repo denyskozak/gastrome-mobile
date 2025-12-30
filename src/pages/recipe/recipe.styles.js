@@ -2,7 +2,6 @@ import { getPercentHeight, getPercentWidth, getTextStyles } from '../../styles/c
 import { fontEnum } from '../../styles/fonts';
 import { StyleSheet } from 'react-native';
 import { Spaces } from '../../styles/spaces';
-import { Colors } from '../../styles/colors';
 import {BorderRadius as FontSizes, BorderRadius} from '../../styles/borderRadiuses';
 import {getDevice} from "../../utilities/getCurrentDevice";
 
@@ -30,7 +29,7 @@ export const useStyles = (theme) => StyleSheet.create({
     // flex: 0.1,
   },
   buttonText: getTextStyles({
-    color: Colors.black,
+    color: theme.colors.black,
     fontSize: FontSizes.large,
     fontFamily: fontEnum.PoppinsBold,
   }),
@@ -68,7 +67,7 @@ export const useStyles = (theme) => StyleSheet.create({
     marginHorizontal: Spaces.medium,
     padding: Spaces.medium,
     backgroundColor: 'rgba(255, 184, 0, 0.12)',
-    borderColor: Colors.primary,
+    borderColor: theme.colors.primary,
     borderWidth: 1,
     borderRadius: BorderRadius.medium,
   },
@@ -81,7 +80,7 @@ export const useStyles = (theme) => StyleSheet.create({
     width: Spaces.xxxlarge,
     height: Spaces.xxxlarge,
     borderRadius: BorderRadius.small,
-    backgroundColor: Colors.primary,
+    backgroundColor: theme.colors.primary,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -91,21 +90,21 @@ export const useStyles = (theme) => StyleSheet.create({
   freeQuotaBannerTitle: getTextStyles({
     fontSize: 16,
     fontFamily: fontEnum.PoppinsBold,
-    color: Colors.black,
+    color: theme.colors.black,
   }),
   freeQuotaBannerSubtitle: getTextStyles({
     fontSize: 14,
-    color: Colors.black,
+    color: theme.colors.black,
     marginTop: Spaces.xsmall,
   }),
   freeQuotaBannerButton: {
     marginTop: Spaces.small,
-    backgroundColor: Colors.white,
+    backgroundColor: theme.colors.white,
     borderWidth: 1,
-    borderColor: Colors.primary,
+    borderColor: theme.colors.primary,
   },
   freeQuotaBannerButtonText: getTextStyles({
-    color: Colors.black,
+    color: theme.colors.black,
     fontFamily: fontEnum.PoppinsSemiBold,
   }),
 
@@ -134,7 +133,7 @@ export const useStyles = (theme) => StyleSheet.create({
     fontSize: 14,
     marginTop: Spaces.large,
     fontFamily: fontEnum.PoppinsExtraBold,
-    color: Colors.red,
+    color: theme.colors.red,
   }),
   viewed: getTextStyles({
     fontSize: 16,
@@ -182,12 +181,12 @@ export const useStyles = (theme) => StyleSheet.create({
   }),
   tip: getTextStyles({
     fontSize: 16,
-    color: Colors.red,
+    color: theme.colors.red,
     marginTop: Spaces.small,
   }),
   author: getTextStyles({
     marginTop: Spaces.small,
-    color: Colors.red,
+    color: theme.colors.red,
   }),
   servings: getTextStyles({
     fontSize: 20,
@@ -209,7 +208,7 @@ export const useStyles = (theme) => StyleSheet.create({
     textAlign: 'center',
     marginBottom: Spaces.small,
     fontFamily: fontEnum.PoppinsBold,
-    color: Colors.red
+    color: theme.colors.red
   }),
   ingredientsContainer: {
     marginLeft: Spaces.small,
@@ -245,7 +244,7 @@ export const useStyles = (theme) => StyleSheet.create({
   stepName: getTextStyles({
     fontSize: 20,
     fontFamily: fontEnum.PoppinsBold,
-    color: Colors.red
+    color: theme.colors.red
   }),
   underline: {
     textDecorationLine: 'underline',
@@ -299,6 +298,6 @@ export const useStyles = (theme) => StyleSheet.create({
     marginTop: Spaces.medium,
   },
   helpModalStartButtonText: getTextStyles({
-    color: Colors.white,
+    color: theme.colors.white,
   })
 });

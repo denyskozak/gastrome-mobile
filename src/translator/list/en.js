@@ -1,5 +1,3 @@
-import {Colors} from "../../styles/colors";
-
 export const translates = {
     navigation: {
         home: 'Home',

@@ -1,10 +1,9 @@
 import { StyleSheet } from 'react-native';
 import { Spaces } from '../../styles/spaces';
 import { BorderRadius, getTextStyles } from '../../styles/common.styles';
-import { Colors } from '../../styles/colors';
 import { fontEnum } from '../../styles/fonts';
 
-const styles = StyleSheet.create({
+export const useStyles = (theme) => StyleSheet.create({
   container: {
     flex: 1,
     position: 'relative',
@@ -23,11 +22,9 @@ const styles = StyleSheet.create({
     marginTop: Spaces.small,
     fontSize: 18,
     textAlign: 'center',
-    color: Colors.white
+    color: theme.colors.white
   }),
   helpModalButton: {
     marginTop: Spaces.medium,
   },
 });
-
-export default styles;

@@ -1,11 +1,10 @@
 import { StyleSheet } from 'react-native';
 import { getTextStyles } from '../../../styles/common.styles';
 import { Spaces } from '../../../styles/spaces';
-import { Colors } from '../../../styles/colors';
 import { fontEnum } from '../../../styles/fonts';
 import {BorderRadius} from "../../../styles/borderRadiuses";
 
-const styles = StyleSheet.create({
+export const useStyles = (theme) => StyleSheet.create({
   modal: {
     margin: 0,
     flex: 1,
@@ -60,7 +59,7 @@ const styles = StyleSheet.create({
     marginTop: Spaces.medium,
     fontSize: 18,
     textAlign: 'center',
-    color: Colors.white,
+    color: theme.colors.white,
   }),
   buttons: {
     marginTop: Spaces.large,
@@ -72,10 +71,10 @@ const styles = StyleSheet.create({
   },
   button: {
     alignSelf: 'stretch',
-    borderColor: Colors.white,
+    borderColor: theme.colors.white,
   },
   buttonText: getTextStyles({
-    color: Colors.black,
+    color: theme.colors.black,
   }),
   logoWrapper: {
     marginTop: Spaces.large,
@@ -88,25 +87,23 @@ const styles = StyleSheet.create({
     marginBottom: Spaces.medium,
   },
   closeButton: {
-    borderColor: Colors.white,
+    borderColor: theme.colors.white,
     minWidth: 80,
   },
   closeButtonText: getTextStyles({
-    color: Colors.white,
+    color: theme.colors.white,
   }),
   error: getTextStyles({
     marginTop: Spaces.medium,
     fontSize: 20,
     textAlign: 'center',
-    color: Colors.white,
+    color: theme.colors.white,
   }),
   success: getTextStyles({
     marginTop: Spaces.medium,
     fontSize: 20,
     textAlign: 'center',
     fontFamily: fontEnum.PoppinsSemiBold,
-    color: Colors.white,
+    color: theme.colors.white,
   }),
 });
-
-export default styles;

@@ -21,10 +21,11 @@ import { sortIngredients } from './grocery.utilities';
 import { Animated } from '../../components/atomic/animated/animated.component';
 import { IntroVideoModal } from '../../components/organismic/intro-video-modal/intro-video-modal';
 
-import styles from './grocery.styles';
+import { useStyles } from './grocery.styles';
 import { HelpButton } from '../../components/molecular/help-button/help-button';
 import { recipesPageRoute } from '../../navigation/navigation.routes';
 import { recipesRoute } from '../recipes/navigation/recipes.routes';
+import { useTheme } from '../../hooks/useTheme';
 
 const intoVideo = require('./grocery-instruction-video.mp4');
 
@@ -34,6 +35,8 @@ const GroceryPageComponent = (props) => {
   } = props;
 
   const [t,, language] = useTranslator('pages.grocery');
+  const { theme } = useTheme();
+  const styles = useStyles(theme);
 
   // Voice select
   const [isListening, setListening] = useState(false);

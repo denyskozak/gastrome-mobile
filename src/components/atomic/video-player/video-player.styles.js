@@ -1,15 +1,14 @@
 import { StyleSheet } from 'react-native';
-import { Colors } from '../../../styles/colors';
 import { containerMarginTop, getTextStyles } from '../../../styles/common.styles';
 import { Spaces } from '../../../styles/spaces';
 
-const styles = StyleSheet.create({
+export const useStyles = (theme) => StyleSheet.create({
   container: {
     width: '100%',
     height: '100%',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: Colors.backgroundColor,
+    backgroundColor: theme.colors.backgroundColor,
   },
   loading: {
     position: 'absolute',
@@ -27,5 +26,3 @@ const styles = StyleSheet.create({
     left: 0
   }
 });
-
-export default styles;

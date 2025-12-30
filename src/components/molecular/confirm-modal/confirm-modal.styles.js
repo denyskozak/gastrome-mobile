@@ -1,18 +1,17 @@
 import { StyleSheet } from 'react-native';
 import { Spaces } from '../../../styles/spaces';
 import { getTextStyles } from '../../../styles/common.styles';
-import {Colors} from "../../../styles/colors";
-const styles = StyleSheet.create({
+export const useStyles = (theme) => StyleSheet.create({
   // Voice assistant modal
   title: getTextStyles({
     marginTop: Spaces.small,
     fontSize: 20,
-    color: Colors.white
+    color: theme.colors.white
   }),
   text: getTextStyles({
     marginTop: Spaces.small,
     fontSize: 16,
-    color: Colors.white
+    color: theme.colors.white
   }),
   buttons: {
     flexDirection: 'row',
@@ -20,11 +19,9 @@ const styles = StyleSheet.create({
     marginTop: Spaces.medium,
   },
   button: {
-    borderColor: Colors.white
+    borderColor: theme.colors.white
   },
   buttonText: getTextStyles({
-    color: Colors.white
+    color: theme.colors.white
   }),
 });
-
-export default styles;

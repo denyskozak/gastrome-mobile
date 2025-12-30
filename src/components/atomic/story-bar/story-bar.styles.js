@@ -1,9 +1,8 @@
 import { StyleSheet } from 'react-native';
-import { Colors } from '../../../styles/colors';
 import { Spaces } from '../../../styles/spaces';
 import {getPercentWidth} from "../../../styles/common.styles";
 
-const styles = StyleSheet.create({
+export const useStyles = (theme) => StyleSheet.create({
   container: {
     display: 'flex',
     flexDirection: 'row',
@@ -20,11 +19,9 @@ const styles = StyleSheet.create({
     transition: 'background-color 0.3s ease', // Smooth transition
   },
   activeSegment: {
-    backgroundColor: Colors.primary,
+    backgroundColor: theme.colors.primary,
   },
   inactiveSegment: {
-    backgroundColor: Colors.white,
+    backgroundColor: theme.colors.white,
   },
 });
-
-export default styles;
