@@ -9,7 +9,7 @@ const ButtonComponent = ({
   style = {},
   textStyle = {},
   highlight = false,
-  children,
+  children = null,
   type = 'clear',
   disabled = false,
   selected = false,
