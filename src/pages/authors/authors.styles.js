@@ -2,9 +2,7 @@ import {getPercentHeight, getPercentWidth, getTextStyles} from '../../styles/com
 import {fontEnum} from '../../styles/fonts';
 import {StyleSheet} from 'react-native';
 import {Spaces} from '../../styles/spaces';
-import {Colors} from '../../styles/colors';
-
-const styles = StyleSheet.create({
+export const useStyles = (theme) => StyleSheet.create({
     container: {
         flex: 1,
         gap: Spaces.medium,
@@ -26,11 +24,11 @@ const styles = StyleSheet.create({
     subscriptionsButton: {
         marginLeft: Spaces.medium,
         marginRight : Spaces.medium,
-        backgroundColor: Colors.black,
+        backgroundColor: theme.colors.black,
         marginBottom: Spaces.medium,
     },
     subscriptionsButtonText: getTextStyles({
-        color: Colors.white,
+        color: theme.colors.white,
     }),
 
     recipes: getTextStyles({
@@ -47,5 +45,3 @@ const styles = StyleSheet.create({
         gap: Spaces.xlarge,
     },
 });
-
-export default styles;

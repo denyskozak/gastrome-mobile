@@ -1,15 +1,14 @@
 import { StyleSheet } from 'react-native';
-import { Colors } from '../../../styles/colors';
 import { getTextStyles } from '../../../styles/common.styles';
 import { BorderRadius } from '../../../styles/borderRadiuses';
 
-const styles = StyleSheet.create({
+export const useStyles = (theme) => StyleSheet.create({
   container: {
     width: '100%',
     height: '100%',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: Colors.backgroundColor,
+    backgroundColor: theme.colors.backgroundColor,
   },
   rounded: {
     borderRadius: BorderRadius.small,
@@ -26,5 +25,3 @@ const styles = StyleSheet.create({
     fontSize: 16
   }),
 });
-
-export default styles;

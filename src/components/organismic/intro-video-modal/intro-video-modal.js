@@ -6,11 +6,13 @@ import {Video} from 'expo-av';
 import {Modal} from '../../atomic/modal/modal.component';
 import {Button} from '../../atomic/button/button.component';
 
-import styles from './intro-video-modal.styles';
-import {Colors} from '../../../styles/colors';
+import { useStyles } from './intro-video-modal.styles';
+import { useTheme } from '../../../hooks/useTheme';
 
 const IntroVideoModalComponent = (props) => {
     const {isOpen, onChangeVisible, title, source} = props;
+    const { theme } = useTheme();
+    const styles = useStyles(theme);
 
     return (
         <Modal isVisible={isOpen} onChangeVisible={onChangeVisible}>
@@ -32,7 +34,7 @@ const IntroVideoModalComponent = (props) => {
                     onChangeVisible(false);
                 }}
             >
-                <Icon name="checkmark-outline" size={24} color={Colors.white}/>
+                <Icon name="checkmark-outline" size={24} color={theme.colors.white}/>
             </Button>
         </Modal>
     );

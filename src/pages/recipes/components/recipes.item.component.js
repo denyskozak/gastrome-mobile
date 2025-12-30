@@ -6,11 +6,11 @@ import {useTranslator} from '../../../hooks/useTranslator';
 import {CountryList} from '../../../components/atomic/country-flag/country-flag.list';
 import {CountryFlag} from '../../../components/atomic/country-flag/country-flag.component';
 import {Animation} from '../../../components/atomic/animation/animation.component';
-import {Colors} from '../../../styles/colors';
 import {Spaces} from '../../../styles/spaces';
 import {cutText} from '../../../utilities/cutText';
+import { useTheme } from '../../../hooks/useTheme';
 
-import styles from './recipes.item.styles';
+import { useStyles } from './recipes.item.styles';
 
 const RecipeItemComponent = ({
     id,
@@ -31,6 +31,8 @@ const RecipeItemComponent = ({
 
     const [t] = useTranslator('pages.recipes');
     const [tCommon] = useTranslator('common');
+    const { theme } = useTheme();
+    const styles = useStyles(theme);
 
     const recipeCountry = useMemo(() => {
         return filters.find(item => CountryList.includes(item));
@@ -98,7 +100,7 @@ const RecipeItemComponent = ({
             {/*  </Text>*/}
             {/*)}*/}
             <View style={styles.icons}>
-                {isFavorited && (<Icon name="bookmark" color={Colors.red} size={Spaces.large}/>)}
+                {isFavorited && (<Icon name="bookmark" color={theme.colors.red} size={Spaces.large}/>)}
                 {recipeCountry && <View style={styles.flag}><CountryFlag name={recipeCountry}/></View>}
             </View>
             <View style={styles.timeContainer}>

@@ -27,6 +27,7 @@ import { Button } from '../atomic/button/button.component';
 import { useTranslator } from '../../hooks/useTranslator';
 import { Liner } from '../atomic/video-player/liner/liner.component';
 import {AVPlaybackStatusError} from "expo-av/src/AV.types";
+import { useTheme } from '../../hooks/useTheme';
 
 let ExpoVideo: any = null;
 let ExpoResizeMode: any = null;
@@ -117,7 +118,8 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
   const feedbackOpacity = useRef(createAnimatedValue(0)).current;
   const heartScale = useRef(createAnimatedValue(0)).current;
   const tabBarHeight = useBottomTabBarHeight();
-  const styles = getStyles(tabBarHeight);
+  const { theme } = useTheme();
+  const styles = getStyles(tabBarHeight, theme);
 
   useEffect(() => {
     setLiked(Boolean(isFavorite));

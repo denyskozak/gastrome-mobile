@@ -1,10 +1,9 @@
 import { StyleSheet } from 'react-native';
 import { getPercentWidth, getTextStyles } from '../../styles/common.styles';
 import { Spaces } from '../../styles/spaces';
-import { Colors } from '../../styles/colors';
 import { BorderRadius } from '../../styles/borderRadiuses';
 
-const styles = StyleSheet.create({
+export const useStyles = (theme) => StyleSheet.create({
   container: {
     flex: 1,
   },
@@ -18,7 +17,7 @@ const styles = StyleSheet.create({
     paddingBottom: Spaces.medium,
     justifyContent: 'center',
     borderBottomWidth: 1,
-    borderColor: Colors.primary,
+    borderColor: theme.colors.primary,
     width: getPercentWidth(100),
   },
   addForm: {
@@ -33,7 +32,7 @@ const styles = StyleSheet.create({
   addButton: {
     marginLeft: Spaces.small,
     borderRadius: BorderRadius.small,
-    backgroundColor: Colors.black,
+    backgroundColor: theme.colors.black,
   },
 
   // List of ingredients
@@ -53,12 +52,12 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   selectedItem: {
-    backgroundColor: Colors.red,
-    borderColor: Colors.red,
+    backgroundColor: theme.colors.red,
+    borderColor: theme.colors.red,
   },
   subText: getTextStyles({
     fontSize: 14,
-    color: Colors.primary,
+    color: theme.colors.primary,
   }),
 
   // Action buttons
@@ -69,7 +68,7 @@ const styles = StyleSheet.create({
     // backgroundColor: Colors.backgroundColor,
     alignItems: 'center',
     borderTopWidth: 1,
-    borderTopColor: Colors.primary,
+    borderTopColor: theme.colors.primary,
   },
   actionButton: {
     marginLeft: Spaces.small,
@@ -85,7 +84,7 @@ const styles = StyleSheet.create({
   },
   finishButtonText: getTextStyles({
     fontSize: 24,
-    color: Colors.white,
+    color: theme.colors.white,
     alignItems: 'center',
   }),
 
@@ -101,8 +100,6 @@ const styles = StyleSheet.create({
   notFoundButton: {
     marginTop: Spaces.medium,
     alignSelf: 'center',
-    borderColor: Colors.primary
+    borderColor: theme.colors.primary
   }
 });
-
-export default styles;

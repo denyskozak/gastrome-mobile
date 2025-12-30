@@ -3,8 +3,8 @@ import { Popover } from 'react-native-popable';
 import { View, Text } from 'react-native';
 import { Animated } from '../animated/animated.component';
 
-import styles from './tooltip.styles';
-import { Colors } from '../../../styles/colors';
+import { useStyles } from './tooltip.styles';
+import { useTheme } from '../../../hooks/useTheme';
 
 const TooltipComponent = ({
   isVisible,
@@ -13,6 +13,8 @@ const TooltipComponent = ({
   placement,
   delay = 0,
 }) => {
+  const { theme } = useTheme();
+  const styles = useStyles(theme);
 
   const positionStyle = useMemo(() => {
     switch (placement) {
@@ -36,7 +38,7 @@ const TooltipComponent = ({
               style={styles.popover}
               visible={isVisible}
               position={calculatedPlacement}
-              backgroundColor={Colors.black}
+              backgroundColor={theme.colors.black}
             >
               <Text style={styles.text}>{text}</Text>
             </Popover>

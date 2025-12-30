@@ -1,11 +1,10 @@
 import { StyleSheet } from 'react-native';
 import { containerMarginTop, getPercentWidth, getTextStyles } from '../../styles/common.styles';
 import { Spaces } from '../../styles/spaces';
-import { Colors } from '../../styles/colors';
 import { BorderRadius } from '../../styles/borderRadiuses';
 import {getDevice} from "../../utilities/getCurrentDevice";
 
-const styles = StyleSheet.create({
+export const useStyles = (theme) => StyleSheet.create({
   container: {
     // marginLeft: Spaces.xsmall,
     // marginRight: Spaces.xsmall,
@@ -18,7 +17,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderBottomWidth: 1,
-    borderColor: Colors.primary,
+    borderColor: theme.colors.primary,
     width: getPercentWidth(100),
     gap: Spaces.small,
   },
@@ -26,7 +25,7 @@ const styles = StyleSheet.create({
     marginLeft: Spaces.small,
     // width: Spaces.xxxlarge,
     borderRadius: BorderRadius.small,
-    borderColor: Colors.white
+    borderColor: theme.colors.white
   },
   actionContainer: {
     flexDirection: 'row',
@@ -41,7 +40,7 @@ const styles = StyleSheet.create({
   },
   emptyList: getTextStyles({
     fontSize: 16,
-    color: Colors.primary
+    color: theme.colors.primary
   }),
   firstSubscriptionButton: {
     margin: Spaces.medium,
@@ -50,23 +49,23 @@ const styles = StyleSheet.create({
   actionText: getTextStyles({
     fontSize: 14,
     marginLeft: Spaces.small,
-    color: Colors.primary,
+    color: theme.colors.primary,
   }),
   resetButton: {
     marginTop: Spaces.small,
-    borderColor: Colors.white,
+    borderColor: theme.colors.white,
   },
   resetButtonText: getTextStyles({
     alignItems: 'center',
     justifyContent: 'center',
     fontSize: 14,
-    color: Colors.white,
+    color: theme.colors.white,
   }),
 
   // Filters
   filters: {
-    backgroundColor: Colors.backgroundColor,
-    borderColor: Colors.primary,
+    backgroundColor: theme.colors.backgroundColor,
+    borderColor: theme.colors.primary,
     borderWidth: 1,
   },
   filtersTitle: getTextStyles({
@@ -93,7 +92,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   filtersBar: {
-    backgroundColor: Colors.primary,
+    backgroundColor: theme.colors.primary,
   },
   filterButtons: {
     flexDirection: 'row',
@@ -110,13 +109,13 @@ const styles = StyleSheet.create({
   searchByIngredientsContainer: {
     marginTop: Spaces.medium,
     padding: Spaces.small,
-    backgroundColor: Colors.primary,
+    backgroundColor: theme.colors.primary,
     borderRadius: BorderRadius.small,
     alignItems: 'center'
   },
   searchByIngredients: getTextStyles({
     fontSize: 14,
-    color: Colors.white,
+    color: theme.colors.white,
   }),
 
   //list
@@ -138,9 +137,7 @@ const styles = StyleSheet.create({
   assistantButtonText: getTextStyles({
     marginLeft: Spaces.small,
     fontSize: 24,
-    color: Colors.white,
+    color: theme.colors.white,
     justifyContent: 'center',
   }),
 });
-
-export default styles;

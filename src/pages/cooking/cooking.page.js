@@ -24,7 +24,7 @@ import {CircleTimer} from '../../components/molecular/circle-timer/circle-timer'
 import {secondsToMinutesWithTranslations} from '../../utilities/timeParsers';
 import {Spaces} from '../../styles/spaces';
 
-import styles from './cooking.page.styles';
+import { useStyles } from './cooking.page.styles';
 import {useRecipes} from "../../hooks/useRecipes";
 import {useSettings} from "../../contexts/settings.context";
 import {useLogger} from "../../hooks/useLogger";
@@ -32,6 +32,7 @@ import * as Haptics from "expo-haptics";
 import {logEvent} from "../../utilities/google-analitics";
 import {useSubscriptions} from "../../contexts/subscriptions.context";
 import {SubscriptionsModal} from "../../components/templates/subscriptions-modal/subscriptions-modal";
+import { useTheme } from '../../hooks/useTheme';
 
 const alarmSong = require('./alarm.mp3');
 const soundObject = new Audio.Sound();
@@ -69,6 +70,8 @@ export const CookingPage = (props) => {
     const [lastCommandDevMode, setLastCommandDevMove] = useState('');
     const [isSubscriptionsOpened, setSubscriptionsOpened] = useState(false);
     const [stepTextSize, setStepTextSize] = useState(18);
+    const { theme } = useTheme();
+    const styles = useStyles(theme);
 
     const parseDuration = useCallback((value) => {
         const translates = {

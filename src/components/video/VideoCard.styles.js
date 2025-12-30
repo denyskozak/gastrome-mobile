@@ -1,9 +1,8 @@
 import {StyleSheet} from "react-native";
 import {getTextStyles} from "../../styles/common.styles";
-import {Colors} from "../../styles/colors";
 import {Spaces} from "../../styles/spaces";
 
-export const getStyles = (tabBarHeight) => StyleSheet.create({
+export const getStyles = (tabBarHeight, theme) => StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#000',
@@ -96,11 +95,11 @@ export const getStyles = (tabBarHeight) => StyleSheet.create({
     metaButton: {
         alignSelf: 'flex-start',
         borderWidth:1,
-        borderColor: Colors.black
+        borderColor: theme.colors.black
     },
     metaButtonText: getTextStyles({
         fontSize: 20,
-        color: Colors.black,
+        color: theme.colors.black,
         fontWeight: '600',
     }),
     tags: {

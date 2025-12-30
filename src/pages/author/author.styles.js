@@ -2,7 +2,6 @@ import { getPercentHeight, getPercentWidth, getTextStyles } from '../../styles/c
 import { fontEnum } from '../../styles/fonts';
 import { StyleSheet } from 'react-native';
 import { Spaces } from '../../styles/spaces';
-import { Colors } from '../../styles/colors';
 import { BorderRadius } from '../../styles/borderRadiuses';
 
 const styles = StyleSheet.create({

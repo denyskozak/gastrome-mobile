@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import NativeModal from 'react-native-modal';
 import { View } from 'react-native';
-import { Colors } from '../../../styles/colors';
-import styles from './alert.styles';
+import { useStyles } from './alert.styles';
+import { useTheme } from '../../../hooks/useTheme';
 
 const AlertComponent = (props) => {
   const {
@@ -12,6 +12,8 @@ const AlertComponent = (props) => {
   } = props;
 
   const [isVisible, setVisible] = useState(true);
+  const { theme } = useTheme();
+  const styles = useStyles(theme);
 
   useEffect(() => {
     // setTimeout(() => setVisible(false), delay);

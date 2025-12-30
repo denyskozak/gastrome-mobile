@@ -6,9 +6,10 @@ import { useTranslator } from '../../../hooks/useTranslator';
 import { Button } from '../../../components/atomic/button/button.component';
 import { useSubscriptions } from '../../../contexts/subscriptions.context';
 
-import styles from './subscriptions.styles';
+import { useStyles } from './subscriptions.styles';
 import { SubscriptionsModal } from '../../../components/templates/subscriptions-modal/subscriptions-modal';
 import { isAvailableAsync, requestReview } from 'expo-store-review';
+import { useTheme } from '../../../hooks/useTheme';
 
 const SubscriptionsPageComponent = () => {
   const [
@@ -17,6 +18,8 @@ const SubscriptionsPageComponent = () => {
 
   const [isSubscriber, activeSubscription] = useSubscriptions();
   const [isSubscriptionsOpened, setSubscriptionsOpened] = useState(false);
+  const { theme } = useTheme();
+  const styles = useStyles(theme);
 
   return (
     <View>
