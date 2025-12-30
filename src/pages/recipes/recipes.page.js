@@ -8,7 +8,6 @@ import * as Haptics from "expo-haptics";
 import {RecipeItem} from './components/recipes.item.component';
 import {useTranslator} from '../../hooks/useTranslator';
 import {Button} from '../../components/atomic/button/button.component';
-import {Colors} from '../../styles/colors';
 import {sortRecipes} from './recipes.sortings';
 import {filterRecipes} from './recipes.filters';
 import {useSearchByIngredients} from '../../contexts/searchByIngredients.context';
@@ -17,13 +16,14 @@ import {recipeRoute, recipesGroceryRoute} from './navigation/recipes.routes';
 import {useFavorites} from '../../contexts/favorites.context';
 import {SubscriptionsModal} from '../../components/templates/subscriptions-modal/subscriptions-modal';
 
-import styles from './recipes.styles';
+import { useStyles } from './recipes.styles';
 import {useRecipes} from "../../hooks/useRecipes";
 import {useSubscriptions} from "../../contexts/subscriptions.context";
 import {SubscriptionButton} from "../../components/templates/subscription-button/subscription-button";
 import {filterIcons} from "../../constants/filters";
 import {renderFilterIcon} from "../../utilities/renders";
 import {useSettings} from "../../contexts/settings.context";
+import { useTheme } from '../../hooks/useTheme';
 
 
 const RecipesPageComponent = (props) => {
@@ -36,6 +36,8 @@ const RecipesPageComponent = (props) => {
     const [favorites] = useFavorites();
     const [isSubscriber] = useSubscriptions();
     const [{filterNames}, setSetting] = useSettings();
+    const { theme } = useTheme();
+    const styles = useStyles(theme);
     const setFilterNames = name => setSetting('filterNames', name);
     const [recipes] = useRecipes(true);
 
@@ -171,7 +173,7 @@ const RecipesPageComponent = (props) => {
                     <Text style={styles.resetButtonText}>
                         {t('reset')}
                         {' '}
-                        <Icon name="close-circle-outline" size={14} color={Colors.white}/>
+                        <Icon name="close-circle-outline" size={14} color={theme.colors.white}/>
                     </Text>
                 </Button>
             </View>
@@ -232,7 +234,7 @@ const RecipesPageComponent = (props) => {
                     onPress={onPress}
                     size="s"
                 >
-                    <Icon name={iconName} size={24} color={Colors.white}/>
+                    <Icon name={iconName} size={24} color={theme.colors.white}/>
                 </Button>
             </Fragment>
         ))

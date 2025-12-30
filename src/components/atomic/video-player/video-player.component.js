@@ -5,9 +5,10 @@ import { View, Text } from 'react-native';
 import { Animated } from '../animated/animated.component';
 import { useEffect, useState } from 'react';
 import { downloadAsync } from '../../../utilities/downloadAsync';
-import styles from './video-player.styles';
+import { useStyles } from './video-player.styles';
 import { AnimatedLogo } from '../logo/animated-logo.component';
 import { Liner } from './liner/liner.component';
+import { useTheme } from '../../../hooks/useTheme';
 
 const VideoPlayerComponent = ({
   style = {},
@@ -19,6 +20,8 @@ const VideoPlayerComponent = ({
   progressLineBottomPosition = 0,
   loadingText = '',
 }) => {
+  const { theme } = useTheme();
+  const styles = useStyles(theme);
 
   const [localUri, setLocalUri] = useState('');
   const [status, setStatus] = useState({});

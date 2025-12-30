@@ -1,9 +1,7 @@
 import { StyleSheet } from 'react-native';
-import { Colors } from '../../../styles/colors';
-
-const styles = StyleSheet.create({
+export const useStyles = (theme) => StyleSheet.create({
   container: {
-    backgroundColor: Colors.backgroundColor,
+    backgroundColor: theme.colors.backgroundColor,
     alignItems: 'center',
     flex: 1,
     justifyContent: 'center',
@@ -13,5 +11,3 @@ const styles = StyleSheet.create({
     height: 160,
   },
 });
-
-export default styles;

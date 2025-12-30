@@ -1,10 +1,9 @@
 import { StyleSheet } from 'react-native';
 import {getTextStyles} from '../../../styles/common.styles';
-import { Colors } from '../../../styles/colors';
 import { Spaces } from '../../../styles/spaces';
 import {BorderRadius} from "../../../styles/borderRadiuses";
 
-const styles = StyleSheet.create({
+export const useStyles = (theme) => StyleSheet.create({
   container: {
     justifyContent: 'center',
     alignItems: 'center',
@@ -20,10 +19,8 @@ const styles = StyleSheet.create({
   text: getTextStyles({
     fontSize: 18,
     padding: Spaces.small,
-    color: Colors.primary,
+    color: theme.colors.primary,
     textAlign: 'center',
     borderRadius: BorderRadius.medium,
   })
 });
-
-export default styles;

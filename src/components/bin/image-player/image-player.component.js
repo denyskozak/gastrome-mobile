@@ -2,9 +2,10 @@ import * as React from 'react';
 import { View, Image } from 'react-native';
 
 import { useEffect, useState } from 'react';
-import styles from './image-player.styles';
+import { useStyles } from './image-player.styles';
 import { downloadAsync } from '../../../utilities/downloadAsync';
 import { AnimatedLogo } from '../../atomic/logo/animated-logo.component';
+import { useTheme } from '../../../hooks/useTheme';
 
 const ImagePlayerComponent = ({
   style = {},
@@ -12,6 +13,8 @@ const ImagePlayerComponent = ({
   rounded = false,
 }) => {
   const [isLoading, setLoading] = useState(true);
+  const { theme } = useTheme();
+  const styles = useStyles(theme);
 
   // main for component
   const [localUri, setLocalUri] = useState('');

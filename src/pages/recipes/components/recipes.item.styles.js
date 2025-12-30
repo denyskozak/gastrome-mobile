@@ -1,12 +1,11 @@
 import { StyleSheet } from 'react-native';
-import { Colors } from '../../../styles/colors';
 import { getTextStyles } from '../../../styles/common.styles';
 import { fontEnum } from '../../../styles/fonts';
 import { Spaces } from '../../../styles/spaces';
 import {BorderRadius as FontSizes, BorderRadius} from '../../../styles/borderRadiuses';
 import { getDevice } from '../../../utilities/getCurrentDevice';
 
-const styles = StyleSheet.create({
+export const useStyles = (theme) => StyleSheet.create({
   container: {
     marginTop: Spaces.medium,
     alignItems: 'center',
@@ -62,7 +61,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: fontEnum.PoppinsBold,
     textAlign: 'center',
-    color: Colors.red,
+    color: theme.colors.red,
     marginBottom: Spaces.small,
   }),
   hasVideoIcon: {
@@ -89,16 +88,14 @@ const styles = StyleSheet.create({
   }),
   selectedIngredients: getTextStyles({
     fontSize: 16,
-    color: Colors.black,
+    color: theme.colors.black,
   }),
   selectButton: {
     marginTop: Spaces.medium,
-    borderColor: Colors.red,
+    borderColor: theme.colors.red,
   },
   selectButtonText: getTextStyles({
     fontSize: 24,
-    color: Colors.red,
+    color: theme.colors.red,
   }),
 });
-
-export default styles;

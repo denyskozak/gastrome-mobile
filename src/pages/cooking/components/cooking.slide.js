@@ -5,7 +5,6 @@ import Slider from '@react-native-community/slider';
 import {useEffect, useMemo, useState} from 'react';
 import {StyleSheet} from 'react-native';
 
-import {Colors} from '../../../styles/colors';
 import {Spaces} from '../../../styles/spaces';
 
 import {Animated} from '../../../components/atomic/animated/animated.component';
@@ -62,7 +61,7 @@ export const CookingSlideComponent = ({
 
     const pauseButton = (
         <View style={styles.backPause}>
-            <Icon name={'pause'} color={Colors.black} size={Spaces.xxxlarge}/>
+            <Icon name={'pause'} color={theme.colors.black} size={Spaces.xxxlarge}/>
         </View>
     );
 
@@ -133,10 +132,10 @@ export const CookingSlideComponent = ({
                         Haptics.selectionAsync();
                         onBackClick?.();
                     }}>
-                        <Icon name='chevron-back-outline' color={Colors.white} size={Spaces.large}/>
+                        <Icon name='chevron-back-outline' color={theme.colors.white} size={Spaces.large}/>
                     </Pressable>
                     <Pressable style={styles.textHideIcon} onPress={() => setIsTextHidden(!isTextHidden)}>
-                        <Icon name={isTextHidden ? 'eye-outline' : 'eye-off-outline'} color={Colors.white}
+                        <Icon name={isTextHidden ? 'eye-outline' : 'eye-off-outline'} color={theme.colors.white}
                               size={Spaces.large}/>
                     </Pressable>
                     <Text style={[styles.step, {fontSize: textSize}]}>
@@ -167,9 +166,9 @@ export const CookingSlideComponent = ({
                             step={1}
                             value={textSize}
                             onValueChange={onTextSizeChange}
-                            minimumTrackTintColor={Colors.white}
-                            maximumTrackTintColor={Colors.gray}
-                            thumbTintColor={Colors.white}
+                            minimumTrackTintColor={theme.colors.white}
+                            maximumTrackTintColor={theme.colors.grey}
+                            thumbTintColor={theme.colors.white}
                         />
                         <Text style={styles.textSizeLabelLarge}>A</Text>
                     </View>

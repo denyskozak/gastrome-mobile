@@ -1,10 +1,9 @@
 import { StyleSheet } from 'react-native';
-import { Colors } from '../../../styles/colors';
 import { Spaces } from '../../../styles/spaces';
 
-const styles = StyleSheet.create({
+export const useStyles = (theme) => StyleSheet.create({
   container: {
-    backgroundColor: Colors.backgroundColor,
+    backgroundColor: theme.colors.backgroundColor,
     padding: Spaces.large,
     justifyContent: 'center',
     borderRadius: 4,
@@ -14,5 +13,3 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   }
 });
-
-export default styles;

@@ -3,12 +3,15 @@ import React, { useCallback } from 'react';
 import { Button } from '../../atomic/button/button.component';
 import { useTranslator } from '../../../hooks/useTranslator';
 
-import styles from './timer-button.styles';
+import { useStyles } from './timer-button.styles';
 import { secondsToMinutesWithTranslations } from '../../../utilities/timeParsers';
+import { useTheme } from '../../../hooks/useTheme';
 
 const TimerButtonComponent = (props) => {
   const { onPress } = props;
   const [t] = useTranslator('components.timerButton');
+  const { theme } = useTheme();
+  const styles = useStyles(theme);
 
   return (
     <Button

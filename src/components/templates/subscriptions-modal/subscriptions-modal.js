@@ -5,8 +5,7 @@ import Icon from '@expo/vector-icons/Ionicons';
 
 import { Button } from '../../atomic/button/button.component';
 
-import styles from './subscriptions-modal.styles';
-import { Colors } from '../../../styles/colors';
+import { useStyles } from './subscriptions-modal.styles';
 import { useTranslator } from '../../../hooks/useTranslator';
 import { AnimatedLogo } from '../../atomic/logo/animated-logo.component';
 import Purchases from 'react-native-purchases';
@@ -14,6 +13,7 @@ import { useSubscriptions } from '../../../contexts/subscriptions.context';
 import { Spaces } from '../../../styles/spaces';
 import * as Haptics from 'expo-haptics';
 import PaywallBackground from '../../../../assets/paywall-background.jpg';
+import { useTheme } from '../../../hooks/useTheme';
 
 const SubscriptionsModalComponent = (props) => {
   const { isOpen, onChangeVisible } = props;
@@ -22,6 +22,8 @@ const SubscriptionsModalComponent = (props) => {
   const [isError, setIsError] = useState(false);
   const [t] = useTranslator('components.subscriptionsModal');
   const [, , subscriptions, setCurrentSubscription] = useSubscriptions();
+  const { theme } = useTheme();
+  const styles = useStyles(theme);
   const options = useMemo(
     () => (subscriptions ? subscriptions.availablePackages : []),
     [subscriptions],
@@ -73,7 +75,7 @@ const SubscriptionsModalComponent = (props) => {
     <NativeModal
       isVisible={isOpen}
       style={styles.modal}
-      backdropColor={Colors.backdropColor}
+      backdropColor={theme.colors.backgroundColor}
       backdropOpacity={0.8}
       animationInTiming={400}
       animationOutTiming={400}
@@ -149,7 +151,7 @@ const SubscriptionsModalComponent = (props) => {
               textStyle={styles.closeButtonText}
               onPress={() => handleVisibilityChange(false)}
             >
-              <Icon name="close-outline" size={Spaces.large} color={Colors.white} />
+              <Icon name="close-outline" size={Spaces.large} color={theme.colors.white} />
             </Button>
           </View>
         </SafeAreaView>

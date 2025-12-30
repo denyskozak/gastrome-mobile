@@ -1,11 +1,10 @@
 import { StyleSheet } from 'react-native';
 import { getPercentWidth, getTextStyles } from '../../styles/common.styles';
 import { Spaces } from '../../styles/spaces';
-import { Colors } from '../../styles/colors';
 import { BorderRadius } from '../../styles/borderRadiuses';
 import { getDevice } from '../../utilities/getCurrentDevice';
 
-const styles = StyleSheet.create({
+export const useStyles = (theme) => StyleSheet.create({
   container: {
     flex: 1,
   },
@@ -19,7 +18,7 @@ const styles = StyleSheet.create({
   },
   assistantButtonText: getTextStyles({
     fontSize: 24,
-    color: Colors.white,
+    color: theme.colors.white,
     alignItems: 'center',
   }),
 
@@ -43,7 +42,7 @@ const styles = StyleSheet.create({
   },
   itemContainer: {
     borderWidth: Spaces.xxsmall,
-    borderColor: Colors.red,
+    borderColor: theme.colors.red,
     borderRadius: BorderRadius.small,
     height: Spaces.mxxlarge,
     alignItems: 'center',
@@ -53,11 +52,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
   }),
   selectedText: getTextStyles({
-    color: Colors.white,
+    color: theme.colors.white,
   }),
   selected: {
-    borderColor: Colors.black,
-    backgroundColor: Colors.black,
+    borderColor: theme.colors.black,
+    backgroundColor: theme.colors.black,
   },
   // confirm: {
   //   alignSelf: 'center',
@@ -79,12 +78,12 @@ const styles = StyleSheet.create({
   },
   confirmButton: {
     width: getPercentWidth(getDevice() === 'iPad' ? 40 : 50),
-    shadowColor: Colors.primary,
+    shadowColor: theme.colors.primary,
     shadowOpacity: 0.8,
     shadowRadius: 10,
     shadowOffset: {height: 1}
   },
-  confirmText: getTextStyles({color: Colors.white}),
+  confirmText: getTextStyles({color: theme.colors.white}),
   addedModalContainer: {
     marginTop: Spaces.medium,
     marginBottom: Spaces.medium,
@@ -107,8 +106,6 @@ const styles = StyleSheet.create({
   // Not found
   notFound: getTextStyles({
     fontSize: 18,
-    color: Colors.primary
+    color: theme.colors.primary
   }),
 });
-
-export default styles;

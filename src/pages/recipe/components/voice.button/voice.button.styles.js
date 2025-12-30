@@ -2,10 +2,9 @@ import { StyleSheet } from 'react-native';
 import { getPercentHeight, getPercentWidth, getTextStyles } from '../../../../styles/common.styles';
 import { fontEnum } from '../../../../styles/fonts';
 import { Spaces } from '../../../../styles/spaces';
-import { Colors } from '../../../../styles/colors';
 import {getDevice} from "../../../../utilities/getCurrentDevice";
 
-const styles = StyleSheet.create({
+export const useStyles = (theme) => StyleSheet.create({
   getActiveCooking: (isUpper = false) => ({
     alignItems: 'center',
     justifyContent: 'center',
@@ -17,28 +16,26 @@ const styles = StyleSheet.create({
   }),
   animationBackground: {
     padding: Spaces.small,
-    backgroundColor: Colors.second,
+    backgroundColor: theme.colors.second,
     borderRadius: 100,
-    borderColor: Colors.primary,
+    borderColor: theme.colors.primary,
     borderWidth: 2,
   },
 
   animationOffBackground: {
     // padding: Spaces.xxsmall,
-    backgroundColor: Colors.second,
+    backgroundColor: theme.colors.second,
     borderRadius: 100,
-    borderColor: Colors.primary,
+    borderColor: theme.colors.primary,
     borderWidth: 2,
   },
   // Voice assistant
   button: {
-    backgroundColor: Colors.primary,
+    backgroundColor: theme.colors.primary,
   },
   buttonText: getTextStyles({
     fontSize: 24,
-    color: Colors.black,
+    color: theme.colors.black,
     justifyContent: 'center',
   }),
 });
-
-export default styles;

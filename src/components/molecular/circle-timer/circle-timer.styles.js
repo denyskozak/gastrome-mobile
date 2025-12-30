@@ -1,11 +1,9 @@
 import { StyleSheet } from 'react-native';
 import { BorderRadius, getTextStyles } from '../../../styles/common.styles';
 import { fontEnum } from '../../../styles/fonts';
-import { Colors } from '../../../styles/colors';
-
-const styles = StyleSheet.create({
+export const useStyles = (theme) => StyleSheet.create({
   container: {
-    backgroundColor: Colors.backgroundColorLowOpacity,
+    backgroundColor: theme.colors.backgroundColorLowOpacity,
     borderRadius: BorderRadius.circle,
   },
   countText: getTextStyles({
@@ -14,5 +12,3 @@ const styles = StyleSheet.create({
     padding: 10
   }),
 });
-
-export default styles;

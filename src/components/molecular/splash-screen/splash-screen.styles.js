@@ -1,11 +1,10 @@
 import { StyleSheet } from 'react-native';
-import { Colors } from '../../../styles/colors';
 import { getTextStyles } from '../../../styles/common.styles';
 import { fontEnum } from '../../../styles/fonts';
 
-const styles = StyleSheet.create({
+export const useStyles = (theme) => StyleSheet.create({
   container: {
-    backgroundColor: Colors.backgroundColor,
+    backgroundColor: theme.colors.backgroundColor,
     justifyContent: 'center',
     alignItems: 'center',
     height: '100%',
@@ -25,8 +24,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     textDecorationLine: 'none',
     fontWeight: '300',
-    color: Colors.black
+    color: theme.colors.black
   },
 });
-
-export default styles;
