@@ -191,6 +191,7 @@ const SubscriptionsModalComponent = (props) => {
                                                     const isHighlighted =
                                                         String(item?.product?.identifier || '').toLowerCase().includes('annual') ||
                                                         String(item?.product?.identifier || '').toLowerCase().includes('year');
+                                                    const showDiscountChip = idx === 1;
 
                                                     return (
                                                         <GlowWrap
@@ -198,18 +199,25 @@ const SubscriptionsModalComponent = (props) => {
                                                             enabled={isHighlighted}
                                                             glowColor={theme.colors?.primary}
                                                         >
-                                                            <Button
-                                                                type="fulled"
-                                                                size="xl"
-                                                                style={styles.button}
-                                                                textStyle={styles.buttonText}
-                                                                onPress={() => {
-                                                                    Haptics.impactAsync('light');
-                                                                    handleOptionClick(item);
-                                                                }}
-                                                            >
-                                                                {item.product.priceString} / {item.product.identifier}
-                                                            </Button>
+                                                            <View style={styles.offerWrapper}>
+                                                                {showDiscountChip && (
+                                                                    <View style={styles.discountChip}>
+                                                                        <Text style={styles.discountChipText}>-30%</Text>
+                                                                    </View>
+                                                                )}
+                                                                <Button
+                                                                    type="fulled"
+                                                                    size="xl"
+                                                                    style={styles.button}
+                                                                    textStyle={styles.buttonText}
+                                                                    onPress={() => {
+                                                                        Haptics.impactAsync('light');
+                                                                        handleOptionClick(item);
+                                                                    }}
+                                                                >
+                                                                    {item.product.priceString} / {item.product.identifier}
+                                                                </Button>
+                                                            </View>
                                                         </GlowWrap>
                                                     );
                                                 })}
