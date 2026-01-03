@@ -69,6 +69,10 @@ export const useStyles = (theme) => StyleSheet.create({
     // display: 'flex',
     gap: 16,
   },
+  offerWrapper: {
+    alignSelf: 'stretch',
+    position: 'relative',
+  },
   button: {
     alignSelf: 'stretch',
     borderColor: theme.colors.white,
@@ -105,5 +109,20 @@ export const useStyles = (theme) => StyleSheet.create({
     textAlign: 'center',
     fontFamily: fontEnum.PoppinsSemiBold,
     color: theme.colors.white,
+  }),
+  discountChip: {
+    position: 'absolute',
+    left: Spaces.small,
+    top: -Spaces.small,
+    backgroundColor: '#E53935',
+    paddingVertical: 4,
+    paddingHorizontal: 10,
+    borderRadius: BorderRadius.large,
+    zIndex: 2,
+  },
+  discountChipText: getTextStyles({
+    color: theme.colors.white,
+    fontSize: 12,
+    fontFamily: fontEnum.PoppinsSemiBold,
   }),
 });
