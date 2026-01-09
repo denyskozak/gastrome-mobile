@@ -76,6 +76,7 @@ export type VideoCardProps = {
   onPressMeta?: (item: VideoItem) => void;
   onRegister?: (index: number, handle: VideoPlayerHandle | null) => void;
   isFavorite?: boolean;
+  showFreeBadge?: boolean;
 };
 
 const HEART_ANIMATION_DURATION = 450;
@@ -95,6 +96,7 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
                                                         onPressMeta,
                                                         onRegister,
                                                         isFavorite,
+                                                        showFreeBadge,
                                                       }) => {
   const [tHome] = useTranslator('pages.home');
   const insets = useSafeAreaInsets();
@@ -638,6 +640,11 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
               <Animated.View pointerEvents="none" style={heartStyle}>
                 <Icon name="heart" size={72} color="#ff4d6d" />
               </Animated.View>
+          ) : null}
+          {showFreeBadge ? (
+              <View style={styles.freeBadge}>
+                <Text style={styles.freeBadgeText}>🆓</Text>
+              </View>
           ) : null}
           <Pressable
               style={StyleSheet.absoluteFill}

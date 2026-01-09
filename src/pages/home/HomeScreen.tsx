@@ -35,7 +35,7 @@ import {useSplashScreen} from "../../contexts/splash-screen.context";
 import { useTheme } from '../../hooks/useTheme';
 import {SubscriptionsModal} from "../../components/templates/subscriptions-modal/subscriptions-modal";
 import {useSubscriptions} from "../../contexts/subscriptions.context";
-import {canViewRecipeToday, markRecipeViewedToday} from "../../utilities/dailyRecipeLimit";
+import {canViewRecipeToday, getDailyViewedRecipes, markRecipeViewedToday} from "../../utilities/dailyRecipeLimit";
 
 const {height: SCREEN_HEIGHT} = Dimensions.get('window');
 const MAX_BUFFER_DISTANCE = 2;
@@ -122,6 +122,7 @@ export const HomeScreen: React.FC = () => {
     const { theme } = useTheme();
     const styles = useStyles(theme);
     const [isSubscriptionsOpened, setSubscriptionsOpened] = useState(false);
+    const [viewedRecipeIds, setViewedRecipeIds] = useState<string[]>([]);
 
     const measure = settings?.measure ?? 'g';
     const [isBackgroundMusicEnabled, setIsBackgroundMusicEnabled] = useState(true);
@@ -161,6 +162,34 @@ export const HomeScreen: React.FC = () => {
     useEffect(() => {
         getCookingStepUrlRef.current = getCookingStepURL;
     }, [getCookingStepURL]);
+
+    useEffect(() => {
+        if (isSubscriber) {
+            setViewedRecipeIds([]);
+            return;
+        }
+
+        let isMounted = true;
+
+        const loadViewedRecipes = async () => {
+            try {
+                const {ids} = await getDailyViewedRecipes();
+                if (isMounted) {
+                    setViewedRecipeIds(ids);
+                }
+            } catch (error) {
+                if (isMounted) {
+                    setViewedRecipeIds([]);
+                }
+            }
+        };
+
+        loadViewedRecipes();
+
+        return () => {
+            isMounted = false;
+        };
+    }, [isSubscriber]);
 
     const recipeMap = useMemo(() => {
         const map = new Map<string, any>();
@@ -316,6 +345,10 @@ export const HomeScreen: React.FC = () => {
                     }
                     if (!hasViewed) {
                         await markRecipeViewedToday(video.recipeId);
+                        setViewedRecipeIds((prev) => {
+                            const id = String(video.recipeId);
+                            return prev.includes(id) ? prev : [...prev, id];
+                        });
                     }
                 } catch (error) {
                     // allow navigation if storage fails
@@ -511,6 +544,9 @@ export const HomeScreen: React.FC = () => {
     const renderItem = useCallback(
         ({item, index}: { item: VideoItem; index: number }) => {
             const isFavorite = item.recipeId ? favoriteIds.includes(item.recipeId) : false;
+            const showFreeBadge = !isSubscriber && item.recipeId
+                ? viewedRecipeIds.includes(String(item.recipeId))
+                : false;
             return (
                 <View style={styles.itemContainer}>
                     <VideoCard
@@ -537,6 +573,7 @@ export const HomeScreen: React.FC = () => {
                         onPressMeta={handleOpenRecipe}
                         onRegister={registerHandle}
                         isFavorite={isFavorite}
+                        showFreeBadge={showFreeBadge}
                     />
                 </View>
             );
@@ -550,6 +587,8 @@ export const HomeScreen: React.FC = () => {
             handleToggleBackgroundMusic,
             registerHandle,
             isBackgroundMusicEnabled,
+            isSubscriber,
+            viewedRecipeIds,
         ],
     );
 
