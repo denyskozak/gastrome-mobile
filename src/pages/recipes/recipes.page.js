@@ -24,7 +24,7 @@ import {filterIcons} from "../../constants/filters";
 import {renderFilterIcon} from "../../utilities/renders";
 import {useSettings} from "../../contexts/settings.context";
 import { useTheme } from '../../hooks/useTheme';
-import {canViewRecipeToday, markRecipeViewedToday} from '../../utilities/dailyRecipeLimit';
+import {canViewRecipeToday, getDailyViewedRecipes, markRecipeViewedToday} from '../../utilities/dailyRecipeLimit';
 
 
 const RecipesPageComponent = (props) => {
@@ -62,6 +62,7 @@ const RecipesPageComponent = (props) => {
     const [filteredByChosenIngredientsListData, setFilteredByChosenIngredientsListData] = useState([]);
     const [isFilterOpened, setFilterOpened] = useState(false);
     const [isSubscriptionsOpened, setSubscriptionsOpened] = useState(false);
+    const [viewedRecipeIds, setViewedRecipeIds] = useState([]);
     const flatListRef = useRef(null);
 
     // Search
@@ -90,6 +91,33 @@ const RecipesPageComponent = (props) => {
     useEffect(() => {
         setSearchedItems(applySearch(searchText, listData));
     }, [searchText, listData])
+
+    useEffect(() => {
+        if (isSubscriber) {
+            setViewedRecipeIds([]);
+            return;
+        }
+
+        let isMounted = true;
+        const loadViewedRecipes = async () => {
+            try {
+                const {ids} = await getDailyViewedRecipes();
+                if (isMounted) {
+                    setViewedRecipeIds(ids);
+                }
+            } catch (error) {
+                if (isMounted) {
+                    setViewedRecipeIds([]);
+                }
+            }
+        };
+
+        loadViewedRecipes();
+
+        return () => {
+            isMounted = false;
+        };
+    }, [isSubscriber]);
 
     // Filter by selected ingredients on Grocery page
     useEffect(() => {
@@ -220,7 +248,8 @@ const RecipesPageComponent = (props) => {
                     return;
                 }
                 if (!hasViewed) {
-                    await markRecipeViewedToday(id);
+                    const updated = await markRecipeViewedToday(id);
+                    setViewedRecipeIds(updated.ids);
                 }
             } catch (error) {
                 // allow navigation if storage fails
@@ -325,6 +354,7 @@ const RecipesPageComponent = (props) => {
                             onPress={handleOpenRecipe}
                             isFavorited={favorites.includes(item.id)}
                             selectedIngredients={listSearchByIngredients}
+                            showFreeBadge={!isSubscriber && viewedRecipeIds.includes(String(item.id))}
                             {...item}
                         />
                     )
