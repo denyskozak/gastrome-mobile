@@ -87,7 +87,7 @@ export const useStyles = (theme) => StyleSheet.create({
     alignItems: 'center',
   },
   subtitle: getTextStyles({
-    color: theme.colors.red,
+    fontSize: 20,
     marginBottom: Spaces.large
   }),
   closeButtonWrapper: {
@@ -117,8 +117,8 @@ export const useStyles = (theme) => StyleSheet.create({
   }),
   discountChip: {
     position: 'absolute',
-    right: -Spaces.medium,
-    top: -Spaces.small,
+    right: -Spaces.medium - Spaces.small,
+    top: -Spaces.small - 1,
     backgroundColor: '#E53935',
     paddingVertical: 4,
     paddingHorizontal: 10,

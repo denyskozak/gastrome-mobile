@@ -540,7 +540,6 @@ export const HomeScreen: React.FC = () => {
             });
         }
     }, [activeIndex, allVideosLength, feedFilter, setActiveIndex, shuffledBaseVideos.length]);
-
     const renderItem = useCallback(
         ({item, index}: { item: VideoItem; index: number }) => {
             const isFavorite = item.recipeId ? favoriteIds.includes(item.recipeId) : false;

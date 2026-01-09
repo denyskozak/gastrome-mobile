@@ -170,15 +170,5 @@ export const getStyles = (tabBarHeight, theme) => StyleSheet.create({
         fontSize: 14,
         fontWeight: '600',
     },
-    freeBadge: {
-        position: 'absolute',
-        bottom: Spaces.large,
-        right: Spaces.large,
-        paddingHorizontal: Spaces.small,
-        paddingVertical: Spaces.xxsmall,
-    },
-    freeBadgeText: getTextStyles({
-        fontSize: 22,
-        color: '#fff',
-    }),
+
 });

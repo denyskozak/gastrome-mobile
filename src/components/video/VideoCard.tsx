@@ -641,11 +641,6 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
                 <Icon name="heart" size={72} color="#ff4d6d" />
               </Animated.View>
           ) : null}
-          {showFreeBadge ? (
-              <View style={styles.freeBadge}>
-                <Text style={styles.freeBadgeText}>🆓</Text>
-              </View>
-          ) : null}
           <Pressable
               style={StyleSheet.absoluteFill}
               onPress={handlePress}
@@ -696,7 +691,7 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
             <Button
                 type="contained"
                 size="xxl"
-                title={tHome('openRecipeButton')}
+                title={`${tHome('openRecipeButton')}${showFreeBadge ? ' 🆓' : ''}`}
                 onPress={() => onPressMeta?.(item)}
                 style={styles.metaButton}
                 textStyle={styles.metaButtonText}

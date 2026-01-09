@@ -276,7 +276,7 @@ export const translates = {
         },
         subscriptionsModal: {
             free: 'Keep free',
-            benefits: 'Get All Now',
+            benefits: 'Get Full Access:',
             benefitsOne: 'Unlimited recipes 🥘',
             benefitsTwo: 'Color Themes 🎨',
             benefitsThree: 'Ingredient Knowledge 🌿',
