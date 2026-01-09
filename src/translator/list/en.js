@@ -274,7 +274,7 @@ export const translates = {
         },
         subscriptionsModal: {
             free: 'Keep free',
-            benefits: 'Try free month',
+            benefits: 'Remove the 5 recipes per day limit',
             benefitsOne: 'Color Themes 🎨',
             benefitsTwo: 'Voice Assistant 🧝',
             benefitsThree: 'Ingredient Knowledge 🌿',

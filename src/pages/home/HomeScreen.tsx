@@ -33,6 +33,9 @@ import {Animated} from "../../components/atomic/animated/animated.component";
 import {Animation} from "../../components/atomic/animation/animation.component";
 import {useSplashScreen} from "../../contexts/splash-screen.context";
 import { useTheme } from '../../hooks/useTheme';
+import {SubscriptionsModal} from "../../components/templates/subscriptions-modal/subscriptions-modal";
+import {useSubscriptions} from "../../contexts/subscriptions.context";
+import {canViewRecipeToday, markRecipeViewedToday} from "../../utilities/dailyRecipeLimit";
 
 const {height: SCREEN_HEIGHT} = Dimensions.get('window');
 const MAX_BUFFER_DISTANCE = 2;
@@ -109,6 +112,7 @@ export const HomeScreen: React.FC = () => {
     const [settings] = useSettings();
     const [tCommon] = useTranslator('common');
     const [tHome] = useTranslator('pages.home');
+    const [isSubscriber] = useSubscriptions();
     const [allVideos, setAllVideos] = useState<VideoItem[]>([]);
     const registryRef = useRef<Map<string, RegistryEntry>>(new Map());
     const {activeIndex, onViewableItemsChanged, viewabilityConfig, setActiveIndex} = useActiveItem();
@@ -117,6 +121,7 @@ export const HomeScreen: React.FC = () => {
     const [isVisibleCustomSplashScreen,setIsVisibleCustomSplashScreen] = useSplashScreen();
     const { theme } = useTheme();
     const styles = useStyles(theme);
+    const [isSubscriptionsOpened, setSubscriptionsOpened] = useState(false);
 
     const measure = settings?.measure ?? 'g';
     const [isBackgroundMusicEnabled, setIsBackgroundMusicEnabled] = useState(true);
@@ -297,14 +302,29 @@ export const HomeScreen: React.FC = () => {
     );
 
     const handleOpenRecipe = useCallback(
-        (video: VideoItem) => {
+        async (video: VideoItem) => {
             if (!video.recipeId) {
                 return;
             }
 
+            if (!isSubscriber) {
+                try {
+                    const {hasViewed, canViewNew} = await canViewRecipeToday(video.recipeId);
+                    if (!hasViewed && !canViewNew) {
+                        setSubscriptionsOpened(true);
+                        return;
+                    }
+                    if (!hasViewed) {
+                        await markRecipeViewedToday(video.recipeId);
+                    }
+                } catch (error) {
+                    // allow navigation if storage fails
+                }
+            }
+
             navigation.navigate(recipeRoute, {id: video.recipeId});
         },
-        [navigation],
+        [isSubscriber, navigation, setSubscriptionsOpened],
     );
 
     const keyExtractor = useCallback((item: VideoItem) => item.id, []);
@@ -620,6 +640,10 @@ export const HomeScreen: React.FC = () => {
                 </>
 
             )}
+            <SubscriptionsModal
+                isOpen={isSubscriptionsOpened}
+                onChangeVisible={() => setSubscriptionsOpened(false)}
+            />
         </View>
     );
 };

@@ -30,6 +30,9 @@ import {useSettings} from "../../contexts/settings.context";
 import {filterIcons} from "../../constants/filters";
 import {recipesRoute} from "../recipes/navigation/recipes.routes";
 import { useTheme } from '../../hooks/useTheme';
+import {SubscriptionsModal} from "../../components/templates/subscriptions-modal/subscriptions-modal";
+import {useSubscriptions} from "../../contexts/subscriptions.context";
+import {canViewRecipeToday, markRecipeViewedToday} from "../../utilities/dailyRecipeLimit";
 
 const videoSources = [
     require('./assets/1.mp4'),
@@ -48,9 +51,11 @@ const WelcomePageComponent = (props) => {
     const [, setSetting] = useSettings();
     const { theme } = useTheme();
     const styles = useWelcomeStyles();
+    const [isSubscriber] = useSubscriptions();
 
     const [, setModalVisible] = useState(false);
     const [isVideoCover, setIsVideoCover] = useState(false);
+    const [isSubscriptionsOpened, setSubscriptionsOpened] = useState(false);
     const [, setMenuDarkMode] = useMenuDarkMode();
     const containerScrollViewRef = useRef(null);
 
@@ -120,6 +125,29 @@ const WelcomePageComponent = (props) => {
         </Button>
         // </Animated>
     );
+
+    const handleRecipePress = async (id) => {
+        if (!isSubscriber) {
+            try {
+                const {hasViewed, canViewNew} = await canViewRecipeToday(id);
+                if (!hasViewed && !canViewNew) {
+                    setSubscriptionsOpened(true);
+                    return;
+                }
+                if (!hasViewed) {
+                    await markRecipeViewedToday(id);
+                }
+            } catch (error) {
+                // allow navigation if storage fails
+            }
+        }
+
+        // Fix for position: absolute in navigation.styles for tabBarStyle dark mode
+        setMenuDarkMode(true);
+        setTimeout(() => {
+            navigation.navigate(recipeRoute, {id});
+        })
+    };
 
     return (
         <ScrollView ref={containerScrollViewRef}>
@@ -225,15 +253,13 @@ const WelcomePageComponent = (props) => {
             <View style={styles.pageContainer}>
                 <View style={styles.pageContent}>
                     <RecipesGenerator
-                        onRecipePress={id => {
-                            // Fix for position: absolute in navigation.styles for tabBarStyle dark mode
-                            setMenuDarkMode(true);
-                            setTimeout(() => {
-                                navigation.navigate(recipeRoute, {id});
-                            })
-                        }}/>
+                        onRecipePress={handleRecipePress}/>
                 </View>
             </View>
+            <SubscriptionsModal
+                isOpen={isSubscriptionsOpened}
+                onChangeVisible={() => setSubscriptionsOpened(false)}
+            />
         </ScrollView>
     );
 };

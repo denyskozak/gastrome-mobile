@@ -202,7 +202,7 @@ export const translates = {
     },
     subscriptionsModal: {
       free: 'Zůstat zdarma',
-      benefits: 'Vyzkoušejte 1 měsíc zdarma',
+      benefits: 'Odstraňte limit 5 receptů denně',
       benefitsOne: 'Barevná schémata v nastavení 🎨',
       benefitsTwo: 'Hlasový asistent 🧝',
       benefitsThree: 'Komentáře k receptům 💬',
