@@ -240,6 +240,7 @@ const SubscriptionsModalComponent = (props) => {
                             </View>
                         </ScrollView>
                         <View style={styles.closeButtonWrapper}>
+                            <Text style={styles.subtitle}>{t('subtitle')}</Text>
                             <Button
                                 type="outlined"
                                 size="m"

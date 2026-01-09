@@ -79,12 +79,17 @@ export const useStyles = (theme) => StyleSheet.create({
   },
   buttonText: getTextStyles({
     color: theme.colors.black,
+    fontSize: 20,
   }),
   logoWrapper: {
     marginTop: Spaces.large,
     marginBottom: Spaces.large,
     alignItems: 'center',
   },
+  subtitle: getTextStyles({
+    color: theme.colors.red,
+    marginBottom: Spaces.large
+  }),
   closeButtonWrapper: {
     alignItems: 'center',
     marginTop: Spaces.large,
