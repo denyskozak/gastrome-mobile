@@ -41,15 +41,13 @@ export const useStyles = (theme) => StyleSheet.create({
   },
   freeBadge: {
     position: 'absolute',
-    top: Spaces.small,
-    left: Spaces.small,
-    backgroundColor: theme.colors.black,
-    borderRadius: BorderRadius.small,
+    bottom: Spaces.small,
+    right: Spaces.small,
     paddingHorizontal: Spaces.small,
     paddingVertical: Spaces.xxsmall,
   },
   freeBadgeText: getTextStyles({
-    fontSize: 18,
+    fontSize: 22,
     color: theme.colors.white,
   }),
   like: {
