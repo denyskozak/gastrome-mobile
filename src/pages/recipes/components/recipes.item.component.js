@@ -25,6 +25,7 @@ const RecipeItemComponent = ({
     filters = [],
     isFavorited = false,
     isSubscriber = false,
+    showFreeBadge = false,
     hideImage = false,
     enableHint = false,
 }) => {
@@ -66,6 +67,11 @@ const RecipeItemComponent = ({
                             source={image}
                             style={styles.image}
                         />
+                        {showFreeBadge && !isSubscriber && (
+                            <View style={styles.freeBadge}>
+                                <Text style={styles.freeBadgeText}>🆓</Text>
+                            </View>
+                        )}
                     </View>
 
                     {/*<AttentionAnimation duration={1200} start={0.5} end={1} property="opacity">*/}
