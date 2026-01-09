@@ -100,7 +100,6 @@ const RecipePageComponent = (props) => {
         if (!isSubscriber) {
             getFreeDayleRecipeCount()
                 .then((amount) => {
-                    console.log("amount: ", amount === 0)
                 if (amount === 0)  {
                     setLimitText(t('noLimit'));
                     return;
