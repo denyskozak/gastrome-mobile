@@ -43,6 +43,11 @@ export const useStyles = (theme) => StyleSheet.create({
     paddingLeft: Spaces.medium,
     paddingRight: Spaces.medium,
   },
+  limit: getTextStyles({
+    fontSize: 14,
+    color: theme.colors.red,
+    marginBottom: Spaces.small,
+  }),
   timeText: getTextStyles({
     fontSize: 14,
   }),
@@ -110,7 +115,7 @@ export const useStyles = (theme) => StyleSheet.create({
 
   imageContainer: {
     alignItems: "center",
-
+    marginTop: Spaces.small,
     ...(getDevice() === 'iPad' ? {  borderRadius: BorderRadius.medium } : {})
   },
   image: {
@@ -164,7 +169,7 @@ export const useStyles = (theme) => StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: Spaces.small,
-    marginTop: Spaces.medium,
+    marginTop: Spaces.large,
   },
   textSizeLabel: getTextStyles({
     fontSize: 12,
@@ -211,6 +216,7 @@ export const useStyles = (theme) => StyleSheet.create({
     color: theme.colors.red
   }),
   ingredientsContainer: {
+    marginTop: Spaces.small,
     marginLeft: Spaces.small,
     marginRight: Spaces.small,
   },

@@ -183,6 +183,8 @@ export const translates = {
             step: 'Step {number}.',
             start: 'Start',
             startVoice: 'Start cooking!',
+            noLimit: 'Limit of free recipes exhausted',
+            limit: 'Left {amount} free recipes',
             addedToCartTitle: '"{name}" has been added to the cart',
             addedToCartText: 'You can found these ingredients in card for make shopping easily',
             cartButton: 'Visit cart',

@@ -1,5 +1,5 @@
 import React, {useEffect, useMemo, useRef, useState} from 'react';
-import {FlatList, Pressable, Image, Text, View, SafeAreaView} from 'react-native';
+import {FlatList, Pressable, Image, Text, View, SafeAreaView, Touchable, TouchableHighlight} from 'react-native';
 import Slider from '@react-native-community/slider';
 import Icon from '@expo/vector-icons/Ionicons';
 import * as Haptics from "expo-haptics";
@@ -30,6 +30,9 @@ import {ZoomInOut} from "../../components/molecular/zoom-in-out-animation/zoom-i
 import {logEvent} from "../../utilities/google-analitics";
 import {isAvailableAsync, requestReview} from "expo-store-review";
 import {useTheme} from "../../hooks/useTheme";
+import {getFreeDayleRecipeCount} from "../../utilities/dailyRecipeLimit";
+import {useSubscriptions} from "../../contexts/subscriptions.context";
+import {SubscriptionsModal} from "../../components/templates/subscriptions-modal/subscriptions-modal";
 
 const RecipePageComponent = (props) => {
     const {
@@ -64,6 +67,7 @@ const RecipePageComponent = (props) => {
 
     const {getCookingStepURL} = useAWS();
     const { theme } = useTheme();
+    const { isSubscriber } = useSubscriptions();
     const styles = useStyles(theme);
     const [, addCartItems] = useMenuCart();
     const [favorites, setLike] = useFavorites();
@@ -73,12 +77,15 @@ const RecipePageComponent = (props) => {
     const [servingsCount, setServingsCount] = useState(servings);
     const [openCommonModal] = useCommonModal();
     const [textSize, setTextSize] = useState(16);
+    const [subscriptionVisibleModal, setSubscriptionVisibleModal] = useState(false);
     const stepTitleFontSize = textSize + 4;
 
     const stepRefs = {};
     const {measure} = settings;
     const [isPreloadVideo, setIsPreloadVideo] = useState(false);
     const flatListRef = useRef(null);
+
+    const [limitText, setLimitText] = useState('');
 
     useEffect(() => {
         logEvent('recipe_page', {title, id});
@@ -88,6 +95,22 @@ const RecipePageComponent = (props) => {
             })
             .catch(() => console.log('Error first step video preload: '));
     }, []);
+
+    useEffect(() => {
+        if (!isSubscriber) {
+            getFreeDayleRecipeCount()
+                .then((amount) => {
+                    console.log("amount: ", amount === 0)
+                if (amount === 0)  {
+                    setLimitText(t('noLimit'));
+                    return;
+                }
+                return setLimitText(t('limit', {amount}))
+            })
+        } else {
+            setLimitText('');
+        }
+    }, [isSubscriber]);
 
     useEffect(() => {
         flatListRef.current?.scrollToOffset({offset: 0, animated: true});
@@ -150,6 +173,13 @@ const RecipePageComponent = (props) => {
             ListHeaderComponent={<>
                 {/* Image section */}
                 <View style={styles.timeContainer}>
+                    {limitText ? <TouchableHighlight onPress={() => setSubscriptionVisibleModal(true)}>
+                        <Text style={styles.limit}>
+                            <Icon name="cart" size={16}/>
+                            {' '}
+                            {limitText}
+                        </Text>
+                    </TouchableHighlight> : null}
                     <Text style={styles.timeText}>
                         <Icon name="time-outline" size={14}/>
                         {'  '}
@@ -401,6 +431,13 @@ const RecipePageComponent = (props) => {
                 </AttentionAnimation>
             </Animated>
         )}
+
+        <SubscriptionsModal
+            isOpen={subscriptionVisibleModal}
+            onChangeVisible={() => {
+                setSubscriptionVisibleModal(false)
+            }}
+        />
 
         <MeasureModal
             isVisible={isMeasureModalOpen}

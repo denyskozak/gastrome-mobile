@@ -56,6 +56,13 @@ export const canViewRecipeToday = async (recipeId) => {
     };
 };
 
+export const getFreeDayleRecipeCount = async () => {
+    const data = await getDailyViewedRecipes();
+
+    return DAILY_RECIPE_LIMIT - data.ids.length
+};
+
+
 export const markRecipeViewedToday = async (recipeId) => {
     const data = await getDailyViewedRecipes();
     const normalizedId = String(recipeId);
