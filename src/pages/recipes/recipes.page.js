@@ -24,6 +24,7 @@ import {filterIcons} from "../../constants/filters";
 import {renderFilterIcon} from "../../utilities/renders";
 import {useSettings} from "../../contexts/settings.context";
 import { useTheme } from '../../hooks/useTheme';
+import {canViewRecipeToday, markRecipeViewedToday} from '../../utilities/dailyRecipeLimit';
 
 
 const RecipesPageComponent = (props) => {
@@ -211,9 +212,23 @@ const RecipesPageComponent = (props) => {
         : listData;
 
     const handleOpenRecipe = useCallback(async (id) => {
+        if (!isSubscriber) {
+            try {
+                const {hasViewed, canViewNew} = await canViewRecipeToday(id);
+                if (!hasViewed && !canViewNew) {
+                    setSubscriptionsOpened(true);
+                    return;
+                }
+                if (!hasViewed) {
+                    await markRecipeViewedToday(id);
+                }
+            } catch (error) {
+                // allow navigation if storage fails
+            }
+        }
         navigation.navigate(recipeRoute, {id});
         Haptics.selectionAsync();
-    }, [navigation]);
+    }, [isSubscriber, navigation, setSubscriptionsOpened]);
 
     // indexes: 0 - label, 1 - icon name, 2 - onPress
     const actions = [

@@ -1,5 +1,5 @@
-import React, {useEffect} from 'react';
-import {FlatList, Pressable, SafeAreaView, View} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {FlatList, Pressable, SafeAreaView} from 'react-native';
 import {Text} from 'react-native';
 import {useAuthor} from "../../hooks/useAuthor";
 import {getDevice} from "../../utilities/getCurrentDevice";
@@ -13,8 +13,10 @@ import styles from './author.styles';
 import {Spaces} from "../../styles/spaces";
 import Icon from "@expo/vector-icons/Ionicons";
 import * as Linking from "expo-linking";
-import {contactURL} from "../../constants/links";
 import * as Haptics from "expo-haptics";
+import {useSubscriptions} from "../../contexts/subscriptions.context";
+import {SubscriptionsModal} from "../../components/templates/subscriptions-modal/subscriptions-modal";
+import {canViewRecipeToday, markRecipeViewedToday} from "../../utilities/dailyRecipeLimit";
 
 let isFirstRun = true;
 
@@ -28,10 +30,32 @@ const AuthorPageComponent = (props) => {
     }, []);
 
     const [author, recipes] = useAuthor(id);
+    const [isSubscriber] = useSubscriptions();
+    const [isSubscriptionsOpened, setSubscriptionsOpened] = useState(false);
 
     const {name, description, image} = author;
 
     const [t] = useTranslator('pages.author');
+
+    const handleOpenRecipe = async (recipeId) => {
+        if (!isSubscriber) {
+            try {
+                const {hasViewed, canViewNew} = await canViewRecipeToday(recipeId);
+                if (!hasViewed && !canViewNew) {
+                    setSubscriptionsOpened(true);
+                    return;
+                }
+                if (!hasViewed) {
+                    await markRecipeViewedToday(recipeId);
+                }
+            } catch (error) {
+                // allow navigation if storage fails
+            }
+        }
+
+        Haptics.selectionAsync();
+        navigation.navigate(recipeRoute, {id: recipeId});
+    };
 
     return (
         <SafeAreaView style={styles.container}>
@@ -52,10 +76,7 @@ const AuthorPageComponent = (props) => {
                             key={item.id}
                             enableHint={isFirstRun && index < 3}
                             hideImage
-                            onPress={id => {
-                                Haptics.selectionAsync();
-                                navigation.navigate(recipeRoute, {id});
-                            }}
+                            onPress={handleOpenRecipe}
                             {...item}
                         />
                     );
@@ -64,9 +85,12 @@ const AuthorPageComponent = (props) => {
                         index > 1 ? element : (<Animated>{element}</Animated>));
                 }}
             />
+            <SubscriptionsModal
+                isOpen={isSubscriptionsOpened}
+                onChangeVisible={() => setSubscriptionsOpened(false)}
+            />
         </SafeAreaView>
     );
 };
 
 export const AuthorPage = AuthorPageComponent;
-
