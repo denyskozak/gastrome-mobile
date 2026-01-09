@@ -17,9 +17,9 @@ const SplashScreenComponent = () => {
   return (
     <Animated.NativeView style={styles.container} exiting={exiting}>
         <AnimatedLogo delay={500} duration={750} size="medium" />
-      <View >
+      <Animated delay={400}>
         <Text style={styles.title}>Gastro & Me</Text>
-      </View>
+      </Animated>
     </Animated.NativeView>
   );
 };

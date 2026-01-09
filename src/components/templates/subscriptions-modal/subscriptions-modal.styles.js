@@ -112,7 +112,7 @@ export const useStyles = (theme) => StyleSheet.create({
   }),
   discountChip: {
     position: 'absolute',
-    left: Spaces.small,
+    right: -Spaces.medium,
     top: -Spaces.small,
     backgroundColor: '#E53935',
     paddingVertical: 4,

@@ -274,9 +274,9 @@ export const translates = {
         },
         subscriptionsModal: {
             free: 'Keep free',
-            benefits: 'Remove the 5 recipes per day limit',
-            benefitsOne: 'Color Themes 🎨',
-            benefitsTwo: 'Voice Assistant 🧝',
+            benefits: 'Next 5 free recipes tomorrow \n Unlock:',
+            benefitsOne: 'Unlimited recipes 🥘',
+            benefitsTwo: 'Color Themes 🎨',
             benefitsThree: 'Ingredient Knowledge 🌿',
             nextFreeRecipesIn: 'Next free recipes in {time}',
             error: 'Sorry, subscription purchase error, try again or contact to us on settings page',

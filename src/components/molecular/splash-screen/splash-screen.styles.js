@@ -15,7 +15,7 @@ export const useStyles = (theme) => StyleSheet.create({
     zIndex: 10,
   },
   title: getTextStyles({
-    fontSize: 32,
+    fontSize: 28,
     fontFamily: fontEnum.PoppinsSemiBold
   }),
   by: {
