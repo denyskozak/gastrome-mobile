@@ -2,6 +2,7 @@ import { StyleSheet } from 'react-native';
 import { Spaces } from '../../styles/spaces';
 import { BorderRadius, getTextStyles } from '../../styles/common.styles';
 import { fontEnum } from '../../styles/fonts';
+import {getDevice} from "../../utilities/getCurrentDevice";
 
 export const useStyles = (theme) => StyleSheet.create({
   container: {
@@ -16,9 +17,12 @@ export const useStyles = (theme) => StyleSheet.create({
   },
   musicButtonContainer: {
     position: 'absolute',
-    right: Spaces.medium,
-    zIndex: 3,
     alignItems: 'center',
+    zIndex: 3,
+    right: getDevice() === 'iPad' ? '10%' : '5%',
+    bottom: Spaces.xxlarge,
+    flexDirection: 'row',
+    gap: Spaces.small,
   },
   musicButton: {
     alignItems: 'center',

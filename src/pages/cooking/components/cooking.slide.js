@@ -115,11 +115,6 @@ export const CookingSlideComponent = ({
                             {/*    <TimerButton onPress={onStartTimePress} duration={duration}/> : null}*/}
 
                         </Animated>
-
-                        {duration && !isTimerActive ?
-                            <Animated duration={1000} name="SlideInLeft" outName="SlideOutLeft"
-                                      style={styles.backButtonRightContainer}><TimerButton onPress={onStartTimePress}/>
-                            </Animated> : null}
                     </>
                 )}
 

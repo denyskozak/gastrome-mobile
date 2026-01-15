@@ -691,7 +691,7 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
             <Button
                 type="contained"
                 size="xxl"
-                title={`${tHome('openRecipeButton')}${showFreeBadge ? ' 🆓' : ''}`}
+                title={`${tHome('openRecipeButton')}${showFreeBadge ? ' 🆓' : ' 🧑🏽‍🍳'}`}
                 onPress={() => onPressMeta?.(item)}
                 style={styles.metaButton}
                 textStyle={styles.metaButtonText}

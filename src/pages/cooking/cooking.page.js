@@ -374,7 +374,7 @@ export const CookingPage = (props) => {
 
     return (
         <SafeAreaView style={styles.container}>
-            <View style={[styles.musicButtonContainer, {top: insets.top + Spaces.medium}]}>
+            <View style={styles.musicButtonContainer}>
                 <TouchableOpacity
                     onPress={handleToggleBackgroundMusic}
                     style={styles.musicButton}
