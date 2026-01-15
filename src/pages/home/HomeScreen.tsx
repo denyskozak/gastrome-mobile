@@ -99,7 +99,7 @@ type RegistryEntry = {
 
 const BACKGROUND_MUSIC_SOURCE: BackgroundMusicSource = require('../../../assets/background-track.mp3');
 
-type FeedFilter = 'all' | 'favorites';
+type FeedFilter = 'all' | 'free' | 'favorites';
 
 export const HomeScreen: React.FC = () => {
     const insets = useSafeAreaInsets();
@@ -227,10 +227,26 @@ export const HomeScreen: React.FC = () => {
         );
     }, [baseVideos, favoriteIds]);
 
-    const displayedVideos = useMemo(
-        () => (feedFilter === 'all' ? allVideos : favoriteVideos),
-        [allVideos, favoriteVideos, feedFilter],
-    );
+    const freeVideos = useMemo(() => {
+        if (isSubscriber || !viewedRecipeIds.length) {
+            return [];
+        }
+
+        const viewedIds = new Set(viewedRecipeIds);
+        return baseVideos.filter((video) =>
+            video.recipeId ? viewedIds.has(String(video.recipeId)) : false,
+        );
+    }, [baseVideos, isSubscriber, viewedRecipeIds]);
+
+    const displayedVideos = useMemo(() => {
+        if (feedFilter === 'favorites') {
+            return favoriteVideos;
+        }
+        if (feedFilter === 'free') {
+            return freeVideos;
+        }
+        return allVideos;
+    }, [allVideos, favoriteVideos, feedFilter, freeVideos]);
 
     const displayedVideosLength = displayedVideos.length;
 
@@ -333,7 +349,7 @@ export const HomeScreen: React.FC = () => {
 
             navigation.navigate(recipeRoute, {id: video.recipeId});
         },
-        [isSubscriber, navigation, setSubscriptionsOpened],
+        [isSubscriber, navigation, setSubscriptionsOpened, setViewedRecipeIds],
     );
 
     const keyExtractor = useCallback((item: VideoItem) => item.id, []);
@@ -441,6 +457,12 @@ export const HomeScreen: React.FC = () => {
             shouldResetToMiddleRef.current = true;
         }
     }, [feedFilter, setActiveIndex]);
+
+    useEffect(() => {
+        if (isSubscriber && feedFilter === 'free') {
+            setFeedFilter('all');
+        }
+    }, [feedFilter, isSubscriber]);
 
     useEffect(() => {
         if (!displayedVideosLength) {
@@ -580,16 +602,20 @@ export const HomeScreen: React.FC = () => {
     );
 
     const listExtraData = useMemo(
-        () => ({favoriteIds, isBackgroundMusicEnabled, feedFilter}),
-        [favoriteIds, feedFilter, isBackgroundMusicEnabled],
+        () => ({favoriteIds, isBackgroundMusicEnabled, feedFilter, viewedRecipeIds}),
+        [favoriteIds, feedFilter, isBackgroundMusicEnabled, viewedRecipeIds],
     );
 
     const feedOptions = useMemo(
-        () => [
-            {key: 'all' as FeedFilter, label: tHome('feedAll') ?? 'All'},
-            {key: 'favorites' as FeedFilter, label: tHome('feedFavorites') ?? 'Favorites'},
-        ],
-        [tHome],
+        () => {
+            const options = [{key: 'all' as FeedFilter, label: tHome('feedAll') ?? 'All'}];
+            if (!isSubscriber) {
+                options.push({key: 'free' as FeedFilter, label: tHome('feedFree') ?? 'Free'});
+            }
+            options.push({key: 'favorites' as FeedFilter, label: tHome('feedFavorites') ?? 'Favorites'});
+            return options;
+        },
+        [isSubscriber, tHome],
     );
 
     return (
