@@ -19,17 +19,38 @@ const sortByPriority = (a, b) => {
 };
 
 const sortByFree = (a, b) => (b.free ?? false) - (a.free ?? false);
-export const sortRecipes = (items = [], sortType = 'asc') => {
-    const list = [...items].sort(sortByPriority);
+const sortByViewedFree = (viewedIds = []) => (a, b) => {
+    const aViewed = Boolean(a.free) && viewedIds.includes(String(a.id));
+    const bViewed = Boolean(b.free) && viewedIds.includes(String(b.id));
+    if (aViewed !== bViewed) {
+        return aViewed ? -1 : 1;
+    }
+    const freeCompare = sortByFree(a, b);
+    if (freeCompare !== 0) {
+        return freeCompare;
+    }
+    return sortByPriority(a, b);
+};
+
+export const sortRecipes = (items = [], sortType = 'asc', viewedIds = []) => {
+    const list = [...items];
     switch (sortType) {
+        case 'free-viewed':
+            return list.sort(sortByViewedFree(viewedIds));
         case 'free':
-            return list.sort(sortByFree);
+            return list.sort((a, b) => {
+                const freeCompare = sortByFree(a, b);
+                if (freeCompare !== 0) {
+                    return freeCompare;
+                }
+                return sortByPriority(a, b);
+            });
         case 'asc':
-            return list
+            return list.sort(sortByPriority);
         case 'desc':
-            return list.reverse()
+            return list.sort(sortByPriority).reverse();
         default:
-            return list
+            return list.sort(sortByPriority);
     }
 }
 
@@ -37,4 +58,3 @@ export const sortRecipesByTitle = (items = [], sortType = 'asc') => {
     const list = [...items].sort(sortByTitle)
     return sortType === 'asc' ? list : list.reverse();
 }
-
