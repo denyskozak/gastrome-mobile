@@ -1,10 +1,10 @@
 import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
-import {Pressable, SafeAreaView, Text} from 'react-native';
+import {Pressable, SafeAreaView, Text, TouchableOpacity, View} from 'react-native';
 import {Audio} from 'expo-av';
 import * as Speech from 'expo-speech';
 import Voice from '@react-native-voice/voice';
 import {isAvailableAsync, requestReview} from 'expo-store-review';
-import {useFocusEffect} from '@react-navigation/native';
+import {useFocusEffect, useIsFocused} from '@react-navigation/native';
 import {Carousel} from '../../components/molecular/carousel/carousel.component';
 import {useTranslator} from '../../hooks/useTranslator';
 import {VoiceButton} from '../recipe/components/voice.button/voice.button.component';
@@ -23,6 +23,8 @@ import {VolumeManager} from 'react-native-volume-manager';
 import {CircleTimer} from '../../components/molecular/circle-timer/circle-timer';
 import {secondsToMinutesWithTranslations} from '../../utilities/timeParsers';
 import {Spaces} from '../../styles/spaces';
+import Icon from '@expo/vector-icons/Ionicons';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 import { useStyles } from './cooking.page.styles';
 import {useRecipes} from "../../hooks/useRecipes";
@@ -33,8 +35,10 @@ import {logEvent} from "../../utilities/google-analitics";
 import {useSubscriptions} from "../../contexts/subscriptions.context";
 import {SubscriptionsModal} from "../../components/templates/subscriptions-modal/subscriptions-modal";
 import { useTheme } from '../../hooks/useTheme';
+import {useBackgroundMusic} from '../../hooks/useBackgroundMusic';
 
 const alarmSong = require('./alarm.mp3');
+const BACKGROUND_MUSIC_SOURCE = require('../../../assets/background-track.mp3');
 const soundObject = new Audio.Sound();
 
 export const CookingPage = (props) => {
@@ -52,10 +56,12 @@ export const CookingPage = (props) => {
 
     const [t, , language] = useTranslator('pages.cooking');
     const [tCommon] = useTranslator('common');
+    const [tHome] = useTranslator('pages.home');
     const [recipes] = useRecipes();
     const [settings] = useSettings();
     const [logError] = useLogger();
     const [isSubscriber] = useSubscriptions();
+    const insets = useSafeAreaInsets();
     const [targetStep, setTargetStep] = useState(null);
     const [helpModalVisible, setHelpModalVisible] = useState(false);
     const [permissionModalVisible, setPermissionModalVisible] = useState(false);
@@ -72,6 +78,17 @@ export const CookingPage = (props) => {
     const [stepTextSize, setStepTextSize] = useState(18);
     const { theme } = useTheme();
     const styles = useStyles(theme);
+    const [isBackgroundMusicEnabled, setIsBackgroundMusicEnabled] = useState(true);
+    const {
+        start: startBackgroundMusic,
+        stop: stopBackgroundMusic,
+        seekToRandomPosition: randomizeBackgroundMusicPosition,
+    } = useBackgroundMusic(
+        BACKGROUND_MUSIC_SOURCE,
+        {volume: 0.05},
+    );
+    const isFocused = useIsFocused();
+    const isVoiceAssistantActive = isListening || timerVoiceActivated;
 
     const parseDuration = useCallback((value) => {
         const translates = {
@@ -121,6 +138,10 @@ export const CookingPage = (props) => {
             }
         })
     };
+
+    const handleToggleBackgroundMusic = useCallback(() => {
+        setIsBackgroundMusicEnabled((prev) => !prev);
+    }, []);
 
     const startListen = () => {
         (async () => {
@@ -246,6 +267,7 @@ export const CookingPage = (props) => {
             await Voice.destroy();
             await Speech.stop();
             await handleTimerSongStop();
+            await stopBackgroundMusic();
             setIsTimeActive(false);
             setTimerVoiceActivated(false);
             setListening(false);
@@ -257,6 +279,24 @@ export const CookingPage = (props) => {
         setTimerVoiceActivated(false);
         handleTimerSongStop().then().catch();
     }, [activeIndex]);
+
+    useEffect(() => {
+        if (isBackgroundMusicEnabled && isFocused && !isVoiceAssistantActive) {
+            void (async () => {
+                await randomizeBackgroundMusicPosition();
+                await startBackgroundMusic();
+            })();
+        } else {
+            void stopBackgroundMusic();
+        }
+    }, [
+        isBackgroundMusicEnabled,
+        isFocused,
+        isVoiceAssistantActive,
+        randomizeBackgroundMusicPosition,
+        startBackgroundMusic,
+        stopBackgroundMusic,
+    ]);
 
     const handleStartCookingPress = async () => {
         if (!isSubscriber) {
@@ -334,6 +374,24 @@ export const CookingPage = (props) => {
 
     return (
         <SafeAreaView style={styles.container}>
+            <View style={[styles.musicButtonContainer, {top: insets.top + Spaces.medium}]}>
+                <TouchableOpacity
+                    onPress={handleToggleBackgroundMusic}
+                    style={styles.musicButton}
+                    accessibilityLabel={
+                        isBackgroundMusicEnabled
+                            ? tHome('stopBackgroundMusic') ?? 'Stop background music'
+                            : tHome('startBackgroundMusic') ?? 'Play background music'
+                    }
+                    accessible
+                >
+                    <View style={styles.musicIcon}>
+                        <Icon name="musical-notes" size={26} color="#ffffff" />
+                        {!isBackgroundMusicEnabled ? <View style={styles.musicOffSlash} /> : null}
+                    </View>
+                    <Text style={styles.musicLabel}>{tHome('musicActionLabel') ?? 'Music'}</Text>
+                </TouchableOpacity>
+            </View>
             {/*Voice assistant*/}
             {!timerVoiceActivated && withVoiceAssistant && (
                 <VoiceButton
