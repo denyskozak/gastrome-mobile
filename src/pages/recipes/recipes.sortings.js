@@ -18,16 +18,11 @@ const sortByPriority = (a, b) => {
     return 0;
 };
 
-const sortByFree = (a, b) => (b.free ?? false) - (a.free ?? false);
-const sortByViewedFree = (viewedIds = []) => (a, b) => {
-    const aViewed = Boolean(a.free) && viewedIds.includes(String(a.id));
-    const bViewed = Boolean(b.free) && viewedIds.includes(String(b.id));
+export const sortByViewedFree = (viewedIds = []) => (a, b) => {
+    const aViewed =  viewedIds.includes(String(a.id));
+    const bViewed =  viewedIds.includes(String(b.id));
     if (aViewed !== bViewed) {
         return aViewed ? -1 : 1;
-    }
-    const freeCompare = sortByFree(a, b);
-    if (freeCompare !== 0) {
-        return freeCompare;
     }
     return sortByPriority(a, b);
 };

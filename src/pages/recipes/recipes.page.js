@@ -8,7 +8,7 @@ import * as Haptics from "expo-haptics";
 import {RecipeItem} from './components/recipes.item.component';
 import {useTranslator} from '../../hooks/useTranslator';
 import {Button} from '../../components/atomic/button/button.component';
-import {sortRecipes} from './recipes.sortings';
+import {mapFree, sortByViewedFree, sortRecipes} from './recipes.sortings';
 import {filterRecipes} from './recipes.filters';
 import {useSearchByIngredients} from '../../contexts/searchByIngredients.context';
 import {filterRecipesByIngredientsList} from './recipes.utilities';
@@ -25,6 +25,7 @@ import {renderFilterIcon} from "../../utilities/renders";
 import {useSettings} from "../../contexts/settings.context";
 import { useTheme } from '../../hooks/useTheme';
 import {canViewRecipeToday, getDailyViewedRecipes, markRecipeViewedToday} from '../../utilities/dailyRecipeLimit';
+import {useFreeRecipes} from "../../contexts/free-recipes";
 
 
 const RecipesPageComponent = (props) => {
@@ -38,6 +39,8 @@ const RecipesPageComponent = (props) => {
     const [isSubscriber] = useSubscriptions();
     const [{filterNames}, setSetting] = useSettings();
     const { theme } = useTheme();
+    const [viewedRecipeIds, setViewedRecipeIds] = useFreeRecipes()
+
     const styles = useStyles(theme);
     const setFilterNames = name => setSetting('filterNames', name);
     const [recipes] = useRecipes(true);
@@ -51,10 +54,9 @@ const RecipesPageComponent = (props) => {
                 filters: isFavorites ? [...item.filters, 'Favorites'] : item.filters,
             }
         });
-    }, [favorites]);
+    }, [favorites, viewedRecipeIds]);
 
     // List
-    const [viewedRecipeIds, setViewedRecipeIds] = useState([]);
     const defaultDataList = useMemo(() => (
         sortRecipes(
             preMappingFavorites(recipes),
@@ -71,6 +73,20 @@ const RecipesPageComponent = (props) => {
     const [isSubscriptionsOpened, setSubscriptionsOpened] = useState(false);
     const flatListRef = useRef(null);
 
+    // useEffect(() => {
+    //     if (!isSubscriber) {
+    //         console.log("viewedRecipeIds: ", viewedRecipeIds)
+    //
+    //         setListData(listData.sort((a,b) =>  {
+    //             const hasLeft = viewedRecipeIds.includes(a.id)
+    //             const hasRight = viewedRecipeIds.includes(b.id)
+    //             if (hasRight && hasLeft) return 0;
+    //             // if (hasLeft) return 1;
+    //             // if (hasRight) return -1;
+    //             return 0;
+    //         }));
+    //     }
+    // }, [isSubscriber, viewedRecipeIds])
     // Search
     const findRecipeIndexesByTitle = useCallback((value, list) => {
         // First search by filtered items
@@ -90,40 +106,27 @@ const RecipesPageComponent = (props) => {
         (value, items) => findRecipeIndexesByTitle(value, items).map(index => ({...listData[index]})),
         [listData]);
 
-    useEffect(() => {
-        setListData(defaultDataList);
-    }, [defaultDataList])
+ 
 
     useEffect(() => {
-        setSearchedItems(applySearch(searchText, listData));
+        if (searchText) {
+            setSearchedItems(applySearch(searchText, listData));
+        }
     }, [searchText, listData])
 
     useEffect(() => {
-        if (isSubscriber) {
-            setViewedRecipeIds([]);
+        if (isSubscriber || viewedRecipeIds.length === 0) {
             return;
         }
 
-        let isMounted = true;
-        const loadViewedRecipes = async () => {
-            try {
-                const {ids} = await getDailyViewedRecipes();
-                if (isMounted) {
-                    setViewedRecipeIds(ids);
-                }
-            } catch (error) {
-                if (isMounted) {
-                    setViewedRecipeIds([]);
-                }
-            }
-        };
+        const reducedViewedRecipeIds = [...viewedRecipeIds];
+        reducedViewedRecipeIds.pop();
+        setListData(listData.sort(sortByViewedFree(
+            reducedViewedRecipeIds,
+        )))
 
-        loadViewedRecipes();
 
-        return () => {
-            isMounted = false;
-        };
-    }, [isSubscriber]);
+    }, [isSubscriber, viewedRecipeIds]);
 
     // Filter by selected ingredients on Grocery page
     useEffect(() => {

@@ -8,6 +8,7 @@ import {FavoritesContextWrapper} from './contexts/favorites.context';
 import {SubscriptionsContextWrapper} from './contexts/subscriptions.context';
 import {SettingsContextWrapper} from './contexts/settings.context';
 import { SplashScreenContextWrapper} from "./contexts/splash-screen.context";
+import {FreeRecipesContextWrapper} from "./contexts/free-recipes";
 
 export const AppContextWrapper = ({children, defaultSettings = null}) => {
     return (
@@ -19,7 +20,9 @@ export const AppContextWrapper = ({children, defaultSettings = null}) => {
                             <SubscriptionsContextWrapper>
                                 <SettingsContextWrapper defaultSettings={defaultSettings}>
                                     <SplashScreenContextWrapper>
-                                    {children}
+                                        <FreeRecipesContextWrapper>
+                                            {children}
+                                        </FreeRecipesContextWrapper>
                                     </SplashScreenContextWrapper>
                                 </SettingsContextWrapper>
                             </SubscriptionsContextWrapper>
