@@ -53,8 +53,15 @@ const RecipesPageComponent = (props) => {
         });
     }, [favorites]);
 
-    const defaultDataList = useMemo(() => sortRecipes(preMappingFavorites(recipes), isSubscriber ? 'asc' : 'free'), [preMappingFavorites, recipes, isSubscriber]);
     // List
+    const [viewedRecipeIds, setViewedRecipeIds] = useState([]);
+    const defaultDataList = useMemo(() => (
+        sortRecipes(
+            preMappingFavorites(recipes),
+            isSubscriber ? 'asc' : 'free-viewed',
+            viewedRecipeIds,
+        )
+    ), [preMappingFavorites, recipes, isSubscriber, viewedRecipeIds]);
     const [listData, setListData] = useState(defaultDataList);
     const [searchedItems, setSearchedItems] = useState([]);
     const [searchText, setSearchText] = useState('');
@@ -62,7 +69,6 @@ const RecipesPageComponent = (props) => {
     const [filteredByChosenIngredientsListData, setFilteredByChosenIngredientsListData] = useState([]);
     const [isFilterOpened, setFilterOpened] = useState(false);
     const [isSubscriptionsOpened, setSubscriptionsOpened] = useState(false);
-    const [viewedRecipeIds, setViewedRecipeIds] = useState([]);
     const flatListRef = useRef(null);
 
     // Search
