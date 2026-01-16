@@ -172,7 +172,7 @@ const RecipePageComponent = (props) => {
             ListHeaderComponent={<>
                 {/* Image section */}
                 <View style={styles.timeContainer}>
-                    {limitText ? <TouchableHighlight onPress={() => setSubscriptionVisibleModal(true)}>
+                    {limitText && !isSubscriber ? <TouchableHighlight onPress={() => setSubscriptionVisibleModal(true)}>
                         <Text style={styles.limit}>
                             <Icon name="cart" size={16}/>
                             {' '}
