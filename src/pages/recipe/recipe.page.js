@@ -67,7 +67,7 @@ const RecipePageComponent = (props) => {
 
     const {getCookingStepURL} = useAWS();
     const { theme } = useTheme();
-    const { isSubscriber } = useSubscriptions();
+    const  [isSubscriber] = useSubscriptions();
     const styles = useStyles(theme);
     const [, addCartItems] = useMenuCart();
     const [favorites, setLike] = useFavorites();
