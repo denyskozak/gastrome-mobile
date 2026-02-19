@@ -609,13 +609,15 @@ export const HomeScreen: React.FC = () => {
     const feedOptions = useMemo(
         () => {
             const options = [{key: 'all' as FeedFilter, label: tHome('feedAll') ?? 'All'}];
-            if (!isSubscriber) {
+            if (!isSubscriber && freeVideos.length > 0) {
                 options.push({key: 'free' as FeedFilter, label: tHome('feedFree') ?? 'Free'});
             }
-            options.push({key: 'favorites' as FeedFilter, label: tHome('feedFavorites') ?? 'Favorites'});
+            if (favoriteIds.length > 0) {
+                options.push({key: 'favorites' as FeedFilter, label: tHome('feedFavorites') ?? 'Favorites'});
+            }
             return options;
         },
-        [isSubscriber, tHome],
+        [isSubscriber, freeVideos.length, favoriteIds.length, tHome],
     );
 
     return (

@@ -1059,7 +1059,7 @@ export const recipes = [
         "cook_time": 60,
         "time": 80,
         "priority": 0,
-        "author": getAuthor(4),
+        "author": getAuthor(1),
         "proteins": 25,
         "fats": 30,
         "carbohydrates": 5,
