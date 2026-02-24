@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native';
 import { getTextStyles } from '../../../styles/common.styles';
 import { fontEnum } from '../../../styles/fonts';
+import {Spaces} from "../../../styles/spaces";
 
 export const useStyles = (theme) => StyleSheet.create({
   container: {
@@ -17,6 +18,10 @@ export const useStyles = (theme) => StyleSheet.create({
   title: getTextStyles({
     fontSize: 28,
     fontFamily: fontEnum.PoppinsSemiBold
+  }),
+  subtitle: getTextStyles({
+    marginTop: Spaces.medium,
+    fontSize: 18,
   }),
   by: {
     position: 'absolute',
