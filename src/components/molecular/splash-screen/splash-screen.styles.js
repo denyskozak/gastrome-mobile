@@ -21,9 +21,12 @@ export const useStyles = (theme) => StyleSheet.create({
   }),
   subtitle: getTextStyles({
     marginTop: Spaces.medium,
+    alignSelf: 'center',
+    textAlign: 'center',
     fontSize: 18,
   }),
   by: {
+
     position: 'absolute',
     bottom: '10%',
     fontSize: 18,
