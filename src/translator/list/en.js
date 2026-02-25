@@ -12,7 +12,7 @@ export const translates = {
         subscriptions: 'Community',
         faq: 'FAQ',
         author: 'Chef',
-        health: 'Health',
+        health: 'Knowledge',
         supplement: 'Supplement',
         authors: 'Gastro Chefs',
     },
@@ -174,7 +174,7 @@ export const translates = {
             close: 'Close',
             apply: 'Apply',
             subscriptions: 'Prepared plans for your:',
-            buySubscription: 'Join GastroMe Community',
+            buySubscription: 'Join Community',
             time: '{time} min',
         },
         recipe: {

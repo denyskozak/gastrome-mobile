@@ -644,10 +644,10 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
   return (
       <View style={styles.container}>
         <View style={styles.videoContainer}>
-          {item.poster && !isLoaded ? (
-              // @ts-ignore
-              <Image source={{ uri: item.poster }} style={styles.poster} resizeMode="cover" />
-          ) : null}
+          {/*{item.poster && !isLoaded ? (*/}
+          {/*    // @ts-ignore*/}
+          {/*    <Image source={{ uri: item.poster }} style={styles.poster} resizeMode="cover" />*/}
+          {/*) : null}*/}
           {renderVideo()}
           {isBuffering && !isLoaded ? (
               <View style={styles.bufferingOverlay}>
