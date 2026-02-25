@@ -28,6 +28,7 @@ import { useTranslator } from '../../hooks/useTranslator';
 import { Liner } from '../atomic/video-player/liner/liner.component';
 import {AVPlaybackStatusError} from "expo-av/src/AV.types";
 import { useTheme } from '../../hooks/useTheme';
+import { downloadAsync } from '../../utilities/downloadAsync';
 
 let ExpoVideo: any = null;
 let ExpoResizeMode: any = null;
@@ -111,6 +112,7 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
   const [isBuffering, setIsBuffering] = useState(true);
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);
+  const [videoUri, setVideoUri] = useState(item.source);
   const [playbackPosition, setPlaybackPosition] = useState(0);
   const [playbackDuration, setPlaybackDuration] = useState(0);
   const [isManuallyPaused, setIsManuallyPaused] = useState(false);
@@ -126,6 +128,29 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
   useEffect(() => {
     setLiked(Boolean(isFavorite));
   }, [isFavorite, item.id]);
+
+  useEffect(() => {
+    let isCancelled = false;
+
+    setVideoUri(item.source);
+
+    (async () => {
+      try {
+        const localUri = await downloadAsync(item.source);
+        if (!isCancelled) {
+          setVideoUri(localUri || item.source);
+        }
+      } catch (error) {
+        if (!isCancelled) {
+          setVideoUri(item.source);
+        }
+      }
+    })();
+
+    return () => {
+      isCancelled = true;
+    };
+  }, [item.source]);
 
   const shouldPlay = isActive && !isManuallyPaused && !hasError;
 
@@ -369,7 +394,7 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
         if (!status?.isLoaded) {
           pendingPlayRef.current = true;
           await videoRef.current?.loadAsync?.(
-              { uri: item.source },
+              { uri: videoUri },
               { shouldPlay: true, isMuted, isLooping: true },
               false,
           );
@@ -389,7 +414,7 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
     } else if (videoRef.current?.seek) {
       videoRef.current.seek(0);
     }
-  }, [isRecoverablePlaybackError, item.source, isMuted]);
+  }, [isRecoverablePlaybackError, isMuted, videoUri]);
 
   const pause = useCallback(async () => {
     if (!videoRef.current) return;
@@ -447,7 +472,7 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
         const status = await videoRef.current.getStatusAsync();
         if (!status?.isLoaded) {
           await videoRef.current.loadAsync?.(
-              { uri: item.source },
+              { uri: videoUri },
               { shouldPlay: false, isMuted: true, isLooping: true },
               false,
           );
@@ -459,7 +484,7 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
     } else {
       preparedRef.current = true;
     }
-  }, [item.source]);
+  }, [videoUri]);
 
   useEffect(() => {
     onRegister?.(index, {
@@ -561,7 +586,7 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
           <ExpoVideo
               ref={videoRef}
               style={StyleSheet.absoluteFill}
-              source={{ uri: item.source }}
+              source={{ uri: videoUri }}
               resizeMode={ExpoResizeMode?.CONTAIN ?? 'contain'}
               isLooping
               isMuted={isMuted}
@@ -580,7 +605,7 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
       return (
           <RNVideo
               ref={videoRef}
-              source={{ uri: item.source }}
+              source={{ uri: videoUri }}
               style={StyleSheet.absoluteFill}
               resizeMode="cover"
               repeat
