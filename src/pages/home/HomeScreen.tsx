@@ -37,6 +37,9 @@ import {SubscriptionsModal} from "../../components/templates/subscriptions-modal
 import {useSubscriptions} from "../../contexts/subscriptions.context";
 import {canViewRecipeToday, getDailyViewedRecipes, markRecipeViewedToday} from "../../utilities/dailyRecipeLimit";
 import {useFreeRecipes} from "../../contexts/free-recipes";
+import {isFirstLaunch} from "../../utilities/isFirstLaunch";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import {HOME_PAGE_SLIDE_HELPER_KEY} from "../../constants/asyncStoreKeys";
 
 const {height: SCREEN_HEIGHT} = Dimensions.get('window');
 const MAX_BUFFER_DISTANCE = 2;
@@ -426,6 +429,23 @@ export const HomeScreen: React.FC = () => {
         }
     }, [activeIndex, displayedVideos]);
 
+    // slide helper handling
+    useEffect(() => {
+        if (!isVisibleCustomSplashScreen) {
+            isFirstLaunch(HOME_PAGE_SLIDE_HELPER_KEY).then(result => {
+                if (!result) return;
+
+                setTimeout(() => {
+                    setShowArrow(true)
+                }, 5000)
+                setTimeout(() => {
+                    setShowArrow(false)
+                }, 9000)
+               AsyncStorage.setItem(HOME_PAGE_SLIDE_HELPER_KEY, 'true');
+            });
+        }
+    }, [isVisibleCustomSplashScreen]);
+
     useEffect(() => {
         syncPlayers();
     }, [activeIndex, syncPlayers]);
@@ -553,12 +573,6 @@ export const HomeScreen: React.FC = () => {
                             if (isVisibleCustomSplashScreen) {
                                setTimeout(() => {
                                    setIsVisibleCustomSplashScreen(false);
-                                   setTimeout(() => {
-                                       setShowArrow(true)
-                                   }, 5000)
-                                   setTimeout(() => {
-                                       setShowArrow(false)
-                                   }, 9000)
                                }, 1000)
                             }
                         }}
