@@ -3,7 +3,8 @@ import {View} from 'react-native';
 import { useFonts } from 'expo-font'
 import * as SplashScreen from 'expo-splash-screen';
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
+// import { requestTrackingPermissionsAsync } from 'expo-tracking-transparency';
+import {Settings} from "react-native-fbsdk-next";
 import { fonts } from './styles/fonts';
 
 import { AppContextWrapper } from './AppContextWrapper';
@@ -31,6 +32,7 @@ const AppInner = ({
     backgroundColor: theme.colors.backgroundColorLowOpacity,
   }), [theme.colors.backgroundColorLowOpacity]);
 
+
   return (
     <View style={appBackgroundStyle}>
       {!fontsLoaded || isVisibleCustomSplashScreen ? <CustomSplashScreen /> : null}
@@ -50,6 +52,27 @@ export const App = () => {
   const [isOnBoarding, setIsOnBoarding] = useIsOnBoarding();
   // const [isVisibleCustomSplashScreen, setVisibleCustomSplashScreen] = useState(true);
   const [storedSettings, setStoredSettings] = useState(null);
+
+  // setup transparency
+  // useEffect(() => {
+  //   (async () => {
+  //     const { status } = await requestTrackingPermissionsAsync();
+  //
+  //     Settings.initializeSDK();
+  //
+  //     if (status === 'granted') {
+  //       await Settings.setAdvertiserTrackingEnabled(true);
+  //     }
+  //   })();
+  // }, []);
+
+  useEffect(() => {
+    try {
+      Settings.initializeSDK();
+    } catch (e) {
+      console.error(e);
+    }
+  }, []);
 
   useEffect(() => { 
     if (fontsLoaded) {

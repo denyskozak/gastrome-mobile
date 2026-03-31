@@ -2,7 +2,7 @@
   "expo": {
     "name": "Gastro & Me",
     "slug": "gastro-and-me",
-    "version": "1.2.31",
+    "version": "1.2.33",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
@@ -28,7 +28,20 @@
           }
         }
       ],
-      "expo-localization"
+      "expo-localization",
+      "expo-tracking-transparency",
+      [
+        "react-native-fbsdk-next",
+        {
+          "appID": "1334672715348341",
+          "clientToken": "ecbc85a7b2d040fc77b4bfe1b754870f",
+          "displayName": "Gastro & Me",
+          "scheme": "fb1334672715348341",
+          "advertiserIDCollectionEnabled": false,
+          "autoLogAppEventsEnabled": true,
+          "isAutoInitEnabled": true
+        }
+      ]
     ],
     "splash": {
       "image": "./assets/splash.png",
