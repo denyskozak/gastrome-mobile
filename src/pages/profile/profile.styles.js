@@ -17,12 +17,18 @@ export const useProfileStyles = createThemedStyles((theme) => StyleSheet.create(
     marginTop: Spaces.large,
   },
   subscriptionText: getTextStyles({}, theme),
+  email: getTextStyles({ padding: Spaces.small, textAlign: 'center'}, theme),
   settingButtons: {
     marginTop: Spaces.large,
     gap: Spaces.small,
   },
   settingButton: {
     borderColor: theme.colors.primary,
+  },
+  modalButtons: {
+    gap: Spaces.small,
+    marginTop: Spaces.small,
+    flexDirection: 'row',
   },
   comingSoon: getTextStyles({
     fontSize: 14,
@@ -43,7 +49,7 @@ export const useProfileStyles = createThemedStyles((theme) => StyleSheet.create(
     marginTop: Spaces.medium,
   },
   themePicker: {
-    marginTop: Spaces.large,
+    marginTop: Spaces.small,
     width: '100%',
     paddingHorizontal: Spaces.large,
     gap: Spaces.small,

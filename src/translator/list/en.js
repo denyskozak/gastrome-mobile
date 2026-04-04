@@ -145,6 +145,9 @@ export const translates = {
             feedback: 'Rate app 🤩',
             join: 'Join Community',
             community: 'GastroMe Community',
+            copied: 'Copied!',
+            copy: 'Copy',
+            close: 'Close',
             communityText: "Happy to see you in our side, we are growing quick!  \n Chat and Streams soon"
         },
         storage: {

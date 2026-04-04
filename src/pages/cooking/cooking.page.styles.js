@@ -28,18 +28,18 @@ export const useStyles = (theme) => StyleSheet.create({
     alignItems: 'center',
   },
   musicIcon: {
-    width: 44,
-    height: 44,
-    borderRadius: 22,
-    backgroundColor: 'rgba(60,60,67,0.45)',
+    width: Spaces.xxxlarge,
+    height: Spaces.xxxlarge,
+    borderRadius: 60,
+    backgroundColor: theme.colors.second,
     alignItems: 'center',
     justifyContent: 'center',
   },
   musicOffSlash: {
     position: 'absolute',
     width: 3,
-    height: 32,
-    backgroundColor: '#ffffff',
+    height: Spaces.xxlarge,
+    backgroundColor: theme.colors.primary,
     borderRadius: 2,
     transform: [{ rotate: '45deg' }],
   },
@@ -61,4 +61,35 @@ export const useStyles = (theme) => StyleSheet.create({
   helpModalButton: {
     marginTop: Spaces.medium,
   },
+
+  backButtonLeftContainer: {
+    position: 'absolute',
+    zIndex: 2,
+    left: getDevice() === 'iPad' ? '10%' : '5%',
+    bottom: Spaces.xxlarge,
+    flexDirection: 'row',
+    gap: Spaces.small,
+  },
+  backButtonRightContainer: {
+    position: 'absolute',
+    zIndex: 2,
+    right: getDevice() === 'iPad' ? '10%' : '5%',
+    bottom: Spaces.xxlarge,
+    flexDirection: 'row',
+    gap: Spaces.small,
+  },
+  backPause: {
+    position: 'absolute',
+    bottom: '50%',
+  },
+  backButton: {
+    backgroundColor: theme.colors.white,
+  },
+  backButtonText: getTextStyles({
+    fontSize: 18,
+    color: theme.colors.black,
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row',
+  }),
 });

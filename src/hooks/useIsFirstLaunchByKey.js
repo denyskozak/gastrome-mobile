@@ -9,15 +9,15 @@ export const useIsFirstLaunchByKey = (asyncStoreKey) => {
   useEffect(() => {
     try {
       (async () => {
-        const FirstLaunchState = await isFirstLaunch(asyncStoreKey);
+        const firstLaunchState = await isFirstLaunch(asyncStoreKey);
         await delayForPromise(500);
-        if (FirstLaunchState && asyncStoreKey) {
+        if (firstLaunchState && asyncStoreKey) {
           await AsyncStorage.setItem(asyncStoreKey, 'true');
           setIsFirst(true);
         }
       })()
     } catch (e) {
-      console.log('useIsFirstLaunchByKey Error: ', e);
+      console.log('useIsFirstLaunchByKey Error: ', asyncStoreKey, e);
     }
   }, [setIsFirst]);
 

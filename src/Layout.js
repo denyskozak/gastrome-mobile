@@ -17,12 +17,14 @@ const LayoutComponent = ({children}) => {
     useLayoutEffect(() => {
         (async () => {
             // Getting speech profiles and default config
+
             try {
                 if (
                     (settings['speechProfile'] && !isFirstRun) // if not first run and has profile (for language change)
                     || (settings['speechProfile'] === '' && isFirstRun) // if first run and has no profile (for first run)
                 ) {
                     const profiles = await getSpeechProfiles(language)
+                    console.log("profiles", profiles);
                     const preferableIndex = profiles.findIndex(item => item.name === preferableProfileByLanguages[language]); // first looking by name and lang
                     const possibleIndex = preferableIndex > -1 ? preferableIndex : Array.isArray(profiles) && profiles.length > 0 ? 0 : null; // second for 1 profile or null
                     const possibleProfile = typeof possibleIndex === 'number' ? profiles[possibleIndex]['identifier'] : '';

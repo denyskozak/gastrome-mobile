@@ -43,7 +43,7 @@ const GlowWrap = ({children, enabled = true, glowColor = 'rgba(255,255,255,0.9)'
 
     const auraStyle = useAnimatedStyle(() => {
         // 0..1..0 (ping-pong), делаем мягкий пульс
-        const scale = 1 + 0.03 * p.value;
+        const scale = 1 + 0.01 * p.value;
         const opacity = 0.18 + 0.22 * p.value;
 
         return {
@@ -188,15 +188,14 @@ const SubscriptionsModalComponent = (props) => {
                                             <>
                                                 {options.map((item, idx) => {
                                                     // Пример: подсветить первую кнопку или "годовую" (настройте под себя)
-                                                    const isHighlighted =
+                                                    const showDiscountChip =
                                                         String(item?.product?.identifier || '').toLowerCase().includes('annual') ||
                                                         String(item?.product?.identifier || '').toLowerCase().includes('year');
-                                                    const showDiscountChip = idx === 1;
 
                                                     return (
                                                         <GlowWrap
                                                             key={item.product.identifier}
-                                                            enabled={isHighlighted}
+                                                            enabled={showDiscountChip}
                                                             glowColor={theme.colors?.primary}
                                                         >
                                                             <View style={styles.offerWrapper}>
@@ -207,7 +206,7 @@ const SubscriptionsModalComponent = (props) => {
                                                                 )}
                                                                 <Button
                                                                     type="fulled"
-                                                                    size="xl"
+                                                                    size="xxl"
                                                                     style={styles.button}
                                                                     textStyle={styles.buttonText}
                                                                     onPress={() => {
@@ -224,7 +223,7 @@ const SubscriptionsModalComponent = (props) => {
 
                                                 <Button
                                                     type="fulled"
-                                                    size="xl"
+                                                    size="xxl"
                                                     style={styles.button}
                                                     textStyle={styles.buttonText}
                                                     onPress={handleRestoreClick}

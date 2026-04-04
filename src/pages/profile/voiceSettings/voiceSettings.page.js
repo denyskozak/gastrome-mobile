@@ -27,12 +27,14 @@ const VoicePageComponent = (props) => {
         Speech.stop()
             .then(() => {
                 setSetting('speechProfile', identifier);
-                Speech.speak(t('chooseNewVoice'), {
+                const options = {
                     onDone: () => {},
                     language,
                     rate: 0.8,
-                    voice: identifier
-                })
+                }
+                if (identifier) options['voice'] = identifier;
+
+                Speech.speak(t('chooseNewVoice'), options)
             })
             .catch();
     };

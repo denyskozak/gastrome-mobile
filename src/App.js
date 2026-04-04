@@ -1,10 +1,9 @@
 import React, {useEffect, useMemo, useState} from 'react';
-import {View} from 'react-native';
+import {View, Text} from 'react-native';
 import { useFonts } from 'expo-font'
 import * as SplashScreen from 'expo-splash-screen';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 // import { requestTrackingPermissionsAsync } from 'expo-tracking-transparency';
-import {Settings} from "react-native-fbsdk-next";
 import { fonts } from './styles/fonts';
 
 import { AppContextWrapper } from './AppContextWrapper';
@@ -53,27 +52,6 @@ export const App = () => {
   // const [isVisibleCustomSplashScreen, setVisibleCustomSplashScreen] = useState(true);
   const [storedSettings, setStoredSettings] = useState(null);
 
-  // setup transparency
-  // useEffect(() => {
-  //   (async () => {
-  //     const { status } = await requestTrackingPermissionsAsync();
-  //
-  //     Settings.initializeSDK();
-  //
-  //     if (status === 'granted') {
-  //       await Settings.setAdvertiserTrackingEnabled(true);
-  //     }
-  //   })();
-  // }, []);
-
-  useEffect(() => {
-    try {
-      Settings.initializeSDK();
-    } catch (e) {
-      console.error(e);
-    }
-  }, []);
-
   useEffect(() => { 
     if (fontsLoaded) {
       try {
@@ -86,7 +64,22 @@ export const App = () => {
           // set default settings
           const storeConfigJSON = await AsyncStorage.getItem(SETTINGS_ASYNC_STORE_KEY);
           if (storeConfigJSON) {
-            setStoredSettings(JSON.parse(storeConfigJSON));
+            try {
+              const restoredConfig = JSON.parse(storeConfigJSON);
+
+              // migration between config state versions
+              // for v0 to v1
+              if (restoredConfig.version  === undefined) {
+                restoredConfig.muted = true;
+                restoredConfig.version = 1;
+              }
+
+              setStoredSettings(restoredConfig);
+              // save after migration
+              await AsyncStorage.setItem(SETTINGS_ASYNC_STORE_KEY, JSON.stringify(restoredConfig));
+            } catch (error) {
+              console.error(`Error storing stored settings: ${storeConfigJSON}`);
+            }
           }
 
           await delayForPromise(500);

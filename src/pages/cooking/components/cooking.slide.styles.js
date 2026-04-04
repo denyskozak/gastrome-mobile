@@ -23,36 +23,11 @@ export const useStyles = (theme) => StyleSheet.create({
         zIndex: 3
     },
     video: {width: '100%', height: '100%', borderRadius:  getDevice() === 'iPad' ? BorderRadius.medium : 0},
-    backButtonLeftContainer: {
-        position: 'absolute',
-        zIndex: 2,
-        left: getDevice() === 'iPad' ? '10%' : '5%',
-        bottom: Spaces.xxlarge,
-        flexDirection: 'row',
-        gap: Spaces.small,
-    },
-    backButtonRightContainer: {
-        position: 'absolute',
-        zIndex: 2,
-        right: getDevice() === 'iPad' ? '10%' : '5%',
-        bottom: Spaces.xxlarge,
-        flexDirection: 'row',
-        gap: Spaces.small,
-    },
     backPause: {
         position: 'absolute',
         bottom: '50%',
     },
-    backButton: {
-        backgroundColor: theme.colors.white,
-    },
-    backButtonText: getTextStyles({
-        fontSize: 18,
-        color: theme.colors.black,
-        alignItems: 'center',
-        justifyContent: 'center',
-        flexDirection: 'row',
-    }),
+
     timerButton: {
         position: 'absolute',
         zIndex: 2,
@@ -67,7 +42,8 @@ export const useStyles = (theme) => StyleSheet.create({
         borderRadius: BorderRadius.small,
         padding: Spaces.small,
         borderColor: theme.colors.white,
-        backgroundColor: theme.colors.backgroundColorLowOpacity
+        backgroundColor: theme.colors.backgroundColorLowOpacity,
+
     },
     textContainerActive: {
         backgroundColor: theme.colors.backgroundColor

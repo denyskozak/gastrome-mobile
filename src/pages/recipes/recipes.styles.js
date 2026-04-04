@@ -23,10 +23,13 @@ export const useStyles = (theme) => StyleSheet.create({
   },
   actionButton: {
     marginLeft: Spaces.small,
+    paddingLeft: 0,
+    paddingRight: 0,
     // width: Spaces.xxxlarge,
     borderRadius: BorderRadius.small,
     borderColor: theme.colors.white
   },
+
   actionContainer: {
     flexDirection: 'row',
     alignItems: 'center',

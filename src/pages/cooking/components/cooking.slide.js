@@ -92,31 +92,15 @@ export const CookingSlideComponent = ({
                     loadingText={loadingText}
                     resizeMode="cover"
                     // progressLineBottomPosition={0}
-                    progressLineBottomPosition={ getDevice() === 'iPad' ? Spaces.medium : 0}
+                    progressLineBottomPosition={ getDevice() === 'iPad' ? Spaces.medium : 10}
                     onLoaded={() => {
-                        if (showHelpArrow) setShowArrow(true)
+                        if (showHelpArrow) {
+                            setTimeout(() => {
+                                setShowArrow(true)
+                            }, 5000)
+                        }
                     }}
                 />
-
-                {!hideButtons && (
-                    <>
-                        <Animated duration={1000} name="SlideInLeft" outName="SlideOutLeft"
-                                  style={styles.backButtonLeftContainer}>
-                            <Button size="m" style={styles.backButton} type="outlined" onPress={() => {
-                                Haptics.selectionAsync();
-                                onBackClick?.();
-                            }}>
-                                <Text style={styles.backButtonText}>
-                                    {backLabel}
-                                </Text>
-                            </Button>
-                            {/*TODO return timer*/}
-                            {/*{duration && !isTimerActive ?*/}
-                            {/*    <TimerButton onPress={onStartTimePress} duration={duration}/> : null}*/}
-
-                        </Animated>
-                    </>
-                )}
 
                 {isPause && !isTimerActive && pauseButton}
 
@@ -127,16 +111,16 @@ export const CookingSlideComponent = ({
                         Haptics.selectionAsync();
                         onBackClick?.();
                     }}>
-                        <Icon name='chevron-back-outline' color={theme.colors.white} size={Spaces.large}/>
+                        <Icon name='chevron-back-outline' color={theme.colors.white} size={Spaces.xlarge}/>
                     </Pressable>
                     <Pressable style={styles.textHideIcon} onPress={() => setIsTextHidden(!isTextHidden)}>
                         <Icon name={isTextHidden ? 'eye-outline' : 'eye-off-outline'} color={theme.colors.white}
-                              size={Spaces.large}/>
+                              size={Spaces.xlarge}/>
                     </Pressable>
                     <Text style={[styles.step, {fontSize: textSize}]}>
                         {stepTitle}
                     </Text>
-                    {!isTextHidden && description && (
+                    {!isTextHidden && description ? (
                         <Text style={[styles.text, {fontSize: textSize}]}>
                             {readCharIndex === 0
                                 ? description
@@ -146,13 +130,13 @@ export const CookingSlideComponent = ({
                                     {description.slice(readCharIndex, description.length)}
                                 </>}
                         </Text>
-                    )}
-                    {!isTextHidden && additionalText && (
+                    ): null}
+                    {!isTextHidden && additionalText ? (
                         <Text style={[styles.text, {fontSize: textSize}]}>
                             {additionalText}
                         </Text>
-                    )}
-                    <View style={styles.textSizeControl}>
+                    ) : null}
+                    {!isTextHidden ? <View style={styles.textSizeControl}>
                         <Text style={styles.textSizeLabel}>A</Text>
                         <Slider
                             style={styles.textSizeSlider}
@@ -161,12 +145,12 @@ export const CookingSlideComponent = ({
                             step={1}
                             value={textSize}
                             onValueChange={onTextSizeChange}
-                            minimumTrackTintColor={theme.colors.white}
+                            minimumTrackTintColor={theme.colors.primary}
                             maximumTrackTintColor={theme.colors.grey}
                             thumbTintColor={theme.colors.white}
                         />
                         <Text style={styles.textSizeLabelLarge}>A</Text>
-                    </View>
+                    </View>: null}
                 </Animated>
                 {/*{author && (*/}
                 {/*    <View style={styles.authorContainer}>*/}

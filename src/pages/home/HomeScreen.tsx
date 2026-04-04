@@ -39,7 +39,8 @@ import {canViewRecipeToday, getDailyViewedRecipes, markRecipeViewedToday} from "
 import {useFreeRecipes} from "../../contexts/free-recipes";
 import {isFirstLaunch} from "../../utilities/isFirstLaunch";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import {HOME_PAGE_SLIDE_HELPER_KEY} from "../../constants/asyncStoreKeys";
+import {HOME_PAGE_SLIDE_HELPER_KEY, IS_FIRST_MUSIC_LAUNCH_STORE_KEY} from "../../constants/asyncStoreKeys";
+import {useIsFirstLaunchByKey} from "../../hooks/useIsFirstLaunchByKey";
 
 const {height: SCREEN_HEIGHT} = Dimensions.get('window');
 const MAX_BUFFER_DISTANCE = 2;
@@ -113,7 +114,7 @@ export const HomeScreen: React.FC = () => {
     const {getCookingStepURL} = useAWS();
     const getCookingStepUrlRef = useRef(getCookingStepURL);
     const navigation = useNavigation<any>();
-    const [settings] = useSettings();
+    const [settings, setSetting] = useSettings();
     const [tCommon] = useTranslator('common');
     const [tHome] = useTranslator('pages.home');
     const [isSubscriber] = useSubscriptions();
@@ -130,7 +131,8 @@ export const HomeScreen: React.FC = () => {
     const [isSubscriptionsOpened, setSubscriptionsOpened] = useState(false);
 
     const measure = settings?.measure ?? 'g';
-    const [isBackgroundMusicEnabled, setIsBackgroundMusicEnabled] = useState(true);
+    const isBackgroundMusicEnabled = settings ? !settings?.muted : false;
+
     const {
         start: startBackgroundMusic,
         stop: stopBackgroundMusic,
@@ -142,6 +144,7 @@ export const HomeScreen: React.FC = () => {
     const isFocused = useIsFocused();
     const [favoriteIds, toggleFavorite] = useFavorites() as [string[], (value: string) => void];
     const [feedFilter, setFeedFilter] = useState<FeedFilter>('all');
+
 
     useEffect(() => {
         if (isBackgroundMusicEnabled && isFocused) {
@@ -167,8 +170,6 @@ export const HomeScreen: React.FC = () => {
     useEffect(() => {
         getCookingStepUrlRef.current = getCookingStepURL;
     }, [getCookingStepURL]);
-
-
 
     const recipeMap = useMemo(() => {
         const map = new Map<string, any>();
@@ -288,8 +289,8 @@ export const HomeScreen: React.FC = () => {
     );
 
     const handleToggleBackgroundMusic = useCallback(() => {
-        setIsBackgroundMusicEnabled((prev) => !prev);
-    }, []);
+        setSetting('muted', !settings.muted);
+    }, [setSetting, settings.muted]);
 
     const handleShare = useCallback(
         async (video: VideoItem) => {

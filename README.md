@@ -18,3 +18,10 @@ solution: Add '||' instead of '|'
 - Molecular - components can be split on Atomic
 - Organismic - components can be split on Molecular
 - Templates - bind to project (like translation)# gastrome-mobile
+
+
+5. Settings state structures change log:
+
+v1:
++ version (number): default "1"
++ muted (boolean): default "false"

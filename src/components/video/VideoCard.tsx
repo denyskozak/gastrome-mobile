@@ -589,7 +589,7 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
               source={{ uri: videoUri }}
               resizeMode={ExpoResizeMode?.CONTAIN ?? 'contain'}
               isLooping
-              isMuted={isMuted}
+              isMuted
               onLoadStart={handleLoadStart}
               onLoad={handleLoad}
               onError={handleVideoError}
@@ -609,7 +609,7 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
               style={StyleSheet.absoluteFill}
               resizeMode="cover"
               repeat
-              muted={isMuted}
+              muted
               paused={!shouldPlay}
               onLoadStart={handleLoadStart}
               onLoad={handleLoad}

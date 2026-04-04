@@ -287,7 +287,7 @@ const RecipesPageComponent = (props) => {
                     onPress={onPress}
                     size="s"
                 >
-                    <Icon name={iconName} size={24} color={theme.colors.white}/>
+                    <Icon name={iconName} size={24} style={styles.actionIcon} color={theme.colors.white}/>
                 </Button>
             </Fragment>
         ))

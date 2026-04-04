@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import * as Linking from 'expo-linking';
+import * as Clipboard from 'expo-clipboard';
 
 import {Pressable, SafeAreaView, ScrollView, Text, View} from 'react-native';
 import {useTranslator} from '../../hooks/useTranslator';
@@ -18,6 +19,9 @@ import {useSubscriptions} from "../../contexts/subscriptions.context";
 import {AnimatedLogo} from "../../components/atomic/logo/animated-logo.component";
 import { useTheme } from '../../hooks/useTheme';
 import { SubscriptionsModal } from '../../components/templates/subscriptions-modal/subscriptions-modal';
+import {Modal} from "../../components/atomic/modal/modal.component";
+import styles from "../../components/templates/measure-modal/measure-modal.styles";
+import * as Haptics from "expo-haptics";
 
 const languagesList = [
     ['UA', 'uk'],
@@ -33,6 +37,8 @@ const SettingsPageComponent = (props) => {
         currentLanguage
     ] = useTranslator('pages.profile');
     const [settings, setSetting] = useSettings();
+    const [showContactModal, setContactModalDisplay] = useState(false);
+    const [copied, setCopied] = useState(false);
     const { themeId, availableThemes, setTheme } = useTheme();
     const styles = useProfileStyles();
 
@@ -53,6 +59,9 @@ const SettingsPageComponent = (props) => {
                     setLanguage(language);
                 }}/>
     );
+    const copyToClipboard = async (text) => {
+        await Clipboard.setStringAsync(text);
+    };
 
     return (
         <ScrollView contentContainerStyle={styles.container}>
@@ -121,7 +130,7 @@ const SettingsPageComponent = (props) => {
                         type="outlined"
                         style={styles.settingButton}
                         title={t('contact')}
-                        onPress={() => Linking.openURL(contactURL)}
+                        onPress={() => setContactModalDisplay(true)}
                     />
                     {!settings['isDevMode'] && (
                         <>
@@ -157,6 +166,37 @@ const SettingsPageComponent = (props) => {
                     <Text
                         style={styles.footerText}>{settings['isDevMode'] ? 'WELCOME IN DEV MOVE <3' : t('footer')}</Text>
                 </Pressable>
+
+                <Modal isBlack={false} isVisible={showContactModal} onChangeVisible={setContactModalDisplay}>
+                    <Text style={styles.email}>
+                        Email: contact@gastroand.me
+                    </Text>
+                   <View style={styles.modalButtons}>
+                       <Button
+                           type="outlined"
+                           style={styles.button}
+                           onPress={() => {
+
+                               copyToClipboard('contact@gastroand.me')
+                                   .then(() => {
+                                       Haptics.impactAsync('medium');
+                                       setCopied(true);
+                                       setTimeout(() => {setCopied(false)}, 2000)
+                                   })
+                                   .catch(() => console.log('Copy contact error'))
+                           }}
+                       >
+                           {copied ? t('copied') : t('copy')}
+                       </Button>
+                       <Button
+                           type="outlined"
+                           style={styles.button}
+                           onPress={() => {setContactModalDisplay(false)}}
+                           title={t('close')}
+                       />
+                   </View>
+
+                </Modal>
 
                 <MeasureModal
                     isVisible={isMeasureModalOpen}
