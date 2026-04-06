@@ -20,7 +20,7 @@ export const useSubscriptions = () => {
   } = context;
 
   return [
-    true,
+    isSubscriber,
     currentSubscription,
     subscriptions,
     setCurrentSubscription,
