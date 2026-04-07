@@ -10,7 +10,7 @@ import {Button} from '../../components/atomic/button/button.component';
 import {Spaces} from '../../styles/spaces';
 import {useMenuCart} from '../../contexts/cart.context';
 import {useCommonModal} from '../../contexts/commonModal/commonModal.context';
-import {renderIngredient, renderQuantity} from './recipe.renders';
+import { renderIngredient, renderQuantity} from './recipe.renders';
 import {CountryList} from '../../components/atomic/country-flag/country-flag.list';
 import {CountryFlag} from '../../components/atomic/country-flag/country-flag.component';
 import {authorRoute, cookingRoute} from '../recipes/navigation/recipes.routes';
@@ -34,10 +34,16 @@ import {getFreeDayleRecipeCount} from "../../utilities/dailyRecipeLimit";
 import {useSubscriptions} from "../../contexts/subscriptions.context";
 import {SubscriptionsModal} from "../../components/templates/subscriptions-modal/subscriptions-modal";
 
+
 const RecipePageComponent = (props) => {
     const {
         navigation, route: {params: {id}},
     } = props;
+
+    const formatter = useMemo(() => new Intl.NumberFormat('en-US', {
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0
+    }), [])
 
     const [t] = useTranslator('pages.recipe');
     const [tCommon] = useTranslator('common');
@@ -158,7 +164,7 @@ const RecipePageComponent = (props) => {
     };
 
     const multiplyByServings = (value = 0) => {
-        return value * (servingsCount / servings);
+        return formatter.format(value * (servingsCount / servings));
     };
 
     const renderPFC = (value) => (
@@ -274,17 +280,7 @@ const RecipePageComponent = (props) => {
                         </View>
                     </View>
                     {/* Measures button */}
-                    <Button
-                        style={styles.measureButton}
-                        type="outlined"
-                        size="l"
-                        onPress={() => {
-                            setIsMeasureModalOpen(true);
-                            Haptics.selectionAsync();
-                        }}
-                    >
-                        {t('chooseMeasure')}
-                    </Button>
+
                     {region && <Text style={styles.region}>{t('region')}: {region}</Text>}
                     {subTitle && <Text style={styles.sub}>{subTitle}</Text>}
                     {calories && <Text style={styles.calories}>{t('calories')}: {multiplyByServings(calories)}</Text>}
@@ -318,6 +314,7 @@ const RecipePageComponent = (props) => {
                     {instagram && <Text style={[styles.author, {fontSize: textSize}]}>{instagram
                         ? t('madeBy', {name: instagram})
                         : null}</Text>}
+
                     {/*Servings manager*/}
                     {servingsCount && (
                         <View>
@@ -354,11 +351,23 @@ const RecipePageComponent = (props) => {
                         </View>
                     )}
 
+                    <Text style={styles.ingredientLabel}>{t('ingredients')}:</Text>
+                    <Button
+                        style={styles.measureButton}
+                        type="outlined"
+                        size="l"
+                        onPress={() => {
+                            setIsMeasureModalOpen(true);
+                            Haptics.selectionAsync();
+                        }}
+                    >
+                        {t('chooseMeasure')}
+                    </Button>
                     <FlatList
                         style={styles.ingredients}
                         data={ingredients.map(prepareIngredient)}
                         keyExtractor={({id, title}) => id + title}
-                        ListHeaderComponent={<Text style={styles.ingredientLabel}>{t('ingredients')}:</Text>}
+
                         ListFooterComponent={<View style={styles.ingredientHeader}>
                             {author && author.image && <Pressable onPress={() => {
                                 Haptics.selectionAsync();

@@ -15,7 +15,7 @@ const filterByFree = (items = [], free = false) => free ? items.filter(getFreeFi
 const prepareItems = items => items
     .map(addRandomViewCount)
     .map(addImageSource)
-    .filter(filterByHasVideo);
+    .filter(filterByHasVideo)
 
 // const mergeBaseOnOriginLanguage = (recipe, index) => ({
 //     ...enRecipes[index],

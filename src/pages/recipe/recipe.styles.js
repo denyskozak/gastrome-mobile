@@ -211,6 +211,7 @@ export const useStyles = (theme) => StyleSheet.create({
   ingredientLabel: getTextStyles({
     fontSize: 20,
     textAlign: 'center',
+    marginTop: Spaces.medium,
     marginBottom: Spaces.small,
     fontFamily: fontEnum.PoppinsBold,
     color: theme.colors.red
@@ -234,7 +235,6 @@ export const useStyles = (theme) => StyleSheet.create({
     width: Spaces.xxxlarge,
   },
   measureButton: {
-    marginTop: Spaces.medium,
     alignSelf: 'center',
   },
   step: {

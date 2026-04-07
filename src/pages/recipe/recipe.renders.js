@@ -1,35 +1,31 @@
 import { addSpaceWithCondition } from '../../utilities/renders';
 
 // American weight system to Europe
-const roundQuantity = value => Number(value).toFixed(2)
+const formatter = new Intl.NumberFormat('en-US', {
+  minimumFractionDigits: 0,
+  maximumFractionDigits: 2
+});
 const changeQuantityToUSA = (quantity, unit, t) => {
   switch (unit) {
     case 'g':
-      return [roundQuantity(quantity * 0.035274 ), t('oz')]; // Convert to ounces
+      return [formatter.format(quantity * 0.035274 ), t('oz')]; // Convert to ounces
     case 'ml':
-      return [roundQuantity(quantity * 0.033814 ), t('oz')]; // Convert to ounces
+      return [formatter.format(quantity * 0.033814 ), t('oz')]; // Convert to ounces
     default:
-      return [quantity, t(unit)]
+      return [formatter.format(quantity), t(unit)]
   }
 };
 
 const renderValue = value => value ? ` ${value}` : '';
 
-
-const formatQuantity = value => {
-  const parsedValue = Number(value);
-
-  return Number.isFinite(parsedValue) ? parsedValue.toFixed(2) : value;
-};
-
 const changeQuantityToTbsp = (quantity, unit, t) => {
   switch (unit) {
     case 'g':
-      return [roundQuantity(quantity * 0.066666 ), t('tbsp')]; // Convert to pounds
+      return [formatter.format(quantity * 0.066666 ), t('tbsp')]; // Convert to pounds
     case 'ml':
-      return [roundQuantity(quantity * 0.067628), t('tbsp')]; // Convert to ounces
+      return [formatter.format(quantity * 0.067628), t('tbsp')]; // Convert to ounces
     default:
-      return [quantity, t(unit)]
+      return [formatter.format(quantity), t(unit)]
   }
 }
 
@@ -52,9 +48,8 @@ export const mapRenderCartQuantity = ({ quantity, unit, comment }, measureSystem
 export const renderQuantity = (quantity, unit, t, comment = '', measureSystem = 'g') => {
   if (typeof quantity === 'number') {
     const [parsedQuantity, parsedUnit] = measureConvertors[measureSystem](quantity, unit, t);
-    const formattedQuantity = formatQuantity(parsedQuantity);
 
-    return typeof quantity === 'number' ? `${formattedQuantity}${renderValue(parsedUnit)}${renderValue(comment)}` : '';
+    return typeof quantity === 'number' ? `${parsedQuantity}${renderValue(parsedUnit)}${renderValue(comment)}` : '';
   } else {
     return '';
   }
