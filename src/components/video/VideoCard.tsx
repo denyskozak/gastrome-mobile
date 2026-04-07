@@ -108,7 +108,6 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
   const ignoreNextPressRef = useRef(false);
   const preparedRef = useRef(false);
   const pendingPlayRef = useRef(false);
-  const [isMuted, setIsMuted] = useState(true);
   const [isBuffering, setIsBuffering] = useState(true);
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);
@@ -294,10 +293,10 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
     }
   }, []);
 
-  const ensureMuted = useCallback(async (muted: boolean) => {
-    if (isExpoAvAvailable && videoRef.current?.setIsMutedAsync) {
+  const ensureMuted = useCallback(async () => {
+    if (isExpoAvAvailable && videoRef.current?.setStatusAsync) {
       try {
-        await videoRef.current.setIsMutedAsync(muted);
+        await videoRef.current.setStatusAsync({ isMuted: true, volume: 0 });
       } catch (error) {
         // ignore mute errors to avoid noisy UI
       }
@@ -395,12 +394,13 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
           pendingPlayRef.current = true;
           await videoRef.current?.loadAsync?.(
               { uri: videoUri },
-              { shouldPlay: true, isMuted, isLooping: true },
+              { shouldPlay: true, isMuted: true, isLooping: true, volume: 0 },
               false,
           );
           pendingPlayRef.current = false;
         } else {
           pendingPlayRef.current = false;
+          await ensureMuted();
           await videoRef.current?.playAsync();
         }
       } catch (error) {
@@ -414,7 +414,7 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
     } else if (videoRef.current?.seek) {
       videoRef.current.seek(0);
     }
-  }, [isRecoverablePlaybackError, isMuted, videoUri]);
+  }, [ensureMuted, isRecoverablePlaybackError, videoUri]);
 
   const pause = useCallback(async () => {
     if (!videoRef.current) return;
@@ -492,9 +492,8 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
       pause,
       unload,
       seekToStart,
-      setMuted: async (muted: boolean) => {
-        setIsMuted(muted);
-        await ensureMuted(muted);
+      setMuted: async () => {
+        await ensureMuted();
       },
       prepare,
     });
@@ -505,8 +504,8 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
   }, [ensureMuted, index, onRegister, pause, play, prepare, seekToStart, stopSingleTapTimeout, unload]);
 
   useEffect(() => {
-    ensureMuted(isMuted);
-  }, [ensureMuted, isMuted]);
+    ensureMuted();
+  }, [ensureMuted]);
 
   useEffect(() => {
     if (!videoRef.current) return;
@@ -590,6 +589,7 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
               resizeMode={ExpoResizeMode?.CONTAIN ?? 'contain'}
               isLooping
               isMuted
+              volume={0}
               onLoadStart={handleLoadStart}
               onLoad={handleLoad}
               onError={handleVideoError}
@@ -610,6 +610,7 @@ const VideoCardComponent: React.FC<VideoCardProps> = ({
               resizeMode="cover"
               repeat
               muted
+              volume={0}
               paused={!shouldPlay}
               onLoadStart={handleLoadStart}
               onLoad={handleLoad}
