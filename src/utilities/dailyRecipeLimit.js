@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {DAILY_VIEWED_RECIPES_KEY} from '../constants/asyncStoreKeys';
 
-export const DAILY_RECIPE_LIMIT = 5;
+export const DAILY_RECIPE_LIMIT = 3;
 
 const getTodayKey = () => new Date().toISOString().split('T')[0];
 

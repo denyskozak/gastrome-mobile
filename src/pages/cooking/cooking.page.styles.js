@@ -28,8 +28,8 @@ export const useStyles = (theme) => StyleSheet.create({
     alignItems: 'center',
   },
   musicIcon: {
-    width: Spaces.xxxlarge,
-    height: Spaces.xxxlarge,
+    width: Spaces.xxlarge + Spaces.large,
+    height: Spaces.xxlarge + Spaces.large,
     borderRadius: 60,
     backgroundColor: theme.colors.second,
     alignItems: 'center',
@@ -69,6 +69,9 @@ export const useStyles = (theme) => StyleSheet.create({
     bottom: Spaces.xxlarge,
     flexDirection: 'row',
     gap: Spaces.small,
+    borderWidth: 2,
+    borderRadius: 50,
+    borderColor: theme.colors.primary,
   },
   backButtonRightContainer: {
     position: 'absolute',
@@ -77,6 +80,9 @@ export const useStyles = (theme) => StyleSheet.create({
     bottom: Spaces.xxlarge,
     flexDirection: 'row',
     gap: Spaces.small,
+    borderWidth: 2,
+    borderRadius: 50,
+    borderColor: theme.colors.primary,
   },
   backPause: {
     position: 'absolute',

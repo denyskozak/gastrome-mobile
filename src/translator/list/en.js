@@ -283,7 +283,7 @@ export const translates = {
             benefitsOne: 'Unlimited recipes 🥘',
             benefitsTwo: 'Color Themes 🎨',
             benefitsThree: 'Ingredient Knowledge 🌿',
-            subtitle: 'Next 5 free recipes tomorrow',
+            subtitle: 'Next {days} free recipes tomorrow',
             nextFreeRecipesIn: 'Next free recipes in {time}',
             error: 'Sorry, subscription purchase error, try again or contact to us on settings page',
             restore: 'Restore',

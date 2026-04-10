@@ -397,7 +397,7 @@ export const CookingPage = (props) => {
                     accessible
                 >
                     <View style={styles.musicIcon}>
-                        <Icon name="chevron-back-outline" size={Spaces.xlarge} color={theme.colors.primary}/>
+                        <Icon name="chevron-back-outline" size={Spaces.xlarge + Spaces.xsmall} color={theme.colors.primary}/>
                     </View>
                     {/*<Text style={styles.musicLabel}>{tHome('musicActionLabel') ?? 'Music'}</Text>*/}
                 </TouchableOpacity>

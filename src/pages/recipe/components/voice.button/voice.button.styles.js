@@ -24,6 +24,7 @@ export const useStyles = (theme) => StyleSheet.create({
 
   animationOffBackground: {
     // padding: Spaces.xxsmall,
+    padding: Spaces.small,
     backgroundColor: theme.colors.second,
     borderRadius: 100,
     borderColor: theme.colors.primary,

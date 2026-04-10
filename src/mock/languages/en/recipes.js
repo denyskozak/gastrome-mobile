@@ -1276,7 +1276,7 @@ export const recipes = [
             {
                 "id": 1,
                 "title": "Spaghetti",
-                "quantity": 75,
+                "quantity": 120,
                 "unit": "g",
                 "description": "dried spaghetti, but fresh is also possible"
             },
@@ -3218,8 +3218,8 @@ export const recipes = [
                 "id": 1,
                 "title": "Orzo pasta",
                 "description": null,
-                "quantity": 1,
-                "unit": "cups"
+                "quantity": 200,
+                "unit": "g"
             },
             {
                 "id": 2,

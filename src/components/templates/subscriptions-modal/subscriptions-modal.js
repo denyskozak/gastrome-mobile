@@ -21,6 +21,7 @@ import * as Haptics from 'expo-haptics';
 import PaywallBackground from '../../../../assets/paywall-background.jpg';
 import {useTheme} from '../../../hooks/useTheme';
 import {BorderRadius} from "../../../styles/borderRadiuses";
+import {DAILY_RECIPE_LIMIT} from "../../../utilities/dailyRecipeLimit";
 
 
 const GlowWrap = ({children, enabled = true, glowColor = 'rgba(255,255,255,0.9)'}) => {
@@ -239,7 +240,7 @@ const SubscriptionsModalComponent = (props) => {
                             </View>
                         </ScrollView>
                         <View style={styles.closeButtonWrapper}>
-                            <Text style={styles.subtitle}>{t('subtitle')}</Text>
+                            <Text style={styles.subtitle}>{t('subtitle', { days: DAILY_RECIPE_LIMIT})}</Text>
                             <Button
                                 type="outlined"
                                 size="m"

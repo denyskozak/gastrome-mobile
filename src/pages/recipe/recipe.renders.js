@@ -30,7 +30,7 @@ const changeQuantityToTbsp = (quantity, unit, t) => {
 }
 
 const changeQuantityToEurope = (quantity, unit,  t) => {
-  return [quantity, t(unit)]
+  return [formatter.format(quantity), t(unit)]
 }
 
 const measureConvertors = {

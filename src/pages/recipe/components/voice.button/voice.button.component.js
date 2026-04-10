@@ -21,7 +21,7 @@ const VoiceButtonComponent = ({
   onButtonPress = () => {
   },
   isUpper = false,
-  lootieName = 'cookOnFire',
+  lootieName = 'voice',
   autoPlay = true,
   startText,
   hideButtonWhenSpeaking = true,
@@ -60,7 +60,7 @@ const VoiceButtonComponent = ({
               <Animated name="SlideInDown" outName="SlideOutDown">
                 <FirstLaunchTooltip asyncStoreKey={VOICE_ASSISTANT_TIP} delay={500} text={t('tip')} placement="top">
                   <View style={styles.animationOffBackground}>
-                    <Animation autoPlay={autoPlay} ref={animationRef} name={lootieName} width={Spaces.xxxlarge * 1.5} height={Spaces.xxxlarge * 1.5}/>
+                    <Animation autoPlay={autoPlay} ref={animationRef} name={lootieName} width={Spaces.xxxlarge + Spaces.large} height={Spaces.xxxlarge  + Spaces.large}/>
                   </View>
                 </FirstLaunchTooltip>
               </Animated>

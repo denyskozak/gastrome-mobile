@@ -164,11 +164,11 @@ const RecipePageComponent = (props) => {
     };
 
     const multiplyByServings = (value = 0) => {
-        return formatter.format(value * (servingsCount / servings));
+        return value * (servingsCount / servings);
     };
 
     const renderPFC = (value) => (
-        renderQuantity(multiplyByServings(value), 'g', tCommon, '', ['g', 'oz'].includes(measure) ? measure : 'g')
+        renderQuantity(Math.floor(multiplyByServings(value)), 'g', tCommon, '', ['g', 'oz'].includes(measure) ? measure : 'g')
     );
 
     return (<SafeAreaView style={styles.container}>
@@ -283,7 +283,7 @@ const RecipePageComponent = (props) => {
 
                     {region && <Text style={styles.region}>{t('region')}: {region}</Text>}
                     {subTitle && <Text style={styles.sub}>{subTitle}</Text>}
-                    {calories && <Text style={styles.calories}>{t('calories')}: {multiplyByServings(calories)}</Text>}
+                    {calories && <Text style={styles.calories}>{t('calories')}: {formatter.format(multiplyByServings(calories))}</Text>}
                     <View style={styles.PFC}>
                         {typeof proteins === 'number' ?
                             <Text style={styles.PFCText}>{t('proteins')}: {renderPFC(proteins)}</Text> : null}
